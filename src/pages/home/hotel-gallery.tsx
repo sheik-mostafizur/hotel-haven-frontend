@@ -7,7 +7,7 @@ const HotelGallery = () => {
         and beauty of Hotel Heaven. Witness the allure that awaits you, from
         luxurious rooms to stunning vistas.
       </p>
-      <div className="grid grid-cols-4 gap-4 mx-auto px-4 my-4">
+      <div className="grid lg:grid-cols-4 gap-4 mx-auto px-4 my-4">
         <div>
           <img
             className="w-96 h-full"
