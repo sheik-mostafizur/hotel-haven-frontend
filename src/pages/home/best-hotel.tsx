@@ -3,11 +3,12 @@ import Container from "../../components/ui/container";
 import axios from "axios";
 import Room from "./room";
 interface BestRoom {
-  src: string;
-  alt: string;
+  price: number;
+  rating: number;
+  image: string;
 }
 
-const BestHotel = () => {
+const BestHotel: React.FC = () => {
   const [rooms, setRoom] = useState<BestRoom[]>([]);
   useEffect(() => {
     axios
@@ -29,7 +30,11 @@ const BestHotel = () => {
           epitome of comfort and elegance.
         </p>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto"></div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+        {rooms.map((room, index) => (
+          <Room key={index} {...room} />
+        ))}
+      </div>
     </Container>
   );
 };
