@@ -4,10 +4,11 @@ type ButtonType = {
   children: ReactNode;
   size?: "xs" | "sm" | "default" | "lg" | "xl";
   className?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button = (props: ButtonType) => {
-  const {children, size = "default", className} = props;
+  const {children, size = "default", className, type} = props;
 
   const buttonStyle = {
     xs: "px-3 py-2 text-xs font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800",
@@ -19,7 +20,9 @@ const Button = (props: ButtonType) => {
   };
 
   return (
-    <button type="button" className={`${buttonStyle[size]} ${className || ""}`}>
+    <button
+      type={type || "button"}
+      className={`${buttonStyle[size]} ${className || ""}`}>
       {children}
     </button>
   );

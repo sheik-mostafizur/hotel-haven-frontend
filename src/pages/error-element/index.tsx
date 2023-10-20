@@ -1,12 +1,16 @@
-import Container from "../../components/ui/container";
+import {Link} from "react-router-dom";
+import Button from "../../components/ui/button";
 
 const ErrorElement = () => {
   return (
-    <>
-      <Container>
-        <h1>404 Page Not Found</h1>
-      </Container>
-    </>
+    <div className="bg-primary-900 h-screen flex items-center justify-center">
+      <div>
+        <h1 className="text-primary-500 mb-8">404 Page Not Found!</h1>
+        <Link to={"/"}>
+          <Button className="block mx-auto">Back to home</Button>
+        </Link>
+      </div>
+    </div>
   );
 };
 
