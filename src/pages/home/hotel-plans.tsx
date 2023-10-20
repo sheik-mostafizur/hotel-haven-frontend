@@ -53,7 +53,7 @@ const HotelPlans = () => {
                     src="https://cdn-icons-png.flaticon.com/128/5291/5291043.png"
                     alt=""
                   />
-                  <p className="text-white">Easy To Access Door</p>
+                  <p className="text-black">Easy To Access Door</p>
                 </li>
                 <li className="flex gap-1 mx-auto items-center">
                   <img

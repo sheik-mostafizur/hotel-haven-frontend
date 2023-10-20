@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import Rating from "react-rating";
 
 interface RoomProps {
@@ -19,15 +19,23 @@ const Room: React.FC<RoomProps> = ({ price, rating, image }) => {
           <a href="#">
             <p>Price: {price}</p>
           </a>
-          {/* <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Rating:
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
             <Rating
-              initialRating={rating}
-              emptySymbol={<i className="far fa-star" />}
-              fullSymbol={<i className="fas fa-star" />}
-              readonly
+              placeholderRating={rating}
+              emptySymbol={
+                <img src="assets/images/star-grey.png" className="icon" />
+              }
+              placeholderSymbol={
+                <img
+                  src="https://t3.ftcdn.net/jpg/01/09/84/42/240_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg"
+                  className="icon"
+                />
+              }
+              //   fullSymbol={
+              //     <img src="assets/images/star-yellow.png" className="icon" />
+              //   }
             />
-          </p> */}
+          </p>
           <a
             href="#"
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
