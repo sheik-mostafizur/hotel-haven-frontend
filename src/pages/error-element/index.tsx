@@ -3,7 +3,7 @@ import Button from "../../components/ui/button";
 
 const ErrorElement = () => {
   return (
-    <div className="bg-primary-50 h-screen flex items-center justify-center">
+    <div className="bg-primary-900 h-screen flex items-center justify-center">
       <div>
         <h1 className="text-primary-500 mb-8">404 Page Not Found!</h1>
         <Link to={"/"}>
