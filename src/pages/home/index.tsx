@@ -1,11 +1,14 @@
-import Container from "../../components/ui/container";
+import Footer from "../../components/footer";
+import Navbar from "../../components/navbar";
+// import Container from "../../components/ui/container";
+import Banner from "./banner";
 
 const Home = () => {
   return (
     <>
-      <Container>
-        <h1 className="underline text-primary-500">Hello world!</h1>
-      </Container>
+      <Navbar />
+      <Banner />
+      <Footer />
     </>
   );
 };
