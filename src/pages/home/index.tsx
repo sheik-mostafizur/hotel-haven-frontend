@@ -5,6 +5,7 @@ import Banner from "./banner";
 import BestHotel from "./best-hotel";
 import CustomerReviews from "./customer-reviews";
 import HotelGallery from "./hotel-gallery";
+import HotelPlans from "./hotel-plans";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <BestHotel />
       <HotelGallery />
       <CustomerReviews />
+      <HotelPlans />
       <Footer />
     </>
   );
