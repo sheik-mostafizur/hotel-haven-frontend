@@ -3,6 +3,7 @@ import Navbar from "../../components/navbar";
 // import Container from "../../components/ui/container";
 import Banner from "./banner";
 import BestHotel from "./best-hotel";
+import HotelGallery from "./hotel-gallery";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <Navbar />
       <Banner />
       <BestHotel />
+      <HotelGallery />
       <Footer />
     </>
   );
