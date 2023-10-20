@@ -8,6 +8,8 @@
   html {
     font-family: "Roboto", system-ui, sans-serif;
   }
+
+  /* typography */
   p {
     @apply font-normal text-secondary-700 dark:text-secondary-400;
   }
@@ -28,5 +30,15 @@
   }
   h6 {
     @apply text-lg text-secondary-900 font-bold dark:text-secondary-100;
+  }
+
+  /* input */
+  input {
+    @apply bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500;
+  }
+
+  /* label */
+  label {
+    @apply block mb-2 text-sm font-medium text-secondary-900 dark:text-white;
   }
 }
