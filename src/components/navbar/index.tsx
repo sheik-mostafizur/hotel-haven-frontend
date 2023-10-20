@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import Button from "../ui/button";
+
 const Navbar = () => {
   return (
     <div className="px-10">
@@ -23,11 +26,15 @@ const Navbar = () => {
               data-dropdown-placement="bottom"
             >
               <span className="sr-only">Open user menu</span>
-              <img
-                className="w-8 h-8 rounded-full"
-                src="/docs/images/people/profile-picture-3.jpg"
-                alt="user photo"
-              />
+              <Button>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-white bg-primary-700 rounded md:bg-transparent md:text-primary-700 md:p-0 md:dark:text-primary-500"
+                  aria-current="page"
+                >
+                  Login
+                </a>
+              </Button>
             </button>
             {/* <!-- Dropdown menu --> */}
             <div
