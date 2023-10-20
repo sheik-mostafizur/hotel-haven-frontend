@@ -1,10 +1,10 @@
 import Container from "../../components/ui/container";
-import "./hotel-plans.css";
+// import "./hotel-plans.css";
 const HotelPlans = () => {
   return (
     <Container>
-      <div className="container my-20 px-4 py-20 img">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
+      <div className="container my-20 py-20 bg-primary-50 img">
+        <div className="grid gap-2 mx-10 md:grid-cols-2 items-center lg:grid-cols-2">
           <div>
             <h2>Hotel Plans</h2>
             <p>
@@ -31,8 +31,8 @@ const HotelPlans = () => {
               </div>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-2 justify-center items-center">
-            <div className="card w-80 h-80 border-2">
+          <div className="grid gap-4 lg:grid-cols-2 justify-center items-center">
+            <div className="card w-full h-80 border-2">
               <p className="px-8">
                 <small>Basic</small>
               </p>
@@ -53,7 +53,7 @@ const HotelPlans = () => {
                     src="https://cdn-icons-png.flaticon.com/128/5291/5291043.png"
                     alt=""
                   />
-                  <p className="text-black">Easy To Access Door</p>
+                  <p className="text-white">Easy To Access Door</p>
                 </li>
                 <li className="flex gap-1 mx-auto items-center">
                   <img
@@ -86,7 +86,7 @@ const HotelPlans = () => {
                 </button>
               </div>
             </div>
-            <div className="card w-80 h-80 border-2">
+            <div className="card w-full h-80 border-2">
               <p className="px-8">
                 <small>Advanced</small>
               </p>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "price": 200,
+    "rating": 5,
+    "image": "https://example.com/hotel_room1.jpg"
+  },
+  {
+    "id": 2,
+    "price": 250,
+    "rating": 5,
+    "image": "https://example.com/hotel_room2.jpg"
+  },
+  {
+    "id": 3,
+    "price": 180,
+    "rating": 5,
+    "image": "https://example.com/hotel_room3.jpg"
+  },
+  {
+    "id": 4,
+    "price": 300,
+    "rating": 4.9,
+    "image": "https://example.com/hotel_room4.jpg"
+  },
+  {
+    "id": 5,
+    "price": 220,
+    "rating": 4.8,
+    "image": "https://example.com/hotel_room5.jpg"
+  },
+  {
+    "id": 6,
+    "price": 270,
+    "rating": 4.7,
+    "image": "https://example.com/hotel_room6.jpg"
+  }
+]
