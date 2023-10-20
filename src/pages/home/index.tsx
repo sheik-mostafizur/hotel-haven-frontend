@@ -3,6 +3,7 @@ import Navbar from "../../components/navbar";
 // import Container from "../../components/ui/container";
 import Banner from "./banner";
 import BestHotel from "./best-hotel";
+import BookingForm from "./booking-form";
 import CustomerReviews from "./customer-reviews";
 import HotelGallery from "./hotel-gallery";
 import HotelPlans from "./hotel-plans";
@@ -12,6 +13,7 @@ const Home = () => {
     <>
       <Navbar />
       <Banner />
+      <BookingForm />
       <BestHotel />
       <HotelGallery />
       <CustomerReviews />

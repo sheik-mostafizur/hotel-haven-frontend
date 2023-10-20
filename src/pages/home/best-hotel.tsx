@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
 import Room from "./room";
-interface BestRoom {
-  price: number;
-  rating: number;
-  image: string;
-}
 
-const BestHotel: React.FC = () => {
-  const [rooms, setRoom] = useState<BestRoom[]>([]);
+const BestHotel = () => {
+  const [rooms, setRoom] = useState([]);
   useEffect(() => {
     axios
       .get("/db/bestRoom.json")
-      .then(({ data }) => {
+      .then(({data}) => {
         setRoom(data);
       })
       .catch((err) => {
