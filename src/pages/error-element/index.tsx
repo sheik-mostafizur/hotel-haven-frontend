@@ -1,13 +1,13 @@
 import Container from "../../components/ui/container";
 
-const Home = () => {
+const ErrorElement = () => {
   return (
     <>
       <Container>
-        <h1 className="underline text-primary-500">Hello world!</h1>
+        <h1>404 Page Not Found</h1>
       </Container>
     </>
   );
 };
 
-export default Home;
+export default ErrorElement;
