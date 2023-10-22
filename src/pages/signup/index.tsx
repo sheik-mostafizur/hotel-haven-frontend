@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import {AiFillEyeInvisible} from "react-icons/ai";
 
 const SignUp = () => {
   return (
