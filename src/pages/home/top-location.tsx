@@ -14,7 +14,7 @@ const TopLocation: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("/db/TopHotelLocation.json")
+      .get("/db/top-hotel-location.json")
       .then((res) => {
         setTopLocation(res.data);
         // console.log(res.data);

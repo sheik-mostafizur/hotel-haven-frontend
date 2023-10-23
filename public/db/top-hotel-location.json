@@ -1,38 +1,42 @@
 [
   {
-    "_id": "1",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 1",
-    "hotelCount": 10
+    "image": "https://media.istockphoto.com/id/646044454/photo/dhaka-bangladesh.webp?b=1&s=612x612&w=0&k=20&c=GsVoayuGHPTfoaD5rSSFDN1yNQblr0umesuFKGD3oto=",
+    "location_name": "Dhaka",
+    "total_hotels": 25
   },
   {
-    "_id": "2",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 2",
-    "hotelCount": 8
+    "image": "https://cdn.pixabay.com/photo/2018/03/20/14/00/sea-3243357_1280.jpg",
+    "location_name": "Cox's Bazar",
+    "total_hotels": 10
   },
   {
-    "_id": "3",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 3",
-    "hotelCount": 7
+    "image": "https://media.istockphoto.com/id/1346172785/photo/patenga-sea-beach-chittagong-bangladesh-drone-view.webp?b=1&s=612x612&w=0&k=20&c=fUW3xEfamgWREBpGgUvHCNZM6K791Bwj864K9duTSyM=",
+    "location_name": "Chittagong",
+    "total_hotels": 6
   },
   {
-    "_id": "4",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 4",
-    "hotelCount": 6
+    "image": "https://cdn.pixabay.com/photo/2018/09/14/10/31/nature-3676693_1280.jpg",
+    "location_name": "Sylhet",
+    "total_hotels": 14
   },
   {
-    "_id": "5",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 5",
-    "hotelCount": 5
+    "image": "https://media.istockphoto.com/id/855313844/photo/the-sixty-dome-mosque.webp?b=1&s=612x612&w=0&k=20&c=lLIekMb1Tt3fK3YxQy4A125nTEYPBBmcObCYEDczHNA=",
+    "location_name": "Khulna",
+    "total_hotels": 4
   },
   {
-    "_id": "6",
-    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
-    "location": "Location 6",
-    "hotelCount": 4
+    "image": "https://media.istockphoto.com/id/1495888661/photo/rajshahi-t-badh.webp?b=1&s=612x612&w=0&k=20&c=K4gaCg5Rb7bkrkm6ndtwbAnmF-3TcDyddBXs33Q3qTE=",
+    "location_name": "Rajshahi",
+    "total_hotels": 5
+  },
+  {
+    "image": "https://media.istockphoto.com/id/1386875921/photo/the-busy-water-transportation-of-buriganga-river-dhaka-bangladesh.webp?b=1&s=170667a&w=0&k=20&c=PzTIWuWW3OmtV4lW4rwRi3RQmRSxK096bmL18mk_uMs=",
+    "location_name": "Barisal",
+    "total_hotels": 4
+  },
+  {
+    "image": "https://media.istockphoto.com/id/1375792443/photo/drone-view-of-coxs-bazaar-sea-beach-chattogram-bangladesh.webp?b=1&s=170667a&w=0&k=20&c=vjLROOT71dq8VpX12jDebFaiPffZwFskj6eSammFOsg=",
+    "location_name": "Mymensingh",
+    "total_hotels": 3
   }
 ]
