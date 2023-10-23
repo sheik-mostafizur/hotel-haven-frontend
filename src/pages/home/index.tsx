@@ -7,6 +7,7 @@ import BestHotel from "./best-hotel";
 // import BookingForm from "./booking-form";
 import CustomerReviews from "./customer-reviews";
 import HotelGallery from "./hotel-gallery";
+import TopLocation from "./top-location";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       {/* <BookingForm /> */}
       <BestHotel />
       <HotelGallery />
+      <TopLocation />
       <CustomerReviews />
       <Footer />
     </>
