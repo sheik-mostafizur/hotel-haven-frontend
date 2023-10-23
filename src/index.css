@@ -11,10 +11,10 @@
 
   /* typography */
   p {
-    @apply font-normal text-secondary-700 dark:text-secondary-400;
+    @apply lg:font-normal text-secondary-700 dark:text-secondary-400;
   }
   h1 {
-    @apply text-5xl text-secondary-900 font-extrabold dark:text-secondary-100;
+    @apply md:text-3xl lg:text-5xl text-secondary-900 md:font-semibold lg:font-extrabold dark:text-secondary-100;
   }
   h2 {
     @apply text-4xl text-secondary-900 font-bold dark:text-secondary-100;

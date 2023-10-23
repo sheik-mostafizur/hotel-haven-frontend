@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ const HotelGallery = () => {
   useEffect(() => {
     axios
       .get("/db/homeGallery.json")
-      .then(({data}) => {
+      .then(({ data }) => {
         setGallery(data);
       })
       .catch((err) => console.log(err));
@@ -27,7 +27,7 @@ const HotelGallery = () => {
         and beauty of Hotel Heaven. Witness the allure that awaits you, from
         luxurious rooms to stunning vistas.
       </p>
-      <div className="grid lg:grid-cols-4 gap-4 mx-auto px-4 my-4">
+      <div className="grid lg:grid-cols-4 gap-4 mx-auto my-4">
         {gallery &&
           gallery.map((image, index) => (
             <img
