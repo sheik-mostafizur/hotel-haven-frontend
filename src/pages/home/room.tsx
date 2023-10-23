@@ -2,15 +2,15 @@ import Button from "../../components/ui/button";
 
 interface Room {
   price: number;
-  image: string;
+  thumbnailURL: string;
 }
 
-const Room: React.FC<Room> = ({price, image}) => {
+const Room: React.FC<Room> = ({ price, thumbnailURL }) => {
   return (
     <>
       <div className=" bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
         <a href="#">
-          <img className="rounded-t-lg" src={image} alt="" />
+          <img className="rounded-t-lg w-full h-80" src={thumbnailURL} alt="" />
         </a>
         <div className="p-5">
           <a href="#">
