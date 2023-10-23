@@ -1,0 +1,37 @@
+[
+  {
+    "_id": "1",
+    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
+    "name": "User 1",
+    "review": "A wonderful experience at the hotel. Highly recommended!",
+    "rating": 5
+  },
+  {
+    "_id": "2",
+    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
+    "name": "User 2",
+    "review": "Great stay, amazing service. Will definitely come back.",
+    "rating": 4.5
+  },
+  {
+    "_id": "3",
+    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
+    "name": "User 3",
+    "review": "Great stay, amazing service. Will definitely come back.",
+    "rating": 4.5
+  },
+  {
+    "_id": "4",
+    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
+    "name": "User 4",
+    "review": "Great stay, amazing service. Will definitely come back.",
+    "rating": 4.5
+  },
+  {
+    "_id": "5",
+    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
+    "name": "User 5",
+    "review": "Great stay, amazing service. Will definitely come back.",
+    "rating": 4.5
+  }
+]

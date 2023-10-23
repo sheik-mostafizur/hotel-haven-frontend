@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "1",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 1",
+    "hotelCount": 10
+  },
+  {
+    "_id": "2",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 2",
+    "hotelCount": 8
+  },
+  {
+    "_id": "3",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 3",
+    "hotelCount": 7
+  },
+  {
+    "_id": "4",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 4",
+    "hotelCount": 6
+  },
+  {
+    "_id": "5",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 5",
+    "hotelCount": 5
+  },
+  {
+    "_id": "6",
+    "thumbnail": "https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg",
+    "location": "Location 6",
+    "hotelCount": 4
+  }
+]

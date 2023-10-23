@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "1",
+    "thumbnailURL": "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2022/01/18123952/most-beautiful-hotels.jpg",
+    "name": "Best Hotel Title 1",
+    "location": "Hotel Location 1",
+    "rating": 4.5,
+    "description": "Short description of the best hotel. Click to see more."
+  },
+  {
+    "_id": "2",
+    "thumbnailURL": "https://www.hindustantimes.com/ht-img/img/2023/05/24/1600x900/dad54a84-475a-11ec-8a70-313cb8a5704f_1637122114930_1684918927691.jpg",
+    "name": "Best Hotel Title 2",
+    "location": "Hotel Location 2",
+    "rating": 4.5,
+    "description": "According to their research, Dubai's Burj Al Arab Jumeirah is the most beautiful luxury hotel (per Instagram data), and really, this comes as little surprise considering a stay at the hotel includes amenities like a Rolls-Royce chauffeur service"
+  },
+  {
+    "_id": "3",
+    "thumbnailURL": "https://www.travelandleisure.com/thmb/rN0WUat7yHF4sGXcdqZqx7BH12U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/peninsula-manila-025-TOPHOTELSWB21-701643345970426694bf0f94bbe06595.jpg",
+    "name": "Best Hotel Title 3",
+    "location": "Hotel Location 3",
+    "rating": 4.5,
+    "description": "According to their research, Dubai's Burj Al Arab Jumeirah is the most beautiful luxury hotel (per Instagram data), and really, this comes as little surprise considering a stay at the hotel includes amenities like a Rolls-Royce chauffeur serviceAccording to their research, Dubai's Burj Al Arab Jumeirah is the most beautiful luxury hotel (per Instagram data), and really, this comes as little surprise considering a stay at the hotel includes amenities like a Rolls-Royce chauffeur service"
+  },
+  {
+    "_id": "4",
+    "thumbnailURL": "https://www.lux-review.com/wp-content/uploads/2019/09/turkish-hotel-1024x576.jpg",
+    "name": "Best Hotel Title 4",
+    "location": "Hotel Location 4",
+    "rating": 4.5,
+    "description": "Short description of the best hotel. Click to see more."
+  },
+  {
+    "_id": "5",
+    "thumbnailURL": "https://imageio.forbes.com/specials-images/imageserve/5ec567daf2098c0006c6036e/Kimpton-Shanghai-Hotel/960x0.jpg?format=jpg&width=960",
+    "name": "Best Hotel Title 5",
+    "location": "Hotel Location 5",
+    "rating": 4.5,
+    "description": "According to their research, Dubai's Burj Al Arab Jumeirah is the most beautiful luxury hotel (per Instagram data), and really, this comes as little surprise considering a stay at the hotel includes amenities like a Rolls-Royce chauffeur service"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "1",
+    "thumbnailURL": "https://www.hotelcontractbeds.co.uk/media/3109/hotel-photography.jpg",
+    "title": "Exploring the Beauty of Abu Bokor",
+    "authorName": "Author 1",
+    "authorProfile": "Author's Profile URL",
+    "publishDate": "2023-10-20"
+  },
+  {
+    "_id": "2",
+    "thumbnailURL": "https://images.jdmagicbox.com/comp/temp/catalogue/-wc5tttp55p.jpg",
+    "title": "Local Delicacies in Abu Bokor",
+    "authorName": "Author 2",
+    "authorProfile": "Author's Profile URL",
+    "publishDate": "2023-10-15"
+  }
+]
