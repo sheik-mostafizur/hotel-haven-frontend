@@ -8,7 +8,7 @@ interface Room {
 const Room: React.FC<Room> = ({price, image}) => {
   return (
     <>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className=" bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
         <a href="#">
           <img className="rounded-t-lg" src={image} alt="" />
         </a>
@@ -16,7 +16,7 @@ const Room: React.FC<Room> = ({price, image}) => {
           <a href="#">
             <p>Price: {price}</p>
           </a>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"></p>
+          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
           <Button size="sm">Book Now</Button>
         </div>
       </div>

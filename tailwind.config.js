@@ -64,5 +64,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [themeSwapper({themes})],
+  plugins: [themeSwapper({ themes })],
 };
