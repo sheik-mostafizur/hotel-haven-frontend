@@ -1,5 +1,3 @@
-// import React from "react";
-// import Rating from "react-rating";
 import Button from "../../components/ui/button";
 
 interface Room {
@@ -7,7 +5,7 @@ interface Room {
   image: string;
 }
 
-const Room: React.FC<Room> = ({ price, image }) => {
+const Room: React.FC<Room> = ({price, image}) => {
   return (
     <>
       <div className=" bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">

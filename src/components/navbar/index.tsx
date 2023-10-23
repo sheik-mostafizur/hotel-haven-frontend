@@ -4,6 +4,11 @@ import {useState} from "react";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+
+  const navItemStyle = `block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:hover:text-primary-500 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-secondary-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-secondary-700`;
+
+  const navItemStyleActive = `block py-2 pl-3 pr-4 text-white bg-primary-500 rounded md:bg-transparent md:text-primary-500 md:p-0 md:dark:text-primary-500`;
+
   return (
     <nav className="bg-white border-secondary-200 dark:bg-secondary-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -105,40 +110,29 @@ const Navbar = () => {
           id="navbar-user">
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-secondary-800 md:dark:bg-secondary-900 dark:border-secondary-700">
             <li>
-              <Link
-                to="/"
-                className="block py-2 pl-3 pr-4 text-white bg-primary-700 rounded md:bg-transparent md:text-primary-700 md:p-0 md:dark:text-primary-500"
-                aria-current="page">
+              <Link to="/" className={navItemStyleActive} aria-current="page">
                 Home
               </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-secondary-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-secondary-700">
+              <Link to={"/services"} className={navItemStyle}>
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-secondary-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-secondary-700">
+              <Link to={"/package"} className={navItemStyle}>
                 Package
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-secondary-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-secondary-700">
+              <Link to={"/forum"} className={navItemStyle}>
                 Forum
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-secondary-900 rounded hover:bg-secondary-100 md:hover:bg-transparent md:hover:text-primary-700 md:p-0 dark:text-white md:dark:hover:text-primary-500 dark:hover:bg-secondary-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-secondary-700">
+              <Link to={"/about"} className={navItemStyle}>
                 About
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
