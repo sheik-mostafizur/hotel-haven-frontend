@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface GalleryImage {
   thumbnailURL: string;

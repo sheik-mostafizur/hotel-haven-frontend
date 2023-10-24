@@ -13,7 +13,11 @@ const Navbar = () => {
     <nav className="bg-white border-secondary-200 dark:bg-secondary-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center">
-          {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" /> */}
+          <img
+            src="/image/logo without background.png"
+            className="h-16 bg-cover"
+            alt="Hotel Haven Logo"
+          />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Hotel Haven
           </span>

@@ -1,37 +1,23 @@
 [
   {
-    "_id": "1",
-    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
-    "name": "User 1",
-    "review": "A wonderful experience at the hotel. Highly recommended!",
-    "rating": 5
+    "_id": 1,
+    "name": "Richard Gonzales",
+    "review": "The car toys from PixiePlay are amazing! My kids love playing with them. The quality is top-notch, and the attention to detail is impressive. Highly recommended!",
+    "rating": 5,
+    "profileURL": "https://randomuser.me/api/portraits/men/62.jpg"
   },
   {
-    "_id": "2",
-    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
-    "name": "User 2",
-    "review": "Great stay, amazing service. Will definitely come back.",
-    "rating": 4.5
+    "_id": 2,
+    "name": "Bella Johnston",
+    "review": "I recently purchased a car toy from PixiePlay, and I'm extremely satisfied with my purchase. The toy is durable, and the design is fantastic. My child can’t stop playing with it!",
+    "rating": 4,
+    "profileURL": "https://randomuser.me/api/portraits/women/31.jpg"
   },
   {
-    "_id": "3",
-    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
-    "name": "User 3",
-    "review": "Great stay, amazing service. Will definitely come back.",
-    "rating": 4.5
-  },
-  {
-    "_id": "4",
-    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
-    "name": "User 4",
-    "review": "Great stay, amazing service. Will definitely come back.",
-    "rating": 4.5
-  },
-  {
-    "_id": "5",
-    "profileURL": "https://static.vecteezy.com/system/resources/thumbnails/002/387/693/small/user-profile-icon-free-vector.jpg",
-    "name": "User 5",
-    "review": "Great stay, amazing service. Will definitely come back.",
-    "rating": 4.5
+    "_id": 3,
+    "name": "David Smith",
+    "review": "The car toys from PixiePlay are incredible! The level of craftsmanship is outstanding, and the attention to detail is exceptional. My children enjoy playing with them for hours on end. Highly recommended!",
+    "rating": 5,
+    "profileURL": "https://randomuser.me/api/portraits/men/11.jpg"
   }
 ]

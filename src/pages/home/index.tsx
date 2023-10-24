@@ -6,7 +6,6 @@ import BestHotel from "./best-hotel";
 // import BookingForm from "./booking-form";
 import CustomerReviews from "./customer-reviews";
 import HotelGallery from "./hotel-gallery";
-// import SearchHome from "./search-home";
 import TopLocation from "./top-location";
 
 const Home = () => {
@@ -14,7 +13,6 @@ const Home = () => {
     <>
       <Navbar />
       <Banner />
-      {/* <SearchHome /> */}
       {/* <BookingForm /> */}
       <BestHotel />
       <HotelGallery />
