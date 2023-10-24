@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../ui/button";
-import {useState} from "react";
+import { useState } from "react";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -37,7 +37,7 @@ const Navbar = () => {
             <Button>Sign In</Button>
           </Link>
           {/*  Dropdown menu */}
-          <div
+          {/* <div
             className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-secondary-100 rounded-lg shadow dark:bg-secondary-700 dark:divide-secondary-600"
             id="user-dropdown">
             <div className="px-4 py-3">
@@ -78,21 +78,23 @@ const Navbar = () => {
                 </a>
               </li>
             </ul>
-          </div>
+          </div>*/}
           <button
             onClick={() => setToggleMenu(!toggleMenu)}
             data-collapse-toggle="navbar-user"
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-secondary-500 rounded-lg md:hidden hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-secondary-200 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:focus:ring-secondary-600"
             aria-controls="navbar-user"
-            aria-expanded="false">
+            aria-expanded="false"
+          >
             <span className="sr-only">Open main menu</span>
             <svg
               className="w-5 h-5"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 17 14">
+              viewBox="0 0 17 14"
+            >
               <path
                 stroke="currentColor"
                 strokeLinecap="round"
@@ -107,16 +109,12 @@ const Navbar = () => {
           className={`${
             toggleMenu || "hidden"
           } items-center justify-between w-full md:flex md:w-auto md:order-1`}
-          id="navbar-user">
+          id="navbar-user"
+        >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-secondary-800 md:dark:bg-secondary-900 dark:border-secondary-700">
             <li>
               <Link to="/" className={navItemStyleActive} aria-current="page">
                 Home
-              </Link>
-            </li>
-            <li>
-              <Link to={"/services"} className={navItemStyle}>
-                Services
               </Link>
             </li>
             <li>
@@ -125,13 +123,13 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/forum"} className={navItemStyle}>
-                Forum
+              <Link to={"/Blog"} className={navItemStyle}>
+                Blog
               </Link>
             </li>
             <li>
               <Link to={"/about"} className={navItemStyle}>
-                About
+                About Us
               </Link>
             </li>
           </ul>
