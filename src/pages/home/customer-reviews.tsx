@@ -1,4 +1,30 @@
 import Container from "../../components/ui/container";
+
+import { FaStar } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface CustomerReviews {
+  _id: number;
+  name: string;
+  review: string;
+  rating: number;
+  profileURL: string;
+}
+
+const CustomerReviews: React.FC = () => {
+  const [reviews, setReviews] = useState<CustomerReviews[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("/db/customer-reviews.json")
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
@@ -31,23 +57,21 @@ const CustomerReviews = () => {
     },
   ];
   return (
-    <Container className="lg:py-16">
+    <Container className="lg:py-16 overflow-hidden">
       <div className=" text-center font-extrabold text-primary-500 text-3xl mt-10 mb-10">
-        <span className="bg-[#181830] p-1 rounded-lg font-mono">
-          Customer Testimonials
-        </span>
+        <h2 className="text-center">Customer Testimonials</h2>
       </div>
       <div className="">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
           {reviews.map((review) => (
             <div
-              key={review.id}
-              className="bg-white p-6 rounded-lg shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
+              key={review._id}
+              className="bg-primary-50 p-6 rounded-lg shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
                 <img
-                  src={review.avatar}
+                  src={review.profileURL}
                   alt={review.name}
                   className="w-12 h-12 rounded-full"
                 />
