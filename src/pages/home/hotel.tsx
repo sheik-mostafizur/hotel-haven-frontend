@@ -5,13 +5,11 @@ interface Hotel {
   title: string;
   location: string;
   description: string;
-  price: number;
   thumbnailURL: string;
   rating: number;
 }
 
 const Hotel: React.FC<Hotel> = ({
-  price,
   location,
   title,
   thumbnailURL,

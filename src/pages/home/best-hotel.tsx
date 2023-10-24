@@ -8,7 +8,6 @@ interface BestHotel {
   title: string;
   location: string;
   description: string;
-  price: number;
   thumbnailURL: string;
   rating: number;
 }
