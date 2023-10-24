@@ -1,24 +1,3 @@
-// import Container from "../../components/ui/container";
-// const Banner = () => {
-//   return (
-//     <Container>
-//       <div className="bg-[url('https://cdn.pixabay.com/photo/2019/12/26/03/51/hotel-4719609_1280.jpg')] bg-cover bg-no-repeat bg-center md:py-32 lg:py-56">
-//         <div className="lg:pl-6 py-20 lg:py-0">
-//           <h1 className="text-white">
-//             Discover <br /> Tranquility at
-//             <span className="text-primary-500"> Hotel Haven</span>
-//           </h1>
-//           <p className="text-white lg:w-96 hidden md:block md:pe-96 lg:px-0">
-//             Welcome to Hotel Haven, where luxury meets serenity.
-//           </p>
-//         </div>
-//       </div>
-//     </Container>
-//   );
-// };
-
-// export default Banner;
-
 import Container from "../../components/ui/container";
 
 const Banner = () => {
@@ -37,8 +16,8 @@ const Banner = () => {
         </div>
 
         {/* Right Column: Booking Form */}
-        <div className="flex-1 p-4 bg-white opacity-90">
-          <h2 className="text-2xl font-semibold">Find Your Room</h2>
+        <div className="flex-1 p-4 rounded-2xl bg-white opacity-90">
+          <h2 className="text-2xl">Find Your Room</h2>
           <form className="grid">
             <div className="mb-4">
               <label
@@ -51,11 +30,14 @@ const Banner = () => {
                 id="countries"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                <option selected>Choose a Location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                <option defaultValue="Choose a Location">
+                  Choose a Location
+                </option>
+                <option value="DH">Dhaka</option>
+                <option value="CH">Chittagong</option>
+                <option value="CX">Cox's Bazar</option>
+                <option value="SY">Sylhet</option>
+                <option value="BA">Bandorban</option>
               </select>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
