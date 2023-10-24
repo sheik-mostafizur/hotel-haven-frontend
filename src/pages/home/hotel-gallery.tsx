@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 interface GalleryImage {
   thumbnailURL: string;
@@ -30,13 +28,15 @@ const HotelGallery = () => {
         and beauty comes to life. Immerse yourself in refined sophistication and
         timeless charm.
       </p>
-      <Carousel
+      {/* <Carousel
+        className="grid grid-rows-2"
         autoPlay={true}
         showArrows={false} // Optionally hide navigation arrows
         infiniteLoop={true} // Optionally enable infinite loop
         interval={2000} // Auto-scroll interval in milliseconds (3 seconds in this example)
         showThumbs={false} // Optionally hide thumbnails
-      >
+      > */}
+      <div className="grid md:grid-cols-1 mx-auto lg:grid-cols-4 gap-3">
         {gallery &&
           gallery.map((image) => (
             <div key={image._id}>
@@ -47,7 +47,8 @@ const HotelGallery = () => {
               />
             </div>
           ))}
-      </Carousel>
+      </div>
+      {/* </Carousel> */}
     </Container>
   );
 };
