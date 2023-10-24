@@ -1,0 +1,58 @@
+[
+  {
+    "thumbnail": "https://example.com/blog1-thumbnail.jpg",
+    "title": "Exploring the Beauty of Nature",
+    "authorName": "John Doe",
+    "authorProfile": "Nature Enthusiast | Travel Blogger",
+    "publishDate": "2023-01-15"
+  },
+  {
+    "thumbnail": "https://example.com/blog2-thumbnail.jpg",
+    "title": "A Culinary Journey Through Bangladesh",
+    "authorName": "Alice Smith",
+    "authorProfile": "Food Critic | Traveler",
+    "publishDate": "2023-02-28"
+  },
+  {
+    "thumbnail": "https://example.com/blog3-thumbnail.jpg",
+    "title": "Adventure in the Hills: Trekking in Sylhet",
+    "authorName": "David Brown",
+    "authorProfile": "Adventure Seeker | Outdoor Enthusiast",
+    "publishDate": "2023-03-12"
+  },
+  {
+    "thumbnail": "https://example.com/blog4-thumbnail.jpg",
+    "title": "Historical Wonders of Dhaka",
+    "authorName": "Sarah Johnson",
+    "authorProfile": "History Buff | Cultural Explorer",
+    "publishDate": "2023-04-04"
+  },
+  {
+    "thumbnail": "https://example.com/blog5-thumbnail.jpg",
+    "title": "Relaxing by the Beach: Cox's Bazar Delight",
+    "authorName": "Michael Clark",
+    "authorProfile": "Beach Lover | Sunseeker",
+    "publishDate": "2023-05-21"
+  },
+  {
+    "thumbnail": "https://example.com/blog6-thumbnail.jpg",
+    "title": "Bengali Cuisine: A Culinary Adventure",
+    "authorName": "Linda Wilson",
+    "authorProfile": "Foodie | Recipe Developer",
+    "publishDate": "2023-06-08"
+  },
+  {
+    "thumbnail": "https://example.com/blog7-thumbnail.jpg",
+    "title": "Art and Culture: Exploring Chittagong",
+    "authorName": "Mark Anderson",
+    "authorProfile": "Art Enthusiast | Culture Explorer",
+    "publishDate": "2023-07-19"
+  },
+  {
+    "thumbnail": "https://example.com/blog8-thumbnail.jpg",
+    "title": "Mystical Mymensingh: A Hidden Gem",
+    "authorName": "Emily Carter",
+    "authorProfile": "Adventure Seeker | History Enthusiast",
+    "publishDate": "2023-08-30"
+  }
+]

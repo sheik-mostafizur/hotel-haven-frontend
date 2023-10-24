@@ -1,14 +1,20 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
 import Room from "./room";
 
-const BestHotel = () => {
-  const [rooms, setRoom] = useState([]);
+interface BestHotel {
+  price: number;
+  thumbnailURL: string;
+  rating: number;
+}
+
+const BestHotel: React.FC = () => {
+  const [rooms, setRoom] = useState<BestHotel[]>([]);
   useEffect(() => {
     axios
-      .get("/db/bestRoom.json")
-      .then(({data}) => {
+      .get("/db/best-hotel.json")
+      .then(({ data }) => {
         setRoom(data);
       })
       .catch((err) => {
@@ -16,13 +22,11 @@ const BestHotel = () => {
       });
   }, []);
   return (
-    <Container className="lg:py-16">
+    <Container className="lg:py-20">
       <div className="mx-auto mb-4">
-        <h2 className="text-center">Hotel Heavens Best Rooms & Suites</h2>
+        <h2 className="text-center">Best Hotels</h2>
         <p className="px-4 lg:px-16 text-center py-4 font-normal">
-          Discover our pinnacle of luxury at Hotel Heaven's Best Hotels. From
-          opulent suites to personalized service, our selection offers the
-          epitome of comfort and elegance.
+          Discover our pinnacle of luxury at Hotel Heaven's Best Hotels.
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
