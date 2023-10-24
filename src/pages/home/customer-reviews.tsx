@@ -1,5 +1,5 @@
-import Rating from "react-rating";
 import Container from "../../components/ui/container";
+
 import { FaStar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -25,7 +25,37 @@ const CustomerReviews: React.FC = () => {
         console.log(err);
       });
   }, []);
+import { Rating } from "@smastrom/react-rating";
 
+import "@smastrom/react-rating/style.css";
+
+const CustomerReviews = () => {
+  const reviews = [
+    {
+      id: 1,
+      name: "Richard Gonzales",
+      review:
+        "The car toys from PixiePlay are amazing! My kids love playing with them. The quality is top-notch, and the attention to detail is impressive. Highly recommended!",
+      rating: 5,
+      avatar: "https://randomuser.me/api/portraits/men/62.jpg",
+    },
+    {
+      id: 2,
+      name: "Bella Johnston",
+      review:
+        "I recently purchased a car toy from PixiePlay, and I'm extremely satisfied with my purchase. The toy is durable, and the design is fantastic. My child can’t stop playing with it!",
+      rating: 4,
+      avatar: "https://randomuser.me/api/portraits/women/31.jpg",
+    },
+    {
+      id: 3,
+      name: "David Smith",
+      review:
+        "The car toys from PixiePlay are incredible! The level of craftsmanship is outstanding, and the attention to detail is exceptional. My children enjoy playing with them for hours on end. Highly recommended!",
+      rating: 4.5,
+      avatar: "https://randomuser.me/api/portraits/men/11.jpg",
+    },
+  ];
   return (
     <Container className="lg:py-16 overflow-hidden">
       <div className=" text-center font-extrabold text-primary-500 text-3xl mt-10 mb-10">
@@ -49,16 +79,11 @@ const CustomerReviews: React.FC = () => {
                   <h3 className="text-xl font-semibold">{review.name}</h3>
                   <div className="flex items-center">
                     <p className="font-semibold font-mono text-lg">
-                      Rating:{" "}
+                      {/* Rating:{" "} */}
                       <Rating
-                        title={review.rating}
-                        initialRating={review.rating}
-                        readonly
-                        placeholderSymbol={<FaStar className="icon" />}
-                        fullSymbol={<FaStar color="#FFD700" className="icon" />}
-                        emptySymbol={
-                          <FaStar color="#C4C4C4" className="icon" />
-                        }
+                        value={review.rating}
+                        readOnly={true}
+                        style={{ maxWidth: "100px" }}
                       />
                     </p>
                   </div>
