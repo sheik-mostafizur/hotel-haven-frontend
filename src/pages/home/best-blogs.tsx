@@ -33,7 +33,7 @@ const BestBlogs: React.FC = () => {
         collection of stories.
       </p>
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-        {bestBlogs.map((b, index) => (
+        {bestBlogs.splice(0, 4).map((b, index) => (
           <Blogs key={index} {...b} />
         ))}
       </div>
