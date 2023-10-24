@@ -24,7 +24,7 @@ const HotelGallery = () => {
 
   return (
     <Container className="lg:py-20">
-      <h2 className="text-center lg:text-5xl">Capturing Elegance</h2>
+      <h2 className="text-center">Capturing Elegance</h2>
       <p className="px-4 lg:px-16 text-center py-2 font-normal">
         Experience our 'Capturing Elegance' section, where the essence of luxury
         and beauty comes to life. Immerse yourself in refined sophistication and
@@ -43,7 +43,7 @@ const HotelGallery = () => {
               <img
                 src={image.thumbnailURL}
                 alt={image.name}
-                className="h-full bg-cover"
+                className="h-full bg-center bg-cover"
               />
             </div>
           ))}

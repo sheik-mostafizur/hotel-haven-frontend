@@ -1,6 +1,7 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Banner from "./banner";
+import BestBlogs from "./best-blogs";
 import BestHotel from "./best-hotel";
 // import BookingForm from "./booking-form";
 import CustomerReviews from "./customer-reviews";
@@ -17,6 +18,7 @@ const Home = () => {
       <HotelGallery />
       <TopLocation />
       <CustomerReviews />
+      <BestBlogs />
       <Footer />
     </>
   );
