@@ -43,7 +43,7 @@ const HotelGallery = () => {
               <img
                 src={image.thumbnailURL}
                 alt={image.name}
-                className="h-full bg-cover"
+                className="h-full bg-center bg-cover"
               />
             </div>
           ))}
