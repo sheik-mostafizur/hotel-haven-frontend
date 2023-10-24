@@ -16,8 +16,8 @@ const Banner = () => {
         </div>
 
         {/* Right Column: Booking Form */}
-        <div className="flex-1 p-4 bg-white opacity-90">
-          <h2 className="text-2xl font-semibold">Find Your Room</h2>
+        <div className="flex-1 p-4 rounded-2xl bg-white opacity-90">
+          <h2 className="text-2xl">Find Your Room</h2>
           <form className="grid">
             <div className="mb-4">
               <label
@@ -30,11 +30,14 @@ const Banner = () => {
                 id="countries"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                <option selected>Choose a Location</option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                <option defaultValue="Choose a Location">
+                  Choose a Location
+                </option>
+                <option value="DH">Dhaka</option>
+                <option value="CH">Chittagong</option>
+                <option value="CX">Cox's Bazar</option>
+                <option value="SY">Sylhet</option>
+                <option value="BA">Bandorban</option>
               </select>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
