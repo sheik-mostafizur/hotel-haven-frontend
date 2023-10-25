@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import Button from "../ui/button";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../redux/authSlice";
+import {logout, logoutGoogle} from "../../redux/authSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
@@ -89,6 +89,14 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(logout());
                     setToggleProfile(false);
+                    dispatch(logoutGoogle())
+                      .unwrap()
+                      .then(() => {
+                        // Handle successful logout
+                      })
+                      .catch((error) => {
+                        // Handle logout error
+                      });
                   }}
                   className={profileMenuStyle + " cursor-pointer"}>
                   Sign out

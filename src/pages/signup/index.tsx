@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import ContinueWithGoogle from "../../components/ContinueWithGoogle";
 
 const SignUp = () => {
   const {
@@ -14,9 +15,7 @@ const SignUp = () => {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // POST: /register
+  const onSubmit = (data: Object) => {
     axios
       .post("/auth/register", data)
       .then(({data}) => {
@@ -34,17 +33,7 @@ const SignUp = () => {
         <div className="relative rounded-lg border p-8 shadow md:w-[450px]">
           <h2>Create a new account!</h2>
           <div className="mt-4 flex items-center justify-center">
-            <button
-              disabled
-              type="button"
-              className="mb-2 mr-2 rounded-lg border border-secondary-200 bg-white py-1 pe-4 ps-2 text-sm font-medium text-secondary-900 hover:bg-secondary-100 hover:text-primary-600 focus:z-10 focus:outline-none focus:ring-4 focus:ring-secondary-200 dark:border-secondary-600 dark:bg-secondary-800 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white dark:focus:ring-secondary-700">
-              <img
-                src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-                alt="google"
-                className="inline-block h-8 w-8"
-              />
-              Continue with Google
-            </button>
+            <ContinueWithGoogle />
           </div>
           <div className="inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
