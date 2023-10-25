@@ -1,7 +1,8 @@
 import Container from "../../components/ui/container";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Location from "./location";
+import fetchData from "../../hooks/fetchData";
 
 interface TopLocation {
   image: string;
@@ -13,13 +14,9 @@ const TopLocation: React.FC = () => {
   const [topLocation, setTopLocation] = useState<TopLocation[]>([]);
 
   useEffect(() => {
-    axios
-      .get("/db/top-hotel-location.json")
-      .then((res) => {
-        setTopLocation(res.data);
-        // console.log(res.data);
-      })
-      .catch((err) => console.log(err.message));
+    fetchData("/db/top-hotel-location.json")
+      .then((data) => setTopLocation(data))
+      .catch((err) => console.log(err));
   }, []);
   return (
     <Container className="lg:py-16">

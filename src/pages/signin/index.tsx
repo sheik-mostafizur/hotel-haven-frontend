@@ -5,7 +5,12 @@ import Button from "../../components/ui/button";
 import {AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/authSlice";
+
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -14,12 +19,11 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    // POST: /register
     axios
       .post("/auth/login", data)
       .then(({data}) => {
-        console.log(data);
+        dispatch(login({token: data.token, user: data.user}));
+        localStorage.setItem("token", data.token);
       })
       .catch((err) => console.log(err));
   };

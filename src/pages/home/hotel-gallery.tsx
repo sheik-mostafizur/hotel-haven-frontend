@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
 import axios from "axios";
+import fetchData from "../../hooks/fetchData";
 
 interface GalleryImage {
   thumbnailURL: string;
@@ -12,11 +13,8 @@ const HotelGallery = () => {
   const [gallery, setGallery] = useState<GalleryImage[]>([]);
 
   useEffect(() => {
-    axios
-      .get("/db/hotel-gallery.json")
-      .then(({ data }) => {
-        setGallery(data);
-      })
+    fetchData("/db/hotel-gallery.json")
+      .then((data) => setGallery(data))
       .catch((err) => console.log(err));
   }, []);
 

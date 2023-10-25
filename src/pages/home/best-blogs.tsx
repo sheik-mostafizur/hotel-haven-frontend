@@ -1,7 +1,8 @@
 import axios from "axios";
 import Container from "../../components/ui/container";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Blogs from "./blogs";
+import fetchData from "../../hooks/fetchData";
 interface BestBlogs {
   thumbnail: string;
   title: string;
@@ -14,14 +15,9 @@ interface BestBlogs {
 const BestBlogs: React.FC = () => {
   const [bestBlogs, setBestBloga] = useState<BestBlogs[]>([]);
   useEffect(() => {
-    axios
-      .get("/db/best-blogs.json")
-      .then(({ data }) => {
-        setBestBloga(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    fetchData("/db/best-blogs.json")
+      .then((data) => setBestBloga(data))
+      .catch((err) => console.log(err));
   }, []);
   // console.log();
   return (
