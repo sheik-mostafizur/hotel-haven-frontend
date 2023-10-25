@@ -1,10 +1,30 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import { Link } from "react-router-dom";
-import { AiFillEyeInvisible } from "react-icons/ai";
+import {Link} from "react-router-dom";
+import {AiFillEyeInvisible} from "react-icons/ai";
+import {useForm} from "react-hook-form";
+import axios from "axios";
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: {errors},
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    // POST: /register
+    axios
+      .post("/auth/register", data)
+      .then(({data}) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <header>
@@ -15,9 +35,9 @@ const SignUp = () => {
           <h2>Create a new account!</h2>
           <div className="mt-4 flex items-center justify-center">
             <button
+              disabled
               type="button"
-              className="mb-2 mr-2 rounded-lg border border-secondary-200 bg-white py-1 pe-4 ps-2 text-sm font-medium text-secondary-900 hover:bg-secondary-100 hover:text-primary-600 focus:z-10 focus:outline-none focus:ring-4 focus:ring-secondary-200 dark:border-secondary-600 dark:bg-secondary-800 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white dark:focus:ring-secondary-700"
-            >
+              className="mb-2 mr-2 rounded-lg border border-secondary-200 bg-white py-1 pe-4 ps-2 text-sm font-medium text-secondary-900 hover:bg-secondary-100 hover:text-primary-600 focus:z-10 focus:outline-none focus:ring-4 focus:ring-secondary-200 dark:border-secondary-600 dark:bg-secondary-800 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white dark:focus:ring-secondary-700">
               <img
                 src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
                 alt="google"
@@ -32,15 +52,25 @@ const SignUp = () => {
               or
             </span>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label htmlFor="name"> Name</label>
-              <input type="text" id="name" placeholder="Name" required />
+              <input
+                type="text"
+                id="name"
+                placeholder="Name"
+                {...register("name", {required: true})}
+              />
             </div>
 
             <div className="mb-6">
               <label htmlFor="email"> email</label>
-              <input type="email" id="email" placeholder="Email" required />
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email", {required: true})}
+              />
             </div>
 
             <div className="mb-6">
@@ -49,30 +79,39 @@ const SignUp = () => {
                 type="url"
                 id="photoURL"
                 placeholder="Photo URL"
-                required
+                {...register("photoURL")}
               />
             </div>
             <div className="mb-6">
               <label htmlFor="phone"> Phone Number</label>
-              <input type="text" id="phone" placeholder="Phone" required />
+              <input
+                type="text"
+                id="phone"
+                placeholder="Phone"
+                {...register("phone", {required: true})}
+              />
             </div>
             <div className="mb-6">
               <label htmlFor="age"> Age</label>
-              <input type="url" id="age" placeholder="Age" required />
+              <input
+                type="text"
+                id="age"
+                placeholder="Age"
+                {...register("age", {required: true})}
+              />
             </div>
 
             <div className="mb-6">
               <label
                 htmlFor="gender"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Gender
               </label>
               <select
                 id="gender"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected>Choose Your Gender</option>
+                {...register("gender", {required: true})}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option defaultValue={""}>Choose Your Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
@@ -85,7 +124,7 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 placeholder="Password"
-                required
+                {...register("password", {required: true})}
               />
               <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
 
@@ -98,7 +137,14 @@ const SignUp = () => {
                 type="password"
                 id="confirm_password"
                 placeholder="Confirm Password"
-                required
+                {...register("confirm_password", {
+                  required: true,
+                  validate: (val: string) => {
+                    if (watch("password") != val) {
+                      return "Your passwords do no match";
+                    }
+                  },
+                })}
               />
               <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
 
@@ -112,8 +158,7 @@ const SignUp = () => {
               Already have an account?{" "}
               <Link
                 to="/signin"
-                className="font-bold text-primary-600 hover:underline"
-              >
+                className="font-bold text-primary-600 hover:underline">
                 Sign In
               </Link>
             </p>
