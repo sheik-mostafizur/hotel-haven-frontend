@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
@@ -7,10 +7,12 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/authSlice";
+import toastSuccess from "../../utils/toastSuccess";
+import toastError from "../../utils/toastError";
 
 const SignIn = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -18,16 +20,19 @@ const SignIn = () => {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Object) => {
     axios
       .post("/auth/login", data)
       .then(({data}) => {
+        toastSuccess(data.message);
         dispatch(login({token: data.token, user: data.user}));
         localStorage.setItem("token", data.token);
+        navigate(-1);
       })
-      .catch((err) => console.log(err));
+      .catch((error) => {
+        toastError(error);
+      });
   };
-
   return (
     <>
       <header>
