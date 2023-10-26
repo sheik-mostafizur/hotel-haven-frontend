@@ -1,4 +1,3 @@
-import axios from "axios";
 import Container from "../../components/ui/container";
 import { useEffect, useState } from "react";
 import Blogs from "./blogs";

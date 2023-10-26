@@ -7,10 +7,16 @@ import {Toaster} from "react-hot-toast";
 import axios from "axios";
 import {Provider} from "react-redux";
 import store from "./redux/store";
-import AuthInitialization from "./components/AuthInitialization";
 import App from "./App";
 
+const isToken = localStorage.getItem("token");
+
 axios.defaults.baseURL = "https://hotel-haven-backend.vercel.app/";
+// axios.defaults.baseURL = "http://localhost:3000";
+
+if (isToken) {
+  axios.defaults.headers.common["Authorization"] = `Bearer ${isToken}`;
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

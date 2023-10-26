@@ -1,7 +1,6 @@
 import Container from "../../components/ui/container";
 // import { FaStar } from "react-icons/fa";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import fetchData from "../../hooks/fetchData";
