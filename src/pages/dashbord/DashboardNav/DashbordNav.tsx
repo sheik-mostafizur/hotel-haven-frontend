@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./dashbord.css";
 import {BiSolidUser} from "react-icons/bi";
 import {
@@ -10,12 +10,15 @@ import {
 } from "react-icons/fa";
 import {AiFillSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
-import {useAppSelector} from "../../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import ROLE from "../../../constants/ROLE";
+import {logout} from "../../../redux/authSlice";
 
 const DashboardNav = () => {
   const user = useAppSelector((state) => state.auth.user);
   const userRole = user?.role;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // const [open, setOpen] = useState(true);
 
@@ -73,6 +76,14 @@ const DashboardNav = () => {
                   <span>Add Hotel</span>
                 </Link>
                 <Link
+                  to="hotel"
+                  className="text-white group flex  items-center gap-5 ">
+                  <span>
+                    <FaProductHunt />
+                  </span>
+                  <span>Hotel</span>
+                </Link>
+                <Link
                   to="rooms"
                   className="text-white group flex  items-center gap-5 ">
                   <span>
@@ -113,14 +124,17 @@ const DashboardNav = () => {
               </span>
               <span>Home</span>
             </Link>
-            <Link
-              to="/logout"
-              className="text-white group flex  items-center gap-10 ">
+            <a
+              onClick={() => {
+                dispatch(logout());
+                navigate("/");
+              }}
+              className="text-white group flex cursor-pointer items-center gap-10 ">
               <span>
                 <FiLogOut />
               </span>
               <span>Logout</span>
-            </Link>
+            </a>
           </div>
         </nav>
       </div>

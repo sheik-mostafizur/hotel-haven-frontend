@@ -1,9 +1,7 @@
 import {Link} from "react-router-dom";
 import Button from "../ui/button";
 import {useState} from "react";
-import {logout, setError} from "../../redux/authSlice";
-import {signOut} from "firebase/auth";
-import {auth} from "../../config/firebase.config";
+import {logout} from "../../redux/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
 const Navbar = () => {
@@ -91,10 +89,6 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(logout());
                     setToggleProfile(false);
-
-                    signOut(auth)
-                      .then()
-                      .catch((err) => dispatch(setError(err.message)));
                   }}
                   className={profileMenuStyle + " cursor-pointer"}>
                   Sign out

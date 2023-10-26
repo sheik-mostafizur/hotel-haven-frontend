@@ -1,7 +1,7 @@
-import { useForm, Controller } from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 
-const RoomsForm = () => {
-  const { handleSubmit, control } = useForm();
+const AddRooms = () => {
+  const {handleSubmit, control} = useForm();
   const onSubmit = (data: any) => {
     // Handle form submission here, e.g., send data to an API
     console.log(data);
@@ -17,7 +17,7 @@ const RoomsForm = () => {
               name="title"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -26,7 +26,7 @@ const RoomsForm = () => {
               name="facilities"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
         </div>
@@ -37,7 +37,7 @@ const RoomsForm = () => {
               name="thumbnail"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -46,7 +46,7 @@ const RoomsForm = () => {
               name="bookedCount"
               control={control}
               defaultValue="0"
-              render={({ field }) => <input {...field} type="number" />}
+              render={({field}) => <input {...field} type="number" />}
             />
           </div>
         </div>
@@ -58,7 +58,7 @@ const RoomsForm = () => {
               name="availability.startDate"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} type="date" />}
+              render={({field}) => <input {...field} type="date" />}
             />
           </div>
           <div>
@@ -67,7 +67,7 @@ const RoomsForm = () => {
               name="availability.endDate"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} type="date" />}
+              render={({field}) => <input {...field} type="date" />}
             />
           </div>
         </div>
@@ -79,7 +79,7 @@ const RoomsForm = () => {
               name="address.location"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -88,7 +88,7 @@ const RoomsForm = () => {
               name="address.thumbnailURL"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
         </div>
@@ -100,11 +100,10 @@ const RoomsForm = () => {
             name="availability.IsAvailable"
             control={control}
             defaultValue=""
-            render={({ field }) => (
+            render={({field}) => (
               <select
                 {...field}
-                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 <option defaultValue="Select your option">
                   Select your option
                 </option>
@@ -122,7 +121,7 @@ const RoomsForm = () => {
               name="capacity.adult"
               control={control}
               defaultValue=""
-              render={({ field }) => (
+              render={({field}) => (
                 <input {...field} type="number" max={11} min={0} />
               )}
             />
@@ -133,7 +132,7 @@ const RoomsForm = () => {
               name="capacity.child"
               control={control}
               defaultValue=""
-              render={({ field }) => (
+              render={({field}) => (
                 <input {...field} type="number" max={11} min={0} />
               )}
             />
@@ -147,7 +146,7 @@ const RoomsForm = () => {
               name="roomInfo.roomSize"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -156,7 +155,7 @@ const RoomsForm = () => {
               name="roomInfo.view"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -165,7 +164,7 @@ const RoomsForm = () => {
               name="roomInfo.bedType"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -174,7 +173,7 @@ const RoomsForm = () => {
               name="roomInfo.regularPrice"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -183,7 +182,7 @@ const RoomsForm = () => {
               name="roomInfo.discountedPrice"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -192,7 +191,7 @@ const RoomsForm = () => {
               name="roomInfo.additionalInfo"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
         </div>
@@ -203,7 +202,7 @@ const RoomsForm = () => {
               name="address.map.lat"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div>
@@ -212,7 +211,7 @@ const RoomsForm = () => {
               name="address.map.lng"
               control={control}
               defaultValue=""
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
         </div>
@@ -221,12 +220,11 @@ const RoomsForm = () => {
           name="description"
           control={control}
           defaultValue=""
-          render={({ field }) => <input {...field} />}
+          render={({field}) => <input {...field} />}
         />
         <button
           className="block bg-primary-500 rounded-lg py-4 px-8 mt-5"
-          type="submit"
-        >
+          type="submit">
           Submit
         </button>
       </form>
@@ -234,4 +232,4 @@ const RoomsForm = () => {
   );
 };
 
-export default RoomsForm;
+export default AddRooms;

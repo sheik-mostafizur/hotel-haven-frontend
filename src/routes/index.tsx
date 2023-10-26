@@ -4,10 +4,11 @@ import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
 import SignIn from "../pages/signin";
 import Users from "../pages/dashbord/User/User";
-import HotelForm from "../pages/dashbord/Hotel/Addhotel";
 import Dashboard from "../pages/dashbord/Dashboard/Dashboard";
 import DashboardLayout from "../pages/dashbord/dashboard-layout/Dashbordlayout";
-import RoomsForm from "../pages/dashbord/Manager/Rooms";
+import AddRooms from "../pages/dashbord/manager/rooms/add-rooms";
+import AddAHotel from "../pages/dashbord/manager/hotel-manager/add-a-hotel";
+import HotelManager from "../pages/dashbord/manager/hotel-manager";
 
 const router = createBrowserRouter([
   {
@@ -36,12 +37,16 @@ const router = createBrowserRouter([
         element: <Users />,
       },
       {
+        path: "hotel",
+        element: <HotelManager />,
+      },
+      {
         path: "addHotel",
-        element: <HotelForm />,
+        element: <AddAHotel />,
       },
       {
         path: "rooms",
-        element: <RoomsForm />,
+        element: <AddRooms />,
       },
     ],
   },
