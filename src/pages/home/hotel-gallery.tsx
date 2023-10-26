@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import fetchData from "../../hooks/fetchData";
 
@@ -25,15 +25,7 @@ const HotelGallery = () => {
         and beauty comes to life. Immerse yourself in refined sophistication and
         timeless charm.
       </p>
-      {/* <Carousel
-        className="grid grid-rows-2"
-        autoPlay={true}
-        showArrows={false} // Optionally hide navigation arrows
-        infiniteLoop={true} // Optionally enable infinite loop
-        interval={2000} // Auto-scroll interval in milliseconds (3 seconds in this example)
-        showThumbs={false} // Optionally hide thumbnails
-      > */}
-      <div className="grid md:grid-cols-1 mx-auto lg:grid-cols-4 gap-3">
+      <div className="grid md:grid-cols-1 mx-auto lg:grid-cols-3 gap-3">
         {gallery &&
           gallery.map((image) => (
             <div key={image._id}>
@@ -45,7 +37,6 @@ const HotelGallery = () => {
             </div>
           ))}
       </div>
-      {/* </Carousel> */}
     </Container>
   );
 };

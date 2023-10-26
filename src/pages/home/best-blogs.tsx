@@ -1,5 +1,5 @@
 import Container from "../../components/ui/container";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Blogs from "./blogs";
 import fetchData from "../../hooks/fetchData";
 interface BestBlogs {
@@ -12,13 +12,13 @@ interface BestBlogs {
 }
 
 const BestBlogs: React.FC = () => {
-  const [bestBlogs, setBestBloga] = useState<BestBlogs[]>([]);
+  const [bestBlogs, setBestBlog] = useState<BestBlogs[]>([]);
   useEffect(() => {
     fetchData("/db/best-blogs.json")
-      .then((data) => setBestBloga(data))
+      .then((data) => setBestBlog(data))
       .catch((err) => console.log(err));
   }, []);
-  // console.log();
+  console.log(bestBlogs);
   return (
     <Container className="lg:py-20">
       <h2 className="mx-auto text-center">Discover Our Latest Blog Entries</h2>
@@ -27,8 +27,8 @@ const BestBlogs: React.FC = () => {
         and adventure. Get inspired and stay informed with our diverse
         collection of stories.
       </p>
-      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-        {bestBlogs.splice(0, 4).map((b, index) => (
+      <div className="grid gap-4 py-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+        {bestBlogs.splice(0, 5).map((b, index) => (
           <Blogs key={index} {...b} />
         ))}
       </div>
