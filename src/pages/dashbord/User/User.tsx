@@ -1,6 +1,5 @@
 import Button from "../../../components/ui/button";
 
-
 const Users = () => {
   const users = [
     {
@@ -31,17 +30,22 @@ const Users = () => {
   ];
 
   return (
-    <div >
-      <ul className="text-red-500 flex flex-col justify-center items-center rounded-xl border ">
+    <div>
+      <ul className="text-primary-500 flex flex-col justify-center items-center rounded-xl border ">
         {users.map((user, idx) => (
-          <div className="flex justify-between border w-3/4  p-4 gap-4 shadow-xl mt-5" key={idx}>
+          <div
+            className="flex justify-between border w-3/4  p-4 gap-4 shadow-xl mt-5"
+            key={idx}>
             <div>
-              <img className="w-12 h-12 rounded-full" src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?size=626&ext=jpg" alt="" />
+              <img
+                className="w-12 h-12 rounded-full"
+                src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?size=626&ext=jpg"
+                alt=""
+              />
             </div>
             <div>
               <p className="text-xl font-semibold">{user.name}</p>
               <p className="text-xl font-semibold">{user.email}</p>
-
             </div>
             <div className=" ">
               <Button className="me-2">Make Admin </Button>

@@ -4,4 +4,4 @@ const gender = {
   OTHERS: "OTHERS",
 };
 
-module.exports = gender;
+export default gender;
