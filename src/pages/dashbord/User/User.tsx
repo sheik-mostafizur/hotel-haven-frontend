@@ -10,7 +10,7 @@ import ROLE from "../../../constants/ROLE";
 
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-  console.log(admin);
+
   const users = useAppSelector((state) => state.admin.users);
   const isLoading = useAppSelector((state) => state.admin.isLoading);
 

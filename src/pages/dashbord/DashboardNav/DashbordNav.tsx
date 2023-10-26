@@ -73,12 +73,8 @@ const DashboardNav = () => {
                   <span>Add Hotel</span>
                 </Link>
                 <Link
-
                   to="rooms"
-                  className="text-white group flex  items-center gap-5 "
-                > 
                   className="text-white group flex  items-center gap-5 ">
-
                   <span>
                     <FaUsers />
                   </span>

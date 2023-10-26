@@ -7,7 +7,6 @@ import Users from "../pages/dashbord/User/User";
 import HotelForm from "../pages/dashbord/Hotel/Addhotel";
 import Dashboard from "../pages/dashbord/Dashboard/Dashboard";
 import DashboardLayout from "../pages/dashbord/dashboard-layout/Dashbordlayout";
-import Rooms from "../pages/dashbord/Manager/Rooms";
 import RoomsForm from "../pages/dashbord/Manager/Rooms";
 
 const router = createBrowserRouter([
