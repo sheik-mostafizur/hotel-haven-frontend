@@ -1,10 +1,10 @@
 import {FaBars, FaSearch} from "react-icons/fa";
 import "./Header.css";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useAppSelector} from "../../../redux/hooks";
 
 const DashHeader = () => {
-  const admin = useSelector((state) => state.auth.user);
+  const admin = useAppSelector((state) => state.auth.user);
   return (
     <div className="flex  rounded-xl  justify-between shadow border mt-4 h-[80px]  bg-white px-10 py-2 ms-10 me-8 ">
       <div className=" flex justify-center items-center">
