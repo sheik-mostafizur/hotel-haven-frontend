@@ -46,11 +46,14 @@ const Users = () => {
                 <Button
                   isDisabled={user.role == role.ADMIN || user._id == admin._id}
                   onClick={() => {
-                    dispatch(editUserData(user._id, {role: role.ADMIN})).then(
-                      () => {
-                        dispatch(fetchUserData());
-                      }
-                    );
+                    dispatch(
+                      editUserData({
+                        _id: user._id,
+                        updatedData: {role: role.ADMIN},
+                      })
+                    ).then(() => {
+                      dispatch(fetchUserData());
+                    });
                   }}
                   className="me-2"
                   size="sm">
@@ -61,11 +64,14 @@ const Users = () => {
                     user.role == role.MANAGER || user._id == admin._id
                   }
                   onClick={() => {
-                    dispatch(editUserData(user._id, {role: role.MANAGER})).then(
-                      () => {
-                        dispatch(fetchUserData());
-                      }
-                    );
+                    dispatch(
+                      editUserData({
+                        _id: user._id,
+                        updatedData: {role: role.MANAGER},
+                      })
+                    ).then(() => {
+                      dispatch(fetchUserData());
+                    });
                   }}
                   className="me-2"
                   size="sm">

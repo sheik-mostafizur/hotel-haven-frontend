@@ -20,7 +20,7 @@ export const fetchUserData = createAsyncThunk(
 
 export const editUserData = createAsyncThunk(
   "admin/editUserData",
-  async (_id, updatedData) => {
+  async ({_id, updatedData}) => {
     try {
       const response = await axios.put(`/admin/user/${_id}`, updatedData);
       return response.data;

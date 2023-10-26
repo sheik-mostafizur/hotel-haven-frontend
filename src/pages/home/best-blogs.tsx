@@ -1,5 +1,5 @@
 import Container from "../../components/ui/container";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Blogs from "./blogs";
 import fetchData from "../../hooks/fetchData";
 interface BestBlogs {
@@ -18,7 +18,7 @@ const BestBlogs: React.FC = () => {
       .then((data) => setBestBlog(data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(bestBlogs);
+
   return (
     <Container className="lg:py-20">
       <h2 className="mx-auto text-center">Discover Our Latest Blog Entries</h2>

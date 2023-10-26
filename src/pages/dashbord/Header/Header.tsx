@@ -30,8 +30,8 @@ const DashHeader = () => {
         <div>
           <img
             className="w-16 h-1w-16 rounded-full"
-            src={admin.photoURL}
-            alt={admin.name}
+            src={admin?.photoURL}
+            alt={admin?.name}
           />
         </div>
       </div>
