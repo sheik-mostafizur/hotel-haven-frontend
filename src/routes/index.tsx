@@ -1,14 +1,13 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
 import SignIn from "../pages/signin";
-import Dashbord from "../pages/dashbord/Dashbord/Dashbord";
 import Users from "../pages/dashbord/User/User";
-import Dashbordlayout from "../pages/dashbord/Dashbordlayout/Dashbordlayout";
 import Addproduct from "../pages/dashbord/Addroom/Addroom";
 import HotelForm from "../pages/dashbord/Hotel/Addhotel";
-
+import Dashboard from "../pages/dashbord/Dashboard/Dashboard";
+import DashboardLayout from "../pages/dashbord/dashboard-layout/Dashbordlayout";
 
 const router = createBrowserRouter([
   {
@@ -25,27 +24,26 @@ const router = createBrowserRouter([
     element: <SignIn />,
   },
   {
-    path: "/dashbord",
-    element: <Dashbordlayout />,
+    path: "/dashboard",
+    element: <DashboardLayout />,
     children: [
       {
         path: "",
-        element: <Dashbord />
+        element: <Dashboard />,
       },
       {
         path: "users",
-        element: <Users />
+        element: <Users />,
       },
       {
         path: "add-product",
-        element: <Addproduct />
-      }
-      ,
+        element: <Addproduct />,
+      },
       {
         path: "add-hotel",
-        element: <HotelForm />
-      }
-    ]
+        element: <HotelForm />,
+      },
+    ],
   },
 ]);
 export default router;
