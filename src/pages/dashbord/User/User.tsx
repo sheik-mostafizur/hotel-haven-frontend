@@ -9,6 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {role} from "../../../constants/role";
 
 const Users = () => {
+  const admin = useSelector((state) => state.auth.user);
+
   const users = useSelector((state) => state.admin.users);
   const isLoading = useSelector((state) => state.admin.isLoading);
 
@@ -42,7 +44,7 @@ const Users = () => {
               </div>
               <div className=" ">
                 <Button
-                  isDisabled={user.role == role.ADMIN}
+                  isDisabled={user.role == role.ADMIN || user._id == admin._id}
                   onClick={() => {
                     dispatch(editUserData(user._id, {role: role.ADMIN})).then(
                       () => {
@@ -55,7 +57,9 @@ const Users = () => {
                   Make Admin{" "}
                 </Button>
                 <Button
-                  isDisabled={user.role == role.MANAGER}
+                  isDisabled={
+                    user.role == role.MANAGER || user._id == admin._id
+                  }
                   onClick={() => {
                     dispatch(editUserData(user._id, {role: role.MANAGER})).then(
                       () => {
@@ -68,6 +72,7 @@ const Users = () => {
                   Make Manager
                 </Button>
                 <Button
+                  isDisabled={user._id == admin._id}
                   onClick={() => {
                     dispatch(deleteUserData(user._id)).then(() => {
                       dispatch(fetchUserData());
