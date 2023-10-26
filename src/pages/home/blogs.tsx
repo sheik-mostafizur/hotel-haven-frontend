@@ -22,13 +22,12 @@ const Blogs: React.FC<Blogs> = ({
   return (
     <>
       <div className=" bg-white p-2 mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
-        <figure>
-          <img className="h-full rounded-t-2xl" src={thumbnail} alt={title} />
-        </figure>
+        <img className="h-80 rounded-t-2xl" src={thumbnail} alt={title} />
+
         <div className="card-body">
           <h5 className="py-2">{title}</h5>
-          <p className="pb-4">{description}</p>
-          <div className="card-actions flex justify-between items-center">
+          <p className="py-2">{description}</p>
+          <div className="card-actions py-2 flex justify-between items-center">
             <div className="flex gap-2 justify-center items-center">
               <div>
                 <img
