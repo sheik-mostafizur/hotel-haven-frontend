@@ -1,30 +1,30 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {auth} from "../config/firebase.config";
-import {login, logout, setError, setLoading} from "../redux/authSlice";
+import {login, logout, setError} from "./redux/authSlice";
+import {auth} from "./config/firebase.config";
 import {signOut} from "firebase/auth";
 
-function AuthInitialization() {
+const App = ({children}) => {
+  const [isGlobalLoading, setIsGlobalLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoading(true));
+    setIsGlobalLoading(true);
     const unsubscribe = auth.onAuthStateChanged((user) => {
       const parsedUser = JSON.parse(JSON.stringify(user));
       if (user) {
         dispatch(login({user: parsedUser, token: user.uid}));
-        dispatch(setLoading(false));
       } else {
         dispatch(logout());
         signOut(auth)
           .then((res) => console.log(res))
           .catch((err) => dispatch(setError(err.message)));
       }
+      setIsGlobalLoading(false);
     });
     return () => unsubscribe();
   }, []);
+  return <>{isGlobalLoading ? "Loading..." : children}</>;
+};
 
-  return null;
-}
-
-export default AuthInitialization;
+export default App;

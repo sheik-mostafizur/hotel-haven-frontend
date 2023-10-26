@@ -2,7 +2,9 @@ import {Link} from "react-router-dom";
 import Button from "../ui/button";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {logout, logoutGoogle} from "../../redux/authSlice";
+import {logout, setError} from "../../redux/authSlice";
+import {signOut} from "firebase/auth";
+import {auth} from "../../config/firebase.config";
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
@@ -89,14 +91,10 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(logout());
                     setToggleProfile(false);
-                    dispatch(logoutGoogle())
-                      .unwrap()
-                      .then(() => {
-                        // Handle successful logout
-                      })
-                      .catch((error) => {
-                        // Handle logout error
-                      });
+
+                    signOut(auth)
+                      .then((res) => console.log(res))
+                      .catch((err) => dispatch(setError(err.message)));
                   }}
                   className={profileMenuStyle + " cursor-pointer"}>
                   Sign out

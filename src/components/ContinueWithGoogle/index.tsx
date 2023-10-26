@@ -1,24 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
-import {continueToGoogle, login} from "../../redux/authSlice";
+import {login, setError, setLoading} from "../../redux/authSlice";
+import {signInWithPopup} from "firebase/auth";
 import {auth, googleProvider} from "../../config/firebase.config";
-import {signInWithPopup} from "@firebase/auth";
 
 const ContinueWithGoogle = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.isLoading);
-  const error = useSelector((state) => state.auth.error);
 
-  const handleGoogleLogin = () => {
-    dispatch(continueToGoogle())
-      .unwrap()
-      .then((user) => {
-        // Handle successful login
-      })
-      .catch((err) => {
-        // Handle error, you can access the error message from the Redux store (state.user.error)
-        console.error("Google login error:", err);
-      });
+  const handleGoogleLogin = async () => {
+    try {
+      dispatch(setLoading(true));
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = JSON.parse(JSON.stringify(result.user));
+      dispatch(setLoading(false));
+      console.log(user);
+      dispatch(login({user, token: user.uid}));
+    } catch (error) {
+      dispatch(setLoading(false));
+      return dispatch(setError(error.message));
+    }
   };
+
   return (
     <button
       type="button"
