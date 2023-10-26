@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom";
 import Button from "../ui/button";
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {logout, setError} from "../../redux/authSlice";
 import {signOut} from "firebase/auth";
 import {auth} from "../../config/firebase.config";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
 
   const isUser = user && user?.email;
 

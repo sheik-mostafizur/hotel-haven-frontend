@@ -9,8 +9,17 @@ interface AuthState {
 }
 
 interface User {
+  _id: string;
   name: string;
-  // Other user properties
+  email: string;
+  photoURL: string;
+  phone: string;
+  age: number;
+  gender: "MALE" | "FEMALE";
+  role: "ADMIN" | "MANAGER" | "CUSTOMER";
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 const initialState: AuthState = {
@@ -29,15 +38,10 @@ export const userSlice = createSlice({
       state,
       action: PayloadAction<{
         token: string;
-        displayName: string | null;
         user: User;
       }>
     ) => {
       state.token = action.payload.token;
-      const displayName = action.payload.displayName;
-      if (displayName) {
-        action.payload.user.name = displayName;
-      }
       state.user = action.payload.user;
       state.isAuthenticated = true;
 

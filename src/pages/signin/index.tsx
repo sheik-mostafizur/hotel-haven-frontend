@@ -10,6 +10,7 @@ import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
 import {useState} from "react";
+import {useAppDispatch} from "../../redux/hooks";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,7 +27,7 @@ const SignIn = () => {
       .post("/auth/login", data)
       .then(({data}) => {
         toastSuccess(data.message);
-        dispatch(login({token: data.token, user: data.user}));
+        useAppDispatch(login({token: data.token, user: data.user}));
         navigate(-1);
       })
       .catch((error) => {
