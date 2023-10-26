@@ -13,7 +13,6 @@ const ContinueWithGoogle = () => {
       const result = await signInWithPopup(auth, googleProvider);
       const user = JSON.parse(JSON.stringify(result.user));
       dispatch(setLoading(false));
-      console.log(user);
       dispatch(login({user, token: user.uid}));
     } catch (error) {
       dispatch(setLoading(false));

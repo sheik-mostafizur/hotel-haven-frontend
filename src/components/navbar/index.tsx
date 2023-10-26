@@ -93,7 +93,7 @@ const Navbar = () => {
                     setToggleProfile(false);
 
                     signOut(auth)
-                      .then((res) => console.log(res))
+                      .then()
                       .catch((err) => dispatch(setError(err.message)));
                   }}
                   className={profileMenuStyle + " cursor-pointer"}>

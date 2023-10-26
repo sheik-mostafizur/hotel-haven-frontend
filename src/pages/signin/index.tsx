@@ -27,7 +27,6 @@ const SignIn = () => {
       .then(({data}) => {
         toastSuccess(data.message);
         dispatch(login({token: data.token, user: data.user}));
-        localStorage.setItem("token", data.token);
         navigate(-1);
       })
       .catch((error) => {
