@@ -1,13 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface AuthState {
-  token: string | null;
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  error: string | null;
-}
-
 interface User {
   _id: string;
   name: string;
@@ -22,9 +14,43 @@ interface User {
   __v: number;
 }
 
+interface AuthState {
+  token: string | null;
+  user:
+    | User
+    | {
+        _id: "";
+        name: "";
+        email: "";
+        photoURL: "";
+        phone: "";
+        age: 0;
+        gender: "MALE";
+        role: "ADMIN";
+        createdAt: "";
+        updatedAt: "";
+        __v: 0;
+      };
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
 const initialState: AuthState = {
   token: null,
-  user: null,
+  user: {
+    _id: "",
+    name: "",
+    email: "",
+    photoURL: "",
+    phone: "",
+    age: 0,
+    gender: "MALE",
+    role: "ADMIN",
+    createdAt: "",
+    updatedAt: "",
+    __v: 0,
+  },
   isAuthenticated: false,
   isLoading: false,
   error: null,
@@ -50,7 +76,19 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.token = null;
-      state.user = null;
+      state.user = {
+        _id: "",
+        name: "",
+        email: "",
+        photoURL: "",
+        phone: "",
+        age: 0,
+        gender: "MALE",
+        role: "ADMIN",
+        createdAt: "",
+        updatedAt: "",
+        __v: 0,
+      };
       state.isAuthenticated = false;
       localStorage.removeItem("token");
       localStorage.removeItem("user");

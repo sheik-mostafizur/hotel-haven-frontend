@@ -1,12 +1,31 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
-  users: null,
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+  photoURL: string;
+  phone: string;
+  age: number;
+  gender: "MALE" | "FEMALE";
+  role: "ADMIN" | "MANAGER" | "CUSTOMER";
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface AdminState {
+  users: User[];
+  isLoading: boolean;
+}
+
+const initialState: AdminState = {
+  users: [],
   isLoading: false,
 };
 
-export const fetchUserData = createAsyncThunk(
+export const fetchUserData = createAsyncThunk<[], void>(
   "admin/fetchUserData",
   async () => {
     try {
@@ -18,7 +37,11 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
-export const editUserData = createAsyncThunk(
+interface UpdatedUserData {
+  _id: string;
+  updatedData: any;
+}
+export const editUserData = createAsyncThunk<string, UpdatedUserData>(
   "admin/editUserData",
   async ({_id, updatedData}) => {
     try {
@@ -29,12 +52,15 @@ export const editUserData = createAsyncThunk(
     }
   }
 );
+interface DeleteUserDataPayload {
+  _id: string;
+}
 
-export const deleteUserData = createAsyncThunk(
+export const deleteUserData = createAsyncThunk<void, DeleteUserDataPayload>(
   "admin/deleteUserData",
-  async (userId) => {
+  async ({_id}) => {
     try {
-      const response = await axios.delete(`/admin/user/${userId}`);
+      const response = await axios.delete(`/admin/user/${_id}`);
       return response.data;
     } catch (error) {
       throw error;

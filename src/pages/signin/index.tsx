@@ -5,7 +5,6 @@ import Button from "../../components/ui/button";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import {useDispatch} from "react-redux";
 import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
@@ -14,7 +13,7 @@ import {useAppDispatch} from "../../redux/hooks";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -27,7 +26,7 @@ const SignIn = () => {
       .post("/auth/login", data)
       .then(({data}) => {
         toastSuccess(data.message);
-        useAppDispatch(login({token: data.token, user: data.user}));
+        dispatch(login({token: data.token, user: data.user}));
         navigate(-1);
       })
       .catch((error) => {

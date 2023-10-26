@@ -5,17 +5,16 @@ import {
   editUserData,
   fetchUserData,
 } from "../../../redux/adminSlice/adminSlice";
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "../../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import ROLE from "../../../constants/ROLE";
 
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-
+  console.log(admin);
   const users = useAppSelector((state) => state.admin.users);
   const isLoading = useAppSelector((state) => state.admin.isLoading);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchUserData());
@@ -60,6 +59,7 @@ const Users = () => {
                   size="sm">
                   Make Admin{" "}
                 </Button>
+
                 <Button
                   isDisabled={
                     user.role == ROLE.MANAGER || user._id == admin._id
@@ -81,7 +81,7 @@ const Users = () => {
                 <Button
                   isDisabled={user._id == admin._id}
                   onClick={() => {
-                    dispatch(deleteUserData(user._id)).then(() => {
+                    dispatch(deleteUserData({_id: user._id})).then(() => {
                       dispatch(fetchUserData());
                     });
                   }}

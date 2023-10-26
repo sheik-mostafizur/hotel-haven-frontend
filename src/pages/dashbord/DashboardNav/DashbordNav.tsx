@@ -10,8 +10,6 @@ import {
 } from "react-icons/fa";
 import {AiFillSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
-import {useState} from "react";
-
 import {useAppSelector} from "../../../redux/hooks";
 import ROLE from "../../../constants/ROLE";
 
@@ -19,7 +17,7 @@ const DashboardNav = () => {
   const user = useAppSelector((state) => state.auth.user);
   const userRole = user?.role;
 
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
 
   return (
     <div>
