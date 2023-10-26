@@ -58,7 +58,7 @@ const HotelForm = () => {
           <div>
             <label> Location:</label>
             <Controller
-              name="address.thumbnailURL"
+              name="address"
               control={control}
               defaultValue=""
               render={({ field }) => <input {...field} />}
@@ -74,7 +74,6 @@ const HotelForm = () => {
             />
           </div>
         </div>
-
         <div className="grid lg:grid-cols-2 gap-2 justify-center">
           <div>
             <label>Latitude:</label>
