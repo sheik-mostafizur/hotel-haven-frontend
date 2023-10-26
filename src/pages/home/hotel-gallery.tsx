@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
-import axios from "axios";
 import fetchData from "../../hooks/fetchData";
 
 interface GalleryImage {

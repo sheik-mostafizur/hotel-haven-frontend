@@ -18,8 +18,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: {errors},
+    // formState: {errors},
   } = useForm();
 
   const onSubmit = (data: Object) => {

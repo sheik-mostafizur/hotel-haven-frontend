@@ -1,9 +1,13 @@
-import {useEffect, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setUser} from "./redux/authSlice";
 import axios from "axios";
 
-const App = ({children}) => {
+type AppProps = {
+  children: ReactNode;
+};
+
+const App: React.FC<AppProps> = ({children}) => {
   const [isAppLoading, setIsAppLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -28,7 +32,7 @@ const App = ({children}) => {
           dispatch(setUser({user: data}));
           setIsAppLoading(false);
         })
-        .catch((err) => setIsAppLoading(false));
+        .catch(() => setIsAppLoading(false));
       return;
     }
   }, [token]);

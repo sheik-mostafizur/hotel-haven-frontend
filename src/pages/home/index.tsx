@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Banner from "./banner";

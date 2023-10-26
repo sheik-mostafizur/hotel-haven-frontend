@@ -1,5 +1,4 @@
 import Container from "../../components/ui/container";
-import axios from "axios";
 import {useEffect, useState} from "react";
 import Location from "./location";
 import fetchData from "../../hooks/fetchData";

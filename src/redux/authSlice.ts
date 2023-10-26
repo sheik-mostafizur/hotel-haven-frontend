@@ -1,6 +1,19 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState = {
+interface AuthState {
+  token: string | null;
+  user: User | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+}
+
+interface User {
+  name: string;
+  // Other user properties
+}
+
+const initialState: AuthState = {
   token: null,
   user: null,
   isAuthenticated: false,
@@ -12,7 +25,14 @@ export const userSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: (
+      state,
+      action: PayloadAction<{
+        token: string;
+        displayName: string | null;
+        user: User;
+      }>
+    ) => {
       state.token = action.payload.token;
       const displayName = action.payload.displayName;
       if (displayName) {
@@ -31,13 +51,13 @@ export const userSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<{user: User}>) => {
       state.user = action.payload.user;
     },
-    setLoading: (state, action) => {
+    setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setError: (state, action) => {
+    setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
   },
