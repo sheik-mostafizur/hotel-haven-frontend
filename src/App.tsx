@@ -31,20 +31,6 @@ const App = ({children}) => {
         .catch((err) => setIsAppLoading(false));
       return;
     }
-
-    // const unsubscribe = auth.onAuthStateChanged((user) => {
-    //   const parsedUser = JSON.parse(JSON.stringify(user));
-    //   if (user) {
-    //     dispatch(login({user: parsedUser, token: user.uid}));
-    //   } else {
-    //     dispatch(logout());
-    //     signOut(auth)
-    //       .then()
-    //       .catch((err) => dispatch(setError(err.message)));
-    //   }
-    //   setIsAppLoading(false);
-    // });
-    // return () => unsubscribe();
   }, [token]);
 
   return <>{isAppLoading ? "Loading..." : children}</>;
