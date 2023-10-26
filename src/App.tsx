@@ -1,26 +1,23 @@
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {login, logout, setError, setUser} from "./redux/authSlice";
-import {auth} from "./config/firebase.config";
-import {signOut} from "firebase/auth";
+import {setUser} from "./redux/authSlice";
 import axios from "axios";
 
 const App = ({children}) => {
   const [isAppLoading, setIsAppLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    setIsAppLoading(true);
-
     const isUser = localStorage.getItem("user");
     if (isUser) {
       dispatch(setUser({user: JSON.parse(isUser)}));
       return setIsAppLoading(false);
     }
 
-    const token = localStorage.getItem("token");
     const bearer = `Bearer ${token}`;
     if (token) {
+      setIsAppLoading(true);
       axios
         .get("user", {
           headers: {
@@ -35,20 +32,20 @@ const App = ({children}) => {
       return;
     }
 
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      const parsedUser = JSON.parse(JSON.stringify(user));
-      if (user) {
-        dispatch(login({user: parsedUser, token: user.uid}));
-      } else {
-        dispatch(logout());
-        signOut(auth)
-          .then()
-          .catch((err) => dispatch(setError(err.message)));
-      }
-      setIsAppLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
+    // const unsubscribe = auth.onAuthStateChanged((user) => {
+    //   const parsedUser = JSON.parse(JSON.stringify(user));
+    //   if (user) {
+    //     dispatch(login({user: parsedUser, token: user.uid}));
+    //   } else {
+    //     dispatch(logout());
+    //     signOut(auth)
+    //       .then()
+    //       .catch((err) => dispatch(setError(err.message)));
+    //   }
+    //   setIsAppLoading(false);
+    // });
+    // return () => unsubscribe();
+  }, [token]);
 
   return <>{isAppLoading ? "Loading..." : children}</>;
 };

@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import {AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import ContinueWithGoogle from "../../components/ContinueWithGoogle";
 
 const SignUp = () => {
   const {
@@ -31,10 +30,7 @@ const SignUp = () => {
       </header>
       <section className="flex min-h-[900px] items-center justify-center">
         <div className="relative rounded-lg border p-8 shadow md:w-[450px]">
-          <h2>Create a new account!</h2>
-          <div className="mt-4 flex items-center justify-center">
-            <ContinueWithGoogle />
-          </div>
+          <h2 className="text-center">Create a new account!</h2>
           <div className="inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
             <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-900 dark:text-white">

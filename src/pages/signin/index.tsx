@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux";
 import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
-import ContinueWithGoogle from "../../components/ContinueWithGoogle";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -40,10 +39,7 @@ const SignIn = () => {
       </header>
       <section className="flex min-h-[600px] items-center justify-center">
         <div className="relative rounded-lg border p-8 shadow md:w-[450px]">
-          <h2>Sign In your account!</h2>
-          <div className="mt-4 flex items-center justify-center">
-            <ContinueWithGoogle />
-          </div>
+          <h2 className="text-center">Sign In your account!</h2>
           <div className="inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
             <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-900 dark:text-white">
