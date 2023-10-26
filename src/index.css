@@ -13,21 +13,27 @@
   p {
     @apply lg:font-normal text-secondary-700 dark:text-secondary-400;
   }
+
   h1 {
     @apply md:text-4xl lg:text-5xl text-secondary-900 md:font-bold lg:font-extrabold dark:text-secondary-100;
   }
+
   h2 {
     @apply text-4xl text-secondary-900 font-bold dark:text-secondary-100;
   }
+
   h3 {
     @apply text-3xl text-secondary-900 font-bold dark:text-secondary-100;
   }
+
   h4 {
     @apply text-2xl text-secondary-900 font-bold dark:text-secondary-100;
   }
+
   h5 {
     @apply text-xl text-secondary-900 font-bold dark:text-secondary-100;
   }
+
   h6 {
     @apply text-lg text-secondary-900 font-bold dark:text-secondary-100;
   }
