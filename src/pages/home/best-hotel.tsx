@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
-import axios from "axios";
 import Hotel from "./hotel";
+import fetchData from "../../hooks/fetchData";
 
 interface BestHotel {
   _id: number;
@@ -15,14 +15,9 @@ interface BestHotel {
 const BestHotel: React.FC = () => {
   const [rooms, setRoom] = useState<BestHotel[]>([]);
   useEffect(() => {
-    axios
-      .get("/db/best-hotel.json")
-      .then(({ data }) => {
-        setRoom(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchData("/db/best-hotel.json")
+      .then((data) => setRoom(data))
+      .catch((err) => console.log(err));
   }, []);
   return (
     <Container className="lg:py-20">

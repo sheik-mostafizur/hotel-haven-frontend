@@ -1,10 +1,38 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {AiFillEyeInvisible} from "react-icons/ai";
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/authSlice";
+import toastSuccess from "../../utils/toastSuccess";
+import toastError from "../../utils/toastError";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: {errors},
+  } = useForm();
+
+  const onSubmit = (data: Object) => {
+    axios
+      .post("/auth/login", data)
+      .then(({data}) => {
+        toastSuccess(data.message);
+        dispatch(login({token: data.token, user: data.user}));
+        localStorage.setItem("token", data.token);
+        navigate(-1);
+      })
+      .catch((error) => {
+        toastError(error);
+      });
+  };
   return (
     <>
       <header>
@@ -16,6 +44,7 @@ const SignIn = () => {
           <div className="mt-4 flex items-center justify-center">
             <button
               type="button"
+              disabled
               className="mb-2 mr-2 rounded-lg border border-secondary-200 bg-white py-1 pe-4 ps-2 text-sm font-medium text-secondary-900 hover:bg-secondary-100 hover:text-primary-600 focus:z-10 focus:outline-none focus:ring-4 focus:ring-secondary-200 dark:border-secondary-600 dark:bg-secondary-800 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white dark:focus:ring-secondary-700">
               <img
                 src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
@@ -31,10 +60,15 @@ const SignIn = () => {
               or
             </span>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
               <label htmlFor="email">Your email</label>
-              <input type="email" id="email" placeholder="Email" required />
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email", {required: true})}
+              />
             </div>
 
             <div className="mb-6 relative">
@@ -43,7 +77,7 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 placeholder="Password"
-                required
+                {...register("password", {required: true})}
               />
               <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
 

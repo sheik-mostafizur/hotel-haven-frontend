@@ -1,9 +1,10 @@
 import Container from "../../components/ui/container";
 // import { FaStar } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
-import { Rating } from "@smastrom/react-rating";
+import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import fetchData from "../../hooks/fetchData";
 
 interface CustomerReviews {
   _id: number;
@@ -17,14 +18,9 @@ const CustomerReviews: React.FC = () => {
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
 
   useEffect(() => {
-    axios
-      .get("/db/customer-reviews.json")
-      .then((res) => {
-        setReviews(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchData("/db/customer-reviews.json")
+      .then((data) => setReviews(data))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -38,8 +34,7 @@ const CustomerReviews: React.FC = () => {
             <div
               key={review._id}
               className="bg-primary-50 p-6 rounded-lg shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
-              data-aos="fade-up"
-            >
+              data-aos="fade-up">
               <div className="flex items-center mb-4">
                 <img
                   src={review.profileURL}
@@ -49,14 +44,14 @@ const CustomerReviews: React.FC = () => {
                 <div className="ml-3">
                   <h3 className="text-xl font-semibold">{review.name}</h3>
                   <div className="flex items-center">
-                    <p className="font-semibold font-mono text-lg">
+                    <div className="font-semibold font-mono text-lg">
                       {/* Rating:{" "} */}
                       <Rating
                         value={review.rating}
                         readOnly={true}
-                        style={{ maxWidth: "100px" }}
+                        style={{maxWidth: "100px"}}
                       />
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
