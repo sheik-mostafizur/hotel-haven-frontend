@@ -11,11 +11,15 @@ import {
 import {AiFillSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {role} from "../../../constants/role";
 
 const DashboardNav = () => {
+  const user = useSelector((state) => state.auth.user);
+  const userRole = user?.role;
+
   const [open, setOpen] = useState(true);
-  const admin = false;
-  const mordaretor = true;
+
   return (
     <div>
       <div>
@@ -32,7 +36,7 @@ const DashboardNav = () => {
                 Dashbord
               </Link>
             </li>
-            {admin && (
+            {userRole == role.ADMIN && (
               <>
                 <li>
                   <Link
@@ -46,43 +50,19 @@ const DashboardNav = () => {
                   </Link>
                 </li>
                 <li>
-                  <div
-                    onClick={() => setOpen(!open)}
-                    id="allusers"
-                    className="text-white group flex cursor-pointer  items-center gap-5 ms-1 ">
-                    <span>
-                      <FaUsers />
-                    </span>
-                    <span>All Users</span>
-                  </div>
-                </li>
-                <li>
-                  <Link
-                    to="add-hotel"
-                    className="text-white group flex cursor-pointer  items-center gap-5 ms-1 ">
-                    <span>
-                      {" "}
-                      <FaHotel />{" "}
-                    </span>
-                    <span>Add Hotel</span>
-                  </Link>
-                </li>
-                <div
-                  className={`flex  ${open ? "hidden" : ""}  ms-10 flex-col`}>
-                  <Link
-                    to="modaretor"
-                    className="text-white group flex  items-center text-lg gap-5 ">
-                    <span>Mordaretor</span>
-                  </Link>
                   <Link
                     to="users"
-                    className="text-white group flex  items-center text-lg gap-5 ">
-                    <span>Users</span>
+                    className="navitem text-white group flex  items-center gap-5">
+                    <span>
+                      {" "}
+                      <BiSolidUser />
+                    </span>
+                    <span className="">All Users</span>
                   </Link>
-                </div>
+                </li>
               </>
             )}
-            {mordaretor && (
+            {userRole == role.MANAGER && (
               <>
                 <Link
                   to="add-product"
@@ -125,6 +105,14 @@ const DashboardNav = () => {
             </li>
           </ul>
           <div>
+            <Link
+              to="/"
+              className="text-white group flex  items-center gap-10 ">
+              <span>
+                <FaHotel />
+              </span>
+              <span>Home</span>
+            </Link>
             <Link
               to="/logout"
               className="text-white group flex  items-center gap-10 ">
