@@ -29,7 +29,7 @@ const BestHotel: React.FC = () => {
           hospitality.
         </p>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto">
         {rooms.map((hotel) => (
           <Hotel key={hotel._id} {...hotel} />
         ))}

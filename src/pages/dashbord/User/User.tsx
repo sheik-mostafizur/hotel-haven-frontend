@@ -5,14 +5,15 @@ import {
   editUserData,
   fetchUserData,
 } from "../../../redux/adminSlice/adminSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {role} from "../../../constants/role";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "../../../redux/hooks";
+import ROLE from "../../../constants/ROLE";
 
 const Users = () => {
-  const admin = useSelector((state) => state.auth.user);
+  const admin = useAppSelector((state) => state.auth.user);
 
-  const users = useSelector((state) => state.admin.users);
-  const isLoading = useSelector((state) => state.admin.isLoading);
+  const users = useAppSelector((state) => state.admin.users);
+  const isLoading = useAppSelector((state) => state.admin.isLoading);
 
   const dispatch = useDispatch();
 
@@ -44,13 +45,16 @@ const Users = () => {
               </div>
               <div className=" ">
                 <Button
-                  isDisabled={user.role == role.ADMIN || user._id == admin._id}
+                  isDisabled={user.role == ROLE.ADMIN || user._id == admin._id}
                   onClick={() => {
-                    dispatch(editUserData(user._id, {role: role.ADMIN})).then(
-                      () => {
-                        dispatch(fetchUserData());
-                      }
-                    );
+                    dispatch(
+                      editUserData({
+                        _id: user._id,
+                        updatedData: {role: ROLE.ADMIN},
+                      })
+                    ).then(() => {
+                      dispatch(fetchUserData());
+                    });
                   }}
                   className="me-2"
                   size="sm">
@@ -58,14 +62,17 @@ const Users = () => {
                 </Button>
                 <Button
                   isDisabled={
-                    user.role == role.MANAGER || user._id == admin._id
+                    user.role == ROLE.MANAGER || user._id == admin._id
                   }
                   onClick={() => {
-                    dispatch(editUserData(user._id, {role: role.MANAGER})).then(
-                      () => {
-                        dispatch(fetchUserData());
-                      }
-                    );
+                    dispatch(
+                      editUserData({
+                        _id: user._id,
+                        updatedData: {role: ROLE.MANAGER},
+                      })
+                    ).then(() => {
+                      dispatch(fetchUserData());
+                    });
                   }}
                   className="me-2"
                   size="sm">

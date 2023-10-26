@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom";
 import Button from "../ui/button";
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {logout, setError} from "../../redux/authSlice";
 import {signOut} from "firebase/auth";
 import {auth} from "../../config/firebase.config";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
 
   const isUser = user && user?.email;
 
@@ -22,7 +22,7 @@ const Navbar = () => {
   const profileMenuStyle = `block px-4 py-2 text-sm text-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:text-secondary-200 dark:hover:text-white`;
 
   return (
-    <nav className="bg-white border-secondary-200 dark:bg-secondary-900">
+    <nav className="bg-white shadow border-secondary-200 dark:bg-secondary-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
         <Link to="/" className="flex items-center">
           <img
@@ -47,8 +47,8 @@ const Navbar = () => {
               <span className="sr-only">Open user menu</span>
               <img
                 className="w-8 h-8 rounded-full"
-                src="https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
-                alt="user photo"
+                src={user?.photoURL}
+                alt={user?.name}
               />
             </button>
           ) : (
