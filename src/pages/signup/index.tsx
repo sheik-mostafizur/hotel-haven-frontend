@@ -1,12 +1,15 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import toastSuccess from "../../utils/toastSuccess";
+import toastError from "../../utils/toastError";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,8 +22,10 @@ const SignUp = () => {
       .post("/auth/register", data)
       .then(({data}) => {
         console.log(data);
+        toastSuccess(data.message);
+        navigate("/signin");
       })
-      .catch((err) => console.log(err));
+      .catch((error) => toastError(error));
   };
 
   return (

@@ -12,7 +12,7 @@ const Dashboard = () => {
                 <p className="text-lg font-semibold  ">Payment amount :</p>
                 <p className="font-semibold">$ 500.00 </p>
               </div>
-              <div className="w-10 h-10 bg-red-600 rounded-full flex justify-center items-center text-white">
+              <div className="w-10 h-10 bg-primary-500 rounded-full flex justify-center items-center text-white">
                 <FaDollarSign />
               </div>
             </div>
