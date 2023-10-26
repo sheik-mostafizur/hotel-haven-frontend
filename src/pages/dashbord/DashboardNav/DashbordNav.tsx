@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./dashbord.css";
-import {BiSolidUser} from "react-icons/bi";
+import { BiSolidUser } from "react-icons/bi";
 import {
   FaUsers,
   FaQuestionCircle,
@@ -8,11 +8,11 @@ import {
   FaProductHunt,
   FaHotel,
 } from "react-icons/fa";
-import {AiFillSetting} from "react-icons/ai";
-import {FiLogOut} from "react-icons/fi";
-import {useState} from "react";
-import {useSelector} from "react-redux";
-import {role} from "../../../constants/role";
+import { AiFillSetting } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { role } from "../../../constants/role";
 
 const DashboardNav = () => {
   const user = useSelector((state) => state.auth.user);
@@ -28,7 +28,8 @@ const DashboardNav = () => {
             <li>
               <Link
                 to="/dashboard"
-                className="text-white group flex  items-center gap-5 ">
+                className="text-white group flex  items-center gap-5 "
+              >
                 <span>
                   {" "}
                   <FaHome />
@@ -41,7 +42,8 @@ const DashboardNav = () => {
                 <li>
                   <Link
                     to="profile"
-                    className="navitem text-white group flex  items-center gap-5">
+                    className="navitem text-white group flex  items-center gap-5"
+                  >
                     <span>
                       {" "}
                       <BiSolidUser />
@@ -52,7 +54,8 @@ const DashboardNav = () => {
                 <li>
                   <Link
                     to="users"
-                    className="navitem text-white group flex  items-center gap-5">
+                    className="navitem text-white group flex  items-center gap-5"
+                  >
                     <span>
                       {" "}
                       <BiSolidUser />
@@ -64,29 +67,33 @@ const DashboardNav = () => {
             )}
             {userRole == role.MANAGER && (
               <>
+                {/* <li className="text-center">{userRole}</li> */}
                 <Link
-                  to="add-product"
-                  className="text-white group flex  items-center gap-5 ">
+                  to="addHotel"
+                  className="text-white group flex  items-center gap-5 "
+                >
                   <span>
                     <FaProductHunt />
                   </span>
-                  <span>Add Product</span>
+                  <span>Add Hotel</span>
                 </Link>
                 <Link
                   to="clients"
-                  className="text-white group flex  items-center gap-5 ">
+                  className="text-white group flex  items-center gap-5 "
+                >
                   <span>
                     <FaUsers />
                   </span>
-                  <span>Client List</span>
+                  <span>Room</span>
                 </Link>
               </>
             )}
-
+            <hr className="border-2" />
             <li>
               <Link
                 to="/faq"
-                className="text-white group flex  items-center gap-5 ">
+                className="text-white group flex  items-center gap-5 "
+              >
                 <span>
                   <FaQuestionCircle />
                 </span>
@@ -96,7 +103,8 @@ const DashboardNav = () => {
             <li>
               <Link
                 to="/setting"
-                className="text-white group flex  items-center gap-5 ">
+                className="text-white group flex  items-center gap-5 "
+              >
                 <span>
                   <AiFillSetting />
                 </span>
@@ -107,7 +115,8 @@ const DashboardNav = () => {
           <div>
             <Link
               to="/"
-              className="text-white group flex  items-center gap-10 ">
+              className="text-white group flex  items-center gap-10 "
+            >
               <span>
                 <FaHotel />
               </span>
@@ -115,7 +124,8 @@ const DashboardNav = () => {
             </Link>
             <Link
               to="/logout"
-              className="text-white group flex  items-center gap-10 ">
+              className="text-white group flex  items-center gap-10 "
+            >
               <span>
                 <FiLogOut />
               </span>
