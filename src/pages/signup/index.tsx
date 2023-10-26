@@ -2,13 +2,17 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
-import {AiFillEyeInvisible} from "react-icons/ai";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
+import {useState} from "react";
 
 const SignUp = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
+
   const navigate = useNavigate();
   const {
     register,
@@ -21,7 +25,6 @@ const SignUp = () => {
     axios
       .post("/auth/register", data)
       .then(({data}) => {
-        console.log(data);
         toastSuccess(data.message);
         navigate("/signin");
       })
@@ -33,8 +36,8 @@ const SignUp = () => {
       <header>
         <Navbar />
       </header>
-      <section className="flex min-h-[900px] items-center justify-center">
-        <div className="relative rounded-lg border p-8 shadow md:w-[450px]">
+      <section className="min-h-[700px] py-12 flex items-center justify-center">
+        <div className="relative rounded-lg border p-8 shadow  md:min-w-[600px]">
           <h2 className="text-center">Create a new account!</h2>
           <div className="inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
@@ -43,24 +46,26 @@ const SignUp = () => {
             </span>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-6">
-              <label htmlFor="name"> Name</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="Name"
-                {...register("name", {required: true})}
-              />
-            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="mb-6">
+                <label htmlFor="name"> Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  {...register("name", {required: true})}
+                />
+              </div>
 
-            <div className="mb-6">
-              <label htmlFor="email"> email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                {...register("email", {required: true})}
-              />
+              <div className="mb-6">
+                <label htmlFor="email"> email</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  {...register("email", {required: true})}
+                />
+              </div>
             </div>
 
             <div className="mb-6">
@@ -72,23 +77,25 @@ const SignUp = () => {
                 {...register("photoURL")}
               />
             </div>
-            <div className="mb-6">
-              <label htmlFor="phone"> Phone Number</label>
-              <input
-                type="text"
-                id="phone"
-                placeholder="Phone"
-                {...register("phone", {required: true})}
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="age"> Age</label>
-              <input
-                type="text"
-                id="age"
-                placeholder="Age"
-                {...register("age", {required: true})}
-              />
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="mb-6">
+                <label htmlFor="phone"> Phone Number</label>
+                <input
+                  type="text"
+                  id="phone"
+                  placeholder="Phone"
+                  {...register("phone", {required: true})}
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="age"> Age</label>
+                <input
+                  type="text"
+                  id="age"
+                  placeholder="Age"
+                  {...register("age", {required: true})}
+                />
+              </div>
             </div>
 
             <div className="mb-6">
@@ -107,38 +114,55 @@ const SignUp = () => {
                 <option value="Other">Other</option>
               </select>
             </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="mb-6 relative">
+                <label htmlFor="password"> Password</label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Password"
+                  {...register("password", {required: true})}
+                />
+                {showPassword ? (
+                  <AiFillEye
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                  />
+                ) : (
+                  <AiFillEyeInvisible
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                  />
+                )}
+              </div>
 
-            <div className="mb-6 relative">
-              <label htmlFor="password"> Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                {...register("password", {required: true})}
-              />
-              <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
-
-              {/* <AiFillEye className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" /> */}
-            </div>
-
-            <div className="mb-6 relative">
-              <label htmlFor="confirm_password"> Confirm Password</label>
-              <input
-                type="password"
-                id="confirm_password"
-                placeholder="Confirm Password"
-                {...register("confirm_password", {
-                  required: true,
-                  validate: (val: string) => {
-                    if (watch("password") != val) {
-                      return "Your passwords do no match";
-                    }
-                  },
-                })}
-              />
-              <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
-
-              {/* <AiFillEye className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" /> */}
+              <div className="mb-6 relative">
+                <label htmlFor="confirm_password"> Confirm Password</label>
+                <input
+                  type={showConfPassword ? "text" : "password"}
+                  id="confirm_password"
+                  placeholder="Confirm Password"
+                  {...register("confirm_password", {
+                    required: true,
+                    validate: (val: string) => {
+                      if (watch("password") != val) {
+                        return "Your passwords do no match";
+                      }
+                    },
+                  })}
+                />
+                {showConfPassword ? (
+                  <AiFillEye
+                    onClick={() => setShowConfPassword(!showConfPassword)}
+                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                  />
+                ) : (
+                  <AiFillEyeInvisible
+                    onClick={() => setShowConfPassword(!showConfPassword)}
+                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                  />
+                )}
+              </div>
             </div>
 
             <Button type={"submit"} className="w-full mb-6">

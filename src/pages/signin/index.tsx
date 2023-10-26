@@ -2,15 +2,17 @@ import {Link, useNavigate} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import {AiFillEyeInvisible} from "react-icons/ai";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
+import {useState} from "react";
 
 const SignIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -60,14 +62,22 @@ const SignIn = () => {
             <div className="mb-6 relative">
               <label htmlFor="password">Your Password</label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Password"
                 {...register("password", {required: true})}
               />
-              <AiFillEyeInvisible className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" />
-
-              {/* <AiFillEye className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer" /> */}
+              {showPassword ? (
+                <AiFillEye
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                />
+              )}
             </div>
 
             <Button type={"submit"} className="w-full mb-6">

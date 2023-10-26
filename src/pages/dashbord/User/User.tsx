@@ -1,24 +1,22 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Button from "../../../components/ui/button";
-import axios from "axios";
+import {
+  deleteUserData,
+  editUserData,
+  fetchUserData,
+} from "../../../redux/adminSlice/adminSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {role} from "../../../constants/role";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const users = useSelector((state) => state.admin.users);
+  const isLoading = useSelector((state) => state.admin.isLoading);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get("/admin/user")
-      .then(({data}) => {
-        setUsers(data);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setIsLoading(false);
-      });
-  }, []);
+    dispatch(fetchUserData());
+  }, [dispatch]);
 
   return (
     <div>
@@ -26,6 +24,7 @@ const Users = () => {
         {isLoading ? (
           <h1 className="text-3xl">Loading...</h1>
         ) : (
+          users &&
           users.map((user, idx) => (
             <div
               className="flex justify-between border w-3/4  p-4 gap-4 shadow-xl mt-5"
@@ -39,12 +38,45 @@ const Users = () => {
               </div>
               <div>
                 <p className="text-xl font-semibold">{user.name}</p>
-                <p className="text-xl font-semibold">{user.email}</p>
+                <p>{user.email}</p>
               </div>
               <div className=" ">
-                <Button className="me-2">Make Admin </Button>
-                <Button className="me-2">Make Mordaretor</Button>
-                <Button className="me-2">Delete</Button>
+                <Button
+                  isDisabled={user.role == role.ADMIN}
+                  onClick={() => {
+                    dispatch(editUserData(user._id, {role: role.ADMIN})).then(
+                      () => {
+                        dispatch(fetchUserData());
+                      }
+                    );
+                  }}
+                  className="me-2"
+                  size="sm">
+                  Make Admin{" "}
+                </Button>
+                <Button
+                  isDisabled={user.role == role.MANAGER}
+                  onClick={() => {
+                    dispatch(editUserData(user._id, {role: role.MANAGER})).then(
+                      () => {
+                        dispatch(fetchUserData());
+                      }
+                    );
+                  }}
+                  className="me-2"
+                  size="sm">
+                  Make Manager
+                </Button>
+                <Button
+                  onClick={() => {
+                    dispatch(deleteUserData(user._id)).then(() => {
+                      dispatch(fetchUserData());
+                    });
+                  }}
+                  className="me-2"
+                  size="sm">
+                  Delete
+                </Button>
               </div>
             </div>
           ))
