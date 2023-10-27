@@ -1,16 +1,16 @@
 import Container from "../../components/ui/container";
 import {useEffect, useState} from "react";
-import Location from "./location";
+import Location from "./Location";
 import fetchData from "../../hooks/fetch-data";
 
-interface TopLocation {
+interface TopLocationTypes {
   image: string;
   location_name: string;
   total_hotels: number;
 }
 
 const TopLocation: React.FC = () => {
-  const [topLocation, setTopLocation] = useState<TopLocation[]>([]);
+  const [topLocation, setTopLocation] = useState<TopLocationTypes[]>([]);
 
   useEffect(() => {
     fetchData("/db/top-hotel-location.json")

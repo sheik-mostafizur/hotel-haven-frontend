@@ -1,12 +1,13 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
-import Banner from "./banner";
-import BestBlogs from "./best-blogs";
-import BestHotel from "./best-hotel";
+import Banner from "./Banner";
+import BestBlogs from "./BestBlogs";
+import BestHotel from "./BestHotel";
+
 // import BookingForm from "./booking-form";
-import CustomerReviews from "./customer-reviews";
-import HotelGallery from "./hotel-gallery";
-import TopLocation from "./top-location";
+import CustomerReviews from "./CustomerReviews";
+import HotelGallery from "./HotelGallery";
+import TopLocation from "./TopLocation";
 
 const Home = () => {
   return (

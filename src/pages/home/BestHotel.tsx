@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
-import Hotel from "./hotel";
+import Hotel from "./Hotel";
 import fetchData from "../../hooks/fetch-data";
 
-interface BestHotel {
+interface BestHotelTypes {
   _id: number;
   title: string;
   location: string;
@@ -13,7 +13,7 @@ interface BestHotel {
 }
 
 const BestHotel: React.FC = () => {
-  const [rooms, setRoom] = useState<BestHotel[]>([]);
+  const [rooms, setRoom] = useState<BestHotelTypes[]>([]);
   useEffect(() => {
     fetchData("/db/best-hotel.json")
       .then((data) => setRoom(data))
