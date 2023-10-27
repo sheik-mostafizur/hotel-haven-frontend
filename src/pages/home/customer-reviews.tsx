@@ -3,7 +3,7 @@ import Container from "../../components/ui/container";
 import {useEffect, useState} from "react";
 import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import fetchData from "../../hooks/fetchData";
+import fetchData from "../../hooks/fetch-data";
 
 interface CustomerReviews {
   _id: number;

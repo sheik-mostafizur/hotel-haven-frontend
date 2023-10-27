@@ -1,7 +1,8 @@
 import Container from "../../components/ui/container";
 import {useEffect, useState} from "react";
 import Blogs from "./blogs";
-import fetchData from "../../hooks/fetchData";
+import fetchData from "../../hooks/fetch-data";
+
 interface BestBlogs {
   thumbnail: string;
   title: string;

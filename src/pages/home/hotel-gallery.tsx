@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
-import fetchData from "../../hooks/fetchData";
+import fetchData from "../../hooks/fetch-data";
 
 interface GalleryImage {
   thumbnailURL: string;

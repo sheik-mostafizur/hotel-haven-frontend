@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
 import Hotel from "./hotel";
-import fetchData from "../../hooks/fetchData";
+import fetchData from "../../hooks/fetch-data";
 
 interface BestHotel {
   _id: number;

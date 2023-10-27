@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
 import {useEffect, useState} from "react";
 import Location from "./location";
-import fetchData from "../../hooks/fetchData";
+import fetchData from "../../hooks/fetch-data";
 
 interface TopLocation {
   image: string;
