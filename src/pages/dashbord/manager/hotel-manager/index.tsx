@@ -1,5 +1,6 @@
-import axios from "axios";
 import {useEffect, useState} from "react";
+import {axios} from "../../../../api";
+import toastError from "../../../../utils/toastError";
 
 const HotelManager = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,8 +14,8 @@ const HotelManager = () => {
         setHotel(data);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        toastError(error);
         setIsLoading(false);
       });
   }, []);

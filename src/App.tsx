@@ -1,7 +1,7 @@
 import {ReactNode, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setUser} from "./redux/authSlice";
-import axios from "axios";
+import {axios} from "./api";
 
 type AppProps = {
   children: ReactNode;

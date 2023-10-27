@@ -1,20 +1,19 @@
 import {useForm, Controller} from "react-hook-form";
 import Button from "../../../../components/ui/button";
-import axios from "axios";
 import toastSuccess from "../../../../utils/toastSuccess";
 import toastError from "../../../../utils/toastError";
+import {axios} from "../../../../api";
 
 const AddAHotel = () => {
   const {handleSubmit, control, reset} = useForm();
 
   const onSubmit = (data: any) => {
     // Handle form submission here, e.g., send data to an API
-    console.log(data);
     axios
       .post("/manager/hotel", data)
       .then(({data}) => {
-        toastSuccess(data.message);
         reset();
+        toastSuccess(data.message);
       })
       .catch((error) => toastError(error));
   };

@@ -3,36 +3,48 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
-import {useForm} from "react-hook-form";
-import axios from "axios";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
 import {useState} from "react";
 import {useAppDispatch} from "../../redux/hooks";
+import {auth} from "../../api";
 
-const SignIn = () => {
+type FormValues = {
+  email: string;
+  password: string;
+};
+
+const SignIn: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     // formState: {errors},
-  } = useForm();
+  } = useForm<FormValues>();
 
-  const onSubmit = (data: Object) => {
-    axios
-      .post("/auth/login", data)
-      .then(({data}) => {
-        toastSuccess(data.message);
-        dispatch(login({token: data.token, user: data.user}));
-        navigate(-1);
-      })
-      .catch((error) => {
-        toastError(error);
+  const onSubmit: SubmitHandler<FormValues> = async (data: {
+    email: string;
+    password: string;
+  }): Promise<void> => {
+    try {
+      const result = await auth.login({
+        email: data.email,
+        password: data.password,
       });
+      toastSuccess(result.message);
+      dispatch(login({token: result.token, user: result.user}));
+      reset();
+      navigate("/");
+    } catch (error: any) {
+      toastError(error);
+    }
   };
+
   return (
     <>
       <header>

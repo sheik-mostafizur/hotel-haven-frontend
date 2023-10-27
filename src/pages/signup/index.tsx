@@ -4,10 +4,10 @@ import Button from "../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
-import axios from "axios";
 import toastSuccess from "../../utils/toastSuccess";
 import toastError from "../../utils/toastError";
 import {useState} from "react";
+import {axios} from "../../api";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);

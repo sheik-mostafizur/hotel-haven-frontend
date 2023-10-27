@@ -17,6 +17,7 @@ const Button = (props: ButtonType) => {
     type,
     onClick,
     isDisabled = false,
+    ...attributes
   } = props;
 
   const disabledStyle = isDisabled && "bg-primary-400 cursor-not-allowed";
@@ -43,7 +44,8 @@ const Button = (props: ButtonType) => {
       type={type || "button"}
       className={`${buttonStyle[size]} ${className || ""}`}
       onClick={onClick}
-      disabled={isDisabled}>
+      disabled={isDisabled}
+      {...attributes}>
       {children}
     </button>
   );

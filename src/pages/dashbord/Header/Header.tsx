@@ -23,10 +23,10 @@ const DashHeader = () => {
         </Link>
       </div>
       <div className="flex justify-center items-center gap-4">
-        <div className="flex justify-center items-center gap-5">
+        {/* <div className="flex justify-center items-center gap-5">
           <FaSearch className="text-2xl" />
           <input type="text" placeholder="search" />
-        </div>
+        </div> */}
         <div>
           <img
             className="w-16 h-1w-16 rounded-full"
