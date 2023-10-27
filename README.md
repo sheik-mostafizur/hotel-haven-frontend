@@ -1,4 +1,4 @@
-# Hotel Haven
+# Hotel Haven (Team Project)
 
 ## [Hotel Haven Requirement](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
 
@@ -10,17 +10,19 @@
 
 ## We are follow Folder and File
 
-**PascalCase** for Component Files and Folders:
+**kebab-case** for File and Folder Names:
 
-- Using PascalCase for component files and folders is a common convention in React. It helps differentiate components from other files and makes it clear that these are meant to be used as React components. Make sure to keep the root file, like "index.js" or "index.ts", in PascalCase, which is also a common practice.
+- make user all folder name are kebab-case
+
+- Using kebab-case for file and folder names is a reasonable choice, especially for non-component files. It's a more web-friendly convention and can be more easily used in URLs.
+
+**PascalCase** for Component Files:
+
+- Using PascalCase for component files is a common convention in React. It helps differentiate components from other files and makes it clear that these are meant to be used as React components. Make sure to keep the root file, like "index.js" or "index.ts", in PascalCase, which is also a common practice.
 
 **camelCase** for TypeScript Types Files:
 
 - Using camelCase for TypeScript type files is a good practice, as it distinguishes them from components and other JavaScript/TypeScript files. This convention is in line with making the code more readable and maintainable.
-
-**kebab-case** for File and Folder Names:
-
-- Using kebab-case for file and folder names is a reasonable choice, especially for non-component files and folders. It's a more web-friendly convention and can be more easily used in URLs.
 
 **UPPERCASE_SNAKE_CASE** for Constants file names:
 
