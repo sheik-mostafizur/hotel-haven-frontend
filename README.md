@@ -12,7 +12,7 @@
 
 **kebab-case** for File and Folder Names:
 
-- **make user all folder name are kebab-case**
+- **make sure all folder names are kebab-case**
 
 - Using kebab-case for file and folder names is a reasonable choice, especially for non-component files. It's a more web-friendly convention and can be more easily used in URLs.
 

@@ -10,11 +10,7 @@ import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {useAppDispatch} from "../../redux/hooks";
 import {auth} from "../../api";
-
-type FormValues = {
-  email: string;
-  password: string;
-};
+import {authType} from "../../types";
 
 const SignIn: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,12 +21,11 @@ const SignIn: React.FC = () => {
     handleSubmit,
     reset,
     // formState: {errors},
-  } = useForm<FormValues>();
+  } = useForm<authType.Login>();
 
-  const onSubmit: SubmitHandler<FormValues> = async (data: {
-    email: string;
-    password: string;
-  }): Promise<void> => {
+  const onSubmit: SubmitHandler<authType.Login> = async (
+    data: authType.Login
+  ): Promise<void> => {
     try {
       const result = await auth.login({
         email: data.email,

@@ -1,3 +1,4 @@
+import {authType} from "../types";
 import axios from "./axios-Instance";
 
 type RegisterType = {
@@ -14,7 +15,7 @@ export const register = async (userData: RegisterType) => {
   }
 };
 
-export const login = async (credentials: {email: string; password: string}) => {
+export const login = async (credentials: authType.Login) => {
   try {
     const response = await axios.post("/auth/login", credentials);
     return response.data;
