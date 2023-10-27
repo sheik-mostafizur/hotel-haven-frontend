@@ -1,4 +1,4 @@
-import {FaBars, FaSearch} from "react-icons/fa";
+import {FaBars} from "react-icons/fa";
 import "./Header.css";
 import {Link} from "react-router-dom";
 import {useAppSelector} from "../../../redux/hooks";
