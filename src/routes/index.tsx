@@ -9,6 +9,7 @@ import DashboardLayout from "../pages/dashbord/dashboard-layout/Dashbordlayout";
 import AddRooms from "../pages/dashbord/manager/rooms/add-rooms";
 import AddAHotel from "../pages/dashbord/manager/hotel-manager/add-a-hotel";
 import HotelManager from "../pages/dashbord/manager/hotel-manager";
+import Settings from "../pages/settings";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/settings",
+    element: <Settings />,
   },
   {
     path: "/dashboard",

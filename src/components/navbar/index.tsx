@@ -20,7 +20,7 @@ const Navbar = () => {
   const profileMenuStyle = `block px-4 py-2 text-sm text-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:text-secondary-200 dark:hover:text-white`;
 
   return (
-    <nav className="bg-white shadow border-secondary-200 dark:bg-secondary-900">
+    <nav className="bg-white shadow-md border-secondary-200 dark:bg-secondary-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
         <Link to="/" className="flex items-center">
           <img
@@ -75,14 +75,9 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className={profileMenuStyle}>
+                <Link to="/settings" className={profileMenuStyle}>
                   Settings
-                </a>
-              </li>
-              <li>
-                <a href="#" className={profileMenuStyle}>
-                  Earnings
-                </a>
+                </Link>
               </li>
               <li>
                 <a

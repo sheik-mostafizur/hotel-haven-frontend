@@ -2,12 +2,15 @@ import {ReactNode, useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setUser} from "./redux/authSlice";
 import {axios} from "./api";
+import {changeTheme} from "./redux/themeSlice";
+import {useAppSelector} from "./redux/hooks";
 
 type AppProps = {
   children: ReactNode;
 };
 
 const App: React.FC<AppProps> = ({children}) => {
+  const themeColors = useAppSelector((state) => state.theme);
   const [isAppLoading, setIsAppLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -36,6 +39,13 @@ const App: React.FC<AppProps> = ({children}) => {
       return;
     }
   }, [token]);
+
+  // checking theme from localStorage
+  const themeLocalStorage = localStorage.getItem("theme");
+  useEffect(() => {
+    document.documentElement.className = themeColors;
+    dispatch(changeTheme({theme: themeLocalStorage}));
+  }, [themeColors, themeLocalStorage]);
 
   return <>{isAppLoading ? "Loading..." : children}</>;
 };
