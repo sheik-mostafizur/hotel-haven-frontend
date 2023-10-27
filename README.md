@@ -1,3 +1,31 @@
+# Hotel Haven
+
+## [Hotel Haven Requirement](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
+
+## [Hotel Haven Requirement Distributions](https://shanjeed-saif.atlassian.net/jira/software/projects/HOT/boards/2/timeline?shared=&atlOrigin=eyJpIjoiZDZkNTkzYzZhMWQ5NDA3NDg1ZWQ3N2JjNWU3M2M0ZGUiLCJwIjoiaiJ9)
+
+## [Hotel Haven Backend](https://github.com/sheik-mostafizur/hotel-haven-backend)
+
+## [Hotel Haven Frontend](https://github.com/sheik-mostafizur/hotel-haven-frontend)
+
+## We are follow Folder and File
+
+**PascalCase** for Component Files and Folders:
+
+- Using PascalCase for component files and folders is a common convention in React. It helps differentiate components from other files and makes it clear that these are meant to be used as React components. Make sure to keep the root file, like "index.js" or "index.ts", in PascalCase, which is also a common practice.
+
+**camelCase** for TypeScript Types Files:
+
+- Using camelCase for TypeScript type files is a good practice, as it distinguishes them from components and other JavaScript/TypeScript files. This convention is in line with making the code more readable and maintainable.
+
+**kebab-case** for File and Folder Names:
+
+- Using kebab-case for file and folder names is a reasonable choice, especially for non-component files and folders. It's a more web-friendly convention and can be more easily used in URLs.
+
+**UPPERCASE_SNAKE_CASE** for Constants file names:
+
+- Using UPPERCASE_SNAKE_CASE for constant values is a common practice. It makes constants stand out and is widely recognized as a convention for constants in many programming languages.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
