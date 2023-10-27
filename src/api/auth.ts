@@ -1,4 +1,4 @@
-import axios from "./axiosInstance";
+import axios from "./axios-Instance";
 
 type RegisterType = {
   email: string;

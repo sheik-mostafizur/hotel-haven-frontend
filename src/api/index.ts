@@ -1,4 +1,4 @@
-import axios from "./axiosInstance";
+import axios from "./axios-Instance";
 import * as auth from "./auth";
 
 export {axios, auth};

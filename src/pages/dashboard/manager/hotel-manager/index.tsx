@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {axios} from "../../../../api";
-import toastError from "../../../../utils/toastError";
+import toastError from "../../../../utils/toast-error";
 
 const HotelManager = () => {
   const [isLoading, setIsLoading] = useState(false);

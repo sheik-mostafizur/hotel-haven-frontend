@@ -1,7 +1,7 @@
 import {useForm, Controller} from "react-hook-form";
 import Button from "../../../../components/ui/button";
-import toastSuccess from "../../../../utils/toastSuccess";
-import toastError from "../../../../utils/toastError";
+import toastSuccess from "../../../../utils/toast-success";
+import toastError from "../../../../utils/toast-error";
 import {axios} from "../../../../api";
 
 const AddAHotel = () => {

@@ -20,10 +20,6 @@
 
 - Using PascalCase for component files is a common convention in React. It helps differentiate components from other files and makes it clear that these are meant to be used as React components. Make sure to keep the root file, like "index.js" or "index.ts", in PascalCase, which is also a common practice.
 
-**camelCase** for TypeScript Types Files:
-
-- Using camelCase for TypeScript type files is a good practice, as it distinguishes them from components and other JavaScript/TypeScript files. This convention is in line with making the code more readable and maintainable.
-
 **UPPERCASE_SNAKE_CASE** for Constants file names:
 
 - Using UPPERCASE_SNAKE_CASE for constant values is a common practice. It makes constants stand out and is widely recognized as a convention for constants in many programming languages.

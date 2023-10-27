@@ -4,8 +4,8 @@ import Button from "../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {useForm} from "react-hook-form";
-import toastSuccess from "../../utils/toastSuccess";
-import toastError from "../../utils/toastError";
+import toastSuccess from "../../utils/toast-success";
+import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {axios} from "../../api";
 
