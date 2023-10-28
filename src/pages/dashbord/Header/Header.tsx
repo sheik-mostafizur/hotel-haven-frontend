@@ -1,7 +1,7 @@
-import {FaBars, FaSearch} from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import "./Header.css";
-import {Link} from "react-router-dom";
-import {useAppSelector} from "../../../redux/hooks";
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
 
 const DashHeader = () => {
   const admin = useAppSelector((state) => state.auth.user);
@@ -40,8 +40,8 @@ const DashHeader = () => {
 };
 
 export default DashHeader;
-/* 
-dashbord 
+/*
+dashbord
 users
 modarator
 
