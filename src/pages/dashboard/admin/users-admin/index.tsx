@@ -1,18 +1,19 @@
 import {useEffect, useState} from "react";
-import Button from "../../../components/ui/button";
-import {
-  deleteUserData,
-  editUserData,
-  fetchUserData,
-} from "../../../redux/adminSlice/adminSlice";
-import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
-import ROLE from "../../../constants/ROLE";
+
 import {AiFillDelete} from "react-icons/ai";
 import {FcManager} from "react-icons/fc";
 import {RiAdminFill} from "react-icons/ri";
 import {Tooltip} from "react-tooltip";
+import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
+import {
+  deleteUserData,
+  editUserData,
+  fetchUserData,
+} from "../../../../redux/adminSlice/adminSlice";
+import Button from "../../../../components/ui/button";
+import ROLE from "../../../../constants/ROLE";
 
-const Users = () => {
+const UsersAdmin = () => {
   const admin = useAppSelector((state) => state.auth.user);
 
   const loadedUsers = useAppSelector((state) => state.admin.users);
@@ -135,4 +136,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersAdmin;

@@ -62,6 +62,14 @@ const DashboardNav = () => {
                     <span className="">All Users</span>
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="hotels"
+                    className="navitem text-white group flex  items-center gap-5">
+                    <span> </span>
+                    <span className="">All Hotels</span>
+                  </Link>
+                </li>
               </>
             )}
             {userRole == ROLE.MANAGER && (

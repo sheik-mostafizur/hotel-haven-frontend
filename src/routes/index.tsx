@@ -3,13 +3,13 @@ import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
 import SignIn from "../pages/signin";
-import Users from "../pages/dashboard/user";
 import Dashboard from "../pages/dashboard/dashboard";
 import DashboardLayout from "../pages/dashboard/dashboard-layout";
 import AddRooms from "../pages/dashboard/manager/rooms/AddRooms";
 import AddAHotel from "../pages/dashboard/manager/hotel-manager/AddAHotel";
 import HotelManager from "../pages/dashboard/manager/hotel-manager";
 import Settings from "../pages/settings";
+import UsersAdmin from "../pages/dashboard/admin/users-admin";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +39,10 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <Users />,
+        element: <UsersAdmin />,
       },
       {
-        path: "hotel",
+        path: "hotels",
         element: <HotelManager />,
       },
       {
