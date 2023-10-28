@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
@@ -12,28 +12,36 @@ import Settings from "../pages/settings";
 import UsersAdmin from "../pages/dashboard/admin/users-admin";
 import AuthProtector from "./AuthProtector";
 import Playground from "../pages/playground";
+import Blogs from "../pages/blogs/blogs";
+import Main from "../Layout/Main/main";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Main />,
     errorElement: <ErrorElement />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
-  {
-    path: "/settings",
-    element: (
-      <AuthProtector>
-        <Settings />
-      </AuthProtector>
-    ),
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/Blog",
+        element: <Blogs />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
+      },
+    ],
   },
   {
     path: "/dashboard",

@@ -1,11 +1,11 @@
 import HashSpinner from "../../components/spinner/hash-spinner";
 
-const Playground: React.FC = () => {
+const Blogs = () => {
   return (
     <HashSpinner>
-      <h1>Playground</h1>
+      <h1>This is Blogs section</h1>
     </HashSpinner>
   );
 };
 
-export default Playground;
+export default Blogs;
