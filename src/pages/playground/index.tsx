@@ -1,10 +1,10 @@
-import HashSpinner from "../../components/spinner/hash-spinner";
+import Spinner from "../../components/spinner";
 
 const Playground: React.FC = () => {
   return (
-    <HashSpinner>
+    <Spinner>
       <h1>Playground</h1>
-    </HashSpinner>
+    </Spinner>
   );
 };
 

@@ -1,3 +1,4 @@
+import Main from "../../layout/main";
 import Banner from "./Banner";
 import BestBlogs from "./BestBlogs";
 import BestHotel from "./BestHotel";
@@ -6,16 +7,15 @@ import HotelGallery from "./HotelGallery";
 import TopLocation from "./TopLocation";
 
 const Home = () => {
-
   return (
-    <>
+    <Main>
       <Banner />
       <BestHotel />
       <HotelGallery />
       <TopLocation />
       <CustomerReviews />
       <BestBlogs />
-    </>
+    </Main>
   );
 };
 

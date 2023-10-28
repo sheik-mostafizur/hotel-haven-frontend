@@ -1,10 +1,10 @@
-import HashSpinner from "../../components/spinner/hash-spinner";
+import Spinner from "../../components/spinner";
 
 const Blogs = () => {
   return (
-    <HashSpinner>
+    <Spinner>
       <h1>This is Blogs section</h1>
-    </HashSpinner>
+    </Spinner>
   );
 };
 
