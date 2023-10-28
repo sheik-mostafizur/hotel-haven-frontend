@@ -40,8 +40,8 @@ const DashHeader = () => {
 };
 
 export default DashHeader;
-/* 
-dashbord 
+/*
+dashbord
 users
 modarator
 

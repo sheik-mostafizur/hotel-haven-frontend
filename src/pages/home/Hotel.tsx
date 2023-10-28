@@ -17,17 +17,19 @@ const Hotel: React.FC<Hotel> = ({
   description,
 }) => {
   return (
-    <div className=" bg-white border border-secondary-50 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-        <img className="rounded-t-lg" src={thumbnailURL} alt="" />
-      </a>
-      <div className="p-5">
-        <h3 className="py-2">{title}</h3>
-        <p className="py-2">Location: {location}</p>
-        <p className="py-2 text-sm">{description}</p>
-        <p className="py-2">Rating: {rating}</p>
-        <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
-        <Button size="sm">See More</Button>
+    <div className="content-to-animate">
+      <div className=" bg-white border border-secondary-50 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <a href="#">
+          <img className="rounded-t-lg w-full h-80" src={thumbnailURL} alt="" />
+        </a>
+        <div className="p-5">
+          <h3 className="py-2">{title}</h3>
+          <p className="py-2">Location: {location}</p>
+          <p className="py-2 text-sm">{description}</p>
+          <p className="py-2">Rating: {rating}</p>
+          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
+          <Button size="sm">See More</Button>
+        </div>
       </div>
     </div>
   );
