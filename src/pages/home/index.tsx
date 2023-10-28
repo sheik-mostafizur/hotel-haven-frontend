@@ -6,6 +6,7 @@ import HotelGallery from "./HotelGallery";
 import TopLocation from "./TopLocation";
 
 const Home = () => {
+
   return (
     <>
       <Banner />
