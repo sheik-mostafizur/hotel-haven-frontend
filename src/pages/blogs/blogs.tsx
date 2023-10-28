@@ -1,4 +1,4 @@
-import HashSpinner from "../../components/hash-spinner/hash-spinner";
+import HashSpinner from "../../components/spinner/hash-spinner";
 
 const Blogs = () => {
   return (

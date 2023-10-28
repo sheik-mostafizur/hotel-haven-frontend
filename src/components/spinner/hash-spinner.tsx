@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 
 interface SpinnerProps {
@@ -6,12 +6,6 @@ interface SpinnerProps {
 }
 
 const HashSpinner: React.FC<SpinnerProps> = ({ children }) => {
-  const override: CSSProperties = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-  };
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
