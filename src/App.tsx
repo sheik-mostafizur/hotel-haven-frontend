@@ -1,9 +1,8 @@
-import {ReactNode, useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import {setUser} from "./redux/authSlice";
+import {ReactNode, useEffect} from "react";
+import {setLoading, setUser} from "./redux/authSlice";
 import {axios} from "./api";
 import {changeTheme} from "./redux/themeSlice";
-import {useAppSelector} from "./redux/hooks";
+import {useAppDispatch, useAppSelector} from "./redux/hooks";
 
 type AppProps = {
   children: ReactNode;
@@ -11,20 +10,23 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({children}) => {
   const themeColors = useAppSelector((state) => state.theme);
-  const [isAppLoading, setIsAppLoading] = useState(false);
-  const dispatch = useDispatch();
+  const {isLoading} = useAppSelector((state) => state.auth);
+
+  const dispatch = useAppDispatch();
 
   const token = localStorage.getItem("token");
+
   useEffect(() => {
     const isUser = localStorage.getItem("user");
     if (isUser) {
       dispatch(setUser({user: JSON.parse(isUser)}));
-      return setIsAppLoading(false);
+      dispatch(setLoading(false)); // Dispatch the action to set loading to false
+      return;
     }
 
     const bearer = `Bearer ${token}`;
     if (token) {
-      setIsAppLoading(true);
+      dispatch(setLoading(true)); // Dispatch the action to set loading to true
       axios
         .get("user", {
           headers: {
@@ -33,21 +35,21 @@ const App: React.FC<AppProps> = ({children}) => {
         })
         .then(({data}) => {
           dispatch(setUser({user: data}));
-          setIsAppLoading(false);
+          dispatch(setLoading(false)); // Dispatch the action to set loading to false
         })
-        .catch(() => setIsAppLoading(false));
+        .catch(() => dispatch(setLoading(false))); // Dispatch the action to set loading to false
       return;
     }
-  }, [token]);
+  }, [token, dispatch]); // Add dispatch as a dependency
 
   // checking theme from localStorage
   const themeLocalStorage = localStorage.getItem("theme");
   useEffect(() => {
     document.documentElement.className = themeColors;
     dispatch(changeTheme({theme: themeLocalStorage}));
-  }, [themeColors, themeLocalStorage]);
+  }, [themeColors, themeLocalStorage, dispatch]); // Add dispatch as a dependency
 
-  return <>{isAppLoading ? "Loading..." : children}</>;
+  return <>{isLoading ? "Loading..." : children}</>;
 };
 
 export default App;

@@ -52,7 +52,7 @@ const initialState: AuthState = {
     __v: 0,
   },
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
