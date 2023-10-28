@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import Container from "../../components/ui/container";
 import fetchData from "../../hooks/fetchData";
 import Marquee from "react-fast-marquee";
 
@@ -29,16 +28,22 @@ const HotelGallery = () => {
       <div>
         <Marquee delay={1} direction="left">
           {gallery.map((image) => (
-            <>
-              <img className="w-96 h-80" src={image.thumbnailURL} alt="" />
-            </>
+            <img
+              key={image._id}
+              className="w-96 h-80"
+              src={image.thumbnailURL}
+              alt="Thumbnail"
+            />
           ))}
         </Marquee>
         <Marquee direction="right">
           {gallery.map((image) => (
-            <>
-              <img className="w-96 h-80" src={image.thumbnailURL} alt="" />
-            </>
+            <img
+              key={image._id}
+              className="w-96 h-80"
+              src={image.thumbnailURL}
+              alt="Thumbnail"
+            />
           ))}
         </Marquee>
       </div>
