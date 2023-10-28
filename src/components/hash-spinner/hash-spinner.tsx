@@ -27,7 +27,6 @@ const HashSpinner: React.FC<SpinnerProps> = ({ children }) => {
           <HashLoader
             color="#f04935"
             loading={loading}
-            CSSProperties={override}
             size={100}
             aria-label="Loading Spinner"
             data-testid="loader"
