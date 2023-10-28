@@ -11,6 +11,7 @@ import HotelManager from "../pages/dashboard/manager/hotel-manager";
 import Settings from "../pages/settings";
 import UsersAdmin from "../pages/dashboard/admin/users-admin";
 import IsAuthenticated from "./isAuthenticated";
+import Playground from "../pages/playground";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         element: <AddRooms />,
       },
     ],
+  },
+  {
+    path: "/playground",
+    element: <Playground />,
   },
 ]);
 export default router;
