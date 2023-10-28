@@ -13,6 +13,7 @@ import {auth} from "../../api";
 import {authType} from "../../types";
 
 const SignIn: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const SignIn: React.FC = () => {
   const onSubmit: SubmitHandler<authType.Login> = async (
     data: authType.Login
   ): Promise<void> => {
+    setIsLoading(true);
     try {
       const result = await auth.login({
         email: data.email,
@@ -37,6 +39,8 @@ const SignIn: React.FC = () => {
       navigate("/");
     } catch (error: any) {
       toastError(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,7 +91,7 @@ const SignIn: React.FC = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              Sign In
+              {isLoading ? "Loading..." : "Sign In"}
             </Button>
             <p>
               Create an account?{" "}

@@ -1,7 +1,12 @@
+import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
 import {Outlet} from "react-router-dom";
 
 const routes = [
+  {
+    path: "/settings",
+    element: <Settings />,
+  },
   {
     path: "/dashboard",
     element: (
