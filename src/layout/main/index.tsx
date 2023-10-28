@@ -8,7 +8,7 @@ const Main = ({children}: MainProps) => {
   return (
     <>
       <Navbar />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );
