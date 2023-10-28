@@ -1,6 +1,6 @@
 import {Navigate, useLocation} from "react-router";
 import {useAppSelector} from "../redux/hooks";
-import Spinner from "../components/spinner";
+import {HashSpinner} from "../components/spinner";
 
 interface PrivateProtectorProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ const PrivateProtector: React.FC<PrivateProtectorProps> = ({children}) => {
 
   const {user, isLoading} = useAppSelector((state) => state.auth);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <HashSpinner fullScreen />;
 
   if (user?.email === "") {
     return <Navigate to="/signin" state={{from: location}} replace />;

@@ -3,7 +3,7 @@ import {setLoading, setUser} from "./redux/authSlice";
 import {axios} from "./api";
 import {changeTheme} from "./redux/themeSlice";
 import {useAppDispatch, useAppSelector} from "./redux/hooks";
-import Spinner from "./components/spinner";
+import {HashSpinner} from "./components/spinner";
 
 type AppProps = {
   children: ReactNode;
@@ -51,7 +51,7 @@ const App: React.FC<AppProps> = ({children}) => {
     dispatch(changeTheme({theme: themeLocalStorage}));
   }, [themeColors, themeLocalStorage, dispatch]); // Add dispatch as a dependency
 
-  return <>{isLoading ? <Spinner fullScreen /> : children}</>;
+  return <>{isLoading ? <HashSpinner fullScreen /> : children}</>;
 };
 
 export default App;
