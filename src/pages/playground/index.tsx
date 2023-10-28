@@ -1,8 +1,10 @@
-const Playground = () => {
+import HashSpinner from "../../components/hash-spinner/hash-spinner";
+
+const Playground: React.FC = () => {
   return (
-    <div>
+    <HashSpinner>
       <h1>Playground</h1>
-    </div>
+    </HashSpinner>
   );
 };
 

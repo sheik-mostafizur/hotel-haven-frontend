@@ -1,4 +1,4 @@
-import {ReactNode, MouseEvent} from "react";
+import { ReactNode, MouseEvent } from "react";
 
 type ButtonType = {
   children: ReactNode;
@@ -45,7 +45,8 @@ const Button = (props: ButtonType) => {
       className={`${buttonStyle[size]} ${className || ""}`}
       onClick={onClick}
       disabled={isDisabled}
-      {...attributes}>
+      {...attributes}
+    >
       {children}
     </button>
   );
