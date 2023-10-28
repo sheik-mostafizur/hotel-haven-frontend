@@ -10,7 +10,7 @@ import AddAHotel from "../pages/dashboard/manager/hotel-manager/AddAHotel";
 import HotelManager from "../pages/dashboard/manager/hotel-manager";
 import Settings from "../pages/settings";
 import UsersAdmin from "../pages/dashboard/admin/users-admin";
-import IsAuthenticated from "./isAuthenticated";
+import AuthProtector from "./AuthProtector";
 import Playground from "../pages/playground";
 
 const router = createBrowserRouter([
@@ -29,15 +29,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <Settings />,
+    element: (
+      <AuthProtector>
+        <Settings />
+      </AuthProtector>
+    ),
   },
   {
     path: "/dashboard",
-    element: (
-      <IsAuthenticated>
-        <DashboardLayout />
-      </IsAuthenticated>
-    ),
+    element: <DashboardLayout />,
     children: [
       {
         path: "",

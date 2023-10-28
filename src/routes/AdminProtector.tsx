@@ -1,19 +1,21 @@
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../redux/hooks";
 import {useEffect} from "react";
+import toastError from "../utils/toast-error";
 
-interface IsAuthenticatedProps {
+interface AdminProtectorProps {
   children: React.ReactNode;
 }
 
-const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({children}) => {
+const AdminProtector: React.FC<AdminProtectorProps> = ({children}) => {
   const navigate = useNavigate();
   const {user, isLoading} = useAppSelector((state) => state.auth);
 
   if (isLoading) return <h1>It's loading</h1>;
 
   useEffect(() => {
-    if (user?.email === "") {
+    if (user?.email === "" || user?.role != "ADMIN") {
+      toastError({});
       navigate("/signin");
     }
   }, [user?.email]);
@@ -21,4 +23,4 @@ const IsAuthenticated: React.FC<IsAuthenticatedProps> = ({children}) => {
   return <>{children}</>;
 };
 
-export default IsAuthenticated;
+export default AdminProtector;
