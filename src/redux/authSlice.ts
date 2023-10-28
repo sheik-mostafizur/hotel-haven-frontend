@@ -95,8 +95,13 @@ export const userSlice = createSlice({
     },
     setUser: (state, action: PayloadAction<{user: User}>) => {
       state.user = action.payload.user;
+
       if (!localStorage.getItem("user")) {
         localStorage.setItem("user", JSON.stringify(action.payload.user));
+      }
+
+      if (localStorage.getItem("token")) {
+        state.token = localStorage.getItem("token");
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {

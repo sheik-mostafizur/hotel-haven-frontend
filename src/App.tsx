@@ -40,6 +40,7 @@ const App: React.FC<AppProps> = ({children}) => {
         .catch(() => dispatch(setLoading(false))); // Dispatch the action to set loading to false
       return;
     }
+    dispatch(setLoading(false));
   }, [token, dispatch]); // Add dispatch as a dependency
 
   // checking theme from localStorage
