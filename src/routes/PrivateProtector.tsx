@@ -1,23 +1,23 @@
-import {Navigate, useLocation} from "react-router-dom";
+import {Navigate, useLocation} from "react-router";
 import {useAppSelector} from "../redux/hooks";
-import ROLE from "../constants/ROLE";
 import Spinner from "../components/spinner";
 
-interface AdminProtectorProps {
+interface PrivateProtectorProps {
   children: React.ReactNode;
 }
 
-const AdminProtector: React.FC<AdminProtectorProps> = ({children}) => {
+const PrivateProtector: React.FC<PrivateProtectorProps> = ({children}) => {
   const location = useLocation();
+
   const {user, isLoading} = useAppSelector((state) => state.auth);
 
   if (isLoading) return <Spinner />;
 
-  if (user?.email === "" || user?.role !== ROLE.ADMIN) {
+  if (user?.email === "") {
     return <Navigate to="/signin" state={{from: location}} replace />;
   }
 
   return children;
 };
 
-export default AdminProtector;
+export default PrivateProtector;

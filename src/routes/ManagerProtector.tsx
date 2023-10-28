@@ -1,7 +1,5 @@
-import {useNavigate} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import {useAppSelector} from "../redux/hooks";
-import {useEffect} from "react";
-import toastError from "../utils/toast-error";
 import ROLE from "../constants/ROLE";
 
 interface ManagerProtectorProps {
@@ -9,17 +7,15 @@ interface ManagerProtectorProps {
 }
 
 const ManagerProtector: React.FC<ManagerProtectorProps> = ({children}) => {
-  const navigate = useNavigate();
+  const location = useLocation();
+
   const {user, isLoading} = useAppSelector((state) => state.auth);
 
   if (isLoading) return <h1>It's loading</h1>;
 
-  useEffect(() => {
-    if (user?.email === "" || user?.role !== ROLE.MANAGER) {
-      toastError({});
-      navigate("/signin");
-    }
-  }, [user?.email]);
+  if (user?.email === "" || user?.role !== ROLE.MANAGER) {
+    return <Navigate to="/signin" state={{from: location}} replace />;
+  }
 
   return children;
 };

@@ -12,6 +12,7 @@ import {
 } from "../../../../redux/adminSlice/adminSlice";
 import Button from "../../../../components/ui/button";
 import ROLE from "../../../../constants/ROLE";
+import Spinner from "../../../../components/spinner";
 
 const UsersAdmin = () => {
   const admin = useAppSelector((state) => state.auth.user);
@@ -50,7 +51,7 @@ const UsersAdmin = () => {
       </form>
       <ul className="text-primary-500 flex flex-col justify-center items-center rounded-xl border ">
         {isLoading ? (
-          <h1 className="text-3xl">Loading...</h1>
+          <Spinner />
         ) : (
           users &&
           users.map((user: any, idx: any) => (
