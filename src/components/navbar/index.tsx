@@ -3,9 +3,10 @@ import Button from "../ui/button";
 import {useState} from "react";
 import {logout} from "../../redux/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {userAuthActions} from "../../redux/user-auth-slice";
 
 const Navbar = () => {
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state) => state.userAuth.user);
   const dispatch = useAppDispatch();
 
   const isUser = user && user?.email;
@@ -82,6 +83,7 @@ const Navbar = () => {
               <li>
                 <a
                   onClick={() => {
+                    dispatch(userAuthActions.logout());
                     dispatch(logout());
                     setToggleProfile(false);
                   }}

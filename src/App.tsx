@@ -1,9 +1,9 @@
 import {ReactNode, useEffect} from "react";
-import {setLoading, setUser} from "./redux/authSlice";
 import {axios} from "./api";
 import {changeTheme} from "./redux/themeSlice";
 import {useAppDispatch, useAppSelector} from "./redux/hooks";
 import {HashSpinner} from "./components/spinner";
+import {userAuthActions} from "./redux/user-auth-slice";
 
 type AppProps = {
   children: ReactNode;
@@ -11,23 +11,21 @@ type AppProps = {
 
 const App: React.FC<AppProps> = ({children}) => {
   const themeColors = useAppSelector((state) => state.theme);
-  const {isLoading} = useAppSelector((state) => state.auth);
-
+  const userAuthState = useAppSelector((state) => state.userAuth);
   const dispatch = useAppDispatch();
 
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const isUser = localStorage.getItem("user");
-    if (isUser) {
-      dispatch(setUser({user: JSON.parse(isUser)}));
-      dispatch(setLoading(false)); // Dispatch the action to set loading to false
+    dispatch(userAuthActions.setLoading(true));
+    if (userAuthState?.user?.email) {
+      dispatch(userAuthActions.setLoading(false));
       return;
     }
 
     const bearer = `Bearer ${token}`;
     if (token) {
-      dispatch(setLoading(true)); // Dispatch the action to set loading to true
+      dispatch(userAuthActions.setLoading(false)); // Dispatch the action to set loading to true
       axios
         .get("user", {
           headers: {
@@ -35,13 +33,12 @@ const App: React.FC<AppProps> = ({children}) => {
           },
         })
         .then(({data}) => {
-          dispatch(setUser({user: data}));
-          dispatch(setLoading(false)); // Dispatch the action to set loading to false
+          dispatch(userAuthActions.setUser(data));
         })
-        .catch(() => dispatch(setLoading(false))); // Dispatch the action to set loading to false
+        .catch(() => dispatch(userAuthActions.setLoading(false))); // Dispatch the action to set loading to false
       return;
     }
-    dispatch(setLoading(false));
+    dispatch(userAuthActions.setLoading(false));
   }, [token, dispatch]); // Add dispatch as a dependency
 
   // checking theme from localStorage
@@ -51,7 +48,7 @@ const App: React.FC<AppProps> = ({children}) => {
     dispatch(changeTheme({theme: themeLocalStorage}));
   }, [themeColors, themeLocalStorage, dispatch]); // Add dispatch as a dependency
 
-  return <>{isLoading ? <HashSpinner fullScreen /> : children}</>;
+  return <>{userAuthState.isLoading ? <HashSpinner fullScreen /> : children}</>;
 };
 
 export default App;

@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {PayloadAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {axios} from "../../api";
 import {AxiosError} from "axios";
 
@@ -66,6 +66,13 @@ const userAuthSlice = createSlice({
   name: "user-auth",
   initialState,
   reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
     logout: () => {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
@@ -140,5 +147,5 @@ const userAuthSlice = createSlice({
     });
   },
 });
-
+export const userAuthActions = userAuthSlice.actions;
 export default userAuthSlice.reducer;
