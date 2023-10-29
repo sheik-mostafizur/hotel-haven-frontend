@@ -4,19 +4,16 @@ import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {auth} from "../../api";
 import {authType} from "../../types";
-import {userAuthLogin} from "../../redux/user-auth-slice";
+import {authLogin} from "../../redux/auth-slice";
 
 const SignIn: React.FC = () => {
-  const userAuthState = useAppSelector((state) => state.userAuth);
+  const authState = useAppSelector((state) => state.auth);
 
-  const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -30,26 +27,18 @@ const SignIn: React.FC = () => {
   const onSubmit: SubmitHandler<authType.Login> = async (
     data: authType.Login
   ): Promise<void> => {
-    setIsLoading(true);
     try {
-      dispatch(
-        userAuthLogin({
+      await dispatch(
+        authLogin({
           email: data.email,
           password: data.password,
         })
       );
-      // const result = await auth.login({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-      // toastSuccess(result.message);
-      // dispatch(login({token: result.token, user: result.user}));
-      // reset();
-      // navigate("/");
+      toastSuccess(authState.message);
+      reset();
+      navigate("/");
     } catch (error: any) {
       toastError(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -100,7 +89,7 @@ const SignIn: React.FC = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              {userAuthState.isLoading ? "Loading..." : "Sign In"}
+              {authState.isLoading ? "Loading..." : "Sign In"}
             </Button>
             <p>
               Create an account?{" "}

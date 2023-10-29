@@ -12,7 +12,7 @@ import {AiFillSetting} from "react-icons/ai";
 import {FiLogOut} from "react-icons/fi";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import ROLE from "../../../constants/ROLE";
-import {logout} from "../../../redux/authSlice";
+import {logout} from "../../../redux/_authSlice";
 
 const DashboardNav = () => {
   const user = useAppSelector((state) => state.auth.user);

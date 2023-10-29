@@ -2,7 +2,7 @@ import {PayloadAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {axios} from "../../api";
 import {AxiosError} from "axios";
 
-export const userAuthLogin = createAsyncThunk<
+export const authLogin = createAsyncThunk<
   any,
   {email: string; password: string},
   {rejectValue: AxiosError}
@@ -19,7 +19,7 @@ export const userAuthLogin = createAsyncThunk<
   }
 });
 
-export const userAuthRegister = createAsyncThunk<
+export const authRegister = createAsyncThunk<
   any,
   {
     registerData: {
@@ -62,7 +62,7 @@ const initialState = {
   message: "",
   isAuthenticated: false,
 };
-const userAuthSlice = createSlice({
+const authSlice = createSlice({
   name: "user-auth",
   initialState,
   reducers: {
@@ -86,19 +86,19 @@ const userAuthSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(userAuthRegister.pending, (state) => {
+    builder.addCase(authRegister.pending, (state) => {
       // Handle pending state for user registration if needed
       state.isLoading = true;
       state.isAuthenticated = false;
     });
 
-    builder.addCase(userAuthRegister.fulfilled, (state, action) => {
+    builder.addCase(authRegister.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.isAuthenticated = true;
       state.isLoading = false;
     });
 
-    builder.addCase(userAuthRegister.rejected, (state, action) => {
+    builder.addCase(authRegister.rejected, (state, action) => {
       // Handle user registration failure
       state.isLoading = false;
       state.isAuthenticated = false;
@@ -115,11 +115,11 @@ const userAuthSlice = createSlice({
       }
     });
     // login
-    builder.addCase(userAuthLogin.pending, (state) => {
+    builder.addCase(authLogin.pending, (state) => {
       state.isLoading = true;
       state.isAuthenticated = false;
     });
-    builder.addCase(userAuthLogin.fulfilled, (state, action) => {
+    builder.addCase(authLogin.fulfilled, (state, action) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isAuthenticated = true;
@@ -130,7 +130,7 @@ const userAuthSlice = createSlice({
       localStorage.setItem("token", action.payload.token);
     });
 
-    builder.addCase(userAuthLogin.rejected, (state, action) => {
+    builder.addCase(authLogin.rejected, (state, action) => {
       state.isLoading = false;
       state.isAuthenticated = false;
 
@@ -147,5 +147,5 @@ const userAuthSlice = createSlice({
     });
   },
 });
-export const userAuthActions = userAuthSlice.actions;
-export default userAuthSlice.reducer;
+export const authActions = authSlice.actions;
+export default authSlice.reducer;

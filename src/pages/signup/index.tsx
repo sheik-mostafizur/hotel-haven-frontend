@@ -9,13 +9,13 @@ import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {axios} from "../../api";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {userAuthRegister} from "../../redux/user-auth-slice";
+import {authRegister} from "../../redux/auth-slice";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
-  const userAuthState = useAppSelector((state) => state.userAuth);
-  console.log(userAuthState);
+  const authState = useAppSelector((state) => state.auth);
+  console.log(authState);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
@@ -26,15 +26,9 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    await dispatch(userAuthRegister(data));
-    return;
-    axios
-      .post("/auth/register", data)
-      .then(({data}) => {
-        toastSuccess(data.message);
-        navigate("/signin");
-      })
-      .catch((error) => toastError(error));
+    await dispatch(authRegister(data));
+    navigate("/signin");
+    toastSuccess(authState.message);
   };
 
   return (
@@ -172,7 +166,7 @@ const SignUp = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              {userAuthState.isLoading ? "loading..." : "Create an account"}
+              {authState.isLoading ? "loading..." : "Create an account"}
             </Button>
             <p>
               Already have an account?{" "}
