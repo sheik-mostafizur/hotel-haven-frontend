@@ -19,7 +19,7 @@ const Hotel: React.FC = () => {
   };
   return (
     <div>
-      <h1 className="text-center">Add hotel form:</h1>
+      <h2 className="text-center">Hotel form:</h2>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="hotelName">Hotel Name</label>
