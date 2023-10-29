@@ -15,7 +15,6 @@ import {userAuthLogin} from "../../redux/user-auth-slice";
 
 const SignIn: React.FC = () => {
   const userAuthState = useAppSelector((state) => state.userAuth);
-  console.log(userAuthState.user);
 
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [showPassword, setShowPassword] = useState(false);

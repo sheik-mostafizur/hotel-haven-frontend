@@ -8,11 +8,15 @@ import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {axios} from "../../api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {userAuthRegister} from "../../redux/user-auth-slice";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
-
+  const userAuthState = useAppSelector((state) => state.userAuth);
+  console.log(userAuthState);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -21,8 +25,8 @@ const SignUp = () => {
     // formState: {errors},
   } = useForm();
 
-  const onSubmit = (data: Object) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    await dispatch(userAuthRegister(data));
     return;
     axios
       .post("/auth/register", data)
@@ -168,7 +172,7 @@ const SignUp = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              Create an account
+              {userAuthState.isLoading ? "loading..." : "Create an account"}
             </Button>
             <p>
               Already have an account?{" "}
