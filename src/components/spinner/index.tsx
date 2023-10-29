@@ -1,3 +1,4 @@
 import HashSpinner from "./HashSpinner";
+import BeatSpinner from "./BeatSpinner";
 
-export {HashSpinner};
+export {HashSpinner, BeatSpinner};

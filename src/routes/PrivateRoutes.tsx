@@ -1,6 +1,7 @@
+import Dashboard from "../pages/dashboard";
+import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
-import {Outlet} from "react-router-dom";
 
 const routes = [
   {
@@ -9,13 +10,12 @@ const routes = [
   },
   {
     path: "/dashboard",
-    element: (
-      <>
-        <h1>Customer</h1>
-        <Outlet />
-      </>
-    ),
+    element: <Dashboard />,
     children: [
+      {
+        path: "",
+        element: <ProfileDashboard />,
+      },
       {
         path: "gust",
         element: <h2>Customer Gust</h2>,

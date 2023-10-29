@@ -24,12 +24,12 @@ const Navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
         <Link to="/" className="flex items-center">
           <img
-            src="/image/logo without background.png"
+            src="/images/logo-transparent.png"
             className="h-16 bg-cover"
             alt="Hotel Haven Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Hotel Haven
+            HotelHaven
           </span>
         </Link>
         <div className="flex items-center md:order-2 relative">

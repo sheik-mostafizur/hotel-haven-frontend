@@ -1,19 +1,23 @@
-import {Outlet} from "react-router-dom";
 import AdminProtector from "./AdminProtector";
+import Dashboard from "../pages/dashboard";
+import {HotelsAdmin, RoomsAdmin} from "../pages/dashboard/admin";
 
 const routes = [
   {
-    path: "/dashboard",
-    element: (
-      <>
-        <h1>Admin</h1>
-        <Outlet />
-      </>
-    ),
+    path: "/",
+    element: <Dashboard />,
     children: [
       {
-        path: "gust",
-        element: <h2>Admin Gust</h2>,
+        path: "users",
+        element: "show users",
+      },
+      {
+        path: "hotels",
+        element: <HotelsAdmin />,
+      },
+      {
+        path: "rooms",
+        element: <RoomsAdmin />,
       },
     ],
   },
@@ -21,6 +25,7 @@ const routes = [
 
 const AdminRoutes = routes.map((route) => ({
   ...route,
+  path: "/admin" + route.path,
   element: <AdminProtector>{route.element}</AdminProtector>,
 }));
 

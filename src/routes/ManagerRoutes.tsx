@@ -1,19 +1,19 @@
-import {Outlet} from "react-router-dom";
+import Dashboard from "../pages/dashboard";
+import {HotelManager, RoomsManager} from "../pages/dashboard/manager";
 import ManagerProtector from "./ManagerProtector";
 
 const routes = [
   {
-    path: "/dashboard",
-    element: (
-      <>
-        <h1>Manager</h1>
-        <Outlet />
-      </>
-    ),
+    path: "/",
+    element: <Dashboard />,
     children: [
       {
-        path: "gust",
-        element: <h2>Manager Gust</h2>,
+        path: "hotel",
+        element: <HotelManager />,
+      },
+      {
+        path: "rooms",
+        element: <RoomsManager />,
       },
     ],
   },
@@ -21,6 +21,7 @@ const routes = [
 
 const ManagerRoutes = routes.map((route) => ({
   ...route,
+  path: "/manager" + route.path,
   element: <ManagerProtector>{route.element}</ManagerProtector>,
 }));
 

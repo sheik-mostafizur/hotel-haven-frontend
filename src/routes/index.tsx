@@ -31,7 +31,6 @@ const router = createBrowserRouter([
     path: "/playground",
     element: <Playground />,
   },
-  // make sure the sequence is maintainable
   ...AdminRoutes,
   ...ManagerRoutes,
   ...PrivateRoutes,
