@@ -1,6 +1,6 @@
 import AdminProtector from "./AdminProtector";
 import Dashboard from "../pages/dashboard";
-import {HotelsAdmin, RoomsAdmin} from "../pages/dashboard/admin";
+import {HotelsAdmin, RoomsAdmin, UsersAdmin} from "../pages/dashboard/admin";
 
 const routes = [
   {
@@ -9,7 +9,7 @@ const routes = [
     children: [
       {
         path: "users",
-        element: "show users",
+        element: <UsersAdmin />,
       },
       {
         path: "hotels",
