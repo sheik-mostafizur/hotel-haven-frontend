@@ -1,17 +1,17 @@
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Button from "../../../../components/ui/button";
 import toastSuccess from "../../../../utils/toast-success";
 import toastError from "../../../../utils/toast-error";
-import {axios} from "../../../../api";
+import { axios } from "../../../../api";
 
 const AddAHotel = () => {
-  const {handleSubmit, control, reset} = useForm();
+  const { handleSubmit, control, reset } = useForm();
 
   const onSubmit = (data: any) => {
     // Handle form submission here, e.g., send data to an API
     axios
       .post("/manager/hotel", data)
-      .then(({data}) => {
+      .then(({ data }) => {
         reset();
         toastSuccess(data.message);
       })
@@ -24,14 +24,14 @@ const AddAHotel = () => {
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid lg:grid-cols-2 gap-2 justify-center">
           <div>
-            <label>Name:</label>
+            <label>Hotel Name:</label>
             <Controller
-              name="name"
+              name="hotelName"
               control={control}
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} />}
+              render={({ field }) => <input {...field} />}
             />
           </div>
           <div>
@@ -42,7 +42,7 @@ const AddAHotel = () => {
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} type="number" />}
+              render={({ field }) => <input {...field} type="number" />}
             />
           </div>
         </div>
@@ -54,11 +54,35 @@ const AddAHotel = () => {
             rules={{
               required: true,
             }}
-            render={({field}) => <input {...field} />}
+            render={({ field }) => <input {...field} />}
           />
         </div>
 
         {/* Address section */}
+        <div className="grid lg:grid-cols-2 gap-2 justify-center">
+          <div>
+            <label> Manager Name:</label>
+            <Controller
+              name="managerName"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field }) => <input {...field} />}
+            />
+          </div>
+          <div>
+            <label>Manager Email:</label>
+            <Controller
+              name="managerEmail"
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field }) => <input {...field} />}
+            />
+          </div>
+        </div>
         <div className="grid lg:grid-cols-2 gap-2 justify-center">
           <div>
             <label> Location:</label>
@@ -68,7 +92,7 @@ const AddAHotel = () => {
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} />}
+              render={({ field }) => <input {...field} />}
             />
           </div>
           <div>
@@ -79,7 +103,7 @@ const AddAHotel = () => {
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} />}
+              render={({ field }) => <input {...field} />}
             />
           </div>
         </div>
@@ -92,7 +116,7 @@ const AddAHotel = () => {
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} />}
+              render={({ field }) => <input {...field} />}
             />
           </div>
           <div>
@@ -103,7 +127,7 @@ const AddAHotel = () => {
               rules={{
                 required: true,
               }}
-              render={({field}) => <input {...field} />}
+              render={({ field }) => <input {...field} />}
             />
           </div>
         </div>
@@ -114,7 +138,7 @@ const AddAHotel = () => {
           rules={{
             required: true,
           }}
-          render={({field}) => <input {...field} />}
+          render={({ field }) => <input {...field} />}
         />
         <Button type="submit" size="lg" className="mt-4">
           Submit
