@@ -1,4 +1,4 @@
-import { default as HotelManager } from "./hotel";
-import { default as RoomsManager } from "./rooms";
+import {default as HotelManager} from "./hotel";
+import {default as RoomsManager} from "./rooms";
 
-export { HotelManager, RoomsManager };
+export {HotelManager, RoomsManager};
