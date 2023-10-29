@@ -1,5 +1,5 @@
-import {default as UsersAdmin} from "./Users";
-import {default as HotelsAdmin} from "./Hotels";
-import {default as RoomsAdmin} from "./Rooms";
+import { default as UsersAdmin } from "./users";
+import { default as HotelsAdmin } from "./hotels";
+import { default as RoomsAdmin } from "./rooms";
 
-export {UsersAdmin, HotelsAdmin, RoomsAdmin};
+export { UsersAdmin, HotelsAdmin, RoomsAdmin };
