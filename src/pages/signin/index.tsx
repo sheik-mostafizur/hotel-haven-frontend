@@ -8,11 +8,15 @@ import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
-import {useAppDispatch} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {auth} from "../../api";
 import {authType} from "../../types";
+import {userAuthLogin} from "../../redux/user-auth-slice";
 
 const SignIn: React.FC = () => {
+  const userAuthState = useAppSelector((state) => state.userAuth);
+  console.log(userAuthState.user);
+
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
@@ -29,14 +33,20 @@ const SignIn: React.FC = () => {
   ): Promise<void> => {
     setIsLoading(true);
     try {
-      const result = await auth.login({
-        email: data.email,
-        password: data.password,
-      });
-      toastSuccess(result.message);
-      dispatch(login({token: result.token, user: result.user}));
-      reset();
-      navigate("/");
+      dispatch(
+        userAuthLogin({
+          email: data.email,
+          password: data.password,
+        })
+      );
+      // const result = await auth.login({
+      //   email: data.email,
+      //   password: data.password,
+      // });
+      // toastSuccess(result.message);
+      // dispatch(login({token: result.token, user: result.user}));
+      // reset();
+      // navigate("/");
     } catch (error: any) {
       toastError(error);
     } finally {
@@ -91,7 +101,7 @@ const SignIn: React.FC = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              {isLoading ? "Loading..." : "Sign In"}
+              {userAuthState.isLoading ? "Loading..." : "Sign In"}
             </Button>
             <p>
               Create an account?{" "}
