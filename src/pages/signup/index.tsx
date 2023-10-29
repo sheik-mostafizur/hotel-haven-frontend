@@ -22,8 +22,6 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data: Object) => {
-    console.log(data);
-    return;
     axios
       .post("/auth/register", data)
       .then(({data}) => {
