@@ -1,13 +1,28 @@
 import {Link, Outlet} from "react-router-dom";
-import {useAppSelector} from "../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {DashboardNavAdmin, DashboardNavManager} from "./dashboard-nav";
 import {BiSolidDashboard} from "react-icons/bi";
 import {FaSignOutAlt} from "react-icons/fa";
 import {AiOutlineAlignLeft} from "react-icons/ai";
 import ROLE from "../../constants/ROLE";
+import {logout} from "../../redux/authSlice";
+import swal from "sweetalert";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
+
+  const handleSignOut = () => {
+    swal({
+      title: "Are you sure you want to log out?",
+      buttons: ["CANCEL", "LOG OUT"],
+    }).then((confirm) => {
+      if (confirm) {
+        dispatch(logout());
+      }
+    });
+  };
+
   return (
     <>
       <button
@@ -50,8 +65,8 @@ const Dashboard = () => {
 
             <li>
               <a
-                href="#"
-                className="flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover:bg-secondary-700 group">
+                onClick={handleSignOut}
+                className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover:bg-secondary-700 group">
                 <FaSignOutAlt className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
               </a>
