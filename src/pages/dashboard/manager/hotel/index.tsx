@@ -1,11 +1,11 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import Container from "../../../../components/ui/container";
 import Button from "../../../../components/ui/button";
-import { axios } from "../../../../api";
+import {axios} from "../../../../api";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import { useEffect, useState } from "react";
-import { BeatSpinner, HashSpinner } from "../../../../components/spinner";
+import {useEffect, useState} from "react";
+import {BeatSpinner, HashSpinner} from "../../../../components/spinner";
 import ViewHotel from "./ViewHotel";
 interface IFormInputs {
   name: string;
@@ -13,7 +13,7 @@ interface IFormInputs {
   address: {
     thumbnailURL: string;
     location: string;
-    map: { lat: string; lng: string };
+    map: {lat: string; lng: string};
   };
   availableRoom: number;
   description: string;
@@ -22,11 +22,11 @@ const Hotel: React.FC = () => {
   const [hotel, setHotel] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const {handleSubmit, control, reset} = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     setIsLoading(true);
     try {
-      const { data: resData } = await axios.post("/manager/hotel", data);
+      const {data: resData} = await axios.post("/manager/hotel", data);
       toastSuccess(resData.message);
       setHotel(resData.hotel);
       reset();
@@ -41,7 +41,7 @@ const Hotel: React.FC = () => {
     setIsLoading(true);
     axios
       .get("/manager/hotel")
-      .then(({ data }) => {
+      .then(({data}) => {
         setHotel(data);
         setIsLoading(false);
       })
@@ -62,8 +62,8 @@ const Hotel: React.FC = () => {
               <Controller
                 name="name"
                 control={control}
-                rules={{ required: true }}
-                render={({ field }) => <input {...field} />}
+                rules={{required: true}}
+                render={({field}) => <input {...field} />}
               />
               <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
                 <div>
@@ -71,8 +71,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="photoURL"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
                 <div>
@@ -80,8 +80,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="availableRoom"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
               </div>
@@ -91,8 +91,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="address.location"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
                 <div>
@@ -102,8 +102,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="address.thumbnailURL"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
               </div>
@@ -113,8 +113,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="address.map.lat"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
                 <div>
@@ -122,8 +122,8 @@ const Hotel: React.FC = () => {
                   <Controller
                     name="address.map.lng"
                     control={control}
-                    rules={{ required: true }}
-                    render={({ field }) => <input {...field} />}
+                    rules={{required: true}}
+                    render={({field}) => <input {...field} />}
                   />
                 </div>
               </div>
@@ -131,8 +131,8 @@ const Hotel: React.FC = () => {
               <Controller
                 name="description"
                 control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
+                rules={{required: true}}
+                render={({field}) => (
                   <textarea
                     {...field}
                     className="border-2 rounded-2xl w-full p-2"

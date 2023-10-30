@@ -4,6 +4,8 @@ import Button from "../../../../components/ui/button";
 import {useEffect, useState} from "react";
 import {axios} from "../../../../api";
 import toastError from "../../../../utils/toast-error";
+import toastSuccess from "../../../../utils/toast-success";
+
 interface IFormInputs {
   title: string;
   thumbnails: Array<string>;
@@ -17,18 +19,32 @@ interface IFormInputs {
     view: number;
     roomSize: string;
     regularPrice: number;
-    discountPrice: number;
+    discountedPrice: number;
     additionalInfo: string;
   };
 }
+
 const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [room, setRoom] = useState([]);
 
   const {handleSubmit, control, reset} = useForm<IFormInputs>({});
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    setIsLoading(true);
+    data.facilities = data.facilities.filter((facilitie) => Boolean(facilitie));
+    data.thumbnails = data.thumbnails.filter((thumbnail) => Boolean(thumbnail));
     console.log(data);
-    reset();
+    try {
+      const {
+        data: {message},
+      } = await axios.post("/manager/room", data);
+      toastSuccess(message);
+    } catch (error: any) {
+      toastError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -65,7 +81,7 @@ const Rooms: React.FC = () => {
                   name="thumbnails[0]"
                   control={control}
                   rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  render={({field}) => <input {...field} type="url" />}
                 />
               </div>
               <div>
@@ -73,7 +89,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[1]"
                   control={control}
-                  render={({field}) => <input {...field} />}
+                  render={({field}) => <input {...field} type="url" />}
                 />
               </div>
               <div>
@@ -81,7 +97,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[2]"
                   control={control}
-                  render={({field}) => <input {...field} />}
+                  render={({field}) => <input {...field} type="url" />}
                 />
               </div>
             </div>
@@ -162,7 +178,7 @@ const Rooms: React.FC = () => {
               <div>
                 <label htmlFor="discountPrice">Discount price</label>
                 <Controller
-                  name="roomInfo.discountPrice"
+                  name="roomInfo.discountedPrice"
                   control={control}
                   rules={{required: true}}
                   render={({field}) => <input {...field} />}

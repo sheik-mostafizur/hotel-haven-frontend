@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { axios } from "../../../../api";
-import { HashSpinner } from "../../../../components/spinner";
+import {useEffect, useState} from "react";
+import {axios} from "../../../../api";
+import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
 
 interface Hotels {
@@ -9,7 +9,7 @@ interface Hotels {
   address: {
     thumbnailURL: string;
     location: string;
-    map: { lat: string; lng: string };
+    map: {lat: string; lng: string};
   };
   availableRoom: number;
   description: string;
@@ -24,7 +24,7 @@ const Hotels: React.FC = () => {
     setIsLoading(true);
     axios
       .get("/admin/hotel")
-      .then(({ data }) => {
+      .then(({data}) => {
         setHotels(data);
         setIsLoading(false);
       })
@@ -41,9 +41,9 @@ const Hotels: React.FC = () => {
       {isLoading ? (
         <HashSpinner />
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
           {hotels.map((hotel) => (
-            <HotelCard key={hotel._id} {...hotel} />
+            <HotelCard key={hotel._id} hotel={hotel} />
           ))}
         </div>
       )}

@@ -1,21 +1,17 @@
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 
-const ViewHotel: React.FC = ({ hotel }) => {
-  /*
-  set an edit button we don't need delete button
-  if status is pending color will be: bg-orange-200
-  if status is rejected color will be: bg-red-200
-  else noting
-  */
+const ViewHotel: React.FC = ({hotel}) => {
+  const {name, photoURL, address, availableRoom, description, status} = hotel;
 
-  const { name, photoURL, address, availableRoom, description } = hotel;
-  // console.log(hotel.status);
   return (
     <div>
       <h2 className="text-center">Hotel</h2>
-      <div>
-        <div className="flex my-4 flex-col gap-10 items-center bg-white border border-secondary-200 rounded-lg shadow md:flex-row hover:bg-secondary-100 dark:border-secondary-700 dark:bg-secondary-800 dark:hover:bg-secondary-700">
+      <div
+        className={`${status == STATUS.PENDING ? "bg-orange-200" : ""} ${
+          status == STATUS.REJECTED ? "bg-red-200" : ""
+        }`}>
+        <div className="flex my-4 flex-col gap-10 items-center border border-secondary-200 rounded-lg shadow md:flex-row dark:border-secondary-700 ">
           <img
             className=" rounded-t-lg md:h-auto md:w-96 md:rounded-none md:rounded-l-lg"
             src={photoURL}
@@ -51,16 +47,15 @@ const ViewHotel: React.FC = ({ hotel }) => {
                     : hotel.status === STATUS.REJECTED
                     ? "bg-red-500"
                     : ""
-                }`}
-              >
+                }`}>
                 Edit hotel
               </Button>
               <Button>Details</Button>
             </div>
           </div>
         </div>
+        {hotel?.feedback && <p>Feedback: {hotel?.feedback}</p>}
       </div>
-      {hotel?.feedback && <p>Feedback: {hotel?.feedback}</p>}
     </div>
   );
 };
