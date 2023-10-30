@@ -1,14 +1,13 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 interface IFormInputs {
-  hotelName: string;
+  name: string;
   photoURL: string;
+  address: {
+    thumbnailURL: string;
+    location: string;
+    map: { lat: string; lng: string };
+  };
   availableRoom: number;
-  managerName: string;
-  managerEmail: string;
-  locationName: string;
-  locationThumbnailURL: string;
-  Latitude: string;
-  Longitude: string;
   description: string;
 }
 const Hotel: React.FC = () => {
@@ -22,9 +21,9 @@ const Hotel: React.FC = () => {
       <h2 className="text-center">Hotel form:</h2>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="hotelName">Hotel Name</label>
+          <label htmlFor="name">Hotel Name</label>
           <Controller
-            name="hotelName"
+            name="name"
             control={control}
             rules={{ required: true }}
             render={({ field }) => <input {...field} />}
@@ -51,29 +50,9 @@ const Hotel: React.FC = () => {
           </div>
           <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
             <div>
-              <label htmlFor="managerName">Manager Name</label>
-              <Controller
-                name="managerName"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
-            <div>
-              <label htmlFor="managerEmail">Manager Email</label>
-              <Controller
-                name="managerEmail"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <input {...field} type="email" />}
-              />
-            </div>
-          </div>
-          <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
-            <div>
               <label htmlFor="locationName">Location Name</label>
               <Controller
-                name="locationName"
+                name="address.location"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -84,7 +63,7 @@ const Hotel: React.FC = () => {
                 Location ThumbnailURL
               </label>
               <Controller
-                name="locationThumbnailURL"
+                name="address.thumbnailURL"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -95,7 +74,7 @@ const Hotel: React.FC = () => {
             <div>
               <label htmlFor="Latitude">Latitude</label>
               <Controller
-                name="Latitude"
+                name="address.map.lat"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -104,7 +83,7 @@ const Hotel: React.FC = () => {
             <div>
               <label htmlFor="Longitude">Longitude</label>
               <Controller
-                name="Longitude"
+                name="address.map.lng"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
