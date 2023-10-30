@@ -29,7 +29,16 @@ const ViewHotel: React.FC = ({ hotel }) => {
               Available Room: {availableRoom}
             </p>
             <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-              Address: {address.location}
+              Location: {address.location}
+            </p>
+            <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+              Location URL: {address.thumbnailURL}
+            </p>
+            <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+              Latitude: {address.map.lat}
+            </p>
+            <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+              Longitude: {address.map.lng}
             </p>
             <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
               Description: {description}

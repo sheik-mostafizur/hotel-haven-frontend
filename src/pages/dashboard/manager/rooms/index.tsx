@@ -47,6 +47,125 @@ const Rooms: React.FC = () => {
 
   return (
     <Container>
+      <h2 className="text-center">Rooms form:</h2>
+      <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="title">Title</label>
+          <Controller
+            name="title"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => <input {...field} />}
+          />
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 py-2 gap-4">
+            <div>
+              <label htmlFor="thumbnails[0]">Thumbnails 1</label>
+              <Controller
+                name="thumbnails[0]"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="thumbnails[1]">Thumbnails 2</label>
+              <Controller
+                name="thumbnails[1]"
+                control={control}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="thumbnails[2]">Thumbnails 3</label>
+              <Controller
+                name="thumbnails[2]"
+                control={control}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-1 lg:grid-cols-4 py-2 gap-4">
+            <div>
+              <label htmlFor="facilities[0]">Facilities 1</label>
+              <Controller
+                name="facilities[0]"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="facilities[1]">Facilities 2</label>
+              <Controller
+                name="facilities[1]"
+                control={control}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="facilities[2]">Facilities 3</label>
+              <Controller
+                name="facilities[2]"
+                control={control}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="facilities[3]">Facilities 4</label>
+              <Controller
+                name="facilities[3]"
+                control={control}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+            <div>
+              <label htmlFor="adult">Adult</label>
+              <Controller
+                name="capacity.adult"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} type="number" />}
+              />
+            </div>
+            <div>
+              <label htmlFor="child">Children</label>
+              <Controller
+                name="capacity.children"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} type="number" />}
+              />
+            </div>
+          </div>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+            <div>
+              <label htmlFor="roomSize">Room Size</label>
+              <Controller
+                name="roomInfo.roomSize"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="regularPrice">Regular Price</label>
+              <Controller
+                name="roomInfo.regularPrice"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="discountPrice">Discount price</label>
+              <Controller
+                name="roomInfo.discountPrice"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
       {room.length == 0 ? (
         <div>
           <h2 className="text-center">Rooms form:</h2>
@@ -73,7 +192,6 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[1]"
                   control={control}
-                  rules={{required: true}}
                   render={({field}) => <input {...field} />}
                 />
               </div>
@@ -82,10 +200,10 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[2]"
                   control={control}
-                  rules={{required: true}}
                   render={({field}) => <input {...field} />}
                 />
               </div>
+
             </div>
             <div className="grid md:grid-cols-1 lg:grid-cols-4 py-2 gap-4">
               <div>
@@ -102,7 +220,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[1]"
                   control={control}
-                  rules={{required: true}}
+                  
                   render={({field}) => <input {...field} />}
                 />
               </div>
@@ -111,7 +229,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[2]"
                   control={control}
-                  rules={{required: true}}
+
                   render={({field}) => <input {...field} />}
                 />
               </div>
@@ -120,7 +238,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[3]"
                   control={control}
-                  rules={{required: true}}
+
                   render={({field}) => <input {...field} />}
                 />
               </div>
