@@ -3,18 +3,24 @@ interface IFormInputs {
   title: string;
   thumbnails: string;
   facilities: string;
-  startDate: string;
-  endDate: string;
+  availability: {
+    startDate: string;
+    endDate: string;
+    isBlocked: string;
+  };
+  capacity: {
+    children: number;
+    adult: number;
+  };
   bookedCount: number;
-  child: number;
-  adult: number;
-  bedType: string;
-  view: number;
-  roomSize: string;
-  regularPrice: number;
-  discountPrice: number;
-  additionalInfo: string;
-  availability: string;
+  roomInfo: {
+    bedType: string;
+    view: number;
+    roomSize: string;
+    regularPrice: number;
+    discountPrice: number;
+    additionalInfo: string;
+  };
 }
 const Rooms: React.FC = () => {
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
@@ -59,7 +65,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="startDate">Start Date</label>
               <Controller
-                name="startDate"
+                name="availability.startDate"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} type="date" />}
@@ -68,7 +74,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="endDate">End Date</label>
               <Controller
-                name="endDate"
+                name="availability.endDate"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} type="date" />}
@@ -86,9 +92,9 @@ const Rooms: React.FC = () => {
               />
             </div>
             <div>
-              <label htmlFor="availability">Availability</label>
+              <label htmlFor="isBlocked">Availability</label>
               <Controller
-                name="availability"
+                name="availability.isBlocked"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -99,7 +105,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="adult">Adult</label>
               <Controller
-                name="adult"
+                name="capacity.adult"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} type="number" />}
@@ -108,7 +114,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="child">Children</label>
               <Controller
-                name="child"
+                name="capacity.children"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} type="number" />}
@@ -119,7 +125,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="roomSize">Room Size</label>
               <Controller
-                name="roomSize"
+                name="roomInfo.roomSize"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -128,7 +134,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="regularPrice">Regular Price</label>
               <Controller
-                name="regularPrice"
+                name="roomInfo.regularPrice"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -137,7 +143,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="discountPrice">Discount price</label>
               <Controller
-                name="discountPrice"
+                name="roomInfo.discountPrice"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -146,7 +152,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="view">View</label>
               <Controller
-                name="view"
+                name="roomInfo.view"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} type="number" />}
@@ -155,7 +161,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="bedType">Bed type</label>
               <Controller
-                name="bedType"
+                name="roomInfo.bedType"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
@@ -164,7 +170,7 @@ const Rooms: React.FC = () => {
             <div>
               <label htmlFor="additionalInfo">additional info</label>
               <Controller
-                name="additionalInfo"
+                name="roomInfo.additionalInfo"
                 control={control}
                 rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
