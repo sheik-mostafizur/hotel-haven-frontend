@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axios } from "../../../../api";
 import { HashSpinner } from "../../../../components/spinner";
-import Hotel from "./hotel";
+import HotelCard from "./HotelCard";
 
 interface Hotels {
   name: string;
@@ -41,7 +41,11 @@ const Hotels: React.FC = () => {
       {isLoading ? (
         <HashSpinner />
       ) : (
-        hotels.map((hotel) => <Hotel key={hotel._id} {...hotel} />)
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+          {hotels.map((hotel) => (
+            <HotelCard key={hotel._id} {...hotel} />
+          ))}
+        </div>
       )}
     </>
   );

@@ -52,7 +52,6 @@ const Rooms: React.FC = () => {
               <Controller
                 name="thumbnails[1]"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
               />
             </div>
@@ -61,7 +60,6 @@ const Rooms: React.FC = () => {
               <Controller
                 name="thumbnails[2]"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
               />
             </div>
@@ -81,7 +79,6 @@ const Rooms: React.FC = () => {
               <Controller
                 name="facilities[1]"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
               />
             </div>
@@ -90,7 +87,6 @@ const Rooms: React.FC = () => {
               <Controller
                 name="facilities[2]"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
               />
             </div>
@@ -99,7 +95,6 @@ const Rooms: React.FC = () => {
               <Controller
                 name="facilities[3]"
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => <input {...field} />}
               />
             </div>
