@@ -4,7 +4,7 @@ import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
 import SignIn from "../pages/signin";
 import Playground from "../pages/playground";
-import Blogs from "../pages/blogs/blogs";
+import Blogs from "../pages/blogs";
 import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorElement />,
   },
   {
-    path: "/Blog",
+    path: "/blogs",
     element: <Blogs />,
   },
   {
