@@ -39,6 +39,9 @@ const Users = () => {
                     Name & Email
                   </th>
                   <th scope="col" className="px-6 py-3">
+                    ID
+                  </th>
+                  <th scope="col" className="px-6 py-3">
                     Phone
                   </th>
                   <th scope="col" className="px-6 py-3">
@@ -75,6 +78,7 @@ const Users = () => {
                         </div>
                       </div>
                     </th>
+                    <td className="px-6 py-4">{user._id}</td>
                     <td className="px-6 py-4">{user.phone}</td>
                     <td className="px-6 py-4">{user.gender}</td>
                     <td className="px-6 py-4">{user.role}</td>

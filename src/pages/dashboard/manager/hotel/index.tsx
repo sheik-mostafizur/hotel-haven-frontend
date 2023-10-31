@@ -7,6 +7,8 @@ import toastSuccess from "../../../../utils/toast-success";
 import {useEffect, useState} from "react";
 import {BeatSpinner, HashSpinner} from "../../../../components/spinner";
 import ViewHotel from "./ViewHotel";
+import {HotelType} from "../../../../types";
+
 interface IFormInputs {
   name: string;
   photoURL: string;
@@ -18,8 +20,30 @@ interface IFormInputs {
   availableRoom: number;
   description: string;
 }
+
+const hotelDefaultValue: HotelType.Hotel = {
+  address: {
+    map: {
+      lat: 0,
+      lng: 0,
+    },
+    thumbnailURL: "",
+    location: "",
+  },
+  _id: "",
+  managerId: "",
+  name: "",
+  photoURL: "",
+  description: "",
+  availableRoom: 0,
+  status: "",
+  createdAt: "",
+  updatedAt: "",
+  __v: 0,
+};
+
 const Hotel: React.FC = () => {
-  const [hotel, setHotel] = useState([]);
+  const [hotel, setHotel] = useState<HotelType.Hotel>(hotelDefaultValue);
   const [isLoading, setIsLoading] = useState(false);
 
   const {handleSubmit, control, reset} = useForm<IFormInputs>({});

@@ -1,38 +1,15 @@
 import {Link} from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
+import {HotelType} from "../../../../types";
 
-interface Location {
-  map: {
-    lat: number;
-    lng: number;
-  };
-  thumbnailURL: string;
-  location: string;
-}
-
-interface Hotel {
-  address: Location;
-  _id: string;
-  managerId: string;
-  name: string;
-  photoURL: string;
-  description: string;
-  availableRoom: number;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-  feedback?: string;
-}
 type ViewHotelProps = {
-  hotel: Hotel;
+  hotel: HotelType.Hotel;
 };
 
 const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
   const {name, photoURL, address, availableRoom, description, status, _id} =
     hotel;
-
   return (
     <div>
       <h2 className="text-center">Hotel</h2>

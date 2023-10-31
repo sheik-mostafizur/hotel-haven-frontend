@@ -10,7 +10,7 @@ import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {useAppDispatch} from "../../redux/hooks";
 import {auth} from "../../api";
-import {authType} from "../../types";
+import {AuthType} from "../../types";
 
 const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
@@ -22,10 +22,10 @@ const SignIn: React.FC = () => {
     handleSubmit,
     reset,
     // formState: {errors},
-  } = useForm<authType.Login>();
+  } = useForm<AuthType.Login>();
 
-  const onSubmit: SubmitHandler<authType.Login> = async (
-    data: authType.Login
+  const onSubmit: SubmitHandler<AuthType.Login> = async (
+    data: AuthType.Login
   ): Promise<void> => {
     setIsLoading(true);
     try {

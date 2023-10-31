@@ -4,36 +4,23 @@ import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
+import {HotelType} from "../../../../types";
 
-interface Location {
-  map: {
-    lat: number;
-    lng: number;
-  };
-  thumbnailURL: string;
-  location: string;
-}
-
-interface Hotel {
-  address: Location;
-  _id: string;
-  managerId: string;
-  name: string;
-  photoURL: string;
-  description: string;
-  availableRoom: number;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
 type HotelCardProps = {
-  hotel: Hotel;
+  hotel: HotelType.Hotel;
 };
 
 const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
-  const {name, photoURL, address, availableRoom, description, _id, status} =
-    hotel;
+  const {
+    name,
+    photoURL,
+    address,
+    availableRoom,
+    description,
+    _id,
+    status,
+    managerId,
+  } = hotel;
 
   const handleRoomApproved = async () => {
     try {
@@ -74,6 +61,9 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
             Name: {name}
           </h3>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+            Manger ID: {managerId}
+          </p>
+          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Location:{address.location}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
@@ -92,7 +82,8 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
           </Button>
           <Button
             onClick={handleRoomRejected}
-            isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}>
+            isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
+            className="mx-2">
             Rejected
           </Button>
           <Link to={_id}>
