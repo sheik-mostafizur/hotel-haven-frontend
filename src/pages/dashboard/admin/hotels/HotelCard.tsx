@@ -1,31 +1,23 @@
-import { Link } from "react-router-dom";
-import { axios } from "../../../../api";
+import {Link} from "react-router-dom";
+import {axios} from "../../../../api";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import { HotelType } from "../../../../types";
+import {HotelType} from "../../../../types";
 
 type HotelCardProps = {
   hotel: HotelType.Hotel;
 };
 
-const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
-  const {
-    name,
-    photoURL,
-    address,
-    availableRoom,
-    description,
-    _id,
-    status,
-    managerId,
-  } = hotel;
+const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
+  const {_id, name, addedRoom, availableRoom, email, status, photoURL} = hotel;
 
+  console.log(hotel);
   const handleRoomApproved = async () => {
     try {
       const {
-        data: { message },
+        data: {message},
       } = await axios.put(`/admin/hotel/status/${_id}`, {
         status: STATUS.APPROVED,
       });
@@ -40,7 +32,7 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
     if (feedback) {
       try {
         const {
-          data: { message },
+          data: {message},
         } = await axios.put(`/admin/hotel/status/${_id}`, {
           status: STATUS.REJECTED,
           feedback,
@@ -52,6 +44,7 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
     }
   };
 
+  // return <>lorem</>;
   return (
     <div>
       <div className="mx-auto h-full bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
@@ -61,31 +54,26 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
             Name: {name}
           </h3>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Manger ID: {managerId}
+            Manger email: {email}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Location:{address.location}
+            availableRoom:{availableRoom}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Available Room: {availableRoom}
+            Added Room: {addedRoom}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Status: {status}
           </p>
-          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Description: {description}
-          </p>
           <Button
             onClick={handleRoomApproved}
-            isDisabled={status == STATUS.APPROVED}
-          >
+            isDisabled={status == STATUS.APPROVED}>
             Approved
           </Button>
           <Button
             onClick={handleRoomRejected}
             isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
-            className="mx-2"
-          >
+            className="mx-2">
             Rejected
           </Button>
           <Link to={_id}>

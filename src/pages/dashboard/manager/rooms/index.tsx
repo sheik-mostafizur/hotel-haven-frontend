@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {axios} from "../../../../api";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
+import {HashSpinner} from "../../../../components/spinner";
 
 interface IFormInputs {
   title: string;
@@ -63,7 +64,9 @@ const Rooms: React.FC = () => {
 
   return (
     <Container>
-      {room.length == 0 ? (
+      {isLoading ? (
+        <HashSpinner />
+      ) : (
         <div>
           <h2 className="text-center">Rooms form:</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -216,9 +219,9 @@ const Rooms: React.FC = () => {
               Add a new room
             </Button>
           </form>
+          <br />
+          {JSON.stringify(room)}
         </div>
-      ) : (
-        <>{JSON.stringify(room)}</>
       )}
     </Container>
   );
