@@ -1,16 +1,16 @@
-import {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   deleteUserData,
   editUserData,
   fetchUserData,
 } from "../../../../redux/adminSlice/adminSlice";
-import {HashSpinner} from "../../../../components/spinner";
-import {AiFillDelete} from "react-icons/ai";
+import { HashSpinner } from "../../../../components/spinner";
+import { AiFillDelete } from "react-icons/ai";
 import Button from "../../../../components/ui/button";
-import {RiAdminFill} from "react-icons/ri";
-import {FaUserTie} from "react-icons/fa";
-import {Tooltip} from "react-tooltip";
+import { RiAdminFill } from "react-icons/ri";
+import { FaUserTie } from "react-icons/fa";
+import { Tooltip } from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
 
 const Users = () => {
@@ -18,15 +18,66 @@ const Users = () => {
   const adminState = useAppSelector((state) => state.admin);
   const dispatch = useAppDispatch();
 
+  const [selectedRole, setSelectedRole] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     dispatch(fetchUserData());
   }, []);
 
+  // Function to filter users by role
+  const filteredUsers = adminState.users.filter((user) => {
+    // Filter by role
+    if (selectedRole !== "All" && user.role !== selectedRole) {
+      return false;
+    }
+
+    // Filter by name
+    if (
+      searchQuery.length > 0 &&
+      !user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <>
       <div className="pb-4">
-        <h2 className="text-center">Our All users</h2>
+        <h2 className="text-center">Our All Users</h2>
       </div>
+
+      <div className="flex justify-between">
+        {/* Dropdown to filter users by role */}
+        <div className="mb-4">
+          <label htmlFor="roleFilter">Filter by Role:</label>
+          <select
+            id="roleFilter"
+            onChange={(e) => setSelectedRole(e.target.value)}
+            value={selectedRole}
+          >
+            <option value="All">All</option>
+            <option value="ADMIN">Admin</option>
+            <option value="MANAGER">Manager</option>
+            <option value="CUSTOMER">Customer</option>
+          </select>
+        </div>
+
+        {/* Search input for filtering by name */}
+        <div className="mb-4">
+          <label htmlFor="nameSearch">Search by Name:</label>
+          <input
+            type="text"
+            id="nameSearch"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Enter name"
+          />
+        </div>
+      </div>
+
       {adminState.isLoading ? (
         <HashSpinner />
       ) : (
@@ -57,13 +108,15 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {adminState.users.map((user) => (
+                {filteredUsers.map((user) => (
                   <tr
                     key={user._id}
-                    className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600">
+                    className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600"
+                  >
                     <th
                       scope="row"
-                      className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white">
+                      className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white"
+                    >
                       <img
                         className="w-10 h-10 rounded-full"
                         src={user.photoURL}
@@ -96,12 +149,13 @@ const Users = () => {
                             dispatch(
                               editUserData({
                                 _id: user._id,
-                                updatedData: {role: ROLE.ADMIN},
+                                updatedData: { role: ROLE.ADMIN },
                               })
                             ).then(() => {
                               dispatch(fetchUserData());
                             });
-                          }}>
+                          }}
+                        >
                           <Tooltip id={`admin-tooltip-${user._id}`} />
 
                           <RiAdminFill className="w-5 h-5" />
@@ -118,12 +172,13 @@ const Users = () => {
                             dispatch(
                               editUserData({
                                 _id: user._id,
-                                updatedData: {role: ROLE.MANAGER},
+                                updatedData: { role: ROLE.MANAGER },
                               })
                             ).then(() => {
                               dispatch(fetchUserData());
                             });
-                          }}>
+                          }}
+                        >
                           <Tooltip id={`manager-tooltip-${user._id}`} />
                           <FaUserTie className="w-5 h-5" />
                         </Button>
@@ -133,12 +188,13 @@ const Users = () => {
                             user.role == ROLE.MANAGER || user._id == admin._id
                           }
                           onClick={() => {
-                            dispatch(deleteUserData({_id: user._id})).then(
+                            dispatch(deleteUserData({ _id: user._id })).then(
                               () => {
                                 dispatch(fetchUserData());
                               }
                             );
-                          }}>
+                          }}
+                        >
                           <AiFillDelete className="w-5 h-5" />
                         </button>
                       </div>
