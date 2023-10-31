@@ -13,7 +13,6 @@ type HotelCardProps = {
 const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
   const {_id, name, addedRoom, availableRoom, email, status, photoURL} = hotel;
 
-  console.log(hotel);
   const handleRoomApproved = async () => {
     try {
       const {

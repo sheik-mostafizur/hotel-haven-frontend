@@ -1,4 +1,3 @@
-import HotelDetails from "../components/hotel-details";
 import Dashboard from "../pages/dashboard";
 import {HotelManager, RoomsManager} from "../pages/dashboard/manager";
 import ManagerProtector from "./ManagerProtector";
@@ -14,7 +13,7 @@ const routes = [
       },
       {
         path: "hotel/:id",
-        element: <HotelDetails />,
+        element: <h1>show manager hotel</h1>,
       },
       {
         path: "rooms",
