@@ -1,24 +1,27 @@
+import {Link} from "react-router-dom";
 import {axios} from "../../../../api";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
+import {HotelType} from "../../../../types";
 
-interface Hotel {
-  name: string;
-  photoURL: string;
-  address: {
-    thumbnailURL: string;
-    location: string;
-    map: {lat: string; lng: string};
-  };
-  availableRoom: number;
-  description: string;
-  _id: string;
-}
-const HotelCard: React.FC<Hotel> = ({hotel}) => {
-  const {name, photoURL, address, availableRoom, description, _id, status} =
-    hotel;
+type HotelCardProps = {
+  hotel: HotelType.Hotel;
+};
+
+const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
+  const {
+    name,
+    photoURL,
+    address,
+    availableRoom,
+    description,
+    _id,
+    status,
+    managerId,
+  } = hotel;
+
   const handleRoomApproved = async () => {
     try {
       const {
@@ -58,10 +61,16 @@ const HotelCard: React.FC<Hotel> = ({hotel}) => {
             Name: {name}
           </h3>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+            Manger ID: {managerId}
+          </p>
+          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Location:{address.location}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Available Room: {availableRoom}
+          </p>
+          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+            Status: {status}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Description: {description}
@@ -73,10 +82,13 @@ const HotelCard: React.FC<Hotel> = ({hotel}) => {
           </Button>
           <Button
             onClick={handleRoomRejected}
-            isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}>
+            isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
+            className="mx-2">
             Rejected
           </Button>
-          <Button isDisabled>Details</Button>
+          <Link to={_id}>
+            <Button>Details</Button>
+          </Link>
         </div>
       </div>
     </div>

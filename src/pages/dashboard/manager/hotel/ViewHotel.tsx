@@ -1,9 +1,15 @@
+import {Link} from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
+import {HotelType} from "../../../../types";
 
-const ViewHotel: React.FC = ({hotel}) => {
-  const {name, photoURL, address, availableRoom, description, status} = hotel;
+type ViewHotelProps = {
+  hotel: HotelType.Hotel;
+};
 
+const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
+  const {name, photoURL, address, availableRoom, description, status, _id} =
+    hotel;
   return (
     <div>
       <h2 className="text-center">Hotel</h2>
@@ -50,7 +56,9 @@ const ViewHotel: React.FC = ({hotel}) => {
                 }`}>
                 Edit hotel
               </Button>
-              <Button>Details</Button>
+              <Link to={_id}>
+                <Button>Details</Button>
+              </Link>
             </div>
           </div>
         </div>

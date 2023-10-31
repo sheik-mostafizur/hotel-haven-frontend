@@ -2,23 +2,11 @@ import {useEffect, useState} from "react";
 import {axios} from "../../../../api";
 import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
-
-interface Hotels {
-  name: string;
-  photoURL: string;
-  address: {
-    thumbnailURL: string;
-    location: string;
-    map: {lat: string; lng: string};
-  };
-  availableRoom: number;
-  description: string;
-  _id: string;
-}
+import {HotelType} from "../../../../types";
 
 const Hotels: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [hotels, setHotels] = useState<Hotels[]>([]);
+  const [hotels, setHotels] = useState<HotelType.Hotel[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,7 +29,7 @@ const Hotels: React.FC = () => {
       {isLoading ? (
         <HashSpinner />
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {hotels.map((hotel) => (
             <HotelCard key={hotel._id} hotel={hotel} />
           ))}
