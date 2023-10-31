@@ -1,6 +1,7 @@
 import AdminProtector from "./AdminProtector";
 import Dashboard from "../pages/dashboard";
 import {HotelsAdmin, RoomsAdmin, UsersAdmin} from "../pages/dashboard/admin";
+import HotelDetails from "../components/hotel-details";
 
 const routes = [
   {
@@ -14,6 +15,10 @@ const routes = [
       {
         path: "hotels",
         element: <HotelsAdmin />,
+      },
+      {
+        path: "hotels/:id",
+        element: <HotelDetails />,
       },
       {
         path: "rooms",

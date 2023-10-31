@@ -1,8 +1,37 @@
+import {Link} from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 
-const ViewHotel: React.FC = ({hotel}) => {
-  const {name, photoURL, address, availableRoom, description, status} = hotel;
+interface Location {
+  map: {
+    lat: number;
+    lng: number;
+  };
+  thumbnailURL: string;
+  location: string;
+}
+
+interface Hotel {
+  address: Location;
+  _id: string;
+  managerId: string;
+  name: string;
+  photoURL: string;
+  description: string;
+  availableRoom: number;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  feedback?: string;
+}
+type ViewHotelProps = {
+  hotel: Hotel;
+};
+
+const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
+  const {name, photoURL, address, availableRoom, description, status, _id} =
+    hotel;
 
   return (
     <div>
@@ -50,7 +79,9 @@ const ViewHotel: React.FC = ({hotel}) => {
                 }`}>
                 Edit hotel
               </Button>
-              <Button>Details</Button>
+              <Link to={_id}>
+                <Button>Details</Button>
+              </Link>
             </div>
           </div>
         </div>
