@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import fetchData from "../../hooks/fetch-data";
+import Container from "../../components/ui/container";
 
 interface GalleryImage {
   thumbnailURL: string;
@@ -18,7 +19,7 @@ const HotelGallery = () => {
   }, []);
 
   return (
-    <div className="lg:my-20 ">
+    <Container className="lg:my-20 ">
       <h2 className="text-center">Capturing Elegance</h2>
       <p className="px-4 lg:px-16 text-center py-2 font-normal">
         Experience our 'Capturing Elegance' section, where the essence of luxury
@@ -47,7 +48,7 @@ const HotelGallery = () => {
           ))}
         </Marquee>
       </div>
-    </div>
+    </Container>
   );
 };
 

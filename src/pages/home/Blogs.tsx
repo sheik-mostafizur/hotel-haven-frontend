@@ -41,7 +41,7 @@ const Blogs: React.FC<Blogs> = ({
                 <div className="badge badge-secondary">{publishDate}</div>
               </div>
             </div>
-            <Button>Read More</Button>
+            {/* <Button>Read More</Button> */}
           </div>
         </div>
       </div>
