@@ -28,7 +28,9 @@ const Hotel: React.FC<Hotel> = ({
           <p className="py-2 text-sm">{description}</p>
           <p className="py-2">Rating: {rating}</p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
-          <Button size="sm">See More</Button>
+          <div className="text-center">
+            <Button size="sm">View Details</Button>
+          </div>
         </div>
       </div>
     </div>

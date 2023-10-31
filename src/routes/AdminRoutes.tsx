@@ -1,7 +1,8 @@
 import AdminProtector from "./AdminProtector";
 import Dashboard from "../pages/dashboard";
-import {HotelsAdmin, RoomsAdmin, UsersAdmin} from "../pages/dashboard/admin";
+import { HotelsAdmin, RoomsAdmin, UsersAdmin } from "../pages/dashboard/admin";
 import HotelDetails from "../components/hotel-details";
+import { axios } from "../api";
 
 const routes = [
   {
@@ -19,6 +20,7 @@ const routes = [
       {
         path: "hotels/:id",
         element: <HotelDetails />,
+        loader: ({ params }) => axios.get(`/admin/hotel/${params.id}`),
       },
       {
         path: "rooms",

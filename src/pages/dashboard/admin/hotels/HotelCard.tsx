@@ -1,16 +1,16 @@
-import {Link} from "react-router-dom";
-import {axios} from "../../../../api";
+import { Link } from "react-router-dom";
+import { axios } from "../../../../api";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import {HotelType} from "../../../../types";
+import { HotelType } from "../../../../types";
 
 type HotelCardProps = {
   hotel: HotelType.Hotel;
 };
 
-const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
+const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
   const {
     name,
     photoURL,
@@ -25,7 +25,7 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
   const handleRoomApproved = async () => {
     try {
       const {
-        data: {message},
+        data: { message },
       } = await axios.put(`/admin/hotel/status/${_id}`, {
         status: STATUS.APPROVED,
       });
@@ -40,7 +40,7 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
     if (feedback) {
       try {
         const {
-          data: {message},
+          data: { message },
         } = await axios.put(`/admin/hotel/status/${_id}`, {
           status: STATUS.REJECTED,
           feedback,
@@ -77,13 +77,15 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
           </p>
           <Button
             onClick={handleRoomApproved}
-            isDisabled={status == STATUS.APPROVED}>
+            isDisabled={status == STATUS.APPROVED}
+          >
             Approved
           </Button>
           <Button
             onClick={handleRoomRejected}
             isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
-            className="mx-2">
+            className="mx-2"
+          >
             Rejected
           </Button>
           <Link to={_id}>
