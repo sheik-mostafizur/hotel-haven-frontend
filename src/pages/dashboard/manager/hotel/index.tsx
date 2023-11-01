@@ -78,7 +78,7 @@ const Hotel: React.FC = () => {
   return (
     <Container>
       <div>
-        {Object.keys(hotel).length === 0 ? (
+        {hotel.managerId == "" ? (
           <>
             <h2 className="text-center">Hotel form:</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -171,7 +171,13 @@ const Hotel: React.FC = () => {
             </form>
           </>
         ) : (
-          <>{isLoading ? <HashSpinner /> : <ViewHotel hotel={hotel} />}</>
+          <>
+            {isLoading ? (
+              <HashSpinner />
+            ) : (
+              <>{hotel.managerId && <ViewHotel hotel={hotel} />}</>
+            )}
+          </>
         )}
       </div>
     </Container>
