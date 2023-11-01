@@ -127,8 +127,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/package"} className={navItemStyle}>
-                Package
+              <Link to={"/hotel"} className={navItemStyle}>
+                Hotel
               </Link>
             </li>
             <li>

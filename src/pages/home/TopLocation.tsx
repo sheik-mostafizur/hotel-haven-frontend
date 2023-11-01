@@ -1,5 +1,5 @@
 import Container from "../../components/ui/container";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Location from "./Location";
 import fetchData from "../../hooks/fetch-data";
 import Button from "../../components/ui/button";
@@ -34,7 +34,7 @@ const TopLocation: React.FC = () => {
         ))}
       </div>
       <div className="text-center my-4">
-        <Button className="">See all</Button>
+        <Button size="xl">See all</Button>
       </div>
     </Container>
   );

@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 
 interface Hotel {
@@ -15,6 +16,7 @@ const Hotel: React.FC<Hotel> = ({
   thumbnailURL,
   rating,
   description,
+  _id,
 }) => {
   return (
     <div className="content-to-animate">
@@ -28,9 +30,9 @@ const Hotel: React.FC<Hotel> = ({
           <p className="py-2 text-sm">{description}</p>
           <p className="py-2">Rating: {rating}</p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
-          <div className="text-center">
+          <Link to={`/hotel/${_id}`}>
             <Button size="sm">View Details</Button>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
