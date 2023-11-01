@@ -11,7 +11,6 @@ import PrivateRoutes from "./PrivateRoutes";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,7 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/contact-us",
     element: <ContactUs />,
-  }
+  },
   {
     path: "/hotel",
     element: <Hotel />,
