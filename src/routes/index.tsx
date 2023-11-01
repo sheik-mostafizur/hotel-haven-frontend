@@ -8,6 +8,8 @@ import Blogs from "../pages/blogs";
 import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import AboutUs from "../pages/AboutUs";
+// import AboutUs from "../pages/AboutUs"
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/blogs",
     element: <Blogs />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs/> ,
   },
   {
     path: "/signup",

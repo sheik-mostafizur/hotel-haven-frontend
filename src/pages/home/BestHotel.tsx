@@ -25,7 +25,7 @@ const BestHotel: React.FC = () => {
         <h2 className="text-center">Discover Exceptional Comfort and Luxury</h2>
         <p className="px-4 lg:px-16 text-center py-4 font-normal">
           Indulge in the epitome of opulence at our carefully curated selection
-          of top-rated hotels, where unparalleled comfort meets world-class
+          of top-rated hotels, where unparalleled comfort meets world-className
           hospitality.
         </p>
       </div>
