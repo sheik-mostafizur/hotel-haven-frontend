@@ -3,7 +3,7 @@ import Hotel from "./Hotel";
 import useAxiosGet from "../../hooks/useAxiosGet";
 import {HashSpinner} from "../../components/spinner";
 
-type hotelType = {
+interface HotelType {
   _id: string;
   name: string;
   location: string;
@@ -14,7 +14,7 @@ type hotelType = {
 
 const BestHotel: React.FC = () => {
   const {data, isLoading} = useAxiosGet("/public/hotel", {limit: 5});
-  const initialHotel: hotelType[] = [];
+  const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;
 
   return (

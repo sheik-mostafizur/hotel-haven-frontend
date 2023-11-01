@@ -1,7 +1,7 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const HotelDetails = () => {
-  const {_id} = useParams();
+  const { _id } = useParams();
   console.log(_id);
   return (
     <div>

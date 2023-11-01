@@ -1,7 +1,8 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
+import LazyLoad from "react-lazy-load";
 
-type hotelType = {
+interface HotelType {
   _id: string;
   name: string;
   location: string;
@@ -10,7 +11,7 @@ type hotelType = {
   rating: number;
 };
 
-const Hotel: React.FC<hotelType> = ({
+const Hotel: React.FC<HotelType> = ({
   location,
   name,
   photoURL,
@@ -20,15 +21,10 @@ const Hotel: React.FC<hotelType> = ({
 }) => {
   return (
     <div className="content-to-animate">
-      <div className=" bg-white border border-secondary-50 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-          <img
-            className="rounded-t-lg w-full h-80"
-            src={photoURL}
-            alt=""
-            loading="lazy"
-          />
-        </a>
+      <div className=" bg-white h-full border border-secondary-50 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <LazyLoad>
+          <img className="rounded-t-lg w-full h-80" src={photoURL} alt="" />
+        </LazyLoad>
         <div className="p-5">
           <h3 className="py-2">{name}</h3>
           <p className="py-2">Location: {location}</p>
