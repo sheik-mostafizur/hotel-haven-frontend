@@ -9,7 +9,9 @@ import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import AboutUs from "../pages/AboutUs";
-// import AboutUs from "../pages/AboutUs"
+import ContactUs from "../pages/contact-us";
+import Hotel from "../pages/hotel";
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
+  },
+  {
+    path: "/hotel",
+    element: <Hotel />,
   },
   {
     path: "/playground",

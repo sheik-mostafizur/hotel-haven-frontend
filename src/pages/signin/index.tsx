@@ -11,6 +11,7 @@ import {useState} from "react";
 import {useAppDispatch} from "../../redux/hooks";
 import {auth} from "../../api";
 import {AuthType} from "../../types";
+import {BeatSpinner} from "../../components/spinner";
 
 const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
@@ -91,7 +92,7 @@ const SignIn: React.FC = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              {isLoading ? "Loading..." : "Sign In"}
+              {isLoading ? <BeatSpinner /> : "Sign In"}
             </Button>
             <p>
               Create an account?{" "}

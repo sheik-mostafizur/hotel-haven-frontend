@@ -127,8 +127,8 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/package"} className={navItemStyle}>
-                Package
+              <Link to={"/hotel"} className={navItemStyle}>
+                Hotel
               </Link>
             </li>
             <li>
@@ -139,6 +139,11 @@ const Navbar = () => {
             <li>
               <Link to={"/about"} className={navItemStyle}>
                 About Us
+              </Link>
+            </li>
+            <li>
+              <Link to={"/contact-us"} className={navItemStyle}>
+                Contact Us
               </Link>
             </li>
           </ul>
