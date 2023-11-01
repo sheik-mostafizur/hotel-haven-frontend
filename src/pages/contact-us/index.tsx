@@ -5,6 +5,7 @@ import emailjs from "emailjs-com";
 import {motion} from "framer-motion";
 import Main from "../../layout/main";
 import Button from "../../components/ui/button";
+import toastSuccess from "../../utils/toast-success";
 
 interface FormData {
   name: string;
@@ -18,18 +19,21 @@ const ContactUs: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      await emailjs.send(
+      const response = await emailjs.send(
         "service_nvwfvek",
         "template_qfb2f2p",
         data,
         "OqespYIns1SjwRkCQ"
       );
-      console.log("Email sent successfully");
+
+      if (response.status === 200) {
+        toastSuccess("Email sent successfully");
+      }
       if (formRef.current) {
         formRef.current.reset();
       }
     } catch (error) {
-      console.error("Error sending email:", error);
+      console.error(error);
     }
   };
 
