@@ -46,14 +46,14 @@ const CustomerReviews: React.FC = () => {
                 <div className="ml-3">
                   <h3 className="text-xl font-semibold">{review.name}</h3>
                   <div className="flex items-center">
-                    <p className="font-semibold font-mono text-lg">
+                    <div className="font-semibold font-mono text-lg">
                       {/* Rating:{" "} */}
                       <Rating
                         value={review.rating}
                         readOnly={true}
                         style={{maxWidth: "100px"}}
                       />
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
