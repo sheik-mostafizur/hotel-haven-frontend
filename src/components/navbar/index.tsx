@@ -141,6 +141,11 @@ const Navbar = () => {
                 About Us
               </Link>
             </li>
+            <li>
+              <Link to={"/contact-us"} className={navItemStyle}>
+                Contact Us
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
