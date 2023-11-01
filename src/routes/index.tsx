@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
@@ -11,7 +11,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
-
+import HotelDetails from "../pages/hotel/hotel-details";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <AboutUs/> ,
+    element: <AboutUs />,
   },
   {
     path: "/signup",
@@ -42,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/hotel",
     element: <Hotel />,
+  },
+  {
+    path: "/hotel-details/:_id",
+    element: <HotelDetails></HotelDetails>,
   },
   {
     path: "/playground",

@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 
 interface HotelsCard {
-  _id: number;
+  _id: string;
   name: string;
   location: string;
   description: string;
@@ -15,6 +16,7 @@ const AllHotelCard: React.FC<HotelsCard> = ({
   photoURL,
   rating,
   description,
+  _id,
 }) => {
   return (
     <div>
@@ -35,7 +37,9 @@ const AllHotelCard: React.FC<HotelsCard> = ({
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Description: {description}
           </p>
-          <Button>View Details</Button>
+          <Link to={_id}>
+            <Button>View Details</Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@ import Container from "../../components/ui/container";
 import AllHotelCard from "./AllHotelCard";
 
 interface Hotels {
-  _id: number;
+  _id: string;
   name: string;
   location: string;
   description: string;
