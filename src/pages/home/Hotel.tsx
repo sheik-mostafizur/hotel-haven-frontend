@@ -1,19 +1,19 @@
 import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 
-interface Hotel {
-  _id: number;
-  title: string;
+type hotelType = {
+  _id: string;
+  name: string;
   location: string;
+  photoURL: string;
   description: string;
-  thumbnailURL: string;
   rating: number;
-}
+};
 
-const Hotel: React.FC<Hotel> = ({
+const Hotel: React.FC<hotelType> = ({
   location,
-  title,
-  thumbnailURL,
+  name,
+  photoURL,
   rating,
   description,
   _id,
@@ -22,10 +22,15 @@ const Hotel: React.FC<Hotel> = ({
     <div className="content-to-animate">
       <div className=" bg-white border border-secondary-50 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
-          <img className="rounded-t-lg w-full h-80" src={thumbnailURL} alt="" />
+          <img
+            className="rounded-t-lg w-full h-80"
+            src={photoURL}
+            alt=""
+            loading="lazy"
+          />
         </a>
         <div className="p-5">
-          <h3 className="py-2">{title}</h3>
+          <h3 className="py-2">{name}</h3>
           <p className="py-2">Location: {location}</p>
           <p className="py-2 text-sm">{description}</p>
           <p className="py-2">Rating: {rating}</p>

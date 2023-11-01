@@ -1,24 +1,22 @@
-import {useEffect, useState} from "react";
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
-import fetchData from "../../hooks/fetch-data";
+import useAxiosGet from "../../hooks/useAxiosGet";
+import {HashSpinner} from "../../components/spinner";
 
-interface BestHotelTypes {
-  _id: number;
-  title: string;
+type hotelType = {
+  _id: string;
+  name: string;
   location: string;
+  photoURL: string;
   description: string;
-  thumbnailURL: string;
   rating: number;
-}
+};
 
 const BestHotel: React.FC = () => {
-  const [rooms, setRoom] = useState<BestHotelTypes[]>([]);
-  useEffect(() => {
-    fetchData("/db/best-hotel.json")
-      .then((data) => setRoom(data))
-      .catch((err) => console.log(err));
-  }, []);
+  const {data, isLoading} = useAxiosGet("/public/hotel", {limit: 5});
+  const initialHotel: hotelType[] = [];
+  const hotels = data || initialHotel;
+
   return (
     <Container className="lg:py-20">
       <div className="mx-auto mb-4">
@@ -30,9 +28,11 @@ const BestHotel: React.FC = () => {
         </p>
       </div>
       <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-        {rooms.map((hotel) => (
-          <Hotel key={hotel._id} {...hotel} />
-        ))}
+        {isLoading ? (
+          <HashSpinner />
+        ) : (
+          hotels && hotels.map((hotel) => <Hotel key={hotel._id} {...hotel} />)
+        )}
       </div>
     </Container>
   );
