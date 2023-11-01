@@ -1,24 +1,31 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
-import fetchData from "../../hooks/fetch-data";
+import { axios } from "../../api";
 
 interface BestHotelTypes {
   _id: number;
-  title: string;
+  name: string;
   location: string;
   description: string;
-  thumbnailURL: string;
+  photoURL: string;
   rating: number;
 }
 
 const BestHotel: React.FC = () => {
   const [rooms, setRoom] = useState<BestHotelTypes[]>([]);
+
   useEffect(() => {
-    fetchData("/db/best-hotel.json")
-      .then((data) => setRoom(data))
-      .catch((err) => console.log(err));
+    axios
+      .get("/public/hotel")
+      .then(({ data }) => {
+        setRoom(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+  console.log(rooms);
   return (
     <Container className="lg:py-20">
       <div className="mx-auto mb-4">
