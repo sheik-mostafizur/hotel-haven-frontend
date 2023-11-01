@@ -8,8 +8,10 @@ import Blogs from "../pages/blogs";
 import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
+
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/blogs",
     element: <Blogs />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs/> ,
   },
   {
     path: "/signup",
