@@ -8,6 +8,7 @@ import Blogs from "../pages/blogs";
 import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import ContactUs from "../pages/contact-us";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <SignIn />,
+  },
+  {
+    path: "/contact-us",
+    element: <ContactUs />,
   },
   {
     path: "/playground",
