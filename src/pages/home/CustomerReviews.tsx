@@ -1,9 +1,8 @@
 import Container from "../../components/ui/container";
-// import { FaStar } from "react-icons/fa";
-import {useEffect, useState} from "react";
 import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import fetchData from "../../hooks/fetch-data";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 interface CustomerReviews {
   _id: number;
@@ -17,11 +16,15 @@ const CustomerReviews: React.FC = () => {
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
 
   useEffect(() => {
-    fetchData("/db/customer-reviews.json")
-      .then((data) => setReviews(data))
-      .catch((err) => console.log(err));
+    axios
+      .get("/db/customer-reviews.json")
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
   return (
     <Container className="lg:py-16 overflow-hidden">
       <div className=" text-center font-extrabold text-primary-500 text-3xl mt-10 mb-10">
@@ -43,14 +46,14 @@ const CustomerReviews: React.FC = () => {
                 <div className="ml-3">
                   <h3 className="text-xl font-semibold">{review.name}</h3>
                   <div className="flex items-center">
-                    <div className="font-semibold font-mono text-lg">
+                    <p className="font-semibold font-mono text-lg">
                       {/* Rating:{" "} */}
                       <Rating
                         value={review.rating}
                         readOnly={true}
                         style={{maxWidth: "100px"}}
                       />
-                    </div>
+                    </p>
                   </div>
                 </div>
               </div>
