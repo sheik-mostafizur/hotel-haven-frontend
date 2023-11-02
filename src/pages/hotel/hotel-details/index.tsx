@@ -1,12 +1,19 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
+import useAxiosGet from "../../../hooks/useAxiosGet";
+import Main from "../../../layout/main";
+import {HashSpinner} from "../../../components/spinner";
+import Container from "../../../components/ui/container";
 
 const HotelDetails = () => {
-  const { _id } = useParams();
-  console.log(_id);
+  const {_id} = useParams();
+  const {isLoading, data} = useAxiosGet(`/hotel/${_id}`);
+
   return (
-    <div>
-      <h1>HotelDetails</h1>
-    </div>
+    <Main>
+      <Container>
+        {isLoading ? <HashSpinner /> : JSON.stringify(data)}
+      </Container>
+    </Main>
   );
 };
 
