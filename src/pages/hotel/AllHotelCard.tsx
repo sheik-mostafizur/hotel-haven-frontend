@@ -37,7 +37,7 @@ const AllHotelCard: React.FC<HotelsCard> = ({
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Description: {description}
           </p>
-          <Link to={_id}>
+          <Link to={`/hotel/${_id}`}>
             <Button>View Details</Button>
           </Link>
         </div>
