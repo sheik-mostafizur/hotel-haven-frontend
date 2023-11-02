@@ -1,21 +1,13 @@
+import FindRoomForm from "../../components/find-room-form";
 import BeatSpinner from "../../components/spinner/BeatSpinner";
 import Button from "../../components/ui/button";
+import Container from "../../components/ui/container";
 
 const Playground: React.FC = () => {
   return (
-    <>
-      <h1>Playground</h1>
-      <BeatSpinner />
-      <Button>
-        Button
-        <BeatSpinner />
-      </Button>
-      <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non dolorem
-        debitis perferendis, cum iure aut, voluptatem, voluptatum expedita ab
-        vitae dolore? Natus quasi rem architecto nobis facere quod eveniet modi.
-      </p>
-    </>
+    <Container>
+      <FindRoomForm />
+    </Container>
   );
 };
 
