@@ -6,8 +6,9 @@ import Container from "../../../components/ui/container";
 import { useEffect, useState } from "react";
 import { axios } from "../../../api";
 import Button from "../../../components/ui/button";
+import GoogleMapReact from "google-map-react";
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 interface HotelDetails {
-  // hotel: object;/
   hotel: {
     photoURL: string;
     name: string;
@@ -17,7 +18,13 @@ interface HotelDetails {
       location: string;
     };
   };
-  rooms: object;
+  rooms: {
+    _id: string;
+    thumbnails: string[];
+    title: string;
+    facilities: string[];
+    roomInfo: { [key: string]: string };
+  }[];
 }
 
 const HotelDetails: React.FC = () => {
@@ -38,11 +45,16 @@ const HotelDetails: React.FC = () => {
       });
   }, []);
 
-  // const hotelDetails = viewHotels.hotel;
-  // console.log(viewHotels);
   const { hotel } = viewHotels;
-  // console.log(viewHotels.rooms);
 
+  const defaultProps = {
+    center: {
+      lat: hotel?.address?.map?.lat,
+      lng: hotel?.address?.map?.lng,
+    },
+    zoom: 11,
+  };
+  console.log(defaultProps.center);
   return (
     <Main>
       <Container>
@@ -51,8 +63,8 @@ const HotelDetails: React.FC = () => {
         ) : (
           <>
             {viewHotels ? (
-              <Container>
-                <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <>
+                <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
                   <img
                     className="rounded-t-lg h-96 w-full"
                     src={hotel?.photoURL}
@@ -60,52 +72,52 @@ const HotelDetails: React.FC = () => {
                   />
 
                   <div className="p-5">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {hotel?.name}
-                    </h5>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      Location: {hotel?.address?.location}
-                    </p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      Rating: {hotel?.rating}
-                    </p>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      {hotel?.description}
-                    </p>
+                    <div>
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-secondary-900 dark:text-white">
+                        {hotel?.name}
+                      </h5>
+                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+                        Location: {hotel?.address?.location}
+                      </p>
+                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+                        Rating: {hotel?.rating}
+                      </p>
+                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
+                        {hotel?.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="text-center my-4">
                   <h3>Choose your room</h3>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3">
+                <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3 2xl:grid-cols-4">
                   {viewHotels.rooms && viewHotels.rooms.length > 0 ? (
                     viewHotels.rooms.map((room) => (
                       <div key={room._id}>
-                        <div className="max-w-sm h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div className=" bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
                           <img
                             className="rounded-t-lg h-80"
                             src={room.thumbnails[0]}
                             alt={room.title}
                           />
 
-                          <div className="p-5">
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                              Type: {room.title}
-                            </h5>
+                          <div className="p-4">
+                            <h5 className="my-2 ">{room.title}</h5>
 
-                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                              Facilities:
+                            <p className="py-1 ">
+                              <strong>Facilities:</strong>
                               <>
                                 {room.facilities.map((facility, index) => (
                                   <li key={index}>{facility}</li>
                                 ))}
                               </>
                             </p>
-                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                              Room Info:
+                            <p className="mb-3">
                               {Object.keys(room.roomInfo).map((key) => (
-                                <p key={key}>
-                                  <strong>{key}:</strong> {room.roomInfo[key]}
+                                <p key={key} className="py-1">
+                                  <strong>{key}:</strong>
+                                  <> {room.roomInfo[key]}</>
                                 </p>
                               ))}
                             </p>
@@ -118,12 +130,25 @@ const HotelDetails: React.FC = () => {
                     <p>No rooms available</p>
                   )}
                 </div>
-              </Container>
+              </>
             ) : (
               <></>
             )}
           </>
         )}
+        <div className="my-8" style={{ height: "100vh", width: "100%" }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: "" }}
+            defaultCenter={defaultProps.center}
+            defaultZoom={defaultProps.zoom}
+          >
+            <AnyReactComponent
+              lat={hotel?.address?.map?.lat}
+              lng={hotel?.address?.map?.lng}
+              text="My Marker"
+            />
+          </GoogleMapReact>
+        </div>
       </Container>
     </Main>
   );
