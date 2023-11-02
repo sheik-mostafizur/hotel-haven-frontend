@@ -7,8 +7,8 @@ const Banner = () => {
       <Container>
         <div className="py-8 md:py-32 lg:py-56 grid grid-cols-1 md:grid-cols-2">
           {/* Left Column: Text Content */}
-          <div>
-            <h1 className="text-white text-2xl md:text-4xl">
+          <div className="flex flex-col gap-4 justify-center mb-4">
+            <h1 className="text-white text-2xl md:text-5xl ">
               Discover <br /> Tranquility at
               <span className="text-primary-500"> Hotel Haven</span>
             </h1>
