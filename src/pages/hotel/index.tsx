@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axios } from "../../api";
 import Container from "../../components/ui/container";
 import AllHotelCard from "./AllHotelCard";
+import Main from "../../layout/main";
 
 interface Hotels {
   _id: string;
@@ -26,14 +27,16 @@ const Hotel: React.FC = () => {
   }, []);
   console.log(hotels);
   return (
-    <Container>
-      <h1 className="text-center"> All Hotel</h1>
-      <div className="grid grid-cols-1 my-4 justify-center items-center gap-4 mx-auto">
-        {hotels.map((hotel) => (
-          <AllHotelCard key={hotel._id} {...hotel} />
-        ))}
-      </div>
-    </Container>
+    <Main>
+      <Container>
+        <h1 className="text-center"> All Hotel</h1>
+        <div className="grid grid-cols-1 my-4 justify-center items-center gap-4 mx-auto">
+          {hotels.map((hotel) => (
+            <AllHotelCard key={hotel._id} {...hotel} />
+          ))}
+        </div>
+      </Container>
+    </Main>
   );
 };
 
