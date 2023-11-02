@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 import Container from "../../components/ui/container";
-import useAxiosGet from "../../hooks/useAxiosGet";
 import {HashSpinner} from "../../components/spinner";
+import {useGetHotelGalleryQuery} from "../../api/rtk-query/hotel-gallery";
 
 interface GalleryImage {
   imageURL: string;
@@ -10,7 +10,7 @@ interface GalleryImage {
 }
 
 const HotelGallery = () => {
-  const {data, isLoading} = useAxiosGet("/public/gallery");
+  const {data, isLoading} = useGetHotelGalleryQuery(undefined);
   const initialGallery: GalleryImage[] = [];
   const images = data || initialGallery;
 

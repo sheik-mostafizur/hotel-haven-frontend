@@ -1,7 +1,8 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
-import useAxiosGet from "../../hooks/useAxiosGet";
+
 import {HashSpinner} from "../../components/spinner";
+import {useGetBestHotelsQuery} from "../../api/rtk-query/best-hotels";
 
 interface HotelType {
   _id: string;
@@ -10,10 +11,10 @@ interface HotelType {
   photoURL: string;
   description: string;
   rating: number;
-};
+}
 
 const BestHotel: React.FC = () => {
-  const {data, isLoading} = useAxiosGet("/public/hotel", {limit: 5});
+  const {data, isLoading} = useGetBestHotelsQuery(undefined);
   const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;
 
