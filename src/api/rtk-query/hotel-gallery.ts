@@ -1,8 +1,8 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from "..";
+import {createApi} from "@reduxjs/toolkit/query/react";
+import BASE_QUERY from "./BASE_QUERY";
 
 const api = createApi({
-  baseQuery: fetchBaseQuery({baseUrl: axios.defaults.baseURL}),
+  baseQuery: BASE_QUERY,
   reducerPath: "hotelGallery",
   tagTypes: ["hotelGallery"],
   endpoints: (builder) => ({

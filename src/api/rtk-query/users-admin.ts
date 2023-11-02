@@ -3,15 +3,16 @@ import BASE_QUERY from "./BASE_QUERY";
 
 const api = createApi({
   baseQuery: BASE_QUERY,
-  reducerPath: "bestHotels",
-  tagTypes: ["bestHotels"],
+  reducerPath: "usersAdmin",
+  tagTypes: ["usersAdmin"],
   endpoints: (builder) => ({
-    getBestHotels: builder.query({
-      query: () => "/public/hotel",
-      providesTags: ["bestHotels"],
+    getUsersAdmin: builder.query({
+      query: () => "/admin/user",
+      providesTags: ["usersAdmin"],
     }),
   }),
 });
 
-export const {useGetBestHotelsQuery} = api;
+export const {useGetUsersAdminQuery} = api;
+
 export default api;

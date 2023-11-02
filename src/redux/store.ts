@@ -4,7 +4,7 @@ import adminSlice from "./adminSlice/adminSlice";
 import themeSlice from "./themeSlice";
 
 // import rtkQuery api
-import {bestHotelsApi, hotelGalleryApi} from "../api/rtk-query";
+import {bestHotelsApi, hotelGalleryApi, usersAdminApi} from "../api/rtk-query";
 
 const store = configureStore({
   reducer: {
@@ -14,11 +14,13 @@ const store = configureStore({
     // api path initialize
     [bestHotelsApi.reducerPath]: bestHotelsApi.reducer,
     [hotelGalleryApi.reducerPath]: hotelGalleryApi.reducer,
+    [usersAdminApi.reducerPath]: usersAdminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       bestHotelsApi.middleware,
-      hotelGalleryApi.middleware
+      hotelGalleryApi.middleware,
+      usersAdminApi.middleware
     ),
 });
 
