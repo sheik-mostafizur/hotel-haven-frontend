@@ -19,6 +19,22 @@ const FindRoomForm = () => {
 
   const onSubmit = (data) => console.log(data);
 
+  // TODO: use min date and item for checkin
+  const minDateTime = () => {
+    const currentDateTime = new Date();
+    const currentYear = currentDateTime.getFullYear();
+    const currentMonth = (currentDateTime.getMonth() + 1)
+      .toString()
+      .padStart(2, "0"); // Month is 0-based, so add 1
+    const currentDate = currentDateTime.getDate().toString().padStart(2, "0");
+    const currentHours = currentDateTime.getHours().toString().padStart(2, "0");
+    const currentMinutes = currentDateTime
+      .getMinutes()
+      .toString()
+      .padStart(2, "0");
+
+    return `${currentYear}-${currentMonth}-${currentDate}T${currentHours}:${currentMinutes}`;
+  };
   return (
     <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl">
       <h2>Find Your Room</h2>
@@ -65,7 +81,12 @@ const FindRoomForm = () => {
               control={control}
               rules={{required: true}}
               render={({field}) => (
-                <input id="checkIn" {...field} type="date" />
+                <input
+                  id="checkIn"
+                  {...field}
+                  type="datetime-local"
+                  min={new Date().toISOString().slice(0, 16)}
+                />
               )}
               name="checkIn"
             />
@@ -76,7 +97,7 @@ const FindRoomForm = () => {
               control={control}
               rules={{required: true}}
               render={({field}) => (
-                <input id="checkOut" {...field} type="date" />
+                <input id="checkOut" {...field} type="datetime-local" />
               )}
               name="checkOut"
             />
