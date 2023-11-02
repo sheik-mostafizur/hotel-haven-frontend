@@ -25,7 +25,6 @@ const Hotel: React.FC = () => {
         console.log(err);
       });
   }, []);
-  console.log(hotels);
   return (
     <Main>
       <Container>
