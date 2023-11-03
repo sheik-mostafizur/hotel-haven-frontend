@@ -24,11 +24,24 @@ const adminApi = createApi({
         url: `/admin/user/${_id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["usersAdmin"],
     }),
     // Hotels Routes
     getHotelsAdmin: builder.query({
       query: () => "/admin/hotel",
       providesTags: ["hotelsAdmin"],
+    }),
+    getHotelsByIdAdmin: builder.query({
+      query: (_id) => `/admin/hotel/${_id}`,
+      providesTags: ["hotelsAdmin"],
+    }),
+    editHotelStatusAdmin: builder.mutation({
+      query: ({_id, data}) => ({
+        url: `/admin/hotel/status/${_id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["hotelsAdmin"],
     }),
   }),
 });
@@ -38,5 +51,7 @@ export const {
   useEditUserAdminMutation,
   useDeleteUserAdminMutation,
   useGetHotelsAdminQuery,
+  useGetHotelsByIdAdminQuery,
+  useEditHotelStatusAdminMutation,
 } = adminApi;
 export default adminApi;
