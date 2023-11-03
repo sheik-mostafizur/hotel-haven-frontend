@@ -1,26 +1,9 @@
-import {useEffect, useState} from "react";
-import {axios} from "../../../../api";
 import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
-import {HotelType} from "../../../../types";
+import {useGetHotelsAdminQuery} from "../../../../api/admin-api";
 
 const Hotels: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [hotels, setHotels] = useState<HotelType.Hotel[]>([]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get("/admin/hotel")
-      .then(({data}) => {
-        setHotels(data);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        setIsLoading(false);
-      });
-  }, []);
-  // console.log(hotels);
+  const {data: hotels, isLoading} = useGetHotelsAdminQuery(undefined);
   return (
     <>
       <div className="pb-4">
