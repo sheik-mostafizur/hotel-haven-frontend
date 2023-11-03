@@ -1,5 +1,4 @@
 import {FcLikePlaceholder} from "react-icons/fc";
-import Button from "../../components/ui/button";
 
 interface Blogs {
   thumbnail: string;
@@ -47,7 +46,7 @@ const Blogs: React.FC<Blogs> = ({
             </div>
             <div className="flex items-center gap-2">
               <FcLikePlaceholder className="text-2xl" />
-              <b className="text-xl text-secondary-500">0</b>
+              <p className="text-xl text-secondary-500">0</p>
             </div>
           </div>
         </div>

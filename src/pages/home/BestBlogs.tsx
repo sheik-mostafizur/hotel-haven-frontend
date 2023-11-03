@@ -2,8 +2,6 @@ import Container from "../../components/ui/container";
 import {useEffect, useState} from "react";
 import Blogs from "./Blogs";
 import fetchData from "../../hooks/fetch-data";
-import Button from "../../components/ui/button";
-import {Link} from "react-router-dom";
 
 interface BestBlogs {
   thumbnail: string;
@@ -34,11 +32,6 @@ const BestBlogs: React.FC = () => {
         {bestBlogs.splice(0, 4).map((b, index) => (
           <Blogs key={index} {...b} />
         ))}
-      </div>
-      <div className="text-center mt-4">
-        <Link to={"/blogs"}>
-          <Button size="lg">See more</Button>
-        </Link>
       </div>
     </Container>
   );
