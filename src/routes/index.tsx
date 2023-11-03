@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
@@ -12,7 +12,7 @@ import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 import HotelDetails from "../pages/hotel/hotel-details";
-import SingleBlog from "../pages/blogs/singleBlog";
+import SingleBlog from "../pages/blogs/SingleBlog";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/:_id",
-    element: <SingleBlog></SingleBlog>,
+    element: <SingleBlog />,
   },
   {
     path: "/about",
