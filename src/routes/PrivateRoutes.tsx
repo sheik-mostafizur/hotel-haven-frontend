@@ -1,6 +1,5 @@
 import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
-import HotelDetails from "../pages/hotel/hotel-details";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
 
@@ -8,10 +7,6 @@ const routes = [
   {
     path: "/settings",
     element: <Settings />,
-  },
-  {
-    path: "/hotel/:_id",
-    element: <HotelDetails />,
   },
   {
     path: "/dashboard",

@@ -1,13 +1,11 @@
-import { useParams } from "react-router-dom";
-// import useAxiosGet from "../../../hooks/useAxiosGet";
+import {useParams} from "react-router-dom";
 import Main from "../../../layout/main";
-import { HashSpinner } from "../../../components/spinner";
+import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
-import { useEffect, useState } from "react";
-import { axios } from "../../../api";
 import Button from "../../../components/ui/button";
 import GoogleMapReact from "google-map-react";
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import {useGetHotelByIdQuery} from "../../../api/public-api";
+const AnyReactComponent = ({text}) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -23,29 +21,15 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: { [key: string]: string };
+    roomInfo: {[key: string]: string};
   }[];
 }
 
 const HotelDetails: React.FC = () => {
-  const { _id } = useParams();
-  const [viewHotels, setViewHotels] = useState<HotelDetails[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const {_id} = useParams();
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery(_id);
 
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`hotel/${_id}`)
-      .then(({ data }) => {
-        setViewHotels(data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  const { hotel } = viewHotels;
+  const {hotel} = viewHotels || [];
 
   const defaultProps = {
     center: {
@@ -130,12 +114,11 @@ const HotelDetails: React.FC = () => {
                     <p>No rooms available</p>
                   )}
                 </div>
-                <div className="my-8" style={{ height: "70vh", width: "100%" }}>
+                <div className="my-8" style={{height: "70vh", width: "100%"}}>
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "" }}
+                    bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
+                    defaultZoom={defaultProps.zoom}>
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}

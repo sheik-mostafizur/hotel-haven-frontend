@@ -4,7 +4,7 @@ import BASE_QUERY from "./BASE_QUERY";
 const publicApi = createApi({
   baseQuery: BASE_QUERY,
   reducerPath: "publicApi",
-  tagTypes: ["gallery", "hotels"],
+  tagTypes: ["gallery", "hotels", "hotelById"],
   endpoints: (builder) => ({
     getHotelGallery: builder.query({
       query: () => "/public/gallery",
@@ -19,8 +19,16 @@ const publicApi = createApi({
       },
       providesTags: ["hotels"],
     }),
+    getHotelById: builder.query({
+      query: (_id) => `/public/hotel/${_id}`,
+      providesTags: ["hotelById"],
+    }),
   }),
 });
 
-export const {useGetHotelGalleryQuery, useGetHotelsQuery} = publicApi;
+export const {
+  useGetHotelGalleryQuery,
+  useGetHotelsQuery,
+  useGetHotelByIdQuery,
+} = publicApi;
 export default publicApi;
