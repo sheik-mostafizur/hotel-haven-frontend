@@ -1,10 +1,5 @@
-import {useEffect, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../../../redux/hooks";
-import {
-  deleteUserData,
-  editUserData,
-  fetchUserData,
-} from "../../../../redux/adminSlice/adminSlice";
+import {useState} from "react";
+import {useAppSelector} from "../../../../redux/hooks";
 import {HashSpinner} from "../../../../components/spinner";
 import {AiFillDelete} from "react-icons/ai";
 import Button from "../../../../components/ui/button";
@@ -12,22 +7,23 @@ import {RiAdminFill} from "react-icons/ri";
 import {FaUserTie} from "react-icons/fa";
 import {Tooltip} from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
-import {useGetUsersAdminQuery} from "../../../../api/admin-api";
+import {
+  useDeleteUserAdminMutation,
+  useEditUserAdminMutation,
+  useGetUsersAdminQuery,
+} from "../../../../api/admin-api";
+
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-  const {data: users, isLoading} = useGetUsersAdminQuery(undefined);
-
-  const dispatch = useAppDispatch();
+  const {data: users, isLoading, refetch} = useGetUsersAdminQuery(undefined);
+  const [editUserAdmin] = useEditUserAdminMutation();
+  const [deleteUserData] = useDeleteUserAdminMutation();
 
   const [selectedRole, setSelectedRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchUserData());
-  }, []);
-
   // Function to filter users by role
-  const filteredUsers = users?.filter((user) => {
+  const filteredUsers = users?.filter((user: any) => {
     // Filter by role
     if (selectedRole !== "All" && user.role !== selectedRole) {
       return false;
@@ -109,7 +105,7 @@ const Users = () => {
               </thead>
               <tbody>
                 {filteredUsers &&
-                  filteredUsers.map((user) => (
+                  filteredUsers.map((user: any) => (
                     <tr
                       key={user._id}
                       className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600">
@@ -145,14 +141,17 @@ const Users = () => {
                               user.role == ROLE.ADMIN || user._id == admin._id
                             }
                             onClick={() => {
-                              dispatch(
-                                editUserData({
-                                  _id: user._id,
-                                  updatedData: {role: ROLE.ADMIN},
+                              editUserAdmin({
+                                _id: user._id,
+                                data: {role: ROLE.ADMIN},
+                              })
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
                                 })
-                              ).then(() => {
-                                dispatch(fetchUserData());
-                              });
+                                .catch((error) => {
+                                  console.error(error);
+                                });
                             }}>
                             <Tooltip id={`admin-tooltip-${user._id}`} />
 
@@ -167,14 +166,17 @@ const Users = () => {
                               user.role == ROLE.MANAGER || user._id == admin._id
                             }
                             onClick={() => {
-                              dispatch(
-                                editUserData({
-                                  _id: user._id,
-                                  updatedData: {role: ROLE.MANAGER},
+                              editUserAdmin({
+                                _id: user._id,
+                                data: {role: ROLE.MANAGER},
+                              })
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
                                 })
-                              ).then(() => {
-                                dispatch(fetchUserData());
-                              });
+                                .catch((error) => {
+                                  console.error(error);
+                                });
                             }}>
                             <Tooltip id={`manager-tooltip-${user._id}`} />
                             <FaUserTie className="w-5 h-5" />
@@ -185,11 +187,14 @@ const Users = () => {
                               user.role == ROLE.MANAGER || user._id == admin._id
                             }
                             onClick={() => {
-                              dispatch(deleteUserData({_id: user._id})).then(
-                                () => {
-                                  dispatch(fetchUserData());
-                                }
-                              );
+                              deleteUserData(user._id)
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
+                                })
+                                .catch((error) => {
+                                  console.error(error);
+                                });
                             }}>
                             <AiFillDelete className="w-5 h-5" />
                           </button>
