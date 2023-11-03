@@ -1,8 +1,8 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 
-import {HashSpinner} from "../../components/spinner";
-import {useGetBestHotelsQuery} from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
+import { useGetBestHotelsQuery } from "../../api/public-api";
 
 interface HotelType {
   _id: string;
@@ -14,7 +14,7 @@ interface HotelType {
 }
 
 const BestHotel: React.FC = () => {
-  const {data, isLoading} = useGetBestHotelsQuery(undefined);
+  const { data, isLoading } = useGetBestHotelsQuery(undefined);
   const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;
 
