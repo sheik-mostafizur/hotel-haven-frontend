@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 import Container from "../../components/ui/container";
 import {HashSpinner} from "../../components/spinner";
-import {useGetHotelGalleryQuery} from "../../api/rtk-query/hotel-gallery";
+import {useGetHotelGalleryQuery} from "../../api/public-api";
 
 interface GalleryImage {
   imageURL: string;

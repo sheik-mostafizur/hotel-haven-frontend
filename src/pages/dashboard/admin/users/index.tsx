@@ -12,12 +12,9 @@ import {RiAdminFill} from "react-icons/ri";
 import {FaUserTie} from "react-icons/fa";
 import {Tooltip} from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
-import {useGetUsersAdminQuery} from "../../../../api/rtk-query/users-admin";
-
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-  // const adminState = useAppSelector((state) => state.admin);
-  const {data: users, isLoading} = useGetUsersAdminQuery(undefined);
+  const {users, isLoading} = useAppSelector((state) => state.admin);
   const dispatch = useAppDispatch();
 
   const [selectedRole, setSelectedRole] = useState("All");

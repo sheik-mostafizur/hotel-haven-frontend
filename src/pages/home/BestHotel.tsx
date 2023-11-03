@@ -2,7 +2,7 @@ import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 
 import {HashSpinner} from "../../components/spinner";
-import {useGetBestHotelsQuery} from "../../api/rtk-query/best-hotels";
+import {useGetBestHotelsQuery} from "../../api/public-api";
 
 interface HotelType {
   _id: string;

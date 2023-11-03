@@ -1,5 +1,5 @@
 import {fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from "..";
+import {axios} from ".";
 
 const BASE_QUERY = fetchBaseQuery({
   baseUrl: axios.defaults.baseURL,

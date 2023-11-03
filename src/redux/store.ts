@@ -4,7 +4,7 @@ import adminSlice from "./adminSlice/adminSlice";
 import themeSlice from "./themeSlice";
 
 // import rtkQuery api
-import {bestHotelsApi, hotelGalleryApi, usersAdminApi} from "../api/rtk-query";
+import {publicApi} from "../api";
 
 const store = configureStore({
   reducer: {
@@ -12,16 +12,10 @@ const store = configureStore({
     admin: adminSlice,
     theme: themeSlice,
     // api path initialize
-    [bestHotelsApi.reducerPath]: bestHotelsApi.reducer,
-    [hotelGalleryApi.reducerPath]: hotelGalleryApi.reducer,
-    [usersAdminApi.reducerPath]: usersAdminApi.reducer,
+    [publicApi.reducerPath]: publicApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      bestHotelsApi.middleware,
-      hotelGalleryApi.middleware,
-      usersAdminApi.middleware
-    ),
+    getDefaultMiddleware().concat(publicApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
