@@ -1,10 +1,12 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 
+
 import {HashSpinner} from "../../components/spinner";
 import {useGetHotelsQuery} from "../../api/public-api";
 import Button from "../../components/ui/button";
 import {Link} from "react-router-dom";
+
 
 interface HotelType {
   _id: string;
@@ -16,6 +18,7 @@ interface HotelType {
 }
 
 const BestHotel: React.FC = () => {
+
   const {data, isLoading} = useGetHotelsQuery({limit: 4});
   const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;

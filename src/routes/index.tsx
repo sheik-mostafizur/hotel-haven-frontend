@@ -12,6 +12,7 @@ import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 import HotelDetails from "../pages/hotel/hotel-details";
+import SingleBlog from "../pages/blogs/singleBlog";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/blogs",
     element: <Blogs />,
+  },
+  {
+    path: "/blogs/:_id",
+    element: <SingleBlog></SingleBlog>,
   },
   {
     path: "/about",

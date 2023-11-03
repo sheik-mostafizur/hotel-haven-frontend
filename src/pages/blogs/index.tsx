@@ -7,13 +7,14 @@ import Container from "../../components/ui/container";
 import {FcLikePlaceholder} from "react-icons/fc";
 
 interface BlogData {
+  _id: number;
   thumbnail: string;
   title: string;
   description: string;
   authorName: string;
   authorProfile: string;
   publishDate: string;
-  likes: number; // New property to store the number of likes
+  likes: number;
 }
 
 const Blogs: React.FC = () => {
@@ -48,7 +49,9 @@ const Blogs: React.FC = () => {
 
                   <div className="card-body">
                     <h5 className="py-2">{blog.title}</h5>
-                    <p className="py-2">{blog.description}</p>
+                    <p className="py-2">
+                      {blog.description.slice(0, 100) + "..."}
+                    </p>
                     <div className="card-actions py-2 flex justify-between items-center">
                       <div className="flex gap-2 justify-center items-center">
                         <div>
@@ -77,7 +80,7 @@ const Blogs: React.FC = () => {
                         </button>
                         <span className="text-sm">{blog.likes} Likes</span>
                       </div>
-                      <Link to="/blog/id">
+                      <Link to={`/blogs/${blog._id}`}>
                         <Button size="sm">Read Blog</Button>
                       </Link>
                     </div>
