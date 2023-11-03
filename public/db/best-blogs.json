@@ -5,7 +5,8 @@
     "description": "Embark on a journey through pristine landscapes and tranquil scenes. Discover the wonders of nature as we traverse forests, rivers, and mountains.",
     "authorName": "John Doe",
     "authorProfile": "https://images.unsplash.com/photo-1639747279286-c07eecb47a0b?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    "publishDate": "2023-01-15"
+    "publishDate": "2023-01-15",
+    "likes": 12
   },
   {
     "thumbnail": "https://media.istockphoto.com/id/870352486/photo/bara-gumbad-at-lodi-garden.webp?b=1&s=612x612&w=0&k=20&c=hPGWAF0hDt9iLVXsAYZLkjaTR4uXcn6HFGx3XkUqrXY=",
@@ -13,7 +14,8 @@
     "description": "Delve into the exquisite flavors of Bengali cuisine. Join us on a gastronomic adventure to savor traditional dishes and culinary delights from Bangladesh.",
     "authorName": "Alice Smith",
     "authorProfile": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D",
-    "publishDate": "2023-02-28"
+    "publishDate": "2023-02-28",
+    "likes": 12
   },
   {
     "thumbnail": "https://cdn.pixabay.com/photo/2016/11/22/19/25/adventure-1850178_1280.jpg",
@@ -21,7 +23,8 @@
     "description": "Pack your bags for an adrenaline-fueled journey. Explore the rugged terrain of Sylhet and experience the thrill of trekking in the scenic hills.",
     "authorName": "David Brown",
     "authorProfile": "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    "publishDate": "2023-03-12"
+    "publishDate": "2023-03-12",
+    "likes": 12
   },
   {
     "thumbnail": "https://cdn.pixabay.com/photo/2021/10/24/06/20/fort-6737124_1280.jpg",
@@ -29,7 +32,8 @@
     "description": "Step back in time and uncover the historical treasures of Dhaka. Immerse yourself in the rich cultural heritage of the capital city of Bangladesh.",
     "authorName": "Sarah Johnson",
     "authorProfile": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    "publishDate": "2023-04-04"
+    "publishDate": "2023-04-04",
+    "likes": 12
   },
   {
     "thumbnail": "https://cdn.pixabay.com/photo/2021/01/30/08/59/sea-5963222_1280.jpg",
@@ -37,7 +41,8 @@
     "description": "Escape to the world's longest natural sea beach. Find serenity by the waves, unwind on the sandy shores, and experience the charm of Cox's Bazar.",
     "authorName": "Michael Clark",
     "authorProfile": "https://images.pexels.com/photos/5490276/pexels-photo-5490276.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "publishDate": "2023-05-21"
+    "publishDate": "2023-05-21",
+    "likes": 12
   },
   {
     "thumbnail": "https://media.istockphoto.com/id/997345886/photo/indian-cuisine-on-diwali-holiday-tikka-masala-samosa-patties-and-sweets-with-mint-chutney-and.webp?b=1&s=170667a&w=0&k=20&c=Y8IlnzVn1Z6-VwuGxaPz_XNyXnL1sKStnfarzrSjfMg=",
@@ -45,7 +50,8 @@
     "description": "Satisfy your taste buds with the diverse flavors of Bengali cuisine. Dive into a culinary journey filled with aromatic spices, delectable sweets, and savory delights.",
     "authorName": "Linda Wilson",
     "authorProfile": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    "publishDate": "2023-06-08"
+    "publishDate": "2023-06-08",
+    "likes": 12
   },
   {
     "thumbnail": "https://cdn.pixabay.com/photo/2023/01/11/05/13/beach-7710960_1280.jpg",
@@ -53,7 +59,8 @@
     "description": "Uncover the artistic and cultural treasures of Chittagong. From vibrant art scenes to historical landmarks, experience the cultural richness of this coastal city.",
     "authorName": "Mark Anderson",
     "authorProfile": "https://images.unsplash.com/photo-1639747280804-dd2d6b3d88ac?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww",
-    "publishDate": "2023-07-19"
+    "publishDate": "2023-07-19",
+    "likes": 12
   },
   {
     "thumbnail": "https://cosmosgroup.sgp1.cdn.digitaloceanspaces.com/news/6551195.webp",
@@ -61,6 +68,7 @@
     "description": "Journey into the heart of Mymensingh and uncover its hidden charms. Explore mystical landscapes, ancient traditions, and the enchanting aura of this lesser-known gem.",
     "authorName": "Emily Carter",
     "authorProfile": "https://images.pexels.com/photos/4307869/pexels-photo-4307869.jpeg?auto=compress&cs=tinysrgb&w=600",
-    "publishDate": "2023-08-30"
+    "publishDate": "2023-08-30",
+    "likes": 12
   }
 ]
