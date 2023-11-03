@@ -1,39 +1,19 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { axios } from "../../../../api";
-import toastError from "../../../../utils/toast-error";
-import { HashSpinner } from "../../../../components/spinner";
+import {Link, useParams} from "react-router-dom";
+import {HashSpinner} from "../../../../components/spinner";
 import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
-import { FaLocationDot } from "react-icons/fa6";
-import { FaChild, FaPeopleArrows } from "react-icons/fa";
-import { MdBedroomParent } from "react-icons/md";
-import { FcManager, FcMoneyTransfer } from "react-icons/fc";
-import { BiSolidOffer } from "react-icons/bi";
-import { HiInformationCircle } from "react-icons/hi2";
+import {FaLocationDot} from "react-icons/fa6";
+import {FaChild, FaPeopleArrows} from "react-icons/fa";
+import {MdBedroomParent} from "react-icons/md";
+import {FcManager, FcMoneyTransfer} from "react-icons/fc";
+import {BiSolidOffer} from "react-icons/bi";
+import {HiInformationCircle} from "react-icons/hi2";
 import Button from "../../../../components/ui/button";
+import {useGetHotelsByIdAdminQuery} from "../../../../api/admin-api";
 
 const HotelDetails = () => {
-  const { _id } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [hotelDetails, setHotelDetails] = useState<any>(null);
-
-  // console.log(hotelDetails?.room);
-  console.log(hotelDetails);
-
-  useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`/admin/hotel/${_id}`)
-      .then(({ data }) => {
-        setIsLoading(false);
-        setHotelDetails(data);
-      })
-      .catch((error: any) => {
-        toastError(error);
-        setIsLoading(false);
-      });
-  }, [_id]);
+  const {_id} = useParams();
+  const {data: hotelDetails, isLoading} = useGetHotelsByIdAdminQuery(_id);
 
   return (
     <>
@@ -70,8 +50,7 @@ const HotelDetails = () => {
             {hotelDetails?.room.map((room: any, index: number) => (
               <div
                 key={index}
-                className=" w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-              >
+                className=" w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <Slider autoplay={3000}>
                   {room.thumbnails.map((item: any, index: any) => (
                     <div
@@ -79,8 +58,7 @@ const HotelDetails = () => {
                       key={index}
                       style={{
                         background: `url('${item}') no-repeat center center`,
-                      }}
-                    >
+                      }}>
                       <div className="center">
                         <h1>{item.title}</h1>
                       </div>
@@ -110,7 +88,7 @@ const HotelDetails = () => {
                           <BiSolidOffer /> <span>Facilities:</span>
                         </span>
                       </span>
-                      <ul className="ms-8" style={{ listStyleType: "disc" }}>
+                      <ul className="ms-8" style={{listStyleType: "disc"}}>
                         {room.facilities.map((facility: any, index: any) => (
                           <li key={index}>{facility}</li>
                         ))}
@@ -121,7 +99,7 @@ const HotelDetails = () => {
                         <HiInformationCircle />{" "}
                         <span className="font-medium">Other Information:</span>
                       </span>
-                      <ul className="ms-8" style={{ listStyleType: "square" }}>
+                      <ul className="ms-8" style={{listStyleType: "square"}}>
                         <li> {room.roomInfo?.bedType}</li>
                         <li> {room.roomInfo?.roomSize}</li>
                         <li> {room.roomInfo?.view}</li>
@@ -138,8 +116,7 @@ const HotelDetails = () => {
                       </span>
                       <span
                         className="text-sm"
-                        style={{ textDecoration: "line-through" }}
-                      >
+                        style={{textDecoration: "line-through"}}>
                         BDT {room.roomInfo?.regularPrice}
                       </span>
                       <span>BDT {room.roomInfo?.discountedPrice}</span>

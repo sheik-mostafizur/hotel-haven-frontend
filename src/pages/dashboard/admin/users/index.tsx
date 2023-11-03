@@ -1,32 +1,29 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
-import {
-  deleteUserData,
-  editUserData,
-  fetchUserData,
-} from "../../../../redux/adminSlice/adminSlice";
-import { HashSpinner } from "../../../../components/spinner";
-import { AiFillDelete } from "react-icons/ai";
+import {useState} from "react";
+import {useAppSelector} from "../../../../redux/hooks";
+import {HashSpinner} from "../../../../components/spinner";
+import {AiFillDelete} from "react-icons/ai";
 import Button from "../../../../components/ui/button";
-import { RiAdminFill } from "react-icons/ri";
-import { FaUserTie } from "react-icons/fa";
-import { Tooltip } from "react-tooltip";
+import {RiAdminFill} from "react-icons/ri";
+import {FaUserTie} from "react-icons/fa";
+import {Tooltip} from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
+import {
+  useDeleteUserAdminMutation,
+  useEditUserAdminMutation,
+  useGetUsersAdminQuery,
+} from "../../../../api/admin-api";
 
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-  const adminState = useAppSelector((state) => state.admin);
-  const dispatch = useAppDispatch();
+  const {data: users, isLoading, refetch} = useGetUsersAdminQuery(undefined);
+  const [editUserAdmin] = useEditUserAdminMutation();
+  const [deleteUserData] = useDeleteUserAdminMutation();
 
   const [selectedRole, setSelectedRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    dispatch(fetchUserData());
-  }, []);
-
   // Function to filter users by role
-  const filteredUsers = adminState.users.filter((user) => {
+  const filteredUsers = users?.filter((user: any) => {
     // Filter by role
     if (selectedRole !== "All" && user.role !== selectedRole) {
       return false;
@@ -56,8 +53,7 @@ const Users = () => {
           <select
             id="roleFilter"
             onChange={(e) => setSelectedRole(e.target.value)}
-            value={selectedRole}
-          >
+            value={selectedRole}>
             <option value="All">All</option>
             <option value="ADMIN">Admin</option>
             <option value="MANAGER">Manager</option>
@@ -78,7 +74,7 @@ const Users = () => {
         </div>
       </div>
 
-      {adminState.isLoading ? (
+      {isLoading ? (
         <HashSpinner />
       ) : (
         <div>
@@ -108,99 +104,104 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredUsers.map((user) => (
-                  <tr
-                    key={user._id}
-                    className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600"
-                  >
-                    <th
-                      scope="row"
-                      className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white"
-                    >
-                      <img
-                        className="w-10 h-10 rounded-full"
-                        src={user.photoURL}
-                        alt={user.name}
-                      />
-                      <div className="pl-3">
-                        <div className="text-base font-semibold">
-                          {user.name}
+                {filteredUsers &&
+                  filteredUsers.map((user: any) => (
+                    <tr
+                      key={user._id}
+                      className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600">
+                      <th
+                        scope="row"
+                        className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white">
+                        <img
+                          className="w-10 h-10 rounded-full"
+                          src={user.photoURL}
+                          alt={user.name}
+                        />
+                        <div className="pl-3">
+                          <div className="text-base font-semibold">
+                            {user.name}
+                          </div>
+                          <div className="font-normal text-secondary-500">
+                            {user.email}
+                          </div>
                         </div>
-                        <div className="font-normal text-secondary-500">
-                          {user.email}
-                        </div>
-                      </div>
-                    </th>
-                    <td className="px-6 py-4">{user._id}</td>
-                    <td className="px-6 py-4">{user.phone}</td>
-                    <td className="px-6 py-4">{user.gender}</td>
-                    <td className="px-6 py-4">{user.role}</td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center justify-center gap-4">
-                        <Button
-                          size="sm"
-                          data-tooltip-id={`admin-tooltip-${user._id}`}
-                          data-tooltip-content="Make a new admin"
-                          data-tooltip-place="top"
-                          isDisabled={
-                            user.role == ROLE.ADMIN || user._id == admin._id
-                          }
-                          onClick={() => {
-                            dispatch(
-                              editUserData({
+                      </th>
+                      <td className="px-6 py-4">{user._id}</td>
+                      <td className="px-6 py-4">{user.phone}</td>
+                      <td className="px-6 py-4">{user.gender}</td>
+                      <td className="px-6 py-4">{user.role}</td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-center gap-4">
+                          <Button
+                            size="sm"
+                            data-tooltip-id={`admin-tooltip-${user._id}`}
+                            data-tooltip-content="Make a new admin"
+                            data-tooltip-place="top"
+                            isDisabled={
+                              user.role == ROLE.ADMIN || user._id == admin._id
+                            }
+                            onClick={() => {
+                              editUserAdmin({
                                 _id: user._id,
-                                updatedData: { role: ROLE.ADMIN },
+                                data: {role: ROLE.ADMIN},
                               })
-                            ).then(() => {
-                              dispatch(fetchUserData());
-                            });
-                          }}
-                        >
-                          <Tooltip id={`admin-tooltip-${user._id}`} />
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
+                                })
+                                .catch((error) => {
+                                  console.error(error);
+                                });
+                            }}>
+                            <Tooltip id={`admin-tooltip-${user._id}`} />
 
-                          <RiAdminFill className="w-5 h-5" />
-                        </Button>
-                        <Button
-                          size="sm"
-                          data-tooltip-id={`manager-tooltip-${user._id}`}
-                          data-tooltip-content="Make a new manager"
-                          data-tooltip-place="top"
-                          isDisabled={
-                            user.role == ROLE.MANAGER || user._id == admin._id
-                          }
-                          onClick={() => {
-                            dispatch(
-                              editUserData({
+                            <RiAdminFill className="w-5 h-5" />
+                          </Button>
+                          <Button
+                            size="sm"
+                            data-tooltip-id={`manager-tooltip-${user._id}`}
+                            data-tooltip-content="Make a new manager"
+                            data-tooltip-place="top"
+                            isDisabled={
+                              user.role == ROLE.MANAGER || user._id == admin._id
+                            }
+                            onClick={() => {
+                              editUserAdmin({
                                 _id: user._id,
-                                updatedData: { role: ROLE.MANAGER },
+                                data: {role: ROLE.MANAGER},
                               })
-                            ).then(() => {
-                              dispatch(fetchUserData());
-                            });
-                          }}
-                        >
-                          <Tooltip id={`manager-tooltip-${user._id}`} />
-                          <FaUserTie className="w-5 h-5" />
-                        </Button>
-                        <button
-                          className="text-red-500"
-                          disabled={
-                            user.role == ROLE.MANAGER || user._id == admin._id
-                          }
-                          onClick={() => {
-                            dispatch(deleteUserData({ _id: user._id })).then(
-                              () => {
-                                dispatch(fetchUserData());
-                              }
-                            );
-                          }}
-                        >
-                          <AiFillDelete className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
+                                })
+                                .catch((error) => {
+                                  console.error(error);
+                                });
+                            }}>
+                            <Tooltip id={`manager-tooltip-${user._id}`} />
+                            <FaUserTie className="w-5 h-5" />
+                          </Button>
+                          <button
+                            className="text-red-500"
+                            disabled={
+                              user.role == ROLE.MANAGER || user._id == admin._id
+                            }
+                            onClick={() => {
+                              deleteUserData(user._id)
+                                .unwrap()
+                                .then(() => {
+                                  refetch();
+                                })
+                                .catch((error) => {
+                                  console.error(error);
+                                });
+                            }}>
+                            <AiFillDelete className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

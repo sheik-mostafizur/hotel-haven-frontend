@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { axios } from "../../api";
+import {useEffect, useState} from "react";
+import {axios} from "../../api";
 import Container from "../../components/ui/container";
 import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
@@ -18,13 +18,14 @@ const Hotel: React.FC = () => {
   useEffect(() => {
     axios
       .get("/public/hotel")
-      .then(({ data }) => {
+      .then(({data}) => {
         setHotels(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   return (
     <Main>
       <Container>
