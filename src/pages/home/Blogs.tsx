@@ -29,7 +29,7 @@ const Blogs: React.FC<Blogs> = ({
 
         <div className="p-4">
           <h5 className="py-2">{title}</h5>
-          <p className="py-2">{description}</p>
+          <p className="py-2">{description.slice(0, 80)}...</p>
           <div className="py-2 flex justify-between items-center">
             <div className="flex gap-2 justify-center items-center">
               <div>
