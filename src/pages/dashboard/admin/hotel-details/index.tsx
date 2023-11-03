@@ -1,11 +1,11 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {axios} from "../../../../api";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { axios } from "../../../../api";
 import toastError from "../../../../utils/toast-error";
-import {HashSpinner} from "../../../../components/spinner";
+import { HashSpinner } from "../../../../components/spinner";
 
 const HotelDetails = () => {
-  const {_id} = useParams();
+  const { _id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [hotelDetails, setHotelDetails] = useState(null);
 
@@ -13,7 +13,7 @@ const HotelDetails = () => {
     setIsLoading(true);
     axios
       .get(`/admin/hotel/${_id}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         setIsLoading(false);
         setHotelDetails(data);
       })
@@ -23,8 +23,11 @@ const HotelDetails = () => {
       });
   }, []);
 
+
   return (
-    <>{isLoading ? <HashSpinner /> : <>{JSON.stringify(hotelDetails)}</>}</>
+    <>{isLoading ? <HashSpinner /> : <>
+      {JSON.stringify(hotelDetails)}
+    </>}</>
   );
 };
 
