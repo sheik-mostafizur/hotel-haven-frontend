@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import {axios} from "../../../../api";
-import {HashSpinner} from "../../../../components/spinner";
+import { useEffect, useState } from "react";
+import { axios } from "../../../../api";
+import { HashSpinner } from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
-import {HotelType} from "../../../../types";
+import { HotelType } from "../../../../types";
 
 const Hotels: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ const Hotels: React.FC = () => {
     setIsLoading(true);
     axios
       .get("/admin/hotel")
-      .then(({data}) => {
+      .then(({ data }) => {
         setHotels(data);
         setIsLoading(false);
       })
