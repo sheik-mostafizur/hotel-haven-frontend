@@ -28,25 +28,29 @@ const HotelGallery = () => {
         <div>
           <Marquee delay={1} direction="left">
             {images &&
-              images.map((image: GalleryImage) => (
-                <img
-                  key={image._id}
-                  className="w-96 h-80"
-                  src={image.imageURL}
-                  alt={image.alt}
-                />
-              ))}
+              images
+                .slice(0, images.length / 2)
+                .map((image: GalleryImage) => (
+                  <img
+                    key={image._id}
+                    className="w-96 h-80"
+                    src={image.imageURL}
+                    alt={image.alt}
+                  />
+                ))}
           </Marquee>
           <Marquee direction="right">
             {images &&
-              images.map((image) => (
-                <img
-                  key={image._id}
-                  className="w-96 h-80"
-                  src={image.imageURL}
-                  alt={image.alt}
-                />
-              ))}
+              images
+                .slice(images.length / 2)
+                .map((image: GalleryImage) => (
+                  <img
+                    key={image._id}
+                    className="w-96 h-80"
+                    src={image.imageURL}
+                    alt={image.alt}
+                  />
+                ))}
           </Marquee>
         </div>
       )}

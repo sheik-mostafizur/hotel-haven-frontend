@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Main from "../../layout/main";
 import Button from "../../components/ui/button";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
-import { FcLikePlaceholder } from "react-icons/fc";
+import {FcLikePlaceholder} from "react-icons/fc";
 
 interface BlogData {
   _id: number;
@@ -19,7 +19,6 @@ interface BlogData {
 
 const Blogs: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogData[]>([]);
-  console.log(blogs);
 
   useEffect(() => {
     fetchData("/db/best-blogs.json")
@@ -76,8 +75,7 @@ const Blogs: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <button
                           className="btn btn-primary"
-                          onClick={() => handleLike(index)}
-                        >
+                          onClick={() => handleLike(index)}>
                           <FcLikePlaceholder className="text-3xl" />
                         </button>
                         <span className="text-sm">{blog.likes} Likes</span>

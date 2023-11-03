@@ -1,8 +1,7 @@
 import Container from "../../components/ui/container";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Blogs from "./Blogs";
 import fetchData from "../../hooks/fetch-data";
-import Button from "../../components/ui/button";
 
 interface BestBlogs {
   thumbnail: string;
@@ -29,13 +28,10 @@ const BestBlogs: React.FC = () => {
         and adventure. Get inspired and stay informed with our diverse
         collection of stories.
       </p>
-      <div className="grid gap-4 py-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
         {bestBlogs.splice(0, 4).map((b, index) => (
           <Blogs key={index} {...b} />
         ))}
-      </div>
-      <div className="text-center">
-        <Button>Read More</Button>
       </div>
     </Container>
   );
