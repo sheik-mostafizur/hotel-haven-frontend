@@ -1,0 +1,42 @@
+[
+  {
+    "hotelId": 1,
+    "managerId": 1,
+    "name": "Luxury Hotel",
+    "photoURL": "https://example.com/hotel1.jpg",
+    "description": "A luxurious hotel with stunning views.",
+    "availableRoom": 50,
+    "address": {
+      "thumbnailURL": "https://example.com/hotel1-thumbnail.jpg",
+      "location": "City Center, Example City, USA"
+    },
+    "map": {
+      "lat": 123.456789,
+      "lng": -78.901234
+    },
+    "title": "Luxury Suite",
+    "facilities": ["Swimming Pool", "Gym", "Spa"],
+    "thumbnails": [
+      "https://example.com/hotel1-room1.jpg",
+      "https://example.com/hotel1-room2.jpg"
+    ],
+    "bookedCount": 10,
+    "availability": {
+      "startDate": "2023-11-01",
+      "endDate": "2023-11-30",
+      "isBlocked": false
+    },
+    "capacity": {
+      "adult": 2,
+      "children": 1
+    },
+    "roomInfo": {
+      "roomSize": "500 sq. ft.",
+      "regularPrice": 300,
+      "discountedPrice": 250,
+      "view": "City View",
+      "bedType": "King Bed",
+      "additionalInfo": "Balcony with a great view."
+    }
+  }
+]
