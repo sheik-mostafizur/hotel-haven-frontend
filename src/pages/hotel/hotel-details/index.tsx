@@ -54,7 +54,7 @@ const HotelDetails: React.FC = () => {
     },
     zoom: 11,
   };
-  console.log(defaultProps.center);
+
   return (
     <Main>
       <Container>
@@ -130,25 +130,26 @@ const HotelDetails: React.FC = () => {
                     <p>No rooms available</p>
                   )}
                 </div>
+                <div className="my-8" style={{ height: "70vh", width: "100%" }}>
+                  <GoogleMapReact
+                    bootstrapURLKeys={{ key: "" }}
+                    defaultCenter={defaultProps.center}
+                    defaultZoom={defaultProps.zoom}
+                  >
+                    <AnyReactComponent
+                      lat={hotel?.address?.map?.lat}
+                      lng={hotel?.address?.map?.lng}
+                      // text="My Marker"
+                    />
+                    <map name=""></map>
+                  </GoogleMapReact>
+                </div>
               </>
             ) : (
               <></>
             )}
           </>
         )}
-        <div className="my-8" style={{ height: "100vh", width: "100%" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: "" }}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
-          >
-            <AnyReactComponent
-              lat={hotel?.address?.map?.lat}
-              lng={hotel?.address?.map?.lng}
-              text="My Marker"
-            />
-          </GoogleMapReact>
-        </div>
       </Container>
     </Main>
   );
