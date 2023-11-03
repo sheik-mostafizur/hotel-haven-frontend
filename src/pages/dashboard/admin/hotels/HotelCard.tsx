@@ -1,49 +1,55 @@
 import {Link} from "react-router-dom";
-import {axios} from "../../../../api";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
 import {HotelType} from "../../../../types";
+import {useEditHotelStatusAdminMutation} from "../../../../api/admin-api";
 
-type HotelCardProps = {
+interface HotelCardProps {
   hotel: HotelType.Hotel;
-};
+}
 
 const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
   const {_id, name, addedRoom, availableRoom, email, status, photoURL} = hotel;
+  const [editHotelStatusAdmin] = useEditHotelStatusAdminMutation();
 
   const handleRoomApproved = async () => {
-    try {
-      const {
-        data: {message},
-      } = await axios.put(`/admin/hotel/status/${_id}`, {
+    editHotelStatusAdmin({
+      _id,
+      data: {
         status: STATUS.APPROVED,
+      },
+    })
+      .unwrap()
+      .then(({message}) => {
+        toastSuccess(message);
+      })
+      .catch(({data}) => {
+        toastError(data);
       });
-      toastSuccess(message);
-    } catch (error: any) {
-      toastError(error);
-    }
   };
 
   const handleRoomRejected = async () => {
     const feedback = prompt("Why Rejected? Please feedback: ");
     if (feedback) {
-      try {
-        const {
-          data: {message},
-        } = await axios.put(`/admin/hotel/status/${_id}`, {
+      editHotelStatusAdmin({
+        _id,
+        data: {
           status: STATUS.REJECTED,
           feedback,
+        },
+      })
+        .unwrap()
+        .then(({message}) => {
+          toastSuccess(message);
+        })
+        .catch(({data}) => {
+          toastError(data);
         });
-        toastSuccess(message);
-      } catch (error: any) {
-        toastError(error);
-      }
     }
   };
 
-  // return <>lorem</>;
   return (
     <div>
       <div className="mx-auto h-full bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
