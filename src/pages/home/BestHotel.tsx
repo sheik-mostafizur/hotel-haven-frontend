@@ -2,7 +2,9 @@ import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 
 import {HashSpinner} from "../../components/spinner";
-import {useGetBestHotelsQuery} from "../../api/public-api";
+import {useGetHotelsQuery} from "../../api/public-api";
+import Button from "../../components/ui/button";
+import {Link} from "react-router-dom";
 
 interface HotelType {
   _id: string;
@@ -14,7 +16,7 @@ interface HotelType {
 }
 
 const BestHotel: React.FC = () => {
-  const {data, isLoading} = useGetBestHotelsQuery(undefined);
+  const {data, isLoading} = useGetHotelsQuery({limit: 4});
   const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;
 
@@ -28,12 +30,17 @@ const BestHotel: React.FC = () => {
           hospitality.
         </p>
       </div>
-      <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+      <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto">
         {isLoading ? (
           <HashSpinner />
         ) : (
           hotels && hotels.map((hotel) => <Hotel key={hotel._id} {...hotel} />)
         )}
+      </div>
+      <div className="text-center mt-8">
+        <Link to={"/hotel"}>
+          <Button size="lg">See more</Button>
+        </Link>
       </div>
     </Container>
   );
