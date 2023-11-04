@@ -6,7 +6,7 @@ import {changeTheme} from "../../redux/themeSlice";
 
 const Settings = () => {
   const dispatch = useAppDispatch();
-  const themes = ["base", "dark", "matrix"];
+  const themes = ["base", "dark", "royal-blue", "matrix"];
 
   return (
     <>
@@ -24,6 +24,9 @@ const Settings = () => {
               className="cursor-pointer shadow-md shadow-[#000000]/50  w-8 h-8 bg-[#000000] rounded-full"></li>
             <li
               onClick={() => dispatch(changeTheme({theme: themes[2]}))}
+              className="cursor-pointer shadow-md shadow-[#3a89f7]/50  w-8 h-8 bg-[#3a89f7] rounded-full"></li>
+            <li
+              onClick={() => dispatch(changeTheme({theme: themes[3]}))}
               className="cursor-pointer shadow-md shadow-[#32cd37]/50  w-8 h-8 bg-[#32cd37] rounded-full"></li>
           </ul>
         </div>

@@ -14,7 +14,6 @@
 #card {
   border-radius: 20px;
   overflow: hidden;
-  border: 8px solid #ffff;
   position: relative;
   cursor: pointer;
 }

@@ -60,6 +60,40 @@ const themes = [
     },
   },
   {
+    name: "royal-blue",
+    selectors: [".royal-blue"],
+    theme: {
+      colors: {
+        primary: {
+          50: "#eff7ff",
+          100: "#dbebfe",
+          200: "#bfddfe",
+          300: "#92c9fe",
+          400: "#5fabfb",
+          500: "#3a89f7",
+          600: "#2c70ed",
+          700: "#1c54d9",
+          800: "#1d45b0",
+          900: "#1d3e8b",
+          950: "#172754",
+        },
+        secondary: {
+          50: "#ecf8ff",
+          100: "#d3edff",
+          200: "#b1e1ff",
+          300: "#7cd1ff",
+          400: "#3fb5ff",
+          500: "#1390ff",
+          600: "#006cff",
+          700: "#0054ff",
+          800: "#0044ce",
+          900: "#073ea1",
+          950: "#092358",
+        },
+      },
+    },
+  },
+  {
     name: "matrix",
     selectors: [".matrix"],
     theme: {

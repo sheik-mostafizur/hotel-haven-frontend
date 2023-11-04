@@ -33,7 +33,7 @@ const FindRoomForm = () => {
   };
 
   return (
-    <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl">
+    <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-700 dark:border-secondary-700 dark:shadow-secondary-800">
       <h2>Find Your Room</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div>
