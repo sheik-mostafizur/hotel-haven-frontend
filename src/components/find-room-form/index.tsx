@@ -1,9 +1,13 @@
 import {useForm, Controller} from "react-hook-form";
 import Button from "../ui/button";
-import useAxiosGet from "../../hooks/useAxiosGet";
+import {useGetLocationsQuery} from "../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setHotelFilter} from "../../redux/hotel-filter-slice";
 
 const FindRoomForm = () => {
-  const {isLoading, data: locations} = useAxiosGet("/public/locations");
+  const {isLoading, data: locations} = useGetLocationsQuery(undefined);
+  const hotelFilter = useAppSelector((state) => state.hotelFilter);
+  const dispatch = useAppDispatch();
 
   const {
     control,
@@ -11,13 +15,15 @@ const FindRoomForm = () => {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      location: "",
-      checkIn: "",
-      checkOut: "",
+      location: hotelFilter.location,
+      checkIn: hotelFilter.checkIn,
+      checkOut: hotelFilter.checkOut,
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    dispatch(setHotelFilter(data));
+  };
 
   return (
     <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl">
