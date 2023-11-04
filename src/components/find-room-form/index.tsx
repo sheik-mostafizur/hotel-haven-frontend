@@ -3,8 +3,12 @@ import Button from "../ui/button";
 import {useGetLocationsQuery} from "../../api/public-api";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {setHotelFilter} from "../../redux/hotel-filter-slice";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const FindRoomForm = () => {
+  const locationURL = useLocation();
+  const navigate = useNavigate();
+
   const {isLoading, data: locations} = useGetLocationsQuery(undefined);
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
@@ -23,6 +27,9 @@ const FindRoomForm = () => {
 
   const onSubmit = (data) => {
     dispatch(setHotelFilter(data));
+    if (locationURL.pathname == "/") {
+      navigate("/hotel");
+    }
   };
 
   return (

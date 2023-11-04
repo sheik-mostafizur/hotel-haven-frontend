@@ -3,9 +3,12 @@ import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
 import {useGetHotelsQuery} from "../../api/public-api";
 import {HashSpinner} from "../../components/spinner";
+import {useAppSelector} from "../../redux/hooks";
 
 const Hotel: React.FC = () => {
-  const {data: hotels, isLoading} = useGetHotelsQuery(undefined);
+  const query = useAppSelector((state) => state.hotelFilter);
+
+  const {data: hotels, isLoading} = useGetHotelsQuery(query);
 
   return (
     <Main>

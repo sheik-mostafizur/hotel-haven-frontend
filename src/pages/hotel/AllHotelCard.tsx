@@ -1,17 +1,17 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 
 interface HotelsCard {
   _id: string;
   name: string;
-  location: string;
+  address: string;
   description: string;
   photoURL: string;
   rating: number;
 }
 
 const AllHotelCard: React.FC<HotelsCard> = ({
-  location,
+  address,
   name,
   photoURL,
   rating,
@@ -29,7 +29,7 @@ const AllHotelCard: React.FC<HotelsCard> = ({
         <div className="flex flex-col justify-between p-4 leading-normal">
           <h5 className="mb-2">{name}</h5>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Location: {location}
+            Location: {address.location}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Rating: {rating}
