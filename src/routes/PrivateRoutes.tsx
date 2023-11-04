@@ -1,3 +1,4 @@
+import Payment from "../components/payment";
 import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
@@ -7,6 +8,10 @@ const routes = [
   {
     path: "/settings",
     element: <Settings />,
+  },
+  {
+    path: "/payment/:_id",
+    element: <Payment />,
   },
   {
     path: "/dashboard",

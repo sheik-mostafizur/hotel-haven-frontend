@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Main from "../../../layout/main";
 import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
@@ -110,7 +110,9 @@ const HotelDetails: React.FC = () => {
                                 </p>
                               ))}
                             </div>
-                            <Button>Reserve Now</Button>
+                            <Link to={`/payment/${room._id}`}>
+                              <Button>Reserve Now</Button>
+                            </Link>
                           </div>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
@@ -18,6 +18,8 @@ const SignIn: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  let location = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -37,7 +39,7 @@ const SignIn: React.FC = () => {
       toastSuccess(result.message);
       dispatch(login({token: result.token, user: result.user}));
       reset();
-      navigate("/");
+      navigate(location?.state?.from?.pathname || "/");
     } catch (error: any) {
       toastError(error);
     } finally {
