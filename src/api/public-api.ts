@@ -26,7 +26,12 @@ const publicApi = createApi({
       providesTags: ["hotels"],
     }),
     getHotelById: builder.query({
-      query: (_id) => `/public/hotel/${_id}`,
+      query: ({_id, params = {}}) => {
+        const queryParams = Object.keys(params)
+          .map((key) => `${key}=${params[key]}`)
+          .join("&");
+        return `/public/hotel/${_id}?${queryParams}`;
+      },
       providesTags: ["hotelById"],
     }),
   }),

@@ -5,6 +5,7 @@ import Container from "../../../components/ui/container";
 import Button from "../../../components/ui/button";
 import GoogleMapReact from "google-map-react";
 import {useGetHotelByIdQuery} from "../../../api/public-api";
+import {useAppSelector} from "../../../redux/hooks";
 const AnyReactComponent = ({text}) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
@@ -26,8 +27,12 @@ interface HotelDetails {
 }
 
 const HotelDetails: React.FC = () => {
+  const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const {_id} = useParams();
-  const {data: viewHotels, isLoading} = useGetHotelByIdQuery(_id);
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
+    _id,
+    params: hotelFilter,
+  });
 
   const {hotel} = viewHotels || [];
 
@@ -89,22 +94,22 @@ const HotelDetails: React.FC = () => {
                           <div className="p-4">
                             <h5 className="my-2 ">{room.title}</h5>
 
-                            <p className="py-1 ">
+                            <div className="py-1 ">
                               <strong>Facilities:</strong>
                               <>
                                 {room.facilities.map((facility, index) => (
                                   <li key={index}>{facility}</li>
                                 ))}
                               </>
-                            </p>
-                            <p className="mb-3">
+                            </div>
+                            <div className="mb-3">
                               {Object.keys(room.roomInfo).map((key) => (
                                 <p key={key} className="py-1">
                                   <strong>{key}:</strong>
                                   <> {room.roomInfo[key]}</>
                                 </p>
                               ))}
-                            </p>
+                            </div>
                             <Button>Reserve Now</Button>
                           </div>
                         </div>
