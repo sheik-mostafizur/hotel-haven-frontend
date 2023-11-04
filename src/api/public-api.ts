@@ -4,8 +4,12 @@ import BASE_QUERY from "./BASE_QUERY";
 const publicApi = createApi({
   baseQuery: BASE_QUERY,
   reducerPath: "publicApi",
-  tagTypes: ["gallery", "hotels", "hotelById"],
+  tagTypes: ["locations", "gallery", "hotels", "hotelById"],
   endpoints: (builder) => ({
+    getLocations: builder.query({
+      query: () => "/public/locations",
+      providesTags: ["locations"],
+    }),
     getHotelGallery: builder.query({
       query: () => "/public/gallery",
       providesTags: ["gallery"],
@@ -27,6 +31,7 @@ const publicApi = createApi({
 });
 
 export const {
+  useGetLocationsQuery,
   useGetHotelGalleryQuery,
   useGetHotelsQuery,
   useGetHotelByIdQuery,
