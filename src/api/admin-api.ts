@@ -1,8 +1,16 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import BASE_QUERY from "./BASE_QUERY";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {axios} from ".";
 
 const adminApi = createApi({
-  baseQuery: BASE_QUERY,
+  baseQuery: fetchBaseQuery({
+    baseUrl: axios.defaults.baseURL,
+    prepareHeaders: (headers) => {
+      if (localStorage.getItem("token")) {
+        headers.set("Authorization", `Bearer ${localStorage.getItem("token")}`);
+      }
+      return headers;
+    },
+  }),
   reducerPath: "adminApi",
   tagTypes: ["usersAdmin", "hotelsAdmin"],
   endpoints: (builder) => ({

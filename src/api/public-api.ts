@@ -1,8 +1,10 @@
-import {createApi} from "@reduxjs/toolkit/query/react";
-import BASE_QUERY from "./BASE_QUERY";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {axios} from ".";
 
 const publicApi = createApi({
-  baseQuery: BASE_QUERY,
+  baseQuery: fetchBaseQuery({
+    baseUrl: axios.defaults.baseURL,
+  }),
   reducerPath: "publicApi",
   tagTypes: ["locations", "gallery", "hotels", "hotelById"],
   endpoints: (builder) => ({
