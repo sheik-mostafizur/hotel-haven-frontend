@@ -49,14 +49,10 @@ const FindRoomForm = () => {
                 {...field}
                 className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 {isLoading ? (
-                  <option defaultValue="Choose a Location">
-                    Choose a Location
-                  </option>
+                  <option value="">Choose a Location</option>
                 ) : (
                   <>
-                    <option defaultValue="Choose a Location">
-                      Choose a Location
-                    </option>
+                    <option value="">Choose a Location</option>
                     {locations &&
                       locations.map((location) => (
                         <option key={location._id} value={location.location}>
