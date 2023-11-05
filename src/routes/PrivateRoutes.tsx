@@ -1,4 +1,4 @@
-import Payment from "../components/payment";
+import Payment from "../pages/payment";
 import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
