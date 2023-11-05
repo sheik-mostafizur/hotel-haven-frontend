@@ -1,3 +1,4 @@
+import React from "react";
 import "./Location.css";
 interface Location {
   image: string;
@@ -5,12 +6,17 @@ interface Location {
   total_hotels: number;
 }
 
-const Location: React.FC<Location> = ({image, location_name, total_hotels}) => {
+const Location: React.FC<Location> = ({
+  image,
+  location_name,
+  total_hotels,
+}) => {
   //   console.log(image);
   return (
     <div
       id="card"
-      className="bg-white mx-auto rounded-lg dark:bg-secondary-700">
+      className="bg-white mx-auto rounded-lg dark:bg-secondary-700"
+    >
       <img
         id="className-img"
         className="w-full h-80 "

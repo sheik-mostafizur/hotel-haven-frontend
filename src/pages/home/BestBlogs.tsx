@@ -1,5 +1,5 @@
 import Container from "../../components/ui/container";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Blogs from "./Blogs";
 import fetchData from "../../hooks/fetch-data";
 

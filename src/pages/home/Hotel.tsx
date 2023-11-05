@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 import LazyLoad from "react-lazy-load";
+import React from "react";
 
 interface HotelType {
   _id: string;
@@ -9,7 +10,7 @@ interface HotelType {
   photoURL: string;
   description: string;
   rating: number;
-};
+}
 
 const Hotel: React.FC<HotelType> = ({
   location,
