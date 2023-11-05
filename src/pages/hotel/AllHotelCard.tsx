@@ -1,10 +1,12 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 
 interface HotelsCard {
   _id: string;
   name: string;
-  address: string;
+  address: {
+    location: string;
+  };
   description: string;
   photoURL: string;
   rating: number;
