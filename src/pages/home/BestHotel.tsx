@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
-import {HashSpinner} from "../../components/spinner";
-import {useGetHotelsQuery} from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
+import { useGetHotelsQuery } from "../../api/public-api";
 
 interface HotelType {
   _id: string;
@@ -13,7 +13,7 @@ interface HotelType {
 }
 
 const BestHotel: React.FC = () => {
-  const {data, isLoading} = useGetHotelsQuery({limit: 4});
+  const { data, isLoading } = useGetHotelsQuery({ limit: 4 });
   const initialHotel: HotelType[] = [];
   const hotels = data || initialHotel;
 
@@ -35,7 +35,7 @@ const BestHotel: React.FC = () => {
             <HashSpinner />
           ) : (
             hotels &&
-            hotels.map((hotel) => <Hotel key={hotel._id} {...hotel} />)
+            hotels.map((hotel: any) => <Hotel key={hotel._id} {...hotel} />)
           )}
         </div>
       </Container>
