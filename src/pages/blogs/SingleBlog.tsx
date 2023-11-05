@@ -5,10 +5,21 @@ import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import { FcLikePlaceholder } from "react-icons/fc";
 
-const SingleBlog = () => {
+interface SingleBlog {
+  _id: number;
+  thumbnail: string;
+  title: string;
+  description: string;
+  authorName: string;
+  authorProfile: string;
+  publishDate: string;
+  likes: number;
+}
+
+const SingleBlog: React.FC = () => {
   const { _id } = useParams();
 
-  const [singleBlog, setSingleBlog] = useState([]);
+  const [singleBlog, setSingleBlog] = useState<SingleBlog[]>([]);
 
   useEffect(() => {
     fetchData("/db/best-blogs.json")
@@ -16,13 +27,13 @@ const SingleBlog = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const findData = singleBlog.find((blog) => blog._id == _id);
+  const findData = singleBlog.find((blog: any) => blog._id == _id);
 
-  const handleLike = (index: number) => {
-    const updatedBlogs = findData;
-    updatedBlogs[index].likes += 1;
-    setSingleBlog(updatedBlogs);
-  };
+  // const handleLike = (index: number) => {
+  //   const updatedBlogs = findData;
+  //   updatedBlogs[index].likes += 1;
+  //   setSingleBlog(updatedBlogs);
+  // };
 
   console.log(findData);
 
@@ -71,7 +82,7 @@ const SingleBlog = () => {
                 <div className="flex items-center gap-2">
                   <button
                     className="btn btn-primary"
-                    onClick={() => handleLike(index)}
+                    // onClick={() => handleLike(index)}
                   >
                     <FcLikePlaceholder className="text-3xl" />
                   </button>
