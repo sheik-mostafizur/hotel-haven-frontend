@@ -1,6 +1,10 @@
 import {Link, Outlet} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {DashboardNavAdmin, DashboardNavManager} from "./dashboard-nav";
+import {
+  DashboardNavAdmin,
+  DashboardNavCustomer,
+  DashboardNavManager,
+} from "./dashboard-nav";
 import {BiSolidDashboard} from "react-icons/bi";
 import {FaSignOutAlt} from "react-icons/fa";
 import {AiOutlineAlignLeft} from "react-icons/ai";
@@ -60,6 +64,7 @@ const Dashboard = () => {
               </Link>
             </li>
 
+            {user.role === ROLE.CUSTOMER && <DashboardNavCustomer />}
             {user.role === ROLE.MANAGER && <DashboardNavManager />}
             {user.role === ROLE.ADMIN && <DashboardNavAdmin />}
 

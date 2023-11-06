@@ -3,6 +3,7 @@ import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
+import {Wishlist} from "../pages/dashboard/customer";
 
 const routes = [
   {
@@ -22,8 +23,8 @@ const routes = [
         element: <ProfileDashboard />,
       },
       {
-        path: "gust",
-        element: <h2>Customer Gust</h2>,
+        path: "wishlist",
+        element: <Wishlist />,
       },
     ],
   },
