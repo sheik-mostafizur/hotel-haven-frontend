@@ -90,5 +90,3 @@ const CustomerReviews: React.FC = () => {
 };
 
 export default CustomerReviews;
-
-// transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200
