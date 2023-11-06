@@ -1,8 +1,9 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
-import { HashSpinner } from "../../components/spinner";
+// import { HashSpinner } from "../../components/spinner";
 import { useGetHotelsQuery } from "../../api/public-api";
 import React from "react";
+import HotelSkeleton from "../../components/skeleton/hotel-skeleton";
 
 interface HotelType {
   _id: string;
@@ -31,14 +32,14 @@ const BestHotel: React.FC = () => {
             world-className hospitality.
           </p>
         </div>
-        <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
-          {isLoading ? (
-            <HashSpinner />
-          ) : (
-            hotels &&
-            hotels.map((hotel: any) => <Hotel key={hotel._id} {...hotel} />)
-          )}
-        </div>
+        {isLoading ? (
+          <HotelSkeleton />
+        ) : (
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
+            {hotels &&
+              hotels.map((hotel: any) => <Hotel key={hotel._id} {...hotel} />)}
+          </div>
+        )}
       </Container>
     </div>
   );
