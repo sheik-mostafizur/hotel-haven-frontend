@@ -1,14 +1,14 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
-import {HotelType} from "../../../../types";
+import { HotelType } from "../../../../types";
 
 type ViewHotelProps = {
   hotel: HotelType.Hotel;
 };
 
-const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
-  const {name, photoURL, address, availableRoom, description, status, _id} =
+const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
+  const { name, photoURL, address, availableRoom, description, status, _id } =
     hotel;
   return (
     <div>
@@ -16,8 +16,9 @@ const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
       <div
         className={`${status == STATUS.PENDING ? "bg-orange-200" : ""} ${
           status == STATUS.REJECTED ? "bg-red-200" : ""
-        }`}>
-        <div className="flex my-4 flex-col gap-10 items-center border border-secondary-200 rounded-lg shadow md:flex-row dark:border-secondary-700 ">
+        }`}
+      >
+        <div className="flex w-full h-full my-4 flex-col gap-10 items-center border border-secondary-200 rounded-lg shadow md:flex-row dark:border-secondary-700 ">
           <img
             className=" rounded-t-lg md:h-auto md:w-96 md:rounded-none md:rounded-l-lg"
             src={photoURL}
@@ -32,9 +33,6 @@ const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
             </p>
             <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
               Location: {address.location}
-            </p>
-            <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-              Location URL: {address.thumbnailURL}
             </p>
             <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
               Latitude: {address.map.lat}
@@ -53,7 +51,8 @@ const ViewHotel: React.FC<ViewHotelProps> = ({hotel}) => {
                     : hotel.status === STATUS.REJECTED
                     ? "bg-red-500"
                     : ""
-                }`}>
+                }`}
+              >
                 Edit hotel
               </Button>
               <Link to={_id}>
