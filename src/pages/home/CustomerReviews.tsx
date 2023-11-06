@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
-import {Rating} from "@smastrom/react-rating";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 interface CustomerReviews {
@@ -38,7 +38,8 @@ const CustomerReviews: React.FC = () => {
               <div
                 key={review._id}
                 className="bg-primary-50 p-6 rounded-lg shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200 dark:bg-secondary-800 dark:border-secondary-700"
-                data-aos="fade-up">
+                data-aos="fade-up"
+              >
                 <div className="flex items-center mb-4">
                   <img
                     src={review.profileURL}
@@ -53,7 +54,7 @@ const CustomerReviews: React.FC = () => {
                         <Rating
                           value={review.rating}
                           readOnly={true}
-                          style={{maxWidth: "100px"}}
+                          style={{ maxWidth: "100px" }}
                         />
                       </div>
                     </div>

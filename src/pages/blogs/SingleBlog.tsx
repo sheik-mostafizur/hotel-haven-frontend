@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";

@@ -1,4 +1,5 @@
-import {FcLikePlaceholder} from "react-icons/fc";
+import React from "react";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 interface Blogs {
   thumbnail: string;

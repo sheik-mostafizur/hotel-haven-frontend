@@ -1,16 +1,25 @@
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Container from "../../../../components/ui/container";
 import Button from "../../../../components/ui/button";
-import {useEffect, useState} from "react";
-import {axios} from "../../../../api";
+import React, { useEffect, useState } from "react";
+import { axios } from "../../../../api";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import {HashSpinner} from "../../../../components/spinner";
+import { HashSpinner } from "../../../../components/spinner";
 
 interface IFormInputs {
   title: string;
-  thumbnails: Array<string>;
-  facilities: Array<string>;
+  thumbnails: {
+    [0]: string;
+    [1]: string;
+    [2]: string;
+  };
+  facilities: {
+    [0]: string;
+    [1]: string;
+    [2]: string;
+    [3]: string;
+  };
   capacity: {
     children: number;
     adult: number;
@@ -29,7 +38,7 @@ const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [room, setRoom] = useState([]);
 
-  const {handleSubmit, control, reset} = useForm<IFormInputs>({});
+  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     setIsLoading(true);
@@ -38,7 +47,7 @@ const Rooms: React.FC = () => {
     console.log(data);
     try {
       const {
-        data: {message},
+        data: { message },
       } = await axios.post("/manager/room", data);
       toastSuccess(message);
     } catch (error: any) {
@@ -52,7 +61,7 @@ const Rooms: React.FC = () => {
     setIsLoading(true);
     axios
       .get("/manager/room")
-      .then(({data}) => {
+      .then(({ data }) => {
         setRoom(data);
         setIsLoading(false);
       })
@@ -74,8 +83,8 @@ const Rooms: React.FC = () => {
             <Controller
               name="title"
               control={control}
-              rules={{required: true}}
-              render={({field}) => <input {...field} />}
+              rules={{ required: true }}
+              render={({ field }) => <input {...field} />}
             />
             <div className="grid md:grid-cols-1 lg:grid-cols-3 py-2 gap-4">
               <div>
@@ -83,8 +92,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[0]"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} type="url" />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} type="url" />}
                 />
               </div>
               <div>
@@ -92,7 +101,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[1]"
                   control={control}
-                  render={({field}) => <input {...field} type="url" />}
+                  render={({ field }) => <input {...field} type="url" />}
                 />
               </div>
               <div>
@@ -100,7 +109,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="thumbnails[2]"
                   control={control}
-                  render={({field}) => <input {...field} type="url" />}
+                  render={({ field }) => <input {...field} type="url" />}
                 />
               </div>
             </div>
@@ -110,8 +119,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[0]"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -119,7 +128,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[1]"
                   control={control}
-                  render={({field}) => <input {...field} />}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -127,7 +136,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[2]"
                   control={control}
-                  render={({field}) => <input {...field} />}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -135,7 +144,7 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="facilities[3]"
                   control={control}
-                  render={({field}) => <input {...field} />}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
             </div>
@@ -145,8 +154,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="capacity.adult"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} type="number" />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} type="number" />}
                 />
               </div>
               <div>
@@ -154,8 +163,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="capacity.children"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} type="number" />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} type="number" />}
                 />
               </div>
             </div>
@@ -165,8 +174,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.roomSize"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -174,8 +183,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.regularPrice"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -183,8 +192,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.discountedPrice"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -192,8 +201,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.view"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} type="text" />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} type="text" />}
                 />
               </div>
               <div>
@@ -201,8 +210,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.bedType"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
               <div>
@@ -210,8 +219,8 @@ const Rooms: React.FC = () => {
                 <Controller
                   name="roomInfo.additionalInfo"
                   control={control}
-                  rules={{required: true}}
-                  render={({field}) => <input {...field} />}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
                 />
               </div>
             </div>

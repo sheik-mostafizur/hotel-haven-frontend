@@ -2,6 +2,7 @@ import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 import { HashSpinner } from "../../components/spinner";
 import { useGetHotelsQuery } from "../../api/public-api";
+import React from "react";
 
 interface HotelType {
   _id: string;

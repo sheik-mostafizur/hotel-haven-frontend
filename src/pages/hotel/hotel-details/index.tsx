@@ -8,6 +8,7 @@ import { FaBed, FaEye, FaCheck } from "react-icons/fa6";
 import { GiResize } from "react-icons/gi";
 import { useGetHotelByIdQuery } from "../../../api/public-api";
 import { useAppSelector } from "../../../redux/hooks";
+import React from "react";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
@@ -17,6 +18,10 @@ interface HotelDetails {
     description: string;
     address: {
       location: string;
+      map: {
+        lat: number;
+        lng: number;
+      };
     };
   };
   rooms: {
@@ -40,12 +45,12 @@ const HotelDetails: React.FC = () => {
 
   const defaultProps = {
     center: {
-      lat: hotel?.address?.map?.lat,
-      lng: hotel?.address?.map?.lng,
+      lat: hotel?.address?.map?.lat as number,
+      lng: hotel?.address?.map?.lng as number,
     },
     zoom: 11,
   };
-  // console.log(viewHotels?.rooms[0].roomInfo);
+
   return (
     <Main>
       <Container>
@@ -61,7 +66,6 @@ const HotelDetails: React.FC = () => {
                     src={hotel?.photoURL}
                     alt=""
                   />
-
                   <div className="p-5">
                     <div>
                       <h5 className="mb-2 text-2xl font-bold tracking-tight text-secondary-900 dark:text-white">
@@ -84,7 +88,7 @@ const HotelDetails: React.FC = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3 2xl:grid-cols-4">
                   {viewHotels.rooms && viewHotels.rooms.length > 0 ? (
-                    viewHotels.rooms.map((room) => (
+                    viewHotels?.rooms.map((room: any) => (
                       <div key={room._id}>
                         <div className=" bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
                           <img
@@ -92,7 +96,6 @@ const HotelDetails: React.FC = () => {
                             src={room.thumbnails[0]}
                             alt={room.title}
                           />
-
                           <div className="p-4">
                             <h5 className="my-2 ">{room.title}</h5>
 
@@ -164,7 +167,9 @@ const HotelDetails: React.FC = () => {
                 </div>
               </>
             ) : (
-              <></>
+              <>
+                <p>No details</p>
+              </>
             )}
           </>
         )}

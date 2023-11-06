@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Main from "../../layout/main";
 import Button from "../../components/ui/button";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
 import { FcLikePlaceholder } from "react-icons/fc";
