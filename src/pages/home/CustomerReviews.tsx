@@ -3,6 +3,10 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 interface CustomerReviews {
   _id: number;
@@ -27,45 +31,58 @@ const CustomerReviews: React.FC = () => {
   }, []);
   return (
     <div className="dark:bg-secondary-700">
-      {" "}
       <Container className="lg:py-16 overflow-hidden">
-        <div className=" text-center font-extrabold text-primary-500 text-3xl mt-10 mb-10">
-          <h2 className="text-center">Customer Testimonials</h2>
+        <div className="mx-auto text-center">
+          <h2 className=""> Customer Reviews</h2>
+          <p className="px-4 lg:px-16 text-center py-2 font-normal">
+            Discover what our customers have to say about their experiences with
+            our products. Read their honest and heartfelt reviews to learn why
+            they love our toys and games.
+          </p>
         </div>
-        <div className="">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-            {reviews.map((review) => (
-              <div
-                key={review._id}
-                className="bg-primary-50 p-6 rounded-lg shadow-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200 dark:bg-secondary-800 dark:border-secondary-700"
-                data-aos="fade-up"
-              >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={review.profileURL}
-                    alt={review.name}
-                    className="w-12 h-12 rounded-full"
-                  />
-                  <div className="ml-3">
-                    <h3 className="text-xl font-semibold">{review.name}</h3>
-                    <div className="flex items-center">
-                      <div className="font-semibold font-mono text-lg">
-                        {/* Rating:{" "} */}
-                        <Rating
-                          value={review.rating}
-                          readOnly={true}
-                          style={{ maxWidth: "100px" }}
-                        />
+        <div style={{ cursor: "grab" }}>
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+          >
+            <div>
+              {reviews.map((review) => (
+                <SwiperSlide
+                  key={review._id}
+                  className="bg-white p-4 rounded-lg shadow-md  dark:bg-secondary-800 dark:border-secondary-700"
+                  data-aos="fade-up"
+                >
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={review.profileURL}
+                      alt={review.name}
+                      className="w-12 h-12 rounded-full"
+                    />
+                    <div className="ml-3">
+                      <h3 className="text-xl font-semibold">{review.name}</h3>
+                      <div className="flex items-center">
+                        <div className="font-semibold font-mono text-lg">
+                          <Rating
+                            value={review.rating}
+                            readOnly={true}
+                            style={{ maxWidth: "100px" }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <p className="text-gray-700 mb-6">
-                  <q className="italic font-mono">{review.review}</q>
-                </p>
-              </div>
-            ))}
-          </div>
+                  <p className="text-secondary-700 mb-6">
+                    <q className="italic font-mono">{review.review}</q>
+                  </p>
+                </SwiperSlide>
+              ))}
+            </div>
+          </Swiper>
         </div>
       </Container>
     </div>
@@ -73,3 +90,5 @@ const CustomerReviews: React.FC = () => {
 };
 
 export default CustomerReviews;
+
+// transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200
