@@ -4,11 +4,16 @@ import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
 import {Wishlist} from "../pages/dashboard/customer";
+import Profile from "../pages/profile";
 
 const routes = [
   {
     path: "/settings",
     element: <Settings />,
+  },
+  {
+    path: "/profile/:_id",
+    element: <Profile />,
   },
   {
     path: "/payment/:_id",

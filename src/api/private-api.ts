@@ -12,7 +12,7 @@ const privateApi = createApi({
     },
   }),
   reducerPath: "privateApi",
-  tagTypes: ["wishlist"],
+  tagTypes: ["wishlist", "profile"],
 
   endpoints: (builder) => ({
     getWishlist: builder.query({
@@ -34,6 +34,10 @@ const privateApi = createApi({
       }),
       invalidatesTags: ["wishlist"],
     }),
+    getProfile: builder.query({
+      query: (_id) => `/profile/${_id}`,
+      providesTags: ["profile"],
+    }),
   }),
 });
 
@@ -41,6 +45,7 @@ export const {
   useGetWishlistQuery,
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,
+  useGetProfileQuery,
 } = privateApi;
 
 export default privateApi;
