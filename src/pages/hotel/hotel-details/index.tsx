@@ -93,7 +93,7 @@ const HotelDetails: React.FC = () => {
                     <p>No rooms available</p>
                   )}
                 </div>
-                <div className="my-8" style={{height: "70vh", width: "100%"}}>
+                <div className="my-8" style={{height: "500px", width: "100%"}}>
                   <GoogleMapReact
                     bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
