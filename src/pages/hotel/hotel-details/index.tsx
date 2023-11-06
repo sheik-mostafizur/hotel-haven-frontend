@@ -1,15 +1,25 @@
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Main from "../../../layout/main";
-import { HashSpinner } from "../../../components/spinner";
+import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import Button from "../../../components/ui/button";
 import GoogleMapReact from "google-map-react";
-import { FaBed, FaEye, FaCheck } from "react-icons/fa6";
-import { GiResize } from "react-icons/gi";
-import { useGetHotelByIdQuery } from "../../../api/public-api";
-import { useAppSelector } from "../../../redux/hooks";
+import {FaBed, FaEye, FaCheck} from "react-icons/fa6";
+import {GiResize} from "react-icons/gi";
+import {useGetHotelByIdQuery} from "../../../api/public-api";
+import {useAppSelector} from "../../../redux/hooks";
 import React from "react";
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import {Tooltip} from "react-tooltip";
+import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
+import {
+  useDeleteWishlistByIdMutation,
+  useGetWishlistQuery,
+  usePostWishlistMutation,
+} from "../../../api/private-api";
+import toastError from "../../../utils/toast-error";
+import toastSuccess from "../../../utils/toast-success";
+
+const AnyReactComponent = ({text}) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -29,19 +39,23 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: { [key: string]: string };
+    roomInfo: {[key: string]: string};
   }[];
 }
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
-  const { _id } = useParams();
-  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
+  const {_id} = useParams();
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
 
-  const { hotel } = viewHotels || [];
+  const {data: wishlist} = useGetWishlistQuery(undefined);
+  const [postWishlist] = usePostWishlistMutation();
+  const [deleteWishlistById] = useDeleteWishlistByIdMutation();
+
+  const {hotel} = viewHotels || [];
 
   const defaultProps = {
     center: {
@@ -49,6 +63,30 @@ const HotelDetails: React.FC = () => {
       lng: hotel?.address?.map?.lng as number,
     },
     zoom: 11,
+  };
+
+  const handleWishlist = (_id) => {
+    postWishlist({roomId: _id})
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
+  };
+
+  const handleDeleteWishlist = (_id) => {
+    deleteWishlistById(_id)
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
   };
 
   return (
@@ -140,9 +178,44 @@ const HotelDetails: React.FC = () => {
                                 </li>
                               </ul>
                             </div>
-                            <Link to={`/payment/${room._id}`}>
-                              <Button>Reserve Now</Button>
-                            </Link>
+                            <div className="flex items-center justify-between">
+                              <Link to={`/payment/${room._id}`}>
+                                <Button>Reserve Now</Button>
+                              </Link>
+                              {wishlist?.some(
+                                (item) => item.roomId === room._id
+                              ) ? (
+                                <>
+                                  <AiFillHeart
+                                    onClick={() =>
+                                      handleDeleteWishlist(room._id)
+                                    }
+                                    data-tooltip-id={`saved_wishlist`}
+                                    data-tooltip-content="Already saved wishlist"
+                                    data-tooltip-place="top"
+                                    className="text-red-500 text-2xl cursor-pointer focus:outline-none"
+                                  />
+                                  <Tooltip
+                                    className="border-none"
+                                    id={`saved_wishlist`}
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <AiOutlineHeart
+                                    onClick={() => handleWishlist(room._id)}
+                                    data-tooltip-id={`wishlist`}
+                                    data-tooltip-content="Save to wishlist"
+                                    data-tooltip-place="top"
+                                    className="text-secondary-500 text-2xl cursor-pointer focus:outline-none"
+                                  />
+                                  <Tooltip
+                                    className="border-none"
+                                    id={`wishlist`}
+                                  />
+                                </>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -151,12 +224,11 @@ const HotelDetails: React.FC = () => {
                     <p>No rooms available</p>
                   )}
                 </div>
-                <div className="my-8" style={{ height: "70vh", width: "100%" }}>
+                <div className="my-8" style={{height: "70vh", width: "100%"}}>
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "" }}
+                    bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
+                    defaultZoom={defaultProps.zoom}>
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}

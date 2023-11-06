@@ -3,5 +3,6 @@ import * as auth from "./auth";
 
 import publicApi from "./public-api";
 import adminApi from "./admin-api";
+import privateApi from "./private-api";
 
-export {axios, auth, publicApi, adminApi};
+export {axios, auth, publicApi, privateApi, adminApi};
