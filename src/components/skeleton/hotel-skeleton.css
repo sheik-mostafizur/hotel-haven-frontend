@@ -1,0 +1,61 @@
+/* hotelSkeleton.css */
+.skeleton {
+  background: #f0f0f0;
+  border-radius: 0.5rem;
+  height: 100%;
+  width: 100%;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-image {
+  height: 80px;
+  width: 100%;
+  background: #ddd;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-content {
+  padding: 1rem;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 80%;
+  background: #ddd;
+  margin: 0 auto 1rem;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-info {
+  height: 16px;
+  width: 60%;
+  background: #ddd;
+  margin: 0 auto 0.5rem;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-description {
+  height: 80px;
+  width: 100%;
+  background: #ddd;
+  margin: 0 auto 0.5rem;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+.skeleton-rating {
+  height: 16px;
+  width: 30%;
+  background: #ddd;
+  margin: 0 auto;
+  animation: pulse 1.5s infinite alternate; /* Add animation to the skeleton */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
