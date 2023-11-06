@@ -1,16 +1,22 @@
 import {Link, Outlet} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {DashboardNavAdmin, DashboardNavManager} from "./dashboard-nav";
+import {
+  DashboardNavAdmin,
+  DashboardNavCustomer,
+  DashboardNavManager,
+} from "./dashboard-nav";
 import {BiSolidDashboard} from "react-icons/bi";
 import {FaSignOutAlt} from "react-icons/fa";
 import {AiOutlineAlignLeft} from "react-icons/ai";
 import ROLE from "../../constants/ROLE";
 import {logout} from "../../redux/authSlice";
 import swal from "sweetalert";
+import {useState} from "react";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
+  const [toggleMenu, setToggleMenu] = useState(false);
 
   const handleSignOut = () => {
     swal({
@@ -26,18 +32,23 @@ const Dashboard = () => {
   return (
     <>
       <button
+        onClick={() => setToggleMenu(!toggleMenu)}
         data-drawer-target="logo-sidebar"
         data-drawer-toggle="logo-sidebar"
         aria-controls="logo-sidebar"
         type="button"
-        className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-secondary-500 rounded-lg sm:hidden hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-secondary-200 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:focus:ring-secondary-600">
+        className={`${
+          toggleMenu ? "block ml-auto" : "ml-3 inline-flex"
+        } items-center p-2 mt-2 text-sm text-secondary-500 rounded-lg sm:hidden hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-secondary-200 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:focus:ring-secondary-600`}>
         <span className="sr-only">Open sidebar</span>
         <AiOutlineAlignLeft className="w-6 h-6" />
       </button>
 
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className={`${
+          toggleMenu ? "" : "-translate-x-full"
+        } fixed top-0 left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0`}
         aria-label="Sidebar">
         <div className="h-full px-3 py-4 overflow-y-auto bg-secondary-50 dark:bg-secondary-800">
           <Link to="/" className="flex items-center pl-2.5 mb-5">
@@ -60,6 +71,7 @@ const Dashboard = () => {
               </Link>
             </li>
 
+            {user.role === ROLE.CUSTOMER && <DashboardNavCustomer />}
             {user.role === ROLE.MANAGER && <DashboardNavManager />}
             {user.role === ROLE.ADMIN && <DashboardNavAdmin />}
 

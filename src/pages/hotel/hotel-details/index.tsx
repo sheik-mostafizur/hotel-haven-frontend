@@ -1,15 +1,13 @@
-import { Link, useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Main from "../../../layout/main";
-import { HashSpinner } from "../../../components/spinner";
+import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
-import Button from "../../../components/ui/button";
 import GoogleMapReact from "google-map-react";
-import { FaBed, FaEye, FaCheck } from "react-icons/fa6";
-import { GiResize } from "react-icons/gi";
-import { useGetHotelByIdQuery } from "../../../api/public-api";
-import { useAppSelector } from "../../../redux/hooks";
-import React from "react";
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import {useGetHotelByIdQuery} from "../../../api/public-api";
+import {useAppSelector} from "../../../redux/hooks";
+import CardRoom from "./CardRoom";
+
+const AnyReactComponent = ({text}) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -29,19 +27,19 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: { [key: string]: string };
+    roomInfo: {[key: string]: string};
   }[];
 }
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
-  const { _id } = useParams();
-  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
+  const {_id} = useParams();
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
 
-  const { hotel } = viewHotels || [];
+  const {hotel} = viewHotels || [];
 
   const defaultProps = {
     center: {
@@ -89,74 +87,17 @@ const HotelDetails: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3 2xl:grid-cols-4">
                   {viewHotels.rooms && viewHotels.rooms.length > 0 ? (
                     viewHotels?.rooms.map((room: any) => (
-                      <div key={room._id}>
-                        <div className=" bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
-                          <img
-                            className="rounded-t-lg h-80"
-                            src={room.thumbnails[0]}
-                            alt={room.title}
-                          />
-                          <div className="p-4">
-                            <h5 className="my-2 ">{room.title}</h5>
-
-                            <div className="py-1 ">
-                              <strong>Facilities:</strong>
-                              <>
-                                {room.facilities.map((facility, index) => (
-                                  <li key={index}>{facility}</li>
-                                ))}
-                              </>
-                            </div>
-                            <div className="mb-3">
-                              <ul>
-                                <li>
-                                  Regular price:{" "}
-                                  {viewHotels?.rooms[0].roomInfo.regularPrice}{" "}
-                                  BDT
-                                </li>
-                                <li>
-                                  Discount price:{" "}
-                                  {
-                                    viewHotels?.rooms[0].roomInfo
-                                      .discountedPrice
-                                  }{" "}
-                                  BDT
-                                </li>
-                                <li className="flex gap-2 items-center">
-                                  <GiResize></GiResize>
-                                  {viewHotels?.rooms[0].roomInfo.roomSize}
-                                </li>
-                                <li className="flex gap-2 items-center">
-                                  <FaBed></FaBed>
-                                  {viewHotels?.rooms[0].roomInfo.bedType}
-                                </li>
-                                <li className="flex gap-2 items-center">
-                                  <FaEye></FaEye>
-                                  {viewHotels?.rooms[0].roomInfo.view}
-                                </li>
-                                <li className="flex gap-2 items-center">
-                                  <FaCheck></FaCheck>
-                                  {viewHotels?.rooms[0].roomInfo.additionalInfo}
-                                </li>
-                              </ul>
-                            </div>
-                            <Link to={`/payment/${room._id}`}>
-                              <Button>Reserve Now</Button>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
+                      <CardRoom key={room._id} room={room} />
                     ))
                   ) : (
                     <p>No rooms available</p>
                   )}
                 </div>
-                <div className="my-8" style={{ height: "70vh", width: "100%" }}>
+                <div className="my-8" style={{height: "500px", width: "100%"}}>
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "" }}
+                    bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
+                    defaultZoom={defaultProps.zoom}>
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}

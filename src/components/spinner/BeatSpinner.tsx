@@ -1,7 +1,7 @@
 import BeatLoader from "react-spinners/BeatLoader";
 
-const BeatSpinner = ({size = 8}) => {
-  return <BeatLoader color="#fef3f2" size={size} />;
+const BeatSpinner = ({size = 8, color = "#fef3f2"}) => {
+  return <BeatLoader color={color} size={size} />;
 };
 
 export default BeatSpinner;
