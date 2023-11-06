@@ -32,7 +32,7 @@ const CustomerReviews: React.FC = () => {
   return (
     <div className="dark:bg-secondary-700">
       <Container className="lg:py-16 overflow-hidden">
-        <div className="mx-auto text-center">
+        <div className="mx-auto text-center py-4">
           <h2 className=""> Customer Reviews</h2>
           <p className="px-4 lg:px-16 text-center py-2 font-normal">
             Discover what our customers have to say about their experiences with
@@ -54,7 +54,7 @@ const CustomerReviews: React.FC = () => {
               {reviews.map((review) => (
                 <SwiperSlide
                   key={review._id}
-                  className="bg-white p-4 rounded-lg shadow-md  dark:bg-secondary-800 dark:border-secondary-700"
+                  className="bg-white p-4 rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-700"
                   data-aos="fade-up"
                 >
                   <div className="flex items-center mb-4">
@@ -76,7 +76,7 @@ const CustomerReviews: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <p className="text-secondary-700 mb-6">
+                  <p className="text-secondary-700 h-52">
                     <q className="italic font-mono">{review.review}</q>
                   </p>
                 </SwiperSlide>
