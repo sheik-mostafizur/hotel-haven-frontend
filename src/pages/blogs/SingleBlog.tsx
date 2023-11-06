@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
-import { FcLikePlaceholder } from "react-icons/fc";
+import {FcLikePlaceholder} from "react-icons/fc";
 
 interface SingleBlog {
   _id: number;
   thumbnail: string;
   title: string;
   description: string;
-  authorName: string;
-  authorProfile: string;
+  userName: string;
+  userProfile: string;
   publishDate: string;
   likes: number;
 }
 
 const SingleBlog: React.FC = () => {
-  const { _id } = useParams();
+  const {_id} = useParams();
 
   const [singleBlog, setSingleBlog] = useState<SingleBlog[]>([]);
 
@@ -34,10 +34,6 @@ const SingleBlog: React.FC = () => {
   //   updatedBlogs[index].likes += 1;
   //   setSingleBlog(updatedBlogs);
   // };
-
-  console.log(findData);
-
-  console.log(singleBlog);
   return (
     <Main>
       <Container>
@@ -61,13 +57,13 @@ const SingleBlog: React.FC = () => {
                   <div>
                     <img
                       className="rounded-full w-9 h-9"
-                      src={findData?.authorProfile}
+                      src={findData?.userProfile}
                       alt=""
                     />
                   </div>
                   <div className="flex-col items-center">
                     <div className="badge badge-outline font-semibold">
-                      <Link to="">{findData?.authorName}</Link>
+                      <Link to="">{findData?.userName}</Link>
                     </div>
                     <div className="badge badge-secondary text-sm">
                       {findData?.publishDate}

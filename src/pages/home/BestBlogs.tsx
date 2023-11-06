@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
-import React, { useEffect, useState } from "react";
-import Blogs from "./Blogs";
+import React, {useEffect, useState} from "react";
 import fetchData from "../../hooks/fetch-data";
+import {BlogCard} from "../../components/card";
 
 interface BestBlogs {
   thumbnail: string;
@@ -32,8 +32,8 @@ const BestBlogs: React.FC = () => {
           collection of stories.
         </p>
         <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
-          {bestBlogs.splice(0, 4).map((b, index) => (
-            <Blogs key={index} {...b} />
+          {bestBlogs.splice(0, 4).map((blog) => (
+            <BlogCard key={blog._id} blog={blog} />
           ))}
         </div>
       </Container>
