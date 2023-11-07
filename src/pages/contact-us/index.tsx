@@ -1,11 +1,11 @@
-// src/components/ContactUs.tsx
-import {useRef} from "react";
-import {useForm, SubmitHandler} from "react-hook-form";
+import { useEffect, useRef } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import emailjs from "emailjs-com";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import Main from "../../layout/main";
 import Button from "../../components/ui/button";
 import toastSuccess from "../../utils/toast-success";
+import contact from '../../assets/contact.png'
 
 interface FormData {
   name: string;
@@ -14,9 +14,8 @@ interface FormData {
 }
 
 const ContactUs: React.FC = () => {
-  const {handleSubmit} = useForm<FormData>();
+  const { handleSubmit } = useForm<FormData>();
   const formRef = useRef<HTMLFormElement | null>(null);
-
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const response = await emailjs.send(
@@ -25,7 +24,6 @@ const ContactUs: React.FC = () => {
         data,
         "OqespYIns1SjwRkCQ"
       );
-
       if (response.status === 200) {
         toastSuccess("Email sent successfully");
       }
@@ -36,30 +34,49 @@ const ContactUs: React.FC = () => {
       console.error(error);
     }
   };
-
   return (
     <Main>
-      <div className="p-4 w-1/2 mx-auto mt-4 mb-4">
-        <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
+      <div className="flex justify-center items-center flex-col lg:flex-row">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap5 lg:gap-20">
+          <div>
+            <div className="w-full -z-20 text-primary-500 flex justify-center items-center">
+              <img src={contact} alt="" />
+            </div>
+          </div>
+          <div style={{ marginTop: '30px' }} className=" ">
+            <div className="p-4  mx-auto mt-4 mb-4">
+              <h1 className="text-2xl font-semibold mb-4">Contact Us</h1>
 
-        <div id="contact" className="flex  justify-center items-center gap-10 ">
-          <motion.form
-            ref={formRef}
-            onSubmit={handleSubmit(onSubmit)}
-            transition={{duration: 0.5}}
-            className="w-full ">
-            <div className="mb-4 mt-10">
-              <input type="text" placeholder="Name" />
-            </div>
-            <div className="mb-4">
-              <input type="email" placeholder="Email" />
-            </div>
+              <div id="contact" className="flex justify-center items-center gap-10">
+                <motion.form ref={formRef} onSubmit={handleSubmit(onSubmit)} transition={{
+                  duration:
+                    0.5
+                }} className="w-full">
+                  <div className="mb-4 mt-10  w-full">
+                    <label className="text-xl font-semibold" htmlFor="name">
+                      Name :
+                    </label>
+                    <input className="p-2" type="text" placeholder="Name" />
+                  </div>
+                  <div className="mb-4  w-full">
+                    <label className="text-xl font-semibold" htmlFor="email">
+                      Email :
+                    </label>
+                    <input className="p-2" name="email" type="email" placeholder="Email" />
+                  </div>
 
-            <div className="mb-4">
-              <textarea placeholder="Your Message here ....." rows={6} />
+                  <div className="mb-4  w-full">
+                    <label className="text-xl font-semibold" htmlFor="message">
+                      Message :
+                    </label>
+                    <textarea className="p-2" name="message"
+                      placeholder="Your Message here ....." rows={6} />
+                  </div>
+                  <Button className="w-full" size="lg" type="submit">Send Message</Button>
+                </motion.form>
+              </div>
             </div>
-            <Button type="submit">Send Message</Button>
-          </motion.form>
+          </div>
         </div>
       </div>
     </Main>
