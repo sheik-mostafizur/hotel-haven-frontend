@@ -1,10 +1,10 @@
-import {FaBed, FaCheck, FaEye} from "react-icons/fa";
-import {GiResize} from "react-icons/gi";
+import { FaBed, FaCheck, FaEye } from "react-icons/fa";
+import { GiResize } from "react-icons/gi";
 import Button from "../../../components/ui/button";
-import {Link} from "react-router-dom";
-import {BeatSpinner} from "../../../components/spinner";
-import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
-import {Tooltip} from "react-tooltip";
+import { Link } from "react-router-dom";
+import { BeatSpinner } from "../../../components/spinner";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { Tooltip } from "react-tooltip";
 import {
   useDeleteWishlistByIdMutation,
   useGetWishlistQuery,
@@ -12,22 +12,33 @@ import {
 } from "../../../api/private-api";
 import toastSuccess from "../../../utils/toast-success";
 import toastError from "../../../utils/toast-error";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const CardRoom = ({room}) => {
-  const {data: wishlist} = useGetWishlistQuery(undefined);
-  const [postWishlist, {isLoading: postWishLoading}] =
+// Import Swiper styles
+// import 'swiper/css';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import './styles.css';
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+const CardRoom = ({ room }) => {
+  const { data: wishlist } = useGetWishlistQuery(undefined);
+  const [postWishlist, { isLoading: postWishLoading }] =
     usePostWishlistMutation();
-  const [deleteWishlistById, {isLoading: delWishLoading}] =
+  const [deleteWishlistById, { isLoading: delWishLoading }] =
     useDeleteWishlistByIdMutation();
 
   const handleWishlist = (_id) => {
-    postWishlist({roomId: _id})
+    postWishlist({ roomId: _id })
       .unwrap()
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
@@ -38,20 +49,39 @@ const CardRoom = ({room}) => {
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
-
+  console.log(room);
   return (
     <div>
       <div className=" bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
-        <img
-          className="rounded-t-lg h-80"
-          src={room.thumbnails[0]}
-          alt={room.title}
-        />
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <img className="w-full h-72" src={room?.thumbnails[0]} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="w-full h-72" src={room?.thumbnails[1]} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="w-full h-72" src={room?.thumbnails[2]} alt="" />
+          </SwiperSlide>
+        </Swiper>
         <div className="p-4">
           <h5 className="my-2 ">{room.title}</h5>
 
