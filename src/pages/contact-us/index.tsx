@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 import Main from "../../layout/main";
 import Button from "../../components/ui/button";
 import toastSuccess from "../../utils/toast-success";
-import lottie from "lottie-web";
-import animationData from "./data.json"; // Import your animation data
+import contact from '../../assets/contact.png'
 
 interface FormData {
   name: string;
@@ -17,19 +16,9 @@ interface FormData {
 const ContactUs: React.FC = () => {
   const { handleSubmit } = useForm<FormData>();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const container = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (container.current) {
-      lottie.loadAnimation({
-        container: container.current,
-        renderer: "svg",
-        autoplay: true,
-        loop: true, // Set loop to false to play the animation only once
-        animationData: animationData,
-      });
-    }
-  }, []);
+
+
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
@@ -56,8 +45,8 @@ const ContactUs: React.FC = () => {
       <div className="flex justify-center items-center flex-col lg:flex-row">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap5 lg:gap-20">
           <div>
-            <div ref={container} className="w-full -z-20 mt-10 text-primary-500">
-              {/* This is where the Lottie animation will be rendered */}
+            <div className="w-full -z-20 text-primary-500 flex justify-center items-center">
+              <img src={contact} alt="" />
             </div>
           </div>
           <div style={{ marginTop: '30px' }} className=" ">
