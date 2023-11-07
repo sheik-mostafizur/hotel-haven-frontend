@@ -6,6 +6,7 @@ import { axios } from "../../../../api";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
 import { HashSpinner } from "../../../../components/spinner";
+import HotelRoomCard from "./roomcard";
 
 interface IFormInputs {
   title: string;
@@ -36,7 +37,7 @@ interface IFormInputs {
 
 const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [room, setRoom] = useState([]);
+  const [rooms, setRoom] = useState([]);
 
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
 
@@ -229,7 +230,12 @@ const Rooms: React.FC = () => {
             </Button>
           </form>
           <br />
-          {JSON.stringify(room)}
+          {
+            rooms.map(singleRoom =>
+              < HotelRoomCard key={singleRoom._id} {...singleRoom} />
+            )
+
+          }
         </div>
       )}
     </Container>
