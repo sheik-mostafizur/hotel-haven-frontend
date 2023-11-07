@@ -4,8 +4,10 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 
 interface IFormInputs {
   title: string;
+  category: string;
   thumbnail: string;
   description: string;
+  likeCount: number;
 }
 
 const CreateBlog = () => {
@@ -22,20 +24,46 @@ const CreateBlog = () => {
           <h2 className="text-center">Create a Blog</h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="title">Title:</label>
-          <Controller
-            name="title"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <input {...field} />}
-          />
-          <label htmlFor="thumbnail">Image:</label>
-          <Controller
-            name="thumbnail"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <input {...field} />}
-          />
+          <div className="grid grid-cols-2 gap-4 mx-auto items-center">
+            <div>
+              <label htmlFor="title">Title:</label>
+              <Controller
+                name="title"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="category">Category:</label>
+              <Controller
+                name="category"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label htmlFor="thumbnail">Image:</label>
+              <Controller
+                name="thumbnail"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+            <div>
+              <label htmlFor="likeCount">Image:</label>
+              <Controller
+                name="likeCount"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
+              />
+            </div>
+          </div>
           <label htmlFor="description">Description</label>
           <Controller
             name="description"

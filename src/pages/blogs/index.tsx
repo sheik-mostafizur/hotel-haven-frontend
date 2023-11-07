@@ -5,7 +5,7 @@ import Container from "../../components/ui/container";
 import { BlogCard } from "../../components/card";
 import Button from "../../components/ui/button";
 import { Link } from "react-router-dom";
-import { AiOutlineMenu } from "react-icons/ai";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import "./dropdown.css";
 interface BlogData {
   _id: number;
@@ -43,20 +43,15 @@ const Blogs: React.FC = () => {
             <h1 className="text-center my-4 font-bold">See Our Recent Blogs</h1>
 
             <div className=" my-4">
-              {/* <details className="">
-                <summary className="text-end"></summary>
-                <ul>
-                  <Link to={"/createBlog"}>
-                    <Button>Create Blog</Button>
-                  </Link>
-                </ul>
-              </details> */}
               <div className="dropdown">
                 <Button className="dropbtn">
-                  <AiOutlineMenu />
+                  <BsThreeDotsVertical />
                 </Button>
                 <div className="dropdown-content max-w-2xl">
-                  <Link className="hover:bg-secondary-200" to={"/createBlog"}>
+                  <Link
+                    className="hover:bg-secondary-200 btn"
+                    to={"/createBlog"}
+                  >
                     Create Blog
                   </Link>
                 </div>
