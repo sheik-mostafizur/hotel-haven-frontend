@@ -1,17 +1,19 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import {HotelType} from "../../../../types";
-import {useEditHotelStatusAdminMutation} from "../../../../api/admin-api";
+import { HotelType } from "../../../../types";
+import { useEditHotelStatusAdminMutation } from "../../../../api/admin-api";
 
 interface HotelCardProps {
   hotel: HotelType.Hotel;
 }
 
-const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
-  const {_id, name, addedRoom, availableRoom, email, status, photoURL} = hotel;
+const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
+  console.log(hotel);
+  const { _id, name, addedRoom, availableRoom, email, status, photoURL } =
+    hotel;
   const [editHotelStatusAdmin] = useEditHotelStatusAdminMutation();
 
   const handleRoomApproved = async () => {
@@ -22,10 +24,10 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
       },
     })
       .unwrap()
-      .then(({message}) => {
+      .then(({ message }) => {
         toastSuccess(message);
       })
-      .catch(({data}) => {
+      .catch(({ data }) => {
         toastError(data);
       });
   };
@@ -41,10 +43,10 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
         },
       })
         .unwrap()
-        .then(({message}) => {
+        .then(({ message }) => {
           toastSuccess(message);
         })
-        .catch(({data}) => {
+        .catch(({ data }) => {
           toastError(data);
         });
     }
@@ -72,13 +74,15 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
           </p>
           <Button
             onClick={handleRoomApproved}
-            isDisabled={status == STATUS.APPROVED}>
+            isDisabled={status == STATUS.APPROVED}
+          >
             Approved
           </Button>
           <Button
             onClick={handleRoomRejected}
             isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
-            className="mx-2">
+            className="mx-2"
+          >
             Rejected
           </Button>
           <Link to={_id}>
