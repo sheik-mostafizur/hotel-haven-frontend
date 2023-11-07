@@ -40,29 +40,34 @@ const CreateBlog = () => {
                 name="category"
                 control={control}
                 rules={{ required: true }}
-                render={({ field }) => <input {...field} />}
+                render={({ field }) => (
+                  <select
+                    className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    {...field}
+                  >
+                    <option defaultValue="Select Category">
+                      Select Category
+                    </option>
+                    <option value="TA">Travel and Adventure</option>
+                    <option value="BTT">Booking Tips and Tricks</option>
+                    <option value="HR">
+                      Hotel Reviews and Recommendations
+                    </option>
+                    <option value="GH">Gardening and Horticulture</option>
+                    <option value="AC">Art and Creativity</option>
+                  </select>
+                )}
               />
             </div>
           </div>
           <div>
-            <div>
-              <label htmlFor="thumbnail">Image:</label>
-              <Controller
-                name="thumbnail"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
-            <div>
-              <label htmlFor="likeCount">Image:</label>
-              <Controller
-                name="likeCount"
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => <input {...field} />}
-              />
-            </div>
+            <label htmlFor="thumbnail">Image:</label>
+            <Controller
+              name="thumbnail"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => <input {...field} />}
+            />
           </div>
           <label htmlFor="description">Description</label>
           <Controller

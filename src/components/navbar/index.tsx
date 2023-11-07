@@ -77,6 +77,11 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/createBlog" className={profileMenuStyle}>
+                  Create a blog
+                </Link>
+              </li>
+              <li>
                 <Link to="/settings" className={profileMenuStyle}>
                   Settings
                 </Link>
