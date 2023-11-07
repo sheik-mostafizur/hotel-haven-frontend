@@ -1,25 +1,17 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Container from "../../../../components/ui/container";
 import Button from "../../../../components/ui/button";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { axios } from "../../../../api";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
 import { HashSpinner } from "../../../../components/spinner";
+import HotelRoomCard from "./roomcard";
 
 interface IFormInputs {
   title: string;
-  thumbnails: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-  };
-  facilities: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-    [3]: string;
-  };
+  thumbnails: Array<string>;
+  facilities: Array<string>;
   capacity: {
     children: number;
     adult: number;
@@ -36,7 +28,7 @@ interface IFormInputs {
 
 const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [room, setRoom] = useState([]);
+  const [rooms, setRoom] = useState([]);
 
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
 
@@ -63,6 +55,7 @@ const Rooms: React.FC = () => {
       .get("/manager/room")
       .then(({ data }) => {
         setRoom(data);
+        console.log(data)
         setIsLoading(false);
       })
       .catch((error) => {
@@ -229,7 +222,16 @@ const Rooms: React.FC = () => {
             </Button>
           </form>
           <br />
-          {JSON.stringify(room)}
+          <div>
+            {
+              rooms.map(singleRoom => < HotelRoomCard key={singleRoom._id} {...singleRoom} />
+              )
+
+            }
+          </div>
+          {
+
+          }
         </div>
       )}
     </Container>

@@ -1,6 +1,6 @@
 import FindRoomForm from "../../components/find-room-form";
 import Container from "../../components/ui/container";
-import React from "react";
+
 
 const Banner = () => {
   return (
