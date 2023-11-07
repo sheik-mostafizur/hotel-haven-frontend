@@ -3,10 +3,12 @@ import Button from "../ui/button";
 import { useState } from "react";
 import { logout } from "../../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const isUser = user && user?.email;
 
@@ -51,7 +53,7 @@ const Navbar = () => {
               />
             </button>
           ) : (
-            <Link to={"/signin"}>
+            <Link to="/signin">
               <Button>Sign In</Button>
             </Link>
           )}
@@ -74,11 +76,6 @@ const Navbar = () => {
               <li>
                 <Link to="/dashboard" className={profileMenuStyle}>
                   Dashboard
-                </Link>
-              </li>
-              <li>
-                <Link to="/createBlog" className={profileMenuStyle}>
-                  Create a blog
                 </Link>
               </li>
               <li>
@@ -133,27 +130,60 @@ const Navbar = () => {
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-secondary-800 md:dark:bg-secondary-900 dark:border-secondary-700">
             <li>
-              <Link to="/" className={navItemStyleActive} aria-current="page">
+              <Link
+                to="/"
+                className={
+                  location.pathname === "/" ? navItemStyleActive : navItemStyle
+                }
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to={"/hotel"} className={navItemStyle}>
+              <Link
+                to="/hotel"
+                className={
+                  location.pathname === "/hotel"
+                    ? navItemStyleActive
+                    : navItemStyle
+                }
+              >
                 Hotel
               </Link>
             </li>
             <li>
-              <Link to={"/blogs"} className={navItemStyle}>
+              <Link
+                to="/blogs"
+                className={
+                  location.pathname === "/blogs"
+                    ? navItemStyleActive
+                    : navItemStyle
+                }
+              >
                 Blog
               </Link>
             </li>
             <li>
-              <Link to={"/about"} className={navItemStyle}>
+              <Link
+                to="/about"
+                className={
+                  location.pathname === "/about"
+                    ? navItemStyleActive
+                    : navItemStyle
+                }
+              >
                 About Us
               </Link>
             </li>
             <li>
-              <Link to={"/contact-us"} className={navItemStyle}>
+              <Link
+                to="/contact-us"
+                className={
+                  location.pathname === "/contact-us"
+                    ? navItemStyleActive
+                    : navItemStyle
+                }
+              >
                 Contact Us
               </Link>
             </li>
