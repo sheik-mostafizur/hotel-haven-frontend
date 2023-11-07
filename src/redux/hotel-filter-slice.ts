@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const hotelFilterSlice = createSlice({
   name: "hotel-filter",
@@ -6,6 +6,8 @@ const hotelFilterSlice = createSlice({
     location: "",
     checkIn: "",
     checkOut: "",
+    adult: 0,
+    child: 0,
   },
   reducers: {
     setHotelFilter: (state, action) => {
@@ -14,6 +16,6 @@ const hotelFilterSlice = createSlice({
   },
 });
 
-export const {setHotelFilter} = hotelFilterSlice.actions;
+export const { setHotelFilter } = hotelFilterSlice.actions;
 
 export default hotelFilterSlice.reducer;
