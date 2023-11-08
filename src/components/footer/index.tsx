@@ -42,9 +42,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="mb-4">
-                <a href="#" className="hover:underline">
+                <Link to={"/license"} className="hover:underline">
                   Licensing
-                </a>
+                </Link>
               </li>
               <li className="mb-4">
                 <a href="#" className="hover:underline">
