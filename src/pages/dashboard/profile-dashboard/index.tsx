@@ -6,6 +6,7 @@ import Modal from "../../../components/ui/modal";
 interface IFormInputs {
   name: string;
   email: string;
+  phone: string;
   CurrentPassword: string;
   NewPassword: string;
   ConfirmNewPassword: string;
@@ -13,26 +14,29 @@ interface IFormInputs {
 const ProfileDashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
 
-  const { name, email, photoURL } = user;
+  const { name, email, photoURL, phone } = user;
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     console.log(data);
   };
-  // console.log(user);
+
+  const photoSave = (e: any): any => {
+    e.preventDefault();
+    const form = e.target;
+    const photoURL = form.photoURL.value;
+  };
+
   return (
     <div>
       <h2 className="text-center">User info</h2>
       <div>
-        <div className="">
+        <div>
           <img
             className="mx-auto relative w-20 lg:w-32 rounded-full"
             src={photoURL}
             alt="user Profile"
           />
-          {/* <button className="btn flex gap-2 items-center mx-auto">
-            <AiFillCamera /> change picture
-          </button> */}
           <Modal
             title="Change user profile"
             button={{
@@ -41,16 +45,14 @@ const ProfileDashboard = () => {
             }}
           >
             <div className="my-2">
-              <form>
+              <form onSubmit={photoSave}>
                 <label htmlFor="photoURL">PhotoURL:</label>
                 <input
                   type="url"
                   name="photoURL"
                   placeholder="Paste your profile url"
                 />
-                <div className="my-1 text-center">
-                  <Button>Save</Button>
-                </div>
+                <input type="submit" value="save" />
               </form>
             </div>
           </Modal>
@@ -75,6 +77,17 @@ const ProfileDashboard = () => {
               defaultValue={email}
               rules={{ required: true }}
               render={({ field }) => <input type="email" {...field} />}
+            />
+          </div>
+          <div className="my-2">
+            <label htmlFor="phone">Mobile:</label>
+            <Controller
+              name="phone"
+              control={control}
+              disabled
+              defaultValue={phone}
+              rules={{ required: true }}
+              render={({ field }) => <input type="number" {...field} />}
             />
           </div>
           <div className="my-2">
