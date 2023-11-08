@@ -6,6 +6,7 @@ import PrivateProtector from "./PrivateProtector";
 import {Wishlist} from "../pages/dashboard/customer";
 import Profile from "../pages/profile";
 import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
+import HomeDashboard from "../pages/dashboard/home-dashboard";
 
 const routes = [
   {
@@ -26,7 +27,7 @@ const routes = [
     children: [
       {
         path: "",
-        element: <ProfileDashboard />,
+        element: <HomeDashboard />,
       },
       {
         path: "wishlist",
@@ -35,6 +36,10 @@ const routes = [
       {
         path: "blogs",
         element: <BlogsDashboard />,
+      },
+      {
+        path: "profile",
+        element: <ProfileDashboard />,
       },
     ],
   },
