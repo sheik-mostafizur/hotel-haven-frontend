@@ -29,11 +29,6 @@ const SingleBlog: React.FC = () => {
 
   const findData = singleBlog.find((blog: any) => blog._id == _id);
 
-  // const handleLike = (index: number) => {
-  //   const updatedBlogs = findData;
-  //   updatedBlogs[index].likes += 1;
-  //   setSingleBlog(updatedBlogs);
-  // };
   return (
     <Main>
       <Container>
@@ -76,10 +71,7 @@ const SingleBlog: React.FC = () => {
               </p>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <button
-                    className="btn btn-primary"
-                    // onClick={() => handleLike(index)}
-                  >
+                  <button className="btn btn-primary">
                     <FcLikePlaceholder className="text-3xl" />
                   </button>
                   <span className="text-sm">{findData?.likes} Likes</span>

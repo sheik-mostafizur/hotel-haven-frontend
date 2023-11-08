@@ -12,7 +12,7 @@ const privateApi = createApi({
     },
   }),
   reducerPath: "privateApi",
-  tagTypes: ["wishlist", "profile"],
+  tagTypes: ["wishlist", "profile", "blogs"],
 
   endpoints: (builder) => ({
     getWishlist: builder.query({
@@ -38,6 +38,18 @@ const privateApi = createApi({
       query: (_id) => `/profile/${_id}`,
       providesTags: ["profile"],
     }),
+    getBlogs: builder.query({
+      query: () => "/blog",
+      providesTags: ["blogs"],
+    }),
+    postBlogs: builder.mutation({
+      query: (data) => ({
+        url: "/blog",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["blogs"],
+    }),
   }),
 });
 
@@ -46,6 +58,8 @@ export const {
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,
   useGetProfileQuery,
+  useGetBlogsQuery,
+  usePostBlogsMutation,
 } = privateApi;
 
 export default privateApi;

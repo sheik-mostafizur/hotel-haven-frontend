@@ -5,6 +5,7 @@ import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
 import {Wishlist} from "../pages/dashboard/customer";
 import Profile from "../pages/profile";
+import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
       {
         path: "wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "blogs",
+        element: <BlogsDashboard />,
       },
     ],
   },
