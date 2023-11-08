@@ -1,6 +1,7 @@
-import React, {useEffect, useRef} from "react";
-import {useAppSelector} from "../../../redux/hooks";
+import React, { useEffect, useRef } from "react";
+import { useAppSelector } from "../../../redux/hooks";
 import Chart from "chart.js/auto";
+import { useGetUsersAdminQuery } from "../../../api/admin-api";
 
 const AdminChart = () => {
   const user = useAppSelector((state) => state.auth.user);
@@ -8,20 +9,33 @@ const AdminChart = () => {
   const usersData = useAppSelector((state) => state.users); // Replace with actual user data from Redux
   const hotelsData = useAppSelector((state) => state.hotels); // Replace with actual hotel data from Redux
 
+  const { data, isLoading } = useGetUsersAdminQuery({
+    length: true,
+  });
+
   // Reference to the canvas elements where the charts will be rendered
   const pieChartRef = useRef(null);
   const barChartRef = useRef(null);
 
   useEffect(() => {
-    if (isAdmin) {
-      const userData = usersData || []; // Replace with your user data
+    if (isAdmin && pieChartRef.current && barChartRef.current && data) {
+      // Destroy the existing chart instances on the canvas
+      if (pieChartRef.current?.__chart) {
+        pieChartRef.current.__chart.destroy();
+      }
+      if (barChartRef.current?.__chart) {
+        barChartRef.current.__chart.destroy();
+      }
+
+      // Create the data for the pie chart
       const userDataCount = {
-        Customers: 100,
-        Managers: 60,
-        Admins: 5,
+        Customers: data?.CUSTOMER || 0,
+        Managers: data?.MANAGER || 0,
+        Admins: data?.ADMIN || 0,
       };
 
       // Count the number of users in each category
+      const userData = usersData || [];
       userData.forEach((user) => {
         if (user.role === "CUSTOMER") {
           userDataCount.Customers += 1;
@@ -32,7 +46,6 @@ const AdminChart = () => {
         }
       });
 
-      // Create the data for the pie chart
       const pieChartData = {
         labels: ["Customers", "Managers", "Admins"],
         datasets: [
@@ -42,7 +55,7 @@ const AdminChart = () => {
               userDataCount.Managers,
               userDataCount.Admins,
             ],
-            backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"], // Colors for the pie chart segments
+            backgroundColor: ["#36A2EB", "#FFCE56", "#FF6384"],
           },
         ],
       };
@@ -52,23 +65,19 @@ const AdminChart = () => {
         data: pieChartData,
       };
 
-      // Destroy the existing pie chart (if any) before creating a new one
-      const existingPieChart = pieChartRef.current?.__chart;
-      if (existingPieChart) {
-        existingPieChart.destroy();
-      }
-
       // Create the pie chart
-      new Chart(pieChartRef.current, pieChartConfig);
+      pieChartRef.current.__chart = new Chart(
+        pieChartRef.current,
+        pieChartConfig
+      );
 
-      // Count the number of hotels with different statuses
+      // Create the data for the bar chart
       const hotelDataCount = {
         APPROVED: 44,
         REJECTED: 3,
         PENDING: 2,
       };
 
-      // Create the data for the bar chart
       const barChartData = {
         labels: ["APPROVED", "REJECTED", "PENDING"],
         datasets: [
@@ -79,7 +88,7 @@ const AdminChart = () => {
               hotelDataCount.REJECTED,
               hotelDataCount.PENDING,
             ],
-            backgroundColor: ["#4CAF50", "#F44336", "#FFC107"], // Colors for the bar chart bars
+            backgroundColor: ["#4CAF50", "#F44336", "#FFC107"],
           },
         ],
       };
@@ -89,16 +98,13 @@ const AdminChart = () => {
         data: barChartData,
       };
 
-      // Destroy the existing bar chart (if any) before creating a new one
-      const existingBarChart = barChartRef.current?.__chart;
-      if (existingBarChart) {
-        existingBarChart.destroy();
-      }
-
       // Create the bar chart
-      new Chart(barChartRef.current, barChartConfig);
+      barChartRef.current.__chart = new Chart(
+        barChartRef.current,
+        barChartConfig
+      );
     }
-  }, [isAdmin, usersData, hotelsData]);
+  }, [isAdmin, usersData, data]);
 
   return (
     <div className="p-4 border-2 border-secondary-200 border-dashed rounded-lg dark:border-secondary-700">
@@ -116,12 +122,14 @@ const AdminChart = () => {
             <div>
               <h4 className="text-lg font-semibold">Total Rooms</h4>
               {/* Assume you have access to totalRooms for the admin */}
-              <p className="text-2xl font-bold text-primary-500">49</p>
+              <p className="text-2xl font-bold text-primary-500">420</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold">Total Users</h4>
               {/* Assume you have access to totalUsers for the admin */}
-              <p className="text-2xl font-bold text-primary-500">165</p>
+              <p className="text-2xl font-bold text-primary-500">
+                {data?.USERS}
+              </p>
             </div>
           </div>
         </div>
