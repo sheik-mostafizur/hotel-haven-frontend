@@ -28,7 +28,6 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
         <div key={`${item.name} ${index}`} className="my-4">
           {item.type !== "select" ? (
             <>
-              {item.rules.validate(4)}
               {item.label && <label htmlFor={item.name}>{item.label}</label>}
               <Controller
                 name={item.name}

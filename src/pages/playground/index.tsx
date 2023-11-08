@@ -1,14 +1,10 @@
-
-import RatingPopUp from "../../components/RatingPopUp";
-import {useForm} from "react-hook-form";
 import Container from "../../components/ui/container";
 import Form from "../../components/ui/form";
 
 const Playground: React.FC = () => {
-
   const form: FormField[] = [
     {
-      type: "password",
+      type: "text",
       name: "password",
       defaultValue: "",
       placeholder: "Enter your password",
@@ -24,35 +20,17 @@ const Playground: React.FC = () => {
         },
       },
     },
-    {
-      type: "password",
-      name: "conform_password",
-      defaultValue: "",
-      label: "I am label",
-      placeholder: "Enter your confirm password",
-      rules: {
-        required: "This is required",
-        validate: (val: string) => {
-          console.log(watch("password"));
-          if (watch("password") != val) {
-            return "Your passwords do no match";
-          }
-        },
-      },
-    },
   ];
   return (
     <Container className="dark:bg-secondary-700 w-screen h-screen">
       <h1>Playground</h1>
-     
-      <RatingPopUp></RatingPopUp>
+
       <Form
         form={form}
         onSubmit={(data) => {
           console.log(data);
         }}
       />
-      {form[1].rules.validate(3)}
     </Container>
   );
 };
