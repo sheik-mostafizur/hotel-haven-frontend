@@ -1,3 +1,4 @@
+// import Button from "../../../../components/ui/button";
 import Container from "../../../../components/ui/container";
 
 const BookingHistory = () => {
@@ -9,16 +10,16 @@ const BookingHistory = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Id
+                Hotel Image
               </th>
               <th scope="col" className="px-6 py-3">
-                RoomId
+                Hotel name
               </th>
               <th scope="col" className="px-6 py-3">
-                UserId
+                Room
               </th>
               <th scope="col" className="px-6 py-3">
-                Action
+                Payment History
               </th>
             </tr>
           </thead>
@@ -31,7 +32,7 @@ const BookingHistory = () => {
               <td className="px-6 py-4"></td>
               <td className="px-6 py-4"></td>
               <td className="px-6 py-4">
-                {/* <Button size="sm">remove</Button> */}
+                {/* <Button size="sm">View</Button> */}
               </td>
             </tr>
           </tbody>
