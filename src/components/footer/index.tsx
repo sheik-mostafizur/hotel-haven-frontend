@@ -6,11 +6,7 @@ const Footer = () => {
       <Container>
         <div className="grid grid-cols-2 gap-8 px-4 md:grid-cols-4">
           <div>
-            <img
-              className="w-44"
-              src="/public/images/logo-transparent.png"
-              alt=""
-            />
+            <img className="w-44" src="/images/logo-transparent.png" alt="" />
           </div>
           <div>
             <h2 className="mb-6 text-sm font-semibold text-secondary-900 uppercase dark:text-white">

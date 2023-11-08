@@ -1,8 +1,8 @@
 import Main from "../../layout/main";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
-import {BlogCard} from "../../components/card";
+import { BlogCard } from "../../components/card";
 
 interface BlogData {
   _id: number;
@@ -37,7 +37,7 @@ const Blogs: React.FC = () => {
       <Main>
         <Container>
           <div className="m-4">
-            <h1 className="text-center my-4 font-bold">See Our Recent Blogs</h1>
+            <h1 className="text-center my-4 font-bold">All Blogs</h1>
 
             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
               {blogs.map((blog: BlogData) => (

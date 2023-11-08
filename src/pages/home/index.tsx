@@ -1,4 +1,3 @@
-import RatingPopUp from "../../components/RatingPopUp";
 import Main from "../../layout/main";
 import Banner from "./Banner";
 import BestBlogs from "./BestBlogs";
@@ -16,7 +15,6 @@ const Home = () => {
       <TopLocation />
       <CustomerReviews />
       <BestBlogs />
-      <RatingPopUp></RatingPopUp>
     </Main>
   );
 };
