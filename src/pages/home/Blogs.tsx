@@ -1,4 +1,5 @@
 import React from "react";
+import "./Blog.css";
 import { FcLikePlaceholder } from "react-icons/fc";
 
 interface Blogs {
@@ -21,7 +22,10 @@ const Blogs: React.FC<Blogs> = ({
   // console.log(title);
   return (
     <>
-      <div className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
+      <div
+        id="fadeIn"
+        className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700"
+      >
         <img
           className="h-80 w-full object-cover rounded-t-2xl"
           src={thumbnail}

@@ -52,7 +52,11 @@ const ProfileDashboard = () => {
                   name="photoURL"
                   placeholder="Paste your profile url"
                 />
-                <input type="submit" value="save" />
+                <input
+                  type="submit"
+                  className="bg-primary-400 my-2 cursor-pointer"
+                  value="save"
+                />
               </form>
             </div>
           </Modal>

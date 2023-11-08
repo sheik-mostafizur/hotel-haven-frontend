@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import fetchData from "../../hooks/fetch-data";
-import {BlogCard} from "../../components/card";
+import { BlogCard } from "../../components/card";
 
 interface BestBlogs {
   thumbnail: string;
