@@ -13,6 +13,7 @@ import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 import HotelDetails from "../pages/hotel/hotel-details";
 import SingleBlog from "../pages/blogs/SingleBlog";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/playground",
     element: <Playground />,
+  },
+  {
+    path: "/PrivacyPolicy",
+    element: <PrivacyPolicy />,
   },
   ...AdminRoutes,
   ...ManagerRoutes,

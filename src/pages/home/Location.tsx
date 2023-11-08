@@ -11,9 +11,13 @@ const Location: React.FC<Location> = ({
   location_name,
   total_hotels,
 }) => {
-  //   console.log(image);
+  const hotelFilter = (location_name: any) => {
+    console.log(location_name);
+  };
+
   return (
     <div
+      onClick={() => hotelFilter(location_name)}
       id="card"
       className="bg-white mx-auto rounded-lg dark:bg-secondary-700"
     >
