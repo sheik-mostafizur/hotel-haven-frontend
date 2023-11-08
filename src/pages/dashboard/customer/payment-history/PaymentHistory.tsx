@@ -22,28 +22,19 @@ const PaymentHistory = () => {
               </th>
             </tr>
           </thead>
-          {/* <tbody>
-                {wishlist?.map((item) => (
-                  <tr
-                    key={item._id}
-                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {item._id}
-                    </th>
-                    <td className="px-6 py-4">{item.roomId}</td>
-                    <td className="px-6 py-4">{item.userId}</td>
-                    <td className="px-6 py-4">
-                      <Button
-                        size="sm"
-                        onClick={() => handleDeleteWishlist(item._id)}>
-                        remove
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody> */}
+          <tbody>
+            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+              <th
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              ></th>
+              <td className="px-6 py-4"></td>
+              <td className="px-6 py-4"></td>
+              <td className="px-6 py-4">
+                {/* <Button size="sm">remove</Button> */}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </Container>
