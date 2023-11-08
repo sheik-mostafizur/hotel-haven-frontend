@@ -15,7 +15,11 @@ import {
 
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
-  const {data: users, isLoading, refetch} = useGetUsersAdminQuery(undefined);
+  const {
+    data: users,
+    isLoading,
+    refetch,
+  } = useGetUsersAdminQuery({limit: Number.MAX_SAFE_INTEGER, descending: true});
   const [editUserAdmin] = useEditUserAdminMutation();
   const [deleteUserData] = useDeleteUserAdminMutation();
 

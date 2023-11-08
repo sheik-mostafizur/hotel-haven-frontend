@@ -16,7 +16,12 @@ const adminApi = createApi({
   endpoints: (builder) => ({
     // Users Routes
     getUsersAdmin: builder.query({
-      query: () => "/admin/user",
+      query: (params = {}) => {
+        const queryParams = Object.keys(params)
+          .map((key) => `${key}=${params[key]}`)
+          .join("&");
+        return `/admin/user?${queryParams}`;
+      },
       providesTags: ["usersAdmin"],
     }),
     editUserAdmin: builder.mutation({
