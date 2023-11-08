@@ -34,21 +34,6 @@ const License: React.FC = () => {
             Bangladesh. We adhere to all relevant regulations and requirements
             as set forth by the local authorities.
           </p>
-
-          <h2>Contact Us</h2>
-
-          <p>
-            If you have any questions or require further information regarding
-            our licensing and registration, please feel free to contact us at:
-          </p>
-
-          <p>
-            Hotel Haven
-            <br />
-            Email: hotelhaven@gmail.com
-            <br />
-            Location: Dhaka, Bangladesh
-          </p>
         </div>
       </Container>
     </Main>

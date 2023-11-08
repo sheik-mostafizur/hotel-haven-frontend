@@ -15,6 +15,7 @@ import HotelDetails from "../pages/hotel/hotel-details";
 import SingleBlog from "../pages/blogs/SingleBlog";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import License from "../pages/License/License";
+import TermsAndConditions from "../pages/TermsAndCondition/TermsAndConditions";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
   {
     path: "/license",
     element: <License />,
+  },
+  {
+    path: "/termsAndConditions",
+    element: <TermsAndConditions />,
   },
   ...AdminRoutes,
   ...ManagerRoutes,
