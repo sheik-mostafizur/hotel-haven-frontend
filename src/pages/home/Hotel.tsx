@@ -3,6 +3,7 @@ import Button from "../../components/ui/button";
 import LazyLoad from "react-lazy-load";
 import React from "react";
 import "./hotel.css";
+import { CiLocationOn } from "react-icons/ci";
 
 interface HotelType {
   _id: string;
@@ -33,7 +34,9 @@ const Hotel: React.FC<HotelType> = ({
         </LazyLoad>
         <div className="p-5">
           <h3 className="py-2">{name}</h3>
-          <p className="py-2">Location: {address?.location}</p>
+          <p className="py-2 flex items-center gap-2">
+            <CiLocationOn /> {address?.location}
+          </p>
           <p className="py-2 text-sm">{description}</p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
           <Link to={`/hotel/${_id}`}>
