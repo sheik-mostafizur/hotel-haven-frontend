@@ -1,22 +1,22 @@
-import { useForm, Controller } from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 import Button from "../ui/button";
-import { useGetLocationsQuery } from "../../api/public-api";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setHotelFilter } from "../../redux/hotel-filter-slice";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useGetLocationsQuery} from "../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setHotelFilter} from "../../redux/hotel-filter-slice";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const FindRoomForm = () => {
   const locationURL = useLocation();
   const navigate = useNavigate();
 
-  const { isLoading, data: locations } = useGetLocationsQuery(undefined);
+  const {isLoading, data: locations} = useGetLocationsQuery(undefined);
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
 
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     defaultValues: {
       location: hotelFilter.location,
@@ -45,12 +45,11 @@ const FindRoomForm = () => {
             rules={{
               required: true,
             }}
-            render={({ field }) => (
+            render={({field}) => (
               <select
                 id="location"
                 {...field}
-                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 {isLoading ? (
                   <option value="">Choose a Location</option>
                 ) : (
@@ -75,8 +74,8 @@ const FindRoomForm = () => {
             <label htmlFor="checkIn">Check In Date</label>
             <Controller
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
+              rules={{required: true}}
+              render={({field}) => (
                 <input
                   id="checkIn"
                   {...field}
@@ -91,15 +90,15 @@ const FindRoomForm = () => {
             <label htmlFor="checkOut">Check Out Date</label>
             <Controller
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
+              rules={{required: true}}
+              render={({field}) => (
                 <input id="checkOut" {...field} type="date" />
               )}
               name="checkOut"
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="adult">Adult</label>
             <Controller
@@ -122,7 +121,7 @@ const FindRoomForm = () => {
               name="child"
             />
           </div>
-        </div>
+        </div> */}
 
         <Button type="submit" className="w-full" size="lg">
           Search
