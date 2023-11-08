@@ -1,24 +1,34 @@
 import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../../../redux/hooks";
 import Chart from "chart.js/auto";
-import { useGetUsersAdminQuery } from "../../../api/admin-api";
+import {
+  useGetHotelsAdminQuery,
+  useGetUsersAdminQuery,
+} from "../../../api/admin-api";
 
 const AdminChart = () => {
   const user = useAppSelector((state) => state.auth.user);
   const isAdmin = user.role === "ADMIN";
   const usersData = useAppSelector((state) => state.users); // Replace with actual user data from Redux
-  const hotelsData = useAppSelector((state) => state.hotels); // Replace with actual hotel data from Redux
 
   const { data, isLoading } = useGetUsersAdminQuery({
     length: true,
   });
+
+  const { data: hotelsData } = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
 
   // Reference to the canvas elements where the charts will be rendered
   const pieChartRef = useRef(null);
   const barChartRef = useRef(null);
 
   useEffect(() => {
-    if (isAdmin && pieChartRef.current && barChartRef.current && data) {
+    if (
+      isAdmin &&
+      pieChartRef.current &&
+      barChartRef.current &&
+      data &&
+      hotelsData
+    ) {
       // Destroy the existing chart instances on the canvas
       if (pieChartRef.current?.__chart) {
         pieChartRef.current.__chart.destroy();
@@ -71,11 +81,17 @@ const AdminChart = () => {
         pieChartConfig
       );
 
-      // Create the data for the bar chart
+      // Extract hotel status data from the hotelsData
+      const hotelStatusData = hotelsData.map((hotel) => hotel.status);
+
+      // Count the number of hotels with different statuses
       const hotelDataCount = {
-        APPROVED: 44,
-        REJECTED: 3,
-        PENDING: 2,
+        APPROVED: hotelStatusData.filter((status) => status === "APPROVED")
+          .length,
+        REJECTED: hotelStatusData.filter((status) => status === "REJECTED")
+          .length,
+        PENDING: hotelStatusData.filter((status) => status === "PENDING")
+          .length,
       };
 
       const barChartData = {
@@ -96,6 +112,20 @@ const AdminChart = () => {
       const barChartConfig = {
         type: "bar",
         data: barChartData,
+        options: {
+          plugins: {
+            legend: false, // Hide the legend
+            datalabels: {
+              anchor: "end",
+              align: "end",
+              font: {
+                weight: "bold",
+              },
+              color: "black",
+              formatter: (value) => value, // Show the actual value on top of the bars
+            },
+          },
+        },
       };
 
       // Create the bar chart
@@ -104,7 +134,7 @@ const AdminChart = () => {
         barChartConfig
       );
     }
-  }, [isAdmin, usersData, data]);
+  }, [isAdmin, usersData, data, hotelsData]);
 
   return (
     <div className="p-4 border-2 border-secondary-200 border-dashed rounded-lg dark:border-secondary-700">
@@ -115,14 +145,16 @@ const AdminChart = () => {
 
       {isAdmin && (
         <div className="mt-4 border p-4 rounded-lg shadow-lg">
-          <h3 className="text-xl text-center my-4 font-semibold">
+          {/* <h3 className="text-xl text-center my-4 font-semibold">
             Admin Dashboard
-          </h3>
+          </h3> */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h4 className="text-lg font-semibold">Total Rooms</h4>
               {/* Assume you have access to totalRooms for the admin */}
-              <p className="text-2xl font-bold text-primary-500">420</p>
+              <p className="text-2xl font-bold text-primary-500">
+                {hotelsData?.length}
+              </p>
             </div>
             <div>
               <h4 className="text-lg font-semibold">Total Users</h4>

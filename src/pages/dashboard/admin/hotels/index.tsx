@@ -1,12 +1,13 @@
-import React, {useState} from "react";
-import {HashSpinner} from "../../../../components/spinner";
+import React, { useState } from "react";
+import { HashSpinner } from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
-import {useGetHotelsAdminQuery} from "../../../../api/admin-api";
+import { useGetHotelsAdminQuery } from "../../../../api/admin-api";
 
 const Hotels: React.FC = () => {
-  const {data: hotels, isLoading} = useGetHotelsAdminQuery(undefined);
+  const { data: hotels, isLoading } = useGetHotelsAdminQuery(undefined);
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all"); // 'all' is the default option
+  console.log(hotels);
 
   // Filter the hotels based on the search text and approval status
   const filteredHotels = hotels
@@ -31,7 +32,8 @@ const Hotels: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border rounded-md">
+            className="p-2 border rounded-md"
+          >
             <option value="all">All</option>
             <option value="APPROVED">Approved</option>
             <option value="REJECTED">Rejected</option>
