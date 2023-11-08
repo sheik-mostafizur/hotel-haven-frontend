@@ -4,6 +4,8 @@ import Main from "../../layout/main";
 import { FaUserAlt, FaLock, FaCheckCircle } from "react-icons/fa";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
+import { useAppSelector } from "../../redux/hooks";
+import Button from "../../components/ui/button";
 
 interface IFormInputs {
   fullName: string;
@@ -12,10 +14,25 @@ interface IFormInputs {
 }
 
 const Payment: React.FC = () => {
+  const user = useAppSelector((state) => state.auth.user);
+
+
   const { _id } = useParams();
   console.log("RoomID: ", _id);
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
+
+  const handelPayment = () => {
+    const order = {
+      ...user,
+      "roomId": _id,
+    }
+    console.log(order)
+  }
+  const amount = 1222;
+
+
+
   return (
     <Main>
       <Container className="px-8">
@@ -53,7 +70,7 @@ const Payment: React.FC = () => {
                   name="fullName"
                   control={control}
                   rules={{ required: true }}
-                  render={({ field }) => <input {...field} />}
+                  render={({ field }) => <input {...field} value={`${user.name}`} />}
                 />
                 <br />
                 <label htmlFor="Email">Email</label>
@@ -62,7 +79,7 @@ const Payment: React.FC = () => {
                   name="Email"
                   control={control}
                   rules={{ required: true }}
-                  render={({ field }) => <input {...field} />}
+                  render={({ field }) => <input {...field} value={`${user.email}`} />}
                 />
                 <br />
                 <label htmlFor="mobile">Mobile</label>
@@ -73,7 +90,15 @@ const Payment: React.FC = () => {
                   name="mobile"
                   control={control}
                   rules={{ required: true }}
-                  render={({ field }) => <input {...field} type="number" />}
+                  render={({ field }) => <input {...field} value={`${user.phone}`} />}
+                />
+                <label htmlFor="amount">Mobile</label>
+
+                <Controller
+                  name="mobile"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} value={amount} type="number" />}
                 />
               </form>
             </div>
@@ -90,7 +115,7 @@ const Payment: React.FC = () => {
               <p className="py-4 flex items-center gap-4 ">
                 <FaCheckCircle></FaCheckCircle> We never charge any card fees
               </p>
-              {/* Titumar bhai Your task is start here */}
+              <Button onClick={() => handelPayment()}>Pay Now</Button>
             </div>
           </div>
           {/* Room Details */}
@@ -126,9 +151,9 @@ const Payment: React.FC = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M1 5h12m0 0L9 1m4 4L9 9"
                   />
                 </svg>
