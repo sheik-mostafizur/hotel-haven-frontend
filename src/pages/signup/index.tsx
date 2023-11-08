@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
@@ -15,11 +15,23 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   const {
-    register,
+    control,
     handleSubmit,
     watch,
-    // formState: {errors},
-  } = useForm();
+    formState: {errors},
+  } = useForm({
+    mode: "all",
+    defaultValues: {
+      name: "",
+      email: "",
+      photoURL: "",
+      phone: "",
+      age: "",
+      gender: "",
+      password: "",
+      confirm_password: "",
+    },
+  });
 
   const onSubmit = (data: Object) => {
     axios
@@ -30,16 +42,24 @@ const SignUp = () => {
       })
       .catch((error) => toastError(error));
   };
-
+  const isValidURL = (url) => {
+    // A simple function to validate the URL format
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
   return (
     <>
       <header>
         <Navbar />
       </header>
       <section className="min-h-[700px] py-12 flex items-center justify-center">
-        <div className="relative rounded-lg border p-8 shadow  md:min-w-[600px]">
+        <div className="relative rounded-lg border p-8 shadow  md:w-[650px]">
           <h2 className="text-center">Create a new account!</h2>
-          <div className="inline-flex w-full items-center justify-center">
+          <div className="mb-4 inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
             <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-900 dark:text-white">
               or
@@ -48,53 +68,136 @@ const SignUp = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="mb-6">
-                <label htmlFor="name"> Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  {...register("name", {required: true})}
+                <label htmlFor="name">Full Name</label>
+                <Controller
+                  name={"name"}
+                  control={control}
+                  rules={{required: "Name is required"}}
+                  render={({field}) => (
+                    <input
+                      className={errors.name ? "border-red-500" : ""}
+                      id={"name"}
+                      type={"text"}
+                      placeholder={"Name"}
+                      {...field}
+                    />
+                  )}
                 />
+                {errors.name && (
+                  <p className="text-red-500" role="alert">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
-
               <div className="mb-6">
-                <label htmlFor="email"> email</label>
-                <input
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                  {...register("email", {required: true})}
+                <label htmlFor="email">Email Address</label>
+                <Controller
+                  name="email"
+                  control={control}
+                  rules={{
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  }}
+                  render={({field}) => (
+                    <input
+                      className={errors.email ? "border-red-500" : ""}
+                      id="email"
+                      type="email"
+                      placeholder="Email"
+                      {...field}
+                    />
+                  )}
                 />
+                {errors.email && (
+                  <p className="text-red-500" role="alert">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="mb-6">
-              <label htmlFor="photoURL"> Profile Photo URL</label>
-              <input
-                type="url"
-                id="photoURL"
-                placeholder="Photo URL"
-                {...register("photoURL")}
+              <label htmlFor="photoURL">Profile Photo URL</label>
+              <Controller
+                name="photoURL"
+                control={control}
+                rules={{
+                  required: "Profile Photo URL is required",
+                  validate: {
+                    validURL: (value) =>
+                      isValidURL(value) || "Invalid URL format",
+                  },
+                }}
+                render={({field}) => (
+                  <input
+                    className={errors.photoURL ? "border-red-500" : ""}
+                    id="photoURL"
+                    type="url"
+                    placeholder="https://example.com/profile.jpg"
+                    {...field}
+                  />
+                )}
               />
+              {errors.photoURL && (
+                <p className="text-red-500" role="alert">
+                  {errors.photoURL.message}
+                </p>
+              )}
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="mb-6">
-                <label htmlFor="phone"> Phone Number</label>
-                <input
-                  type="text"
-                  id="phone"
-                  placeholder="Phone"
-                  {...register("phone", {required: true})}
+                <label htmlFor="phone">Phone Number</label>
+                <Controller
+                  name="phone"
+                  control={control}
+                  rules={{required: "Phone Number is required"}}
+                  render={({field}) => (
+                    <input
+                      className={errors.phone ? "border-red-500" : ""}
+                      id="phone"
+                      type="text"
+                      placeholder="Phone"
+                      {...field}
+                    />
+                  )}
                 />
+                {errors.phone && (
+                  <p className="text-red-500" role="alert">
+                    {errors.phone.message}
+                  </p>
+                )}
               </div>
+
               <div className="mb-6">
-                <label htmlFor="age"> Age</label>
-                <input
-                  type="text"
-                  id="age"
-                  placeholder="Age"
-                  {...register("age", {required: true})}
+                <label htmlFor="age">Age</label>
+                <Controller
+                  name="age"
+                  control={control}
+                  rules={{
+                    required: "Age is required",
+                    validate: {
+                      validAge: (value) =>
+                        parseInt(value) >= 18 || "Age must be at least 18",
+                    },
+                  }}
+                  render={({field}) => (
+                    <input
+                      className={errors.age ? "border-red-500" : ""}
+                      id="age"
+                      type="text"
+                      placeholder="Age"
+                      {...field}
+                    />
+                  )}
                 />
+                {errors.age && (
+                  <p className="text-red-500" role="alert">
+                    {errors.age.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -104,63 +207,123 @@ const SignUp = () => {
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Gender
               </label>
-              <select
-                id="gender"
-                {...register("gender", {required: true})}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                <option defaultValue={""}>Choose Your Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
+              <Controller
+                name="gender"
+                control={control}
+                rules={{required: "Gender is required"}}
+                render={({field}) => (
+                  <select
+                    id="gender"
+                    {...field}
+                    className={`${
+                      errors.gender
+                        ? "border-red-500 focus:border-red-500"
+                        : "border-secondary-300 focus:border-primary-500"
+                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
+                    <option value="">Choose Your Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                )}
+              />
+              {errors.gender && (
+                <p className="text-red-500" role="alert">
+                  {errors.gender.message}
+                </p>
+              )}
             </div>
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="mb-6 relative">
-                <label htmlFor="password"> Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  placeholder="Password"
-                  {...register("password", {required: true})}
-                />
-                {showPassword ? (
-                  <AiFillEye
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+              <div className="mb-6">
+                <div className=" relative">
+                  <label htmlFor="password">Password</label>
+                  <Controller
+                    name="password"
+                    control={control}
+                    rules={{
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                      pattern: {
+                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/,
+                        message:
+                          "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+                      },
+                    }}
+                    render={({field}) => (
+                      <div>
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          id="password"
+                          placeholder="Password"
+                          {...field}
+                        />
+                        {showPassword ? (
+                          <AiFillEye
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                          />
+                        ) : (
+                          <AiFillEyeInvisible
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                          />
+                        )}
+                      </div>
+                    )}
                   />
-                ) : (
-                  <AiFillEyeInvisible
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
-                  />
+                </div>
+                {errors.password && (
+                  <p className="text-red-500" role="alert">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
 
-              <div className="mb-6 relative">
-                <label htmlFor="confirm_password"> Confirm Password</label>
-                <input
-                  type={showConfPassword ? "text" : "password"}
-                  id="confirm_password"
-                  placeholder="Confirm Password"
-                  {...register("confirm_password", {
-                    required: true,
-                    validate: (val: string) => {
-                      if (watch("password") != val) {
-                        return "Your passwords do no match";
-                      }
-                    },
-                  })}
-                />
-                {showConfPassword ? (
-                  <AiFillEye
-                    onClick={() => setShowConfPassword(!showConfPassword)}
-                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+              <div className="mb-6">
+                <div className="relative">
+                  <label htmlFor="confirm_password">Confirm Password</label>
+                  <Controller
+                    name="confirm_password"
+                    control={control}
+                    rules={{
+                      required: "Confirm Password is required",
+                      validate: (value) =>
+                        value === watch("password") || "Passwords do not match",
+                    }}
+                    render={({field}) => (
+                      <div>
+                        <input
+                          type={showConfPassword ? "text" : "password"}
+                          id="confirm_password"
+                          placeholder="Confirm Password"
+                          {...field}
+                        />
+                        {showConfPassword ? (
+                          <AiFillEye
+                            onClick={() =>
+                              setShowConfPassword(!showConfPassword)
+                            }
+                            className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                          />
+                        ) : (
+                          <AiFillEyeInvisible
+                            onClick={() =>
+                              setShowConfPassword(!showConfPassword)
+                            }
+                            className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                          />
+                        )}
+                      </div>
+                    )}
                   />
-                ) : (
-                  <AiFillEyeInvisible
-                    onClick={() => setShowConfPassword(!showConfPassword)}
-                    className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
-                  />
+                </div>
+                {errors.confirm_password && (
+                  <p className="text-red-500" role="alert">
+                    {errors.confirm_password.message}
+                  </p>
                 )}
               </div>
             </div>

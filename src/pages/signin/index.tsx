@@ -3,7 +3,7 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
@@ -21,11 +21,17 @@ const SignIn: React.FC = () => {
   let location = useLocation();
 
   const {
-    register,
+    control,
     handleSubmit,
     reset,
-    // formState: {errors},
-  } = useForm<AuthType.Login>();
+    formState: {errors},
+  } = useForm<AuthType.Login>({
+    mode: "all",
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit: SubmitHandler<AuthType.Login> = async (
     data: AuthType.Login
@@ -63,33 +69,65 @@ const SignIn: React.FC = () => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6">
-              <label htmlFor="email">Your email</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                {...register("email", {required: true})}
+              <label htmlFor="email">Email Address</label>
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: "Email is required",
+                }}
+                render={({field}) => (
+                  <input
+                    className={errors.email ? "border-red-500" : ""}
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    {...field}
+                  />
+                )}
               />
+              {errors.email && (
+                <p className="text-red-500" role="alert">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
-
-            <div className="mb-6 relative">
-              <label htmlFor="password">Your Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                placeholder="Password"
-                {...register("password", {required: true})}
-              />
-              {showPassword ? (
-                <AiFillEye
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+            <div className="mb-6">
+              <div className=" relative">
+                <label htmlFor="password">Password</label>
+                <Controller
+                  name="password"
+                  control={control}
+                  rules={{
+                    required: "Password is required",
+                  }}
+                  render={({field}) => (
+                    <div>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        id="password"
+                        placeholder="Password"
+                        {...field}
+                      />
+                      {showPassword ? (
+                        <AiFillEye
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                        />
+                      ) : (
+                        <AiFillEyeInvisible
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
+                        />
+                      )}
+                    </div>
+                  )}
                 />
-              ) : (
-                <AiFillEyeInvisible
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 text-2xl text-secondary-600 cursor-pointer"
-                />
+              </div>
+              {errors.password && (
+                <p className="text-red-500" role="alert">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
