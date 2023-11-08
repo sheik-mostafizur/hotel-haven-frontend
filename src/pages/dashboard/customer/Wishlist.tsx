@@ -2,24 +2,24 @@ import {
   useDeleteWishlistByIdMutation,
   useGetWishlistQuery,
 } from "../../../api/private-api";
-import {HashSpinner} from "../../../components/spinner";
+import { HashSpinner } from "../../../components/spinner";
 import Button from "../../../components/ui/button";
 import Container from "../../../components/ui/container";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 
 const Wishlist = () => {
-  const {data: wishlist, isLoading} = useGetWishlistQuery(undefined);
+  const { data: wishlist, isLoading } = useGetWishlistQuery(undefined);
   const [deleteWishlistById] = useDeleteWishlistByIdMutation();
 
-  const handleDeleteWishlist = (_id) => {
+  const handleDeleteWishlist = (_id: any) => {
     deleteWishlistById(_id)
       .unwrap()
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
@@ -50,13 +50,15 @@ const Wishlist = () => {
                 </tr>
               </thead>
               <tbody>
-                {wishlist?.map((item) => (
+                {wishlist?.map((item: any) => (
                   <tr
                     key={item._id}
-                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  >
                     <th
                       scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    >
                       {item._id}
                     </th>
                     <td className="px-6 py-4">{item.roomId}</td>
@@ -64,7 +66,8 @@ const Wishlist = () => {
                     <td className="px-6 py-4">
                       <Button
                         size="sm"
-                        onClick={() => handleDeleteWishlist(item._id)}>
+                        onClick={() => handleDeleteWishlist(item._id)}
+                      >
                         remove
                       </Button>
                     </td>
