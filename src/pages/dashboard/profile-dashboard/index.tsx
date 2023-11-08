@@ -2,6 +2,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAppSelector } from "../../../redux/hooks";
 import Button from "../../../components/ui/button";
 import { AiFillCamera } from "react-icons/ai";
+import Modal from "../../../components/ui/modal";
 interface IFormInputs {
   name: string;
   email: string;
@@ -29,9 +30,30 @@ const ProfileDashboard = () => {
             src={photoURL}
             alt="user Profile"
           />
-          <button className="btn flex gap-2 items-center mx-auto">
+          {/* <button className="btn flex gap-2 items-center mx-auto">
             <AiFillCamera /> change picture
-          </button>
+          </button> */}
+          <Modal
+            title="Change user profile"
+            button={{
+              label: "Change Photo",
+              className: "block mx-auto my-2",
+            }}
+          >
+            <div className="my-2">
+              <form>
+                <label htmlFor="photoURL">PhotoURL:</label>
+                <input
+                  type="url"
+                  name="photoURL"
+                  placeholder="Paste your profile url"
+                />
+                <div className="my-1 text-center">
+                  <Button>Save</Button>
+                </div>
+              </form>
+            </div>
+          </Modal>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="my-2">
