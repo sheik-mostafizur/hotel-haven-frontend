@@ -1,9 +1,9 @@
 import Container from "../../components/ui/container";
 import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
-import {useGetHotelsQuery} from "../../api/public-api";
-import {HashSpinner} from "../../components/spinner";
-import {useAppSelector} from "../../redux/hooks";
+import { useGetHotelsQuery } from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
+import { useAppSelector } from "../../redux/hooks";
 
 interface Hotel {
   _id: string;
@@ -13,13 +13,12 @@ interface Hotel {
   };
   description: string;
   photoURL: string;
-  rating: number;
 }
 
 const Hotel: React.FC = () => {
   const query = useAppSelector((state) => state.hotelFilter);
 
-  const {data: hotels, isLoading} = useGetHotelsQuery(query);
+  const { data: hotels, isLoading } = useGetHotelsQuery(query);
 
   return (
     <Main>

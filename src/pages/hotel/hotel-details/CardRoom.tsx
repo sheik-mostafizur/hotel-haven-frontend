@@ -13,25 +13,26 @@ import {
 import toastSuccess from "../../../utils/toast-success";
 import toastError from "../../../utils/toast-error";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 
 // Import Swiper styles
 // import 'swiper/css';
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// import './styles.css';
-
-// import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
-const CardRoom = ({ room }) => {
+interface Room {
+  room: any;
+}
+
+const CardRoom: React.FC<Room> = ({ room }) => {
   const { data: wishlist } = useGetWishlistQuery(undefined);
   const [postWishlist, { isLoading: postWishLoading }] =
     usePostWishlistMutation();
   const [deleteWishlistById, { isLoading: delWishLoading }] =
     useDeleteWishlistByIdMutation();
 
-  const handleWishlist = (_id) => {
+  const handleWishlist = (_id: any) => {
     postWishlist({ roomId: _id })
       .unwrap()
       .then((data) => {
@@ -43,7 +44,7 @@ const CardRoom = ({ room }) => {
       });
   };
 
-  const handleDeleteWishlist = (_id) => {
+  const handleDeleteWishlist = (_id: any) => {
     deleteWishlistById(_id)
       .unwrap()
       .then((data) => {
@@ -88,15 +89,23 @@ const CardRoom = ({ room }) => {
           <div className="py-1 ">
             <strong>Facilities:</strong>
             <>
-              {room.facilities.map((facility, index) => (
+              {room.facilities.map((facility: any, index: number) => (
                 <li key={index}>{facility}</li>
               ))}
             </>
           </div>
           <div className="mb-3">
             <ul>
-              <li>Regular price: {room?.roomInfo.regularPrice} BDT</li>
-              <li>Discount price: {room?.roomInfo.discountedPrice} BDT</li>
+              <li className="flex gap-4 items-center">
+                <span>
+                  <FaRegMoneyBillAlt />
+                </span>
+                <span className="line-through">
+                  {room?.roomInfo.regularPrice} BDT
+                </span>
+                <span> {room?.roomInfo.discountedPrice} BDT</span>
+              </li>
+              <li></li>
               <li className="flex gap-2 items-center">
                 <GiResize></GiResize>
                 {room?.roomInfo.roomSize}
@@ -119,7 +128,7 @@ const CardRoom = ({ room }) => {
             <Link to={`/payment/${room._id}`}>
               <Button>Reserve Now</Button>
             </Link>
-            {wishlist?.some((item) => item.roomId === room._id) ? (
+            {wishlist?.some((item: any) => item.roomId === room._id) ? (
               <>
                 {delWishLoading ? (
                   <BeatSpinner color="#ef4444" />
