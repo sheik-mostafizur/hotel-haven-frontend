@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { HashSpinner } from "../../../../components/spinner";
+import React, {useState} from "react";
+import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
-import { useGetHotelsAdminQuery } from "../../../../api/admin-api";
+import {useGetHotelsAdminQuery} from "../../../../api/admin-api";
 
 const Hotels: React.FC = () => {
-  const { data: hotels, isLoading } = useGetHotelsAdminQuery(undefined);
+  const {data: hotels, isLoading} = useGetHotelsAdminQuery(undefined);
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all"); // 'all' is the default option
 
@@ -31,8 +31,7 @@ const Hotels: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border rounded-md"
-          >
+            className="p-2 border rounded-md">
             <option value="all">All</option>
             <option value="APPROVED">Approved</option>
             <option value="REJECTED">Rejected</option>
@@ -53,7 +52,7 @@ const Hotels: React.FC = () => {
       {isLoading ? (
         <HashSpinner />
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
           {filteredHotels.map((hotel: any) => (
             <HotelCard key={hotel._id} hotel={hotel} />
           ))}
