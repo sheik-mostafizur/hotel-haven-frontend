@@ -138,11 +138,6 @@ const AdminChart = () => {
 
   return (
     <div className="p-4 border-2 border-secondary-200 border-dashed rounded-lg dark:border-secondary-700">
-      <h2>User Details</h2>
-      <h3>Name: {user.name}</h3>
-      <h5>Role: {user.role}</h5>
-      <img width={100} src={user.photoURL} alt={user.name} />
-
       {isAdmin && (
         <div className="mt-4 border p-4 rounded-lg shadow-lg">
           {/* <h3 className="text-xl text-center my-4 font-semibold">
@@ -150,7 +145,7 @@ const AdminChart = () => {
           </h3> */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h4 className="text-lg font-semibold">Total Rooms</h4>
+              <h4 className="text-lg font-semibold">Total Hotels</h4>
               {/* Assume you have access to totalRooms for the admin */}
               <p className="text-2xl font-bold text-primary-500">
                 {hotelsData?.length}
