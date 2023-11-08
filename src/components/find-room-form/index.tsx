@@ -34,6 +34,16 @@ const FindRoomForm = () => {
     }
   };
 
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = new Date();
+  const date = formatDateToYYYYMMDD(today);
+
   return (
     <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-700 dark:border-secondary-700 dark:shadow-secondary-800">
       <h2>Find Your Room</h2>
@@ -76,12 +86,7 @@ const FindRoomForm = () => {
               control={control}
               rules={{required: true}}
               render={({field}) => (
-                <input
-                  id="checkIn"
-                  {...field}
-                  type="date"
-                  min={new Date().toISOString().slice(0, 16)}
-                />
+                <input id="checkIn" {...field} type="date" min={date} />
               )}
               name="checkIn"
             />
