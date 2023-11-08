@@ -1,3 +1,4 @@
+import {useForm} from "react-hook-form";
 import Container from "../../components/ui/container";
 import Form from "../../components/ui/form";
 
@@ -27,9 +28,10 @@ type FormField = {
 const Playground: React.FC = () => {
   const form: FormField[] = [
     {
-      type: "email",
-      name: "email",
+      type: "password",
+      name: "password",
       defaultValue: "",
+      placeholder: "Enter your password",
       rules: {
         required: "This is required",
         minLength: {
@@ -43,39 +45,19 @@ const Playground: React.FC = () => {
       },
     },
     {
-      name: "name",
+      type: "password",
+      name: "conform_password",
       defaultValue: "",
       label: "I am label",
-      placeholder: "I am placeholder",
+      placeholder: "Enter your confirm password",
       rules: {
         required: "This is required",
-        minLength: {
-          value: 3,
-          message: "Too Few Characters",
+        validate: (val: string) => {
+          console.log(watch("password"));
+          if (watch("password") != val) {
+            return "Your passwords do no match";
+          }
         },
-        maxLength: {
-          value: 30,
-          message: "Too Many Characters",
-        },
-      },
-    },
-    {
-      type: "select",
-      name: "country",
-      defaultValue: "",
-      option: [
-        {
-          label: "Chose a value",
-          value: "",
-        },
-        {
-          label: "Travel and Adventure",
-          value: "travel and adventure",
-        },
-      ],
-      label: "Select label",
-      rules: {
-        required: "This is required",
       },
     },
   ];
@@ -88,6 +70,7 @@ const Playground: React.FC = () => {
           console.log(data);
         }}
       />
+      {form[1].rules.validate(3)}
     </Container>
   );
 };
