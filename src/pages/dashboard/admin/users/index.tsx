@@ -1,14 +1,12 @@
 import {useState} from "react";
 import {useAppSelector} from "../../../../redux/hooks";
 import {HashSpinner} from "../../../../components/spinner";
-import {AiFillDelete} from "react-icons/ai";
 import Button from "../../../../components/ui/button";
 import {RiAdminFill} from "react-icons/ri";
 import {FaUserTie} from "react-icons/fa";
 import {Tooltip} from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
 import {
-  useDeleteUserAdminMutation,
   useEditUserAdminMutation,
   useGetUsersAdminQuery,
 } from "../../../../api/admin-api";
@@ -21,7 +19,6 @@ const Users = () => {
     refetch,
   } = useGetUsersAdminQuery({limit: Number.MAX_SAFE_INTEGER, descending: true});
   const [editUserAdmin] = useEditUserAdminMutation();
-  const [deleteUserData] = useDeleteUserAdminMutation();
 
   const [selectedRole, setSelectedRole] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
@@ -185,23 +182,6 @@ const Users = () => {
                             <Tooltip id={`manager-tooltip-${user._id}`} />
                             <FaUserTie className="w-5 h-5" />
                           </Button>
-                          <button
-                            className="text-red-500"
-                            disabled={
-                              user.role == ROLE.MANAGER || user._id == admin._id
-                            }
-                            onClick={() => {
-                              deleteUserData(user._id)
-                                .unwrap()
-                                .then(() => {
-                                  refetch();
-                                })
-                                .catch((error) => {
-                                  console.error(error);
-                                });
-                            }}>
-                            <AiFillDelete className="w-5 h-5" />
-                          </button>
                         </div>
                       </td>
                     </tr>

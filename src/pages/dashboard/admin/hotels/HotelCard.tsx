@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../../../components/ui/button";
 import STATUS from "../../../../constants/STATUS";
 import toastError from "../../../../utils/toast-error";
 import toastSuccess from "../../../../utils/toast-success";
-import { HotelType } from "../../../../types";
-import { useEditHotelStatusAdminMutation } from "../../../../api/admin-api";
+import {HotelType} from "../../../../types";
+import {useEditHotelStatusAdminMutation} from "../../../../api/admin-api";
 
 interface HotelCardProps {
   hotel: HotelType.Hotel;
 }
 
-const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
-  console.log(hotel);
-  const { _id, name, addedRoom, availableRoom, email, status, photoURL } =
-    hotel;
+const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
+  const {_id, name, addedRoom, availableRoom, email, status, photoURL} = hotel;
   const [editHotelStatusAdmin] = useEditHotelStatusAdminMutation();
 
   const handleRoomApproved = async () => {
@@ -24,10 +22,10 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
       },
     })
       .unwrap()
-      .then(({ message }) => {
+      .then(({message}) => {
         toastSuccess(message);
       })
-      .catch(({ data }) => {
+      .catch(({data}) => {
         toastError(data);
       });
   };
@@ -43,10 +41,10 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
         },
       })
         .unwrap()
-        .then(({ message }) => {
+        .then(({message}) => {
           toastSuccess(message);
         })
-        .catch(({ data }) => {
+        .catch(({data}) => {
           toastError(data);
         });
     }
@@ -55,7 +53,11 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
   return (
     <div>
       <div className="mx-auto h-full bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
-        <img className="rounded-t-lg" src={photoURL} alt="" />
+        <img
+          className="rounded-t-lg h-[200px] object-cover"
+          src={photoURL}
+          alt=""
+        />
         <div className="p-5">
           <h3 className="mb-2 text-2xl font-bold tracking-tight text-secondary-900 dark:text-white">
             Name: {name}
@@ -73,20 +75,20 @@ const HotelCard: React.FC<HotelCardProps> = ({ hotel }) => {
             Status: {status}
           </p>
           <Button
+            size="sm"
             onClick={handleRoomApproved}
-            isDisabled={status == STATUS.APPROVED}
-          >
+            isDisabled={status == STATUS.APPROVED}>
             Approved
           </Button>
           <Button
+            size="sm"
             onClick={handleRoomRejected}
             isDisabled={status == STATUS.REJECTED || status == STATUS.APPROVED}
-            className="mx-2"
-          >
+            className="mx-2">
             Rejected
           </Button>
           <Link to={_id}>
-            <Button>Details</Button>
+            <Button size="sm">Details</Button>
           </Link>
         </div>
       </div>

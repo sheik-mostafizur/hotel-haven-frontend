@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import React, {useEffect, useRef} from "react";
+import {useAppSelector} from "../../../redux/hooks";
 import Chart from "chart.js/auto";
 
-const ProfileDashboard = () => {
+const AdminChart = () => {
   const user = useAppSelector((state) => state.auth.user);
   const isAdmin = user.role === "ADMIN";
   const usersData = useAppSelector((state) => state.users); // Replace with actual user data from Redux
@@ -146,4 +146,4 @@ const ProfileDashboard = () => {
   );
 };
 
-export default ProfileDashboard;
+export default AdminChart;

@@ -67,7 +67,7 @@ const Dashboard = () => {
               )}
               {ROLE.MANAGER == user.role && (
                 <span className="absolute top-1.5 -right-6 md:-right-3 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                  Admin
+                  Manager
                 </span>
               )}
             </div>
@@ -97,7 +97,7 @@ const Dashboard = () => {
             </div>
             <li>
               <Link
-                to={"profile"}
+                to={"/dashboard/profile"}
                 className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group">
                 <CgProfile className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
                 <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
@@ -105,7 +105,7 @@ const Dashboard = () => {
             </li>
             <li>
               <Link
-                to={"blogs"}
+                to={"/dashboard/blogs"}
                 className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group">
                 <BiLogoBlogger className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
                 <span className="flex-1 ml-3 whitespace-nowrap">Blogs</span>
