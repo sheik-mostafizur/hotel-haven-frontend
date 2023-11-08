@@ -78,9 +78,9 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               )}
             </div>
 
-            {description.length >= 150 ? (
+            {description.length >= 90 ? (
               <p className="mb-3 text-secondary-500">
-                {description.slice(0, 150)}{" "}
+                {description.slice(0, 90)}{" "}
                 <Link
                   to={`/blogs/${_id}`}
                   className="font-semibold text-secondary-500 dark:text-white hover:underline">

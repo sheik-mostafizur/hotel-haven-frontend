@@ -8,6 +8,7 @@ import {
 import {BiLogoBlogger, BiSolidDashboard} from "react-icons/bi";
 import {FaSignOutAlt} from "react-icons/fa";
 import {AiOutlineAlignLeft} from "react-icons/ai";
+import {CgProfile} from "react-icons/cg";
 import ROLE from "../../constants/ROLE";
 import {logout} from "../../redux/authSlice";
 import swal from "sweetalert";
@@ -94,6 +95,14 @@ const Dashboard = () => {
               {user.role === ROLE.MANAGER && <DashboardNavManager />}
               {user.role === ROLE.ADMIN && <DashboardNavAdmin />}
             </div>
+            <li>
+              <Link
+                to={"profile"}
+                className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group">
+                <CgProfile className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+                <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
+              </Link>
+            </li>
             <li>
               <Link
                 to={"blogs"}
