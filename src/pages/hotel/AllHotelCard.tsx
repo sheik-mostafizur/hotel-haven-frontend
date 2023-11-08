@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 import React from "react";
 
@@ -10,14 +10,12 @@ interface HotelsCard {
   };
   description: string;
   photoURL: string;
-  rating: number;
 }
 
 const AllHotelCard: React.FC<HotelsCard> = ({
   address,
   name,
   photoURL,
-  rating,
   description,
   _id,
 }) => {
@@ -32,10 +30,7 @@ const AllHotelCard: React.FC<HotelsCard> = ({
         <div className="flex flex-col justify-between p-4 leading-normal">
           <h5 className="mb-2">{name}</h5>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Location: {address.location}
-          </p>
-          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-            Rating: {rating}
+            Location: {address?.location}
           </p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
             Description: {description}

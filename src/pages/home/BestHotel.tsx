@@ -8,10 +8,11 @@ import HotelSkeleton from "../../components/skeleton/hotel-skeleton";
 interface HotelType {
   _id: string;
   name: string;
-  location: string;
+  address: {
+    location: string;
+  };
   photoURL: string;
   description: string;
-  rating: number;
 }
 
 const BestHotel: React.FC = () => {
