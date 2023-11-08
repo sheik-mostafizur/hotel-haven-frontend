@@ -1,4 +1,4 @@
-import { ReactNode, useState, useRef, useEffect } from "react";
+import {ReactNode, useState, useRef, useEffect} from "react";
 import Button from "../button";
 
 interface ModalProps {
@@ -10,12 +10,12 @@ interface ModalProps {
   title?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, button, title }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef(null);
+const Modal: React.FC<ModalProps> = ({children, button, title}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const closeOnOutsideClick = (e: any) => {
-    if (modalRef.current && !modalRef.current.contains(e.target)) {
+  const closeOnOutsideClick = (e: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       setIsOpen(false);
     }
   };
@@ -43,8 +43,7 @@ const Modal: React.FC<ModalProps> = ({ children, button, title }) => {
       <div
         className={`${
           isOpen ? "" : "hidden"
-        } bg-secondary-500/50 flex items-center justify-center fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%)] max-h-full`}
-      >
+        } bg-secondary-500/50 flex items-center justify-center fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%)] max-h-full`}>
         <div className="relative w-full max-w-2xl max-h-full" ref={modalRef}>
           {/* <!-- Modal content --> */}
           <div className="relative bg-white rounded-lg shadow dark:bg-secondary-700">
@@ -57,15 +56,13 @@ const Modal: React.FC<ModalProps> = ({ children, button, title }) => {
                 onClick={() => setIsOpen(false)}
                 type="button"
                 className="text-secondary-400 bg-transparent hover:bg-secondary-200 hover:text-secondary-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-secondary-600 dark:hover:text-white"
-                data-modal-hide="default-modal"
-              >
+                data-modal-hide="default-modal">
                 <svg
                   className="w-3 h-3"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
-                  viewBox="0 0 14 14"
-                >
+                  viewBox="0 0 14 14">
                   <path
                     stroke="currentColor"
                     strokeLinecap="round"
