@@ -29,11 +29,11 @@ const Hotel: React.FC<HotelType> = ({
           <img className="rounded-t-lg w-full h-80" src={photoURL} alt="" />
         </LazyLoad>
         <div className="p-5">
-          <h3 className="py-2">{name}</h3>
-          <p className="py-2 flex items-center gap-2">
+          <h4 className="py-2 h-12">{name}</h4>
+          <p className="py-4 flex h-20 items-center gap-2">
             <CiLocationOn /> {address?.location}
           </p>
-          <p className="py-2 text-sm">{description}</p>
+          <p className="py-2 text-sm h-32">{description}</p>
           <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
           <Link to={`/hotel/${_id}`}>
             <Button size="sm">View Details</Button>

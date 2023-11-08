@@ -1,31 +1,11 @@
+
+import RatingPopUp from "../../components/RatingPopUp";
 import {useForm} from "react-hook-form";
 import Container from "../../components/ui/container";
 import Form from "../../components/ui/form";
 
-type FormField = {
-  type?: string;
-  name: string;
-  defaultValue: string;
-  label?: string;
-  placeholder?: string;
-  rules?: {
-    required: string;
-    minLength?: {
-      value: number;
-      message: string;
-    };
-    maxLength?: {
-      value: number;
-      message: string;
-    };
-  };
-  option?: Array<{
-    label: string;
-    value: string;
-  }>;
-};
-
 const Playground: React.FC = () => {
+
   const form: FormField[] = [
     {
       type: "password",
@@ -64,6 +44,8 @@ const Playground: React.FC = () => {
   return (
     <Container className="dark:bg-secondary-700 w-screen h-screen">
       <h1>Playground</h1>
+     
+      <RatingPopUp></RatingPopUp>
       <Form
         form={form}
         onSubmit={(data) => {
