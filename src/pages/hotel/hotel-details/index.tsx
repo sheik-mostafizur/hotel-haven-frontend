@@ -1,13 +1,16 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Main from "../../../layout/main";
-import {HashSpinner} from "../../../components/spinner";
+import { Rating } from "@smastrom/react-rating";
+import { HashSpinner } from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
-import {useGetHotelByIdQuery} from "../../../api/public-api";
-import {useAppSelector} from "../../../redux/hooks";
+import { useGetHotelByIdQuery } from "../../../api/public-api";
+import { useAppSelector } from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
+import RatingPopUp from "../../../components/RatingPopUp";
+import { useEffect, useState } from "react";
 
-const AnyReactComponent = ({text}) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -27,19 +30,19 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: {[key: string]: string};
+    roomInfo: { [key: string]: string };
   }[];
 }
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
-  const {_id} = useParams();
-  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
+  const { _id } = useParams();
+  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
 
-  const {hotel, rooms} = viewHotels || [];
+  const { hotel, rooms } = viewHotels || [];
 
   const defaultProps = {
     center: {
@@ -49,8 +52,17 @@ const HotelDetails: React.FC = () => {
     zoom: 11,
   };
 
-  // console.log(rooms[0].thumbnails[0]);
+  const [comment, setComment] = useState([]);
 
+  useEffect(() => {
+    fetch("/db/comment.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setComment(data);
+      });
+  }, []);
+
+  console.log(comment);
   return (
     <Main>
       <Container>
@@ -199,18 +211,17 @@ const HotelDetails: React.FC = () => {
                       <p>
                         <small>
                           This property advises that enhanced cleaning and guest
-                          safety measures are currently in place. <br /> <br />
+                          safety measures are currently in place. <br />
                           Disinfectant is used to clean the property;
                           commonly-touched surfaces are cleaned with
                           disinfectant between stays; bed sheets and towels are
                           laundered at a temperature of at least 60°C/140°F.{" "}
-                          <br /> <br /> Social distancing measures are in place;
-                          staff at the property wear personal protective
-                          equipment; guests are provided with hand sanitizer.{" "}
-                          <br /> <br /> Contactless check-in and contactless
-                          check-out are available. <br /> <br /> Each guestroom
-                          is kept vacant for a minimum of 72 hours between
-                          bookings.
+                          <br /> Social distancing measures are in place; staff
+                          at the property wear personal protective equipment;
+                          guests are provided with hand sanitizer. <br /> <br />{" "}
+                          Contactless check-in and contactless check-out are
+                          available. <br /> Each guestroom is kept vacant for a
+                          minimum of 72 hours between bookings.
                         </small>
                       </p>
                     </div>
@@ -233,13 +244,63 @@ const HotelDetails: React.FC = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <div>
+                    <RatingPopUp />
+                  </div>
+                  <div className="mx-auto">
+                    <h2 className="text-center">Customer reviews</h2>
+                    <div className="flex gap-2 justify-center">
+                      <Rating
+                        value={4.5}
+                        readOnly={true}
+                        style={{ maxWidth: "100px" }}
+                      />
+                      <p>4.5 out of 5</p>
+                    </div>
+                    {comment.slice(0, 3).map((c: any) => (
+                      <div
+                        key={c.id}
+                        className=" p-4 bg-white  rounded-lg dark:bg-gray-800 "
+                      >
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <img
+                              className="rounded-full w-12 h-12"
+                              src={c?.image}
+                              alt=""
+                            />
+                            <div>
+                              <h5>{c?.name}</h5>
+                              <Rating
+                                value={c?.rating}
+                                readOnly={true}
+                                style={{ maxWidth: "100px" }}
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <p>{c?.date}</p>
+                          </div>
+                        </div>
+                        <p className="my-3 font-normal text-gray-500 dark:text-gray-400">
+                          {c?.feedback}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <div
                   className="my-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
-                  style={{height: "500px", width: "100%"}}>
+                  style={{ height: "500px", width: "100%" }}
+                >
                   <GoogleMapReact
-                    bootstrapURLKeys={{key: ""}}
+                    bootstrapURLKeys={{ key: "" }}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}>
+                    defaultZoom={defaultProps.zoom}
+                  >
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}
