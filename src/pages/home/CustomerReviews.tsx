@@ -29,26 +29,40 @@ const CustomerReviews: React.FC = () => {
         console.log(err);
       });
   }, []);
+
   return (
-    <div className="dark:bg-secondary-700">
+    <div className="bg-primary-50 dark:bg-secondary-700">
       <Container className="lg:py-16 overflow-hidden">
         <div className="mx-auto text-center py-4">
           <h2 className=""> Customer Reviews</h2>
-          <p className="px-4 lg:px-16 text-center py-2 font-normal">
+          <p className="px-4 lg:px-16 text-center py-2">
             Discover what our customers have to say about their experiences with
-            our products. Read their honest and heartfelt reviews to learn why
-            they love our toys and games.
+            our products.
           </p>
         </div>
         <div style={{cursor: "grab"}}>
           <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
             pagination={{
               clickable: true,
             }}
             modules={[Pagination]}
-            className="mySwiper">
+            className="mySwiper"
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 30,
+              },
+
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}>
             <div>
               {reviews.map((review) => (
                 <SwiperSlide
