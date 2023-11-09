@@ -9,7 +9,6 @@ import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 const BlogsDashboard = () => {
   const { data: blogs, isLoading } = useGetBlogsQuery(undefined);
   const user = useAppSelector((state) => state.auth.user);
-  console.log(user);
 
   const iconStyle = {
     inactive:

@@ -18,7 +18,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
     publishDate,
     isLiked = false,
     isFavorite = false,
-    duserId,
+    userId,
     userName,
     userProfile,
   } = props.blog;
