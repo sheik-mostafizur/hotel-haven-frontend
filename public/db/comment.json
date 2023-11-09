@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "rating": "5",
+    "name": "John Smith",
+    "image": "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg",
+    "date": "2023-11-09",
+    "feedback": "Impressive product! Exceeded expectations. Top quality and easy to use. Highly recommended. 5/5."
+  },
+  {
+    "id": 2,
+    "rating": "4",
+    "name": "Alice Johnson",
+    "image": "https://play-lh.googleusercontent.com/DBlW7854rRNk-LPRu8jD25HRYaA0AFEvNLJvGtAUMSC-kJu1IfH7Wg4an_kMRA6VcPZ2=w526-h296-rw",
+    "date": "2023-11-08",
+    "feedback": "Good value for the price. Decent build quality. Lacks some advanced features. 4/5. Budget-friendly."
+  },
+  {
+    "id": 3,
+    "rating": "3",
+    "name": "Ella Davis",
+    "image": "https://cdn.pixabay.com/photo/2015/03/03/08/55/portrait-657116_1280.jpg",
+    "date": "2023-11-07",
+    "feedback": "On-time delivery. Decent product but not exceptional. 3/5. Consider other options."
+  },
+  {
+    "id": 4,
+    "rating": "4.9",
+    "name": "David Wilson",
+    "image": "https://cdn.pixabay.com/photo/2016/03/26/22/13/man-1281562_1280.jpg",
+    "date": "2023-11-06",
+    "feedback": "Perfect fit! Outstanding quality and features. User-friendly. Highly recommended. 4.9/5."
+  }
+]
