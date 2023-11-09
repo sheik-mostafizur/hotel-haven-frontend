@@ -75,6 +75,20 @@ const Hotel: React.FC = () => {
       });
   }, []);
 
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    fetch("/db/all-district.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setLocations(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        toastError(error);
+      });
+  }, []);
+
   return (
     <Container>
       {isLoading ? (
@@ -119,9 +133,24 @@ const Hotel: React.FC = () => {
                       name="address.location"
                       control={control}
                       rules={{ required: true }}
-                      render={({ field }) => <input {...field} />}
+                      render={({ field }) => (
+                        <select
+                          {...field}
+                          className="bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        >
+                          <option value="" disabled>
+                            Select a location
+                          </option>
+                          {locations.map((location) => (
+                            <option key={location.id} value={location?.name}>
+                              {location?.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
                     />
                   </div>
+
                   <div>
                     <label htmlFor="locationThumbnailURL">
                       Location ThumbnailURL
