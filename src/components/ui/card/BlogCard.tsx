@@ -17,7 +17,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
     likeCount,
     publishDate,
     isLiked = false,
-    isBooked = false,
+    isFavorite = false,
     userId,
     userName,
     userProfile,
@@ -40,7 +40,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               className="mb-2 text-2xl font-bold text-secondary-900 dark:text-white hover:underline">
               {title}
             </Link>
-            {isBooked ? (
+            {isFavorite ? (
               <BsBookmarkStarFill className={iconStyle.active} />
             ) : (
               <BsBookmarkStar className={iconStyle.inactive} />

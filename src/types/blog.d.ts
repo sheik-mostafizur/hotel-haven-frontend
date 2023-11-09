@@ -6,7 +6,7 @@ interface Blog {
   likeCount: number;
   publishDate: string;
   isLiked?: boolean;
-  isBooked?: boolean;
+  isFavorite?: boolean;
   userId: string;
   userName: string;
   userProfile: string;

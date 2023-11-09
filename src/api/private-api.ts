@@ -39,12 +39,12 @@ const privateApi = createApi({
       providesTags: ["profile"],
     }),
     getBlogs: builder.query({
-      query: () => "/blog",
+      query: () => "/blog/user-blog",
       providesTags: ["blogs"],
     }),
     postBlogs: builder.mutation({
       query: (data) => ({
-        url: "/blog",
+        url: "/blog/user-blog",
         method: "POST",
         body: data,
       }),

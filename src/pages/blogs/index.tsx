@@ -2,7 +2,7 @@ import Main from "../../layout/main";
 import Container from "../../components/ui/container";
 import {BlogCard} from "../../components/ui/card";
 import {HashSpinner} from "../../components/spinner";
-import {useGetBlogsQuery} from "../../api/public-api";
+import {useGetPublicBlogsQuery} from "../../api/public-api";
 
 interface BlogData {
   _id: number;
@@ -16,7 +16,7 @@ interface BlogData {
 }
 
 const Blogs: React.FC = () => {
-  const {data: blogs, isLoading} = useGetBlogsQuery({});
+  const {data: blogs, isLoading} = useGetPublicBlogsQuery({});
 
   return (
     <>
