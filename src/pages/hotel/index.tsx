@@ -5,6 +5,7 @@ import Main from "../../layout/main";
 import { useGetHotelsQuery } from "../../api/public-api";
 import { HashSpinner } from "../../components/spinner";
 import { useAppSelector } from "../../redux/hooks";
+import useSetTitle from "../../hooks/useSetTitle";
 
 interface Hotel {
   _id: string;
@@ -17,6 +18,7 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
+  useSetTitle("All Hotels");
   const query = useAppSelector((state) => state.hotelFilter);
   const { data: hotels, isLoading } = useGetHotelsQuery(query);
   const [searchTerm, setSearchTerm] = useState<string>("");

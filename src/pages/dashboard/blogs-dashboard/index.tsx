@@ -5,8 +5,10 @@ import CreateBlog from "./CreateNewBlog";
 import { useAppSelector } from "../../../redux/hooks";
 import { BsBookmarkStar, BsBookmarkStarFill } from "react-icons/bs";
 import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
+import useSetTitle from "../../../hooks/useSetTitle";
 
 const BlogsDashboard = () => {
+  useSetTitle("Blogs - Dashboard");
   const { data: blogs, isLoading } = useGetBlogsQuery(undefined);
   const user = useAppSelector((state) => state.auth.user);
 
