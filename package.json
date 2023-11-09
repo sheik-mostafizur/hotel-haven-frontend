@@ -25,6 +25,7 @@
     "react": "^18.2.0",
     "react-animated-slider": "^1.1.4",
     "react-calendar": "^4.6.1",
+    "react-chartjs-2": "^5.2.0",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.2",
