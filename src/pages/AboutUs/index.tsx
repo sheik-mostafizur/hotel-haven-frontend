@@ -1,9 +1,11 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
+import useSetTitle from "../../hooks/useSetTitle";
 
 const AboutUs: React.FC = () => {
+  useSetTitle("About Us");
   return (
     <Main>
       <Container className="">

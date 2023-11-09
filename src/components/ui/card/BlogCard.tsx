@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {AiOutlineLike, AiTwotoneLike} from "react-icons/ai";
 import {BsBookmarkStar, BsBookmarkStarFill} from "react-icons/bs";
 import {BlogType} from "../../../types";
+import formatPostDate from "../../../utils/format-post-date";
 
 interface BlogCardProps {
   blog: BlogType.Blog;
@@ -74,7 +75,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
                   {userName}
                 </span>
                 <small className="text-sm text-secondary-500 dark:text-white">
-                  {publishDate}
+                  {formatPostDate(publishDate)}
                 </small>
               </div>
             </Link>

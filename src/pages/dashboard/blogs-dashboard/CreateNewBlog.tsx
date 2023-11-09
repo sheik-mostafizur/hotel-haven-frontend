@@ -2,7 +2,7 @@ import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import Container from "../../../components/ui/container";
 import Button from "../../../components/ui/button";
 import BLOG_CATEGORIES from "../../../constants/BLOG_CATEGORIES";
-import {usePostBlogsMutation} from "../../../api/private-api";
+import {usePostUserBlogMutation} from "../../../api/private-api";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 import Modal from "../../../components/ui/modal";
@@ -16,7 +16,7 @@ interface IFormInputs {
 }
 
 const CreateBlog = () => {
-  const [postBlogs] = usePostBlogsMutation();
+  const [postBlogs] = usePostUserBlogMutation();
   const {handleSubmit, control, reset} = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
@@ -35,7 +35,7 @@ const CreateBlog = () => {
     <Container>
       <Modal
         title={"Create a new blog"}
-        button={{label: "Add more blogs", className: "block ml-auto"}}>
+        button={{label: "Add Blog", className: "block ml-auto"}}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-4 mx-auto items-center">
             <div>

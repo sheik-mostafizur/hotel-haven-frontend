@@ -1,30 +1,30 @@
 import { useState ,  ChangeEvent } from "react";
 import Greeting from "./Greeting";
 
-const RatingPopUp : React.FC = () => {
+const RatingPopUp: React.FC = () => {
   const [rating, setRating] = useState<number>(0);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState<boolean>(false);
 
   const handleRatingSubmit = () => {
-    console.log('Rating submitted:', rating);
-    console.log('Message submitted:', message);
+    console.log("Rating submitted:", rating);
+    console.log("Message submitted:", message);
     setRating(0);
-    setMessage('');
+    setMessage("");
     setIsSubmitDisabled(true);
     setFeedbackSubmitted(true);
   };
 
-  const handleRatingChange = (newRating : number) => {
+  const handleRatingChange = (newRating: number) => {
     setRating(newRating);
-    setIsSubmitDisabled(newRating === 0 );
+    setIsSubmitDisabled(newRating === 0);
   };
 
-  const handleMessageChange = (e : ChangeEvent<HTMLTextAreaElement>) => {
-    const newMessage : string  =  e.target.value;
+  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newMessage: string = e.target.value;
     setMessage(newMessage);
-    setIsSubmitDisabled(rating === 0 );
+    setIsSubmitDisabled(rating === 0);
   };
 
   return (

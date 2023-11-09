@@ -4,6 +4,7 @@ import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {FcLikePlaceholder} from "react-icons/fc";
+import {useGetBlogByIdQuery} from "../../api/private-api";
 
 interface SingleBlog {
   _id: number;
@@ -18,6 +19,8 @@ interface SingleBlog {
 
 const SingleBlog: React.FC = () => {
   const {_id} = useParams();
+  const {data, isLoading} = useGetBlogByIdQuery(_id);
+  console.log(data);
 
   const [singleBlog, setSingleBlog] = useState<SingleBlog[]>([]);
 

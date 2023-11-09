@@ -1,3 +1,4 @@
+import useSetTitle from "../../hooks/useSetTitle";
 import Main from "../../layout/main";
 import Banner from "./Banner";
 import BestBlogs from "./BestBlogs";
@@ -7,6 +8,7 @@ import HotelGallery from "./HotelGallery";
 import TopLocation from "./TopLocation";
 
 const Home = () => {
+  useSetTitle("Home");
   return (
     <Main>
       <Banner />

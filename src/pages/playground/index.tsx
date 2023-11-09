@@ -1,5 +1,4 @@
 import RatingPopUp from "../../components/RatingPopUp";
-import Greeting from "../../components/RatingPopUp/Greeting";
 import Container from "../../components/ui/container";
 import Form from "../../components/ui/form";
 
@@ -51,11 +50,7 @@ const Playground: React.FC = () => {
         }}
       />
 
-      <RatingPopUp></RatingPopUp>
-
-    
-
-      
+      <RatingPopUp />
     </Container>
   );
 };
