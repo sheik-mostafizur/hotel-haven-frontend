@@ -1,8 +1,8 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/ui/button";
 import LazyLoad from "react-lazy-load";
 import React from "react";
-import {CiLocationOn} from "react-icons/ci";
+import { CiLocationOn } from "react-icons/ci";
 
 interface HotelType {
   _id: string;
