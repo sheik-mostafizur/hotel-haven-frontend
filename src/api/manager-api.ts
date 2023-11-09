@@ -37,5 +37,9 @@ const managerApi = createApi({
   }),
 });
 
-export const {useGetManagerHotelQuery} = managerApi;
+export const {
+  useGetManagerHotelQuery,
+  usePostManagerHotelMutation,
+  useUpdateManagerHotelMutation,
+} = managerApi;
 export default managerApi;
