@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 import Container from "../../components/ui/container";
-import {HashSpinner} from "../../components/spinner";
-import {useGetHotelGalleryQuery} from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
+import { useGetHotelGalleryQuery } from "../../api/public-api";
 
 interface GalleryImage {
   imageURL: string;
@@ -10,19 +10,16 @@ interface GalleryImage {
 }
 
 const HotelGallery = () => {
-  const {data, isLoading} = useGetHotelGalleryQuery(undefined);
+  const { data, isLoading } = useGetHotelGalleryQuery(undefined);
   const initialGallery: GalleryImage[] = [];
   const images = data || initialGallery;
 
   return (
     <div className="dark:bg-secondary-700">
-      {" "}
       <Container className="lg:py-20 ">
         <h2 className="text-center">Capturing Elegance</h2>
         <p className="px-4 lg:px-16 text-center py-2 font-normal">
-          Experience our 'Capturing Elegance' section, where the essence of
-          luxury and beauty comes to life. Immerse yourself in refined
-          sophistication and timeless charm.
+          Immerse yourself in refined sophistication and timeless charm.
         </p>
         {isLoading ? (
           <HashSpinner />

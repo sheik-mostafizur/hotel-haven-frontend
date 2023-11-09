@@ -24,14 +24,12 @@ const BestHotel: React.FC = () => {
     <div className="dark:bg-secondary-700">
       <Container className="lg:py-20">
         <div className="mx-auto mb-4">
-          <h2 className="text-center">
-            Discover Exceptional Comfort and Luxury
-          </h2>
-          <p className="px-4 lg:px-16 text-center py-4 font-normal">
+          <h2 className="text-center">Discover our best hotel</h2>
+          {/* <p className="px-4 lg:px-16 text-center py-4 font-normal">
             Indulge in the epitome of opulence at our carefully curated
             selection of top-rated hotels, where unparalleled comfort meets
             world-className hospitality.
-          </p>
+          </p> */}
         </div>
         {isLoading ? (
           <HotelSkeleton />

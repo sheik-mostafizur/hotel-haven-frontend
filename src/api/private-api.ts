@@ -38,17 +38,44 @@ const privateApi = createApi({
       query: (_id) => `/profile/${_id}`,
       providesTags: ["profile"],
     }),
-    getBlogs: builder.query({
+
+    // Blogs for user
+    getUserBlogById: builder.query({
+      query: (_id) => `/blog/user-blog/${_id}`,
+      providesTags: ["blogs"],
+    }),
+    updateUserBlogById: builder.mutation({
+      query: ({_id, data}) => ({
+        url: `/blog/user-blog/${_id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["blogs"],
+    }),
+    deleteUserBlogById: builder.mutation({
+      query: (_id) => ({
+        url: `/blog/user-blog/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["blogs"],
+    }),
+    getUserBlogs: builder.query({
       query: () => "/blog/user-blog",
       providesTags: ["blogs"],
     }),
-    postBlogs: builder.mutation({
+    postUserBlog: builder.mutation({
       query: (data) => ({
         url: "/blog/user-blog",
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["blogs"],
+    }),
+
+    // blogs for all users
+    getBlogById: builder.query({
+      query: (_id) => `/blog/${_id}`,
+      providesTags: ["blogs"],
     }),
   }),
 });
@@ -58,8 +85,11 @@ export const {
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,
   useGetProfileQuery,
-  useGetBlogsQuery,
-  usePostBlogsMutation,
+  useGetUserBlogByIdQuery,
+  useDeleteUserBlogByIdMutation,
+  useGetUserBlogsQuery,
+  usePostUserBlogMutation,
+  useGetBlogByIdQuery,
 } = privateApi;
 
 export default privateApi;
