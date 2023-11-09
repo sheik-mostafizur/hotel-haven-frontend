@@ -1,22 +1,22 @@
 import Container from "../../components/ui/container";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Location from "./Location";
-import fetchData from "../../hooks/fetch-data";
+
+import { useGetLocationsQuery } from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
 
 interface TopLocationTypes {
-  image: string;
-  location_name: string;
-  total_hotels: number;
+  ThumbnailURL: string;
+  name: string;
+  total_hotel: number;
+  _id: string;
 }
 
 const TopLocation: React.FC = () => {
-  const [topLocation, setTopLocation] = useState<TopLocationTypes[]>([]);
-
-  useEffect(() => {
-    fetchData("/db/top-hotel-location.json")
-      .then((data) => setTopLocation(data))
-      .catch((err) => console.log(err));
-  }, []);
+  const { data, isLoading } = useGetLocationsQuery(undefined);
+  const initialLocation: TopLocationTypes[] = [];
+  const location = data || initialLocation;
+  console.log(location);
   return (
     <div className="dark:bg-secondary-700">
       <Container className="lg:py-16">
@@ -28,11 +28,15 @@ const TopLocation: React.FC = () => {
             experiences.
           </p>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
-          {topLocation.splice(0, 6).map((l, index) => (
-            <Location key={index} {...l} />
-          ))}
-        </div>
+        {isLoading ? (
+          <HashSpinner />
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+            {location.slice(0, 6).map((l: any) => (
+              <Location key={l?._id} {...l} />
+            ))}
+          </div>
+        )}
       </Container>
     </div>
   );
