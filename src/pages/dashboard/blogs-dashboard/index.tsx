@@ -32,7 +32,7 @@ const BlogsDashboard = () => {
           {blogs.map((blog: any) => (
             <div
               key={blog?._id}
-              className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800"
+              className="relative bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800"
             >
               <img
                 className="rounded-t-lg w-full h-72"
@@ -107,6 +107,14 @@ const BlogsDashboard = () => {
                   </div>
                 </div>
               </div>
+              {blog?.category && (
+                <div
+                  className="absolute top-2 right-2 bg-secondary-500 text-white px-2 py-1 rounded"
+                  style={{ opacity: 0.8 }}
+                >
+                  {blog?.category.toUpperCase()}
+                </div>
+              )}
             </div>
           ))}
         </div>
