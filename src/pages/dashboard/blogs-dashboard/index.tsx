@@ -1,15 +1,15 @@
-import {Link} from "react-router-dom";
-import {useGetUserBlogsQuery} from "../../../api/private-api";
-import {HashSpinner} from "../../../components/spinner";
+import { Link } from "react-router-dom";
+import { useGetUserBlogsQuery } from "../../../api/private-api";
+import { HashSpinner } from "../../../components/spinner";
 import CreateBlog from "./CreateNewBlog";
-import {useAppSelector} from "../../../redux/hooks";
-import {BsBookmarkStar, BsBookmarkStarFill} from "react-icons/bs";
-import {AiOutlineLike, AiTwotoneLike} from "react-icons/ai";
+import { useAppSelector } from "../../../redux/hooks";
+import { BsBookmarkStar, BsBookmarkStarFill } from "react-icons/bs";
+import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 import useSetTitle from "../../../hooks/useSetTitle";
 
 const BlogsDashboard = () => {
   useSetTitle("Blogs - Dashboard");
-  const {data: blogs, isLoading} = useGetUserBlogsQuery(undefined);
+  const { data: blogs, isLoading } = useGetUserBlogsQuery(undefined);
   const user = useAppSelector((state) => state.auth.user);
 
   const iconStyle = {
@@ -20,10 +20,13 @@ const BlogsDashboard = () => {
 
   return (
     <div>
-      <h1 className="text-center">Blogs</h1>
-      <CreateBlog />
-
-      <h2 className="mb-4">My Blogs</h2>
+      <div className="flex justify-between items-center">
+        <h4 className="appearance-none flex gap-2">
+          <span>My</span>
+          <span>Blogs</span>
+        </h4>
+        <CreateBlog />
+      </div>
 
       {isLoading ? (
         <HashSpinner />
@@ -32,7 +35,8 @@ const BlogsDashboard = () => {
           {blogs.map((blog: any) => (
             <div
               key={blog?._id}
-              className="relative bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800">
+              className="relative bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800"
+            >
               <img
                 className="rounded-t-lg w-full h-72"
                 src={blog?.thumbnail}
@@ -42,7 +46,8 @@ const BlogsDashboard = () => {
                 <div className="flex items-center justify-between gap-4">
                   <Link
                     to={`/blogs/${blog?._id}`}
-                    className="mb-2 text-2xl font-bold text-secondary-900 dark:text-white hover:underline">
+                    className="mb-2 text-2xl font-bold text-secondary-900 dark:text-white hover:underline"
+                  >
                     {blog?.title}
                   </Link>
                   {blog?.isFavorite ? (
@@ -57,7 +62,8 @@ const BlogsDashboard = () => {
                     {blog?.description.slice(0, 90)}{" "}
                     <Link
                       to={`/blogs/${blog?._id}`}
-                      className="font-semibold text-secondary-500 dark:text-white hover:underline">
+                      className="font-semibold text-secondary-500 dark:text-white hover:underline"
+                    >
                       read more
                     </Link>
                   </p>
@@ -68,7 +74,8 @@ const BlogsDashboard = () => {
                 <div className="py-2 flex justify-between items-center">
                   <Link
                     to={`/profile/${blog?.userId}`}
-                    className="group flex gap-2 justify-center items-center">
+                    className="group flex gap-2 justify-center items-center"
+                  >
                     <img
                       className="rounded-full w-9 h-9 group-hover:outline outline-1 outline-primary-100"
                       src={user?.photoURL}
