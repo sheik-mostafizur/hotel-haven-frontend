@@ -1,8 +1,9 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
-import {BlogCard} from "../../components/ui/card";
-import {HashSpinner} from "../../components/spinner";
-import {useGetBlogsQuery} from "../../api/public-api";
+import { BlogCard } from "../../components/ui/card";
+import { HashSpinner } from "../../components/spinner";
+import { useGetPublicBlogsQuery } from "../../api/public-api";
+import useSetTitle from "../../hooks/useSetTitle";
 
 interface BlogData {
   _id: number;
@@ -16,7 +17,8 @@ interface BlogData {
 }
 
 const Blogs: React.FC = () => {
-  const {data: blogs, isLoading} = useGetBlogsQuery({});
+  useSetTitle("Blogs");
+  const { data: blogs, isLoading } = useGetPublicBlogsQuery({});
 
   return (
     <>

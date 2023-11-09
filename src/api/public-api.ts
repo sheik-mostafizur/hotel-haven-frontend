@@ -34,7 +34,7 @@ const publicApi = createApi({
       },
       providesTags: ["hotelById"],
     }),
-    getBlogs: builder.query({
+    getPublicBlogs: builder.query({
       query: (params = {}) => {
         const queryParams = Object.keys(params)
           .map((key) => `${key}=${params[key]}`)
@@ -51,6 +51,6 @@ export const {
   useGetHotelGalleryQuery,
   useGetHotelsQuery,
   useGetHotelByIdQuery,
-  useGetBlogsQuery,
+  useGetPublicBlogsQuery,
 } = publicApi;
 export default publicApi;
