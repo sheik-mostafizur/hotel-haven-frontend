@@ -1,7 +1,7 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from ".";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axios } from ".";
 
-const publicApi = createApi({
+const publicApi: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: axios.defaults.baseURL,
   }),
@@ -37,7 +37,7 @@ const publicApi = createApi({
       providesTags: ["hotels"],
     }),
     getHotelById: builder.query({
-      query: ({_id, params = {}}) => {
+      query: ({ _id, params = {} }) => {
         const queryParams = Object.keys(params)
           .map((key) => `${key}=${params[key]}`)
           .join("&");
