@@ -1,8 +1,8 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
-import { BlogCard } from "../../components/ui/card";
-import { HashSpinner } from "../../components/spinner";
-import { useGetPublicBlogsQuery } from "../../api/public-api";
+import {BlogCard} from "../../components/ui/card";
+import {HashSpinner} from "../../components/spinner";
+import {useGetPublicBlogsQuery} from "../../api/public-api";
 import useSetTitle from "../../hooks/useSetTitle";
 
 interface BlogData {
@@ -18,7 +18,7 @@ interface BlogData {
 
 const Blogs: React.FC = () => {
   useSetTitle("Blogs");
-  const { data: blogs, isLoading } = useGetPublicBlogsQuery({});
+  const {data: blogs, isLoading} = useGetPublicBlogsQuery({descending: true});
 
   return (
     <>
@@ -27,7 +27,7 @@ const Blogs: React.FC = () => {
           <div className="m-4">
             <h1 className="text-center my-4 font-bold">All Blogs</h1>
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
               {isLoading ? (
                 <HashSpinner />
               ) : (

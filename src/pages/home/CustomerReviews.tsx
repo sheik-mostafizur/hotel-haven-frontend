@@ -1,12 +1,12 @@
 import Container from "../../components/ui/container";
-import { Rating } from "@smastrom/react-rating";
+import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import {Pagination} from "swiper/modules";
 
 interface CustomerReviews {
   _id: number;
@@ -31,7 +31,7 @@ const CustomerReviews: React.FC = () => {
   }, []);
 
   return (
-    <div className="dark:bg-secondary-700">
+    <div className="bg-primary-50 dark:bg-secondary-700">
       <Container className="lg:py-16 overflow-hidden">
         <div className="mx-auto text-center py-4">
           <h2 className=""> Customer Reviews</h2>
@@ -40,7 +40,7 @@ const CustomerReviews: React.FC = () => {
             our products.
           </p>
         </div>
-        <div style={{ cursor: "grab" }}>
+        <div style={{cursor: "grab"}}>
           <Swiper
             pagination={{
               clickable: true,
@@ -62,15 +62,13 @@ const CustomerReviews: React.FC = () => {
                 slidesPerView: 3,
                 spaceBetween: 30,
               },
-            }}
-          >
+            }}>
             <div>
               {reviews.map((review) => (
                 <SwiperSlide
                   key={review._id}
                   className="bg-white p-4 rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
-                  data-aos="fade-up"
-                >
+                  data-aos="fade-up">
                   <div className="flex items-center mb-4">
                     <img
                       src={review.profileURL}
@@ -84,7 +82,7 @@ const CustomerReviews: React.FC = () => {
                           <Rating
                             value={review.rating}
                             readOnly={true}
-                            style={{ maxWidth: "100px" }}
+                            style={{maxWidth: "100px"}}
                           />
                         </div>
                       </div>
