@@ -93,7 +93,10 @@ const SignUp = () => {
                   )}
                 />
                 {errors.name && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.name.message}
                   </p>
                 )}
@@ -123,7 +126,10 @@ const SignUp = () => {
                   )}
                 />
                 {errors.email && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.email.message}
                   </p>
                 )}
@@ -157,7 +163,10 @@ const SignUp = () => {
                 )}
               />
               {errors.photoURL && (
-                <p className="text-red-500 dark:text-red-500" role="alert">
+                <p
+                  className="text-sm text-red-500 dark:text-red-500"
+                  role="alert"
+                >
                   {errors.photoURL.message}
                 </p>
               )}
@@ -182,7 +191,10 @@ const SignUp = () => {
                   )}
                 />
                 {errors.phone && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.phone.message}
                   </p>
                 )}
@@ -213,7 +225,10 @@ const SignUp = () => {
                   )}
                 />
                 {errors.age && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.age.message}
                   </p>
                 )}
@@ -249,7 +264,10 @@ const SignUp = () => {
                 )}
               />
               {errors.gender && (
-                <p className="text-red-500 dark:text-red-500" role="alert">
+                <p
+                  className="text-sm text-red-500 dark:text-red-500"
+                  role="alert"
+                >
                   {errors.gender.message}
                 </p>
               )}
@@ -297,7 +315,10 @@ const SignUp = () => {
                   />
                 </div>
                 {errors.password && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.password.message}
                   </p>
                 )}
@@ -342,7 +363,10 @@ const SignUp = () => {
                   />
                 </div>
                 {errors.confirm_password && (
-                  <p className="text-red-500 dark:text-red-500" role="alert">
+                  <p
+                    className="text-sm text-red-500 dark:text-red-500"
+                    role="alert"
+                  >
                     {errors.confirm_password.message}
                   </p>
                 )}
