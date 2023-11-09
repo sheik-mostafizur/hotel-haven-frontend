@@ -2,7 +2,7 @@ import Main from "../../layout/main";
 import React, {useEffect, useState} from "react";
 import fetchData from "../../hooks/fetch-data";
 import Container from "../../components/ui/container";
-import {BlogCard} from "../../components/card";
+import {BlogCard} from "../../components/ui/card";
 
 interface BlogData {
   _id: number;
