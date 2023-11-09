@@ -1,9 +1,11 @@
 import { useState ,  ChangeEvent } from "react";
+import Greeting from "./Greeting";
 
 const RatingPopUp : React.FC = () => {
   const [rating, setRating] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState<boolean>(false);
 
   const handleRatingSubmit = () => {
     console.log('Rating submitted:', rating);
@@ -11,6 +13,7 @@ const RatingPopUp : React.FC = () => {
     setRating(0);
     setMessage('');
     setIsSubmitDisabled(true);
+    setFeedbackSubmitted(true);
   };
 
   const handleRatingChange = (newRating : number) => {
@@ -25,7 +28,10 @@ const RatingPopUp : React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-6 flex flex-col justify-center sm:py-12">
+     <div>
+      { feedbackSubmitted ? ( 
+
+<Greeting></Greeting>) : (<div className="min-h-screen py-6 flex flex-col justify-center sm:py-12">
     <div className="py-3 sm:max-w-xl sm:mx-auto">
       <div className="bg-white min-w-1xl border-2 flex flex-col rounded-xl shadow-lg">
         <div className="px-4 lg:px-12 py-5">
@@ -75,7 +81,9 @@ const RatingPopUp : React.FC = () => {
         </div>
       </div>
     </div>
-  </div>
+
+  </div>)}
+ </div>
   );
 };
 
