@@ -4,7 +4,7 @@ import themeSlice from "./themeSlice";
 import hotelFilterSlice from "./hotel-filter-slice";
 
 // import rtkQuery api
-import {publicApi, adminApi, privateApi} from "../api";
+import {publicApi, privateApi, managerApi, adminApi} from "../api";
 
 const store = configureStore({
   reducer: {
@@ -14,12 +14,14 @@ const store = configureStore({
     // api path initialize
     [publicApi.reducerPath]: publicApi.reducer,
     [privateApi.reducerPath]: privateApi.reducer,
+    [managerApi.reducerPath]: managerApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       publicApi.middleware,
       privateApi.middleware,
+      managerApi.middleware,
       adminApi.middleware
     ),
 });
