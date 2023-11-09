@@ -4,6 +4,7 @@ import {BlogCard} from "../../components/ui/card";
 import {HashSpinner} from "../../components/spinner";
 import {useGetPublicBlogsQuery} from "../../api/public-api";
 import useSetTitle from "../../hooks/useSetTitle";
+import BlogCardSkeleton from "../../components/ui/card/BlogCardSkeleton";
 
 interface BlogData {
   _id: number;
@@ -15,6 +16,14 @@ interface BlogData {
   publishDate: string;
   likes: number;
 }
+
+const generateSkeletons = (count: number) => {
+  const skeletons = [];
+  for (let i = 0; i < count; i++) {
+    skeletons.push(<BlogCardSkeleton key={i} />);
+  }
+  return skeletons;
+};
 
 const Blogs: React.FC = () => {
   useSetTitle("Blogs");
@@ -28,13 +37,11 @@ const Blogs: React.FC = () => {
             <h1 className="text-center my-4 font-bold">All Blogs</h1>
 
             <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
-              {isLoading ? (
-                <HashSpinner />
-              ) : (
-                blogs?.map((blog: BlogData) => (
-                  <BlogCard key={blog._id} blog={blog} />
-                ))
-              )}
+              {isLoading
+                ? generateSkeletons(10)
+                : blogs?.map((blog: BlogData) => (
+                    <BlogCard key={blog._id} blog={blog} />
+                  ))}
             </div>
           </div>
         </Container>
