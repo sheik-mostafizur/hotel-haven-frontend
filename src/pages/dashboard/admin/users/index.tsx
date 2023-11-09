@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useAppSelector } from "../../../../redux/hooks";
-import { HashSpinner } from "../../../../components/spinner";
+import {useState} from "react";
+import {useAppSelector} from "../../../../redux/hooks";
+import {HashSpinner} from "../../../../components/spinner";
 import Button from "../../../../components/ui/button";
-import { RiAdminFill } from "react-icons/ri";
-import { FaUserTie } from "react-icons/fa";
-import { Tooltip } from "react-tooltip";
+import {RiAdminFill} from "react-icons/ri";
+import {FaUserTie} from "react-icons/fa";
+import {Tooltip} from "react-tooltip";
 import ROLE from "../../../../constants/ROLE";
 import {
   useEditUserAdminMutation,
@@ -57,8 +57,7 @@ const Users = () => {
           <select
             id="roleFilter"
             onChange={(e) => setSelectedRole(e.target.value)}
-            value={selectedRole}
-          >
+            value={selectedRole}>
             <option value="All">All</option>
             <option value="ADMIN">Admin</option>
             <option value="MANAGER">Manager</option>
@@ -113,12 +112,10 @@ const Users = () => {
                   filteredUsers.map((user: any) => (
                     <tr
                       key={user._id}
-                      className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-700 hover:bg-secondary-50 dark:hover:bg-secondary-600"
-                    >
+                      className="bg-white border-b dark:bg-secondary-800 dark:border-secondary-800 hover:bg-secondary-50 dark:hover:bg-secondary-600">
                       <th
                         scope="row"
-                        className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white"
-                      >
+                        className="flex items-center px-6 py-4 text-secondary-900 whitespace-nowrap dark:text-white">
                         <img
                           className="w-10 h-10 rounded-full"
                           src={user.photoURL}
@@ -150,7 +147,7 @@ const Users = () => {
                             onClick={() => {
                               editUserAdmin({
                                 _id: user._id,
-                                data: { role: ROLE.ADMIN },
+                                data: {role: ROLE.ADMIN},
                               })
                                 .unwrap()
                                 .then(() => {
@@ -159,8 +156,7 @@ const Users = () => {
                                 .catch((error) => {
                                   console.error(error);
                                 });
-                            }}
-                          >
+                            }}>
                             <Tooltip id={`admin-tooltip-${user._id}`} />
 
                             <RiAdminFill className="w-5 h-5" />
@@ -176,7 +172,7 @@ const Users = () => {
                             onClick={() => {
                               editUserAdmin({
                                 _id: user._id,
-                                data: { role: ROLE.MANAGER },
+                                data: {role: ROLE.MANAGER},
                               })
                                 .unwrap()
                                 .then(() => {
@@ -185,8 +181,7 @@ const Users = () => {
                                 .catch((error) => {
                                   console.error(error);
                                 });
-                            }}
-                          >
+                            }}>
                             <Tooltip id={`manager-tooltip-${user._id}`} />
                             <FaUserTie className="w-5 h-5" />
                           </Button>

@@ -52,7 +52,7 @@ const HotelCard: React.FC<HotelCardProps> = ({hotel}) => {
 
   return (
     <div>
-      <div className="mx-auto h-full bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
+      <div className="mx-auto h-full bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
         <img
           className="rounded-t-lg h-[200px] object-cover"
           src={photoURL}

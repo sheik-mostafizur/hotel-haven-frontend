@@ -58,12 +58,12 @@ const SignIn: React.FC = () => {
       <header>
         <Navbar />
       </header>
-      <section className="flex min-h-[600px] items-center justify-center">
-        <div className="relative rounded-lg border p-8 shadow md:w-[450px]">
+      <section className="flex min-h-[600px] items-center justify-center dark:bg-secondary-700">
+        <div className="relative rounded-lg border dark:border-secondary-500 p-8 shadow md:w-[450px]">
           <h2 className="text-center">Sign In your account!</h2>
           <div className="inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
-            <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-900 dark:text-white">
+            <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-700 dark:text-white">
               or
             </span>
           </div>
@@ -78,7 +78,9 @@ const SignIn: React.FC = () => {
                 }}
                 render={({field}) => (
                   <input
-                    className={errors.email ? "border-red-500" : ""}
+                    className={
+                      errors.email ? "border-red-500 dark:border-red-500" : ""
+                    }
                     id="email"
                     type="email"
                     placeholder="Email"
@@ -87,7 +89,7 @@ const SignIn: React.FC = () => {
                 )}
               />
               {errors.email && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors.email.message}
                 </p>
               )}
@@ -105,6 +107,11 @@ const SignIn: React.FC = () => {
                     <div>
                       <input
                         type={showPassword ? "text" : "password"}
+                        className={
+                          errors.password
+                            ? "border-red-500 dark:border-red-500"
+                            : ""
+                        }
                         id="password"
                         placeholder="Password"
                         {...field}
@@ -125,7 +132,7 @@ const SignIn: React.FC = () => {
                 />
               </div>
               {errors.password && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors.password.message}
                 </p>
               )}
@@ -138,7 +145,7 @@ const SignIn: React.FC = () => {
               Create an account?{" "}
               <Link
                 to="/signup"
-                className="font-bold text-primary-600 hover:underline">
+                className="font-bold text-primary-600 dark:text-white hover:underline">
                 Sign Up
               </Link>
             </p>

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import React, {useEffect, useRef} from "react";
+import {useAppSelector} from "../../../redux/hooks";
 import Chart from "chart.js/auto";
 import {
   useGetHotelsAdminQuery,
@@ -11,11 +11,11 @@ const AdminChart = () => {
   const isAdmin = user.role === "ADMIN";
   const usersData = useAppSelector((state) => state.users); // Replace with actual user data from Redux
 
-  const { data, isLoading } = useGetUsersAdminQuery({
+  const {data, isLoading} = useGetUsersAdminQuery({
     length: true,
   });
 
-  const { data: hotelsData } = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
+  const {data: hotelsData} = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
 
   // Reference to the canvas elements where the charts will be rendered
   const pieChartRef = useRef(null);
@@ -137,7 +137,7 @@ const AdminChart = () => {
   }, [isAdmin, usersData, data, hotelsData]);
 
   return (
-    <div className="p-4 border-2 border-secondary-200 border-dashed rounded-lg dark:border-secondary-700">
+    <div className="p-4 border-2 border-secondary-200 border-dashed rounded-lg dark:border-secondary-800">
       {isAdmin && (
         <div className="mt-4 border p-4 rounded-lg shadow-lg">
           {/* <h3 className="text-xl text-center my-4 font-semibold">

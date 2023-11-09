@@ -34,7 +34,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
   return (
     <>
       {isLoading ? (
-        <div className="animate-pulse bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-600">
+        <div className="animate-pulse bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800">
           <div className="rounded-t-lg w-full h-72 bg-primary-50"></div>
           <div className="p-5">
             <div className="flex items-center justify-between gap-4">
@@ -58,7 +58,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
           </div>
         </div>
       ) : (
-        <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-600">
+        <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800">
           <img
             className="rounded-t-lg w-full h-72"
             src={thumbnail}

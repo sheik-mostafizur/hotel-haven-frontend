@@ -48,7 +48,7 @@ const Modal: React.FC<ModalProps> = ({children, button, title}) => {
           {/* <!-- Modal content --> */}
           <div className="relative bg-white rounded-lg shadow dark:bg-secondary-700">
             {/* <!-- Modal header --> */}
-            <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-secondary-600">
+            <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-secondary-800">
               <h3 className="text-xl font-semibold text-secondary-900 dark:text-white">
                 {title || "Terms of Service"}
               </h3>

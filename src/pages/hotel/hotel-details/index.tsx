@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Main from "../../../layout/main";
-import { HashSpinner } from "../../../components/spinner";
+import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
-import { useGetHotelByIdQuery } from "../../../api/public-api";
-import { useAppSelector } from "../../../redux/hooks";
+import {useGetHotelByIdQuery} from "../../../api/public-api";
+import {useAppSelector} from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({text}) => <div>{text}</div>;
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -27,19 +27,19 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: { [key: string]: string };
+    roomInfo: {[key: string]: string};
   }[];
 }
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
-  const { _id } = useParams();
-  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
+  const {_id} = useParams();
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
 
-  const { hotel, rooms } = viewHotels || [];
+  const {hotel, rooms} = viewHotels || [];
 
   const defaultProps = {
     center: {
@@ -60,7 +60,7 @@ const HotelDetails: React.FC = () => {
           <>
             {viewHotels ? (
               <>
-                <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700">
+                <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
                   <div className="grid grid-cols-2 items-center gap-1">
                     <div>
                       <img
@@ -154,7 +154,7 @@ const HotelDetails: React.FC = () => {
                   )}
                 </div>
 
-                <div className=" p-6 my-6 grid lg:grid-cols-3 gap-2  bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-700 dark:hover:bg-secondary-700">
+                <div className=" p-6 my-6 grid lg:grid-cols-3 gap-2  bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
                   <div className="w-52">
                     <h3 className="my-2">Fees & policies</h3>
                   </div>
@@ -234,14 +234,12 @@ const HotelDetails: React.FC = () => {
                   </div>
                 </div>
                 <div
-                  className="my-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-700"
-                  style={{ height: "500px", width: "100%" }}
-                >
+                  className="my-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
+                  style={{height: "500px", width: "100%"}}>
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "" }}
+                    bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
+                    defaultZoom={defaultProps.zoom}>
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}

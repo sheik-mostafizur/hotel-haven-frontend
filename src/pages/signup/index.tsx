@@ -8,8 +8,10 @@ import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {axios} from "../../api";
+import {BeatSpinner} from "../../components/spinner";
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
 
@@ -34,13 +36,18 @@ const SignUp = () => {
   });
 
   const onSubmit = (data: Object) => {
+    setIsLoading(true);
     axios
       .post("/auth/register", data)
       .then(({data}) => {
         toastSuccess(data.message);
         navigate("/signin");
+        setIsLoading(false);
       })
-      .catch((error) => toastError(error));
+      .catch((error) => {
+        toastError(error);
+        setIsLoading(false);
+      });
   };
   const isValidURL = (url) => {
     // A simple function to validate the URL format
@@ -56,12 +63,12 @@ const SignUp = () => {
       <header>
         <Navbar />
       </header>
-      <section className="min-h-[700px] py-12 flex items-center justify-center">
-        <div className="relative rounded-lg border p-8 shadow  md:w-[650px]">
+      <section className="min-h-[700px] py-12  dark:bg-secondary-700 flex items-center justify-center">
+        <div className="relative rounded-lg border dark:border-secondary-800 p-8 shadow  md:w-[650px]">
           <h2 className="text-center">Create a new account!</h2>
           <div className="mb-4 inline-flex w-full items-center justify-center">
             <hr className="my-4 h-px w-full border-0 bg-secondary-200 dark:bg-secondary-700" />
-            <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-900 dark:text-white">
+            <span className="absolute left-1/2 -translate-x-1/2 bg-white px-3 font-medium text-secondary-900 dark:bg-secondary-700 dark:text-white">
               or
             </span>
           </div>
@@ -75,7 +82,9 @@ const SignUp = () => {
                   rules={{required: "Name is required"}}
                   render={({field}) => (
                     <input
-                      className={errors.name ? "border-red-500" : ""}
+                      className={
+                        errors.name ? "border-red-500 dark:border-red-500" : ""
+                      }
                       id={"name"}
                       type={"text"}
                       placeholder={"Name"}
@@ -84,7 +93,7 @@ const SignUp = () => {
                   )}
                 />
                 {errors.name && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.name.message}
                   </p>
                 )}
@@ -103,7 +112,9 @@ const SignUp = () => {
                   }}
                   render={({field}) => (
                     <input
-                      className={errors.email ? "border-red-500" : ""}
+                      className={
+                        errors.email ? "border-red-500 dark:border-red-500" : ""
+                      }
                       id="email"
                       type="email"
                       placeholder="Email"
@@ -112,7 +123,7 @@ const SignUp = () => {
                   )}
                 />
                 {errors.email && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.email.message}
                   </p>
                 )}
@@ -133,7 +144,11 @@ const SignUp = () => {
                 }}
                 render={({field}) => (
                   <input
-                    className={errors.photoURL ? "border-red-500" : ""}
+                    className={
+                      errors.photoURL
+                        ? "border-red-500 dark:border-red-500"
+                        : ""
+                    }
                     id="photoURL"
                     type="url"
                     placeholder="https://example.com/profile.jpg"
@@ -142,7 +157,7 @@ const SignUp = () => {
                 )}
               />
               {errors.photoURL && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors.photoURL.message}
                 </p>
               )}
@@ -156,7 +171,9 @@ const SignUp = () => {
                   rules={{required: "Phone Number is required"}}
                   render={({field}) => (
                     <input
-                      className={errors.phone ? "border-red-500" : ""}
+                      className={
+                        errors.phone ? "border-red-500 dark:border-red-500" : ""
+                      }
                       id="phone"
                       type="text"
                       placeholder="Phone"
@@ -165,7 +182,7 @@ const SignUp = () => {
                   )}
                 />
                 {errors.phone && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.phone.message}
                   </p>
                 )}
@@ -185,7 +202,9 @@ const SignUp = () => {
                   }}
                   render={({field}) => (
                     <input
-                      className={errors.age ? "border-red-500" : ""}
+                      className={
+                        errors.age ? "border-red-500 dark:border-red-500" : ""
+                      }
                       id="age"
                       type="text"
                       placeholder="Age"
@@ -194,7 +213,7 @@ const SignUp = () => {
                   )}
                 />
                 {errors.age && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.age.message}
                   </p>
                 )}
@@ -217,9 +236,9 @@ const SignUp = () => {
                     {...field}
                     className={`${
                       errors.gender
-                        ? "border-red-500 focus:border-red-500"
+                        ? "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500"
                         : "border-secondary-300 focus:border-primary-500"
-                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
+                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
                     <option value="">Choose Your Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -228,7 +247,7 @@ const SignUp = () => {
                 )}
               />
               {errors.gender && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors.gender.message}
                 </p>
               )}
@@ -276,7 +295,7 @@ const SignUp = () => {
                   />
                 </div>
                 {errors.password && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.password.message}
                   </p>
                 )}
@@ -321,7 +340,7 @@ const SignUp = () => {
                   />
                 </div>
                 {errors.confirm_password && (
-                  <p className="text-red-500" role="alert">
+                  <p className="text-red-500 dark:text-red-500" role="alert">
                     {errors.confirm_password.message}
                   </p>
                 )}
@@ -329,13 +348,13 @@ const SignUp = () => {
             </div>
 
             <Button type={"submit"} className="w-full mb-6">
-              Create an account
+              {isLoading ? <BeatSpinner /> : "Create an account"}
             </Button>
             <p>
               Already have an account?{" "}
               <Link
                 to="/signin"
-                className="font-bold text-primary-600 hover:underline">
+                className="font-bold text-primary-600 dark:text-white hover:underline">
                 Sign In
               </Link>
             </p>

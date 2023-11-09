@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
@@ -99,23 +100,20 @@ const AboutUs: React.FC = () => {
       <section className="py-12 md:py-24">
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative">
           <div className="shadow rounded-xl">
-            <div className="grid overflow-hidden text-white shadow-xl md:grid-cols-2 bg-[#5355] rounded-xl">
+            <div className="grid overflow-hidden text-white shadow-xl md:grid-cols-2 bg-primary-50 rounded-xl">
               <aside className="p-8 space-y-4 md:p-16">
                 <h2 className="text-2xl font-bold tracking-tight md:text-4xl font-headline">
                   Ready to enjoy your days. Let's start to booking our awesome
                   hotels
                 </h2>
-                <p className="font-medium  md:text-2xl">
+                <p>
                   Explore our site, know our services and booked which you will
                   be comfort.
                 </p>
                 <div>
-                  <a
-                    href="/hotel"
-                    className="bg-white text-black px-4 py-2 mt-3 rounded-xl"
-                  >
-                    let's go to hotels
-                  </a>
+                  <Link to={"/hotel"}>
+                    <Button>let's go to hotels</Button>
+                  </Link>
                 </div>
               </aside>
               <aside className="relative hidden md:block">
@@ -207,7 +205,7 @@ const AboutUs: React.FC = () => {
             </p>
           </div>
         </div>
-        <section className="flex flex-col max-w-4xl justify-center mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-secondary-800 md:flex-row md:h-48">
+        <section className="flex flex-col max-w-4xl justify-center mx-auto overflow-hidden bg-primary-50 rounded-lg shadow dark:bg-secondary-800 md:flex-row md:h-48">
           <div className="md:flex md:items-center justify-center md:w-1/2">
             <div className="px-6 py-6 md:px-8 md:py-0">
               <h2 className="text-lg text-black font-bold ">
@@ -225,7 +223,7 @@ const AboutUs: React.FC = () => {
           </div>
           <div className="flex items-center justify-center py-6 md:py-0 md:w-1/2">
             <form>
-              <div className="flex flex-col gap-1 p-1.5 overflow-hidden border rounded-lg dark:border-secondary-600 lg:flex-row dark:focus-within:border-primary-300 focus-within:ring focus-within:ring-opacity-40 focus-within:border-primary-400 focus-within:ring-primary-300">
+              <div className="flex flex-col gap-1 p-1.5 overflow-hidden border rounded-lg dark:border-secondary-800 lg:flex-row dark:focus-within:border-primary-300 focus-within:ring focus-within:ring-opacity-40 focus-within:border-primary-400 focus-within:ring-primary-300">
                 <input
                   className="px-6 py-2 text-secondary-700 placeholder-secondary-500 bg-white outline-none dark:bg-secondary-800 dark:placeholder-secondary-400 focus:placeholder-transparent dark:focus:placeholder-transparent"
                   type="text"

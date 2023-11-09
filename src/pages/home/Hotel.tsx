@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 import LazyLoad from "react-lazy-load";
 import React from "react";
-import { CiLocationOn } from "react-icons/ci";
+import {CiLocationOn} from "react-icons/ci";
 
 interface HotelType {
   _id: string;
@@ -24,7 +24,7 @@ const Hotel: React.FC<HotelType> = ({
 }) => {
   return (
     <div className="content-to-animate overflow-hidden shadow rounded-lg">
-      <div className=" bg-white h-full border border-secondary-50 dark:bg-gray-800 dark:border-gray-700">
+      <div className=" bg-white h-full border border-secondary-50 dark:bg-secondary-800 dark:border-secondary-800">
         <LazyLoad>
           <img className="rounded-t-lg w-full h-80" src={photoURL} alt="" />
         </LazyLoad>

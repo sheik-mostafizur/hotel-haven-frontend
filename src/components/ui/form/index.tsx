@@ -26,7 +26,7 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
       })}>
       {form.map((item, index) => (
         <div key={`${item.name} ${index}`} className="my-4">
-          {item.type !== "select" ? (
+          {item.tag !== "select" ? (
             <>
               {item.label && <label htmlFor={item.name}>{item.label}</label>}
               <Controller
@@ -34,17 +34,36 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                 control={control}
                 rules={item.rules}
                 render={({field}) => (
-                  <input
-                    className={errors[item.name] ? "border-red-500" : ""}
-                    id={item.name}
-                    type={item.type || "text"}
-                    placeholder={item?.placeholder}
-                    {...field}
-                  />
+                  <>
+                    {item.tag == "textarea" ? (
+                      <textarea
+                        id={item.name}
+                        className={
+                          errors[item.name]
+                            ? "border-red-500 dark:border-red-500"
+                            : ""
+                        }
+                        placeholder={item?.placeholder}
+                        rows={item?.rows || 4}
+                        {...field}></textarea>
+                    ) : (
+                      <input
+                        className={
+                          errors[item.name]
+                            ? "border-red-500 dark:border-red-500"
+                            : ""
+                        }
+                        id={item.name}
+                        type={item.type || "text"}
+                        placeholder={item?.placeholder}
+                        {...field}
+                      />
+                    )}
+                  </>
                 )}
               />
               {errors[item.name] && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors[item.name].message}
                 </p>
               )}
@@ -62,9 +81,9 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                     {...field}
                     className={`${
                       errors[item.name]
-                        ? "border-red-500 focus:border-red-500"
+                        ? "border-red-500 dark:border-red-500 focus:border-red-500"
                         : "border-secondary-300 focus:border-primary-500"
-                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
+                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
                     {item.option.map((opt, index) => (
                       <option key={`${opt.value} ${index}`} value={opt.value}>
                         {opt.label}
@@ -74,7 +93,7 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                 )}
               />
               {errors[item.name] && (
-                <p className="text-red-500" role="alert">
+                <p className="text-red-500 dark:text-red-500" role="alert">
                   {errors[item.name].message}
                 </p>
               )}

@@ -5,6 +5,7 @@
 ```typescript
 type FormField = {
   type?: string;
+  tag?: string;
   name: string;
   defaultValue: string;
   label?: string;
@@ -65,7 +66,7 @@ const form: FormField[] = [
     },
   },
   {
-    type: "select",
+    tag: "select",
     name: "country",
     defaultValue: "",
     option: [

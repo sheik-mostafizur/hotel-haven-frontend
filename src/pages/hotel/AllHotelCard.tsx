@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 import React from "react";
-import { CiLocationOn } from "react-icons/ci";
+import {CiLocationOn} from "react-icons/ci";
 
 interface HotelsCard {
   _id: string;
@@ -22,7 +22,7 @@ const AllHotelCard: React.FC<HotelsCard> = ({
 }) => {
   return (
     <div>
-      <div className="flex flex-col mx-auto items-center bg-white border border-secondary-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-secondary-100 dark:border-secondary-700 dark:bg-secondary-800 dark:hover:bg-secondary-700">
+      <div className="flex flex-col mx-auto items-center bg-white border border-secondary-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-secondary-100 dark:border-secondary-800 dark:bg-secondary-800 dark:hover:bg-secondary-700">
         <img
           className="object-cover w-full md:max-w-xs h-full md:h-96 rounded-t-lg md:rounded-none md:rounded-l-lg"
           src={photoURL}

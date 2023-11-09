@@ -45,7 +45,7 @@ const FindRoomForm = () => {
   const date = formatDateToYYYYMMDD(today);
 
   return (
-    <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-700 dark:border-secondary-700 dark:shadow-secondary-800">
+    <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-800 dark:border-secondary-800 dark:shadow-secondary-800">
       <h2>Find Your Room</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div>
@@ -59,7 +59,7 @@ const FindRoomForm = () => {
               <select
                 id="location"
                 {...field}
-                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-600 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 {isLoading ? (
                   <option value="">Choose a Location</option>
                 ) : (

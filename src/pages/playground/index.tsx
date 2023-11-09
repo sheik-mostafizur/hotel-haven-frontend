@@ -20,10 +20,27 @@ const Playground: React.FC = () => {
         },
       },
     },
+    {
+      tag: "textarea",
+      name: "message",
+      defaultValue: "",
+      placeholder: "Enter your password",
+      rules: {
+        required: "This is required",
+        minLength: {
+          value: 3,
+          message: "Too Few Characters",
+        },
+        maxLength: {
+          value: 30,
+          message: "Too Many Characters",
+        },
+      },
+    },
   ];
   return (
     <Container className="dark:bg-secondary-700 w-screen h-screen">
-      <h1>Playground</h1>
+      <h1 className="font-OpenSans">Playground</h1>
 
       <Form
         form={form}
