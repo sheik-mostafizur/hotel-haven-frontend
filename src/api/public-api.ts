@@ -6,7 +6,7 @@ const publicApi = createApi({
     baseUrl: axios.defaults.baseURL,
   }),
   reducerPath: "publicApi",
-  tagTypes: ["locations", "gallery", "hotels", "hotelById"],
+  tagTypes: ["locations", "gallery", "hotels", "hotelById", "blog"],
   endpoints: (builder) => ({
     getLocations: builder.query({
       query: () => "/public/locations",
@@ -34,6 +34,15 @@ const publicApi = createApi({
       },
       providesTags: ["hotelById"],
     }),
+    getBlogs: builder.query({
+      query: (params = {}) => {
+        const queryParams = Object.keys(params)
+          .map((key) => `${key}=${params[key]}`)
+          .join("&");
+        return `/public/blog?${queryParams}`;
+      },
+      providesTags: ["blog"],
+    }),
   }),
 });
 
@@ -42,5 +51,6 @@ export const {
   useGetHotelGalleryQuery,
   useGetHotelsQuery,
   useGetHotelByIdQuery,
+  useGetBlogsQuery,
 } = publicApi;
 export default publicApi;
