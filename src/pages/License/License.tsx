@@ -6,8 +6,8 @@ const License: React.FC = () => {
   return (
     <Main>
       <Container>
-        <div>
-          <h1>Licensing Information</h1>
+        <div className="my-10">
+          <h1 className="my-2">Licensing Information</h1>
 
           <p>
             Welcome to Hotel Haven, a hotel booking service located in Dhaka,
@@ -15,7 +15,7 @@ const License: React.FC = () => {
             registration of our business.
           </p>
 
-          <h2>Business Information</h2>
+          <h2 className="my-2">Business Information</h2>
 
           <p>
             <strong>Business Name:</strong> Hotel Haven
@@ -27,7 +27,7 @@ const License: React.FC = () => {
             <strong>Location:</strong> Dhaka, Bangladesh
           </p>
 
-          <h2>Licensing and Registration</h2>
+          <h2 className="my-2">Licensing and Registration</h2>
 
           <p>
             Hotel Haven is a legally registered and licensed business in Dhaka,

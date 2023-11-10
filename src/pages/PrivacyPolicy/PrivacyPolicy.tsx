@@ -6,8 +6,8 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <Main>
       <Container>
-        <div className="">
-          <h1>Privacy Policy</h1>
+        <div className="my-10">
+          <h1 className="my-2">Privacy Policy</h1>
 
           <p>
             This Privacy Policy describes how Hotel Haven ("we," "us," or "our")
@@ -15,7 +15,7 @@ const PrivacyPolicy: React.FC = () => {
             our hotel booking website.
           </p>
 
-          <h2>Information We Collect</h2>
+          <h2 className="my-2">Information We Collect</h2>
 
           <p>
             When you use our website, we may collect the following types of
@@ -43,7 +43,7 @@ const PrivacyPolicy: React.FC = () => {
             </li>
           </ul>
 
-          <h2>How We Use Your Information</h2>
+          <h2 className="my-2">How We Use Your Information</h2>
 
           <p>
             We use the information we collect for various purposes, including:
@@ -62,7 +62,7 @@ const PrivacyPolicy: React.FC = () => {
             <li>Complying with legal and regulatory requirements.</li>
           </ul>
 
-          <h2>Sharing Your Information</h2>
+          <h2 className="my-2">Sharing Your Information</h2>
 
           <p>
             We may share your information with third parties in the following
@@ -85,7 +85,7 @@ const PrivacyPolicy: React.FC = () => {
             </li>
           </ul>
 
-          <h2>Your Choices</h2>
+          <h2 className="my-2">Your Choices</h2>
 
           <p>
             You have certain rights regarding your personal information,
