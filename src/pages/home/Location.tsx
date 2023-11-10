@@ -1,5 +1,6 @@
 import React from "react";
 import "./Location.css";
+import { Link } from "react-router-dom";
 interface Location {
   thumbnail: string;
   location: string;
@@ -13,13 +14,14 @@ const Location: React.FC<Location> = ({
   totalHotel,
   _id,
 }) => {
-  const hotelFilter = (location_name: any) => {
-    console.log(location_name);
-  };
+  // const hotelFilter = (location_name: any) => {
+  //   console.log(location_name);
+  // };
 
   return (
-    <div
-      onClick={() => hotelFilter(_id)}
+    <Link
+      to={`/location/${location}`}
+      // onClick={() => hotelFilter(location)}
       id="card"
       className="bg-white mx-auto rounded-lg dark:bg-secondary-700"
     >
@@ -37,7 +39,7 @@ const Location: React.FC<Location> = ({
           Total Hotel: {totalHotel}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
