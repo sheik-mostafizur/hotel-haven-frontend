@@ -23,6 +23,7 @@ const Wishlist = () => {
         toastError(error);
       });
   };
+  console.log(wishlist);
 
   return (
     <Container>
@@ -36,13 +37,10 @@ const Wishlist = () => {
               <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   <th scope="col" className="px-6 py-3">
-                    Id
+                    Hotel Name
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    RoomId
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    UserId
+                    Room title
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Action
@@ -55,14 +53,8 @@ const Wishlist = () => {
                     key={item._id}
                     className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                   >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      {item._id}
-                    </th>
-                    <td className="px-6 py-4">{item.roomId}</td>
-                    <td className="px-6 py-4">{item.userId}</td>
+                    <td className="px-6 py-4">Hotel Name</td>
+                    <td className="px-6 py-4">Room Title</td>
                     <td className="px-6 py-4">
                       <Button
                         size="sm"
