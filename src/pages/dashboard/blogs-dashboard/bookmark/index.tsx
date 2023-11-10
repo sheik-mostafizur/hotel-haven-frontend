@@ -22,15 +22,20 @@ const Bookmark = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <td className="px-6 py-4">
-              <img src="" alt="" />
-            </td>
-            <td className="px-6 py-4"></td>
-            <td className="px-6 py-4">
-              <Button size="sm">Read</Button>
-            </td>
-          </tr>
+          {data?.map((item: any) => (
+            <tr
+              key={item._id}
+              // className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+            >
+              <td className="px-6 py-4">
+                <img src={item.blogThumbnail} className="w-20" alt="" />
+              </td>
+              <td className="px-6 py-4">{item.blogTitle}</td>
+              <td>
+                <Button>Read</Button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

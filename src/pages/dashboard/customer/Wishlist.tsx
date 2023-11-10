@@ -53,8 +53,8 @@ const Wishlist = () => {
                     key={item._id}
                     className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                   >
-                    <td className="px-6 py-4">Hotel Name</td>
-                    <td className="px-6 py-4">Room Title</td>
+                    <td className="px-6 py-4">{item.hotelName}</td>
+                    <td className="px-6 py-4">{item.roomTitle}</td>
                     <td className="px-6 py-4">
                       <Button
                         size="sm"
