@@ -12,8 +12,13 @@ const adminApi = createApi({
     },
   }),
   reducerPath: "adminApi",
-  tagTypes: ["usersAdmin", "hotelsAdmin"],
+  tagTypes: ["adminInfo", "usersAdmin", "hotelsAdmin"],
   endpoints: (builder) => ({
+    // admin show length
+    getAdminInfo: builder.query({
+      query: () => "/admin",
+      providesTags: ["adminInfo"],
+    }),
     // Users Routes
     getUsersAdmin: builder.query({
       query: (params = {}) => {
@@ -60,6 +65,7 @@ const adminApi = createApi({
 });
 
 export const {
+  useGetAdminInfoQuery,
   useGetUsersAdminQuery,
   useEditUserAdminMutation,
   useDeleteUserAdminMutation,

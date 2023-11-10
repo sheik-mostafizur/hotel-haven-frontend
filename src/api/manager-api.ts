@@ -12,8 +12,12 @@ const managerApi = createApi({
     },
   }),
   reducerPath: "managerApi",
-  tagTypes: ["managerHotel"],
+  tagTypes: ["managerInfo", "managerHotel"],
   endpoints: (builder) => ({
+    getManagerInfo: builder.query({
+      query: () => "/manager",
+      providesTags: ["managerInfo"],
+    }),
     getManagerHotel: builder.query({
       query: () => "/manager/hotel",
       providesTags: ["managerHotel"],
@@ -38,6 +42,7 @@ const managerApi = createApi({
 });
 
 export const {
+  useGetManagerInfoQuery,
   useGetManagerHotelQuery,
   usePostManagerHotelMutation,
   useUpdateManagerHotelMutation,
