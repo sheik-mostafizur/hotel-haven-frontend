@@ -16,6 +16,7 @@ import SingleBlog from "../pages/blogs/SingleBlog";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import License from "../pages/License/License";
 import TermsAndConditions from "../pages/TermsAndCondition/TermsAndConditions";
+import LocationHotel from "../pages/home/locationHotel/locationHotel";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: "/hotel/:_id",
     element: <HotelDetails />,
+  },
+  {
+    path: "location/:location",
+    element: <LocationHotel />,
   },
   {
     path: "/playground",

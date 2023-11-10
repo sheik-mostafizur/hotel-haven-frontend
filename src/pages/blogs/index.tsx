@@ -1,7 +1,6 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
 import { BlogCard } from "../../components/ui/card";
-import { HashSpinner } from "../../components/spinner";
 import { useGetPublicBlogsQuery } from "../../api/public-api";
 import useSetTitle from "../../hooks/useSetTitle";
 import BlogCardSkeleton from "../../components/ui/card/BlogCardSkeleton";

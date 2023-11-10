@@ -23,14 +23,13 @@ const Hotel: React.FC = () => {
   const { data: hotels, isLoading } = useGetHotelsQuery(query);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [locationFilter, setLocationFilter] = useState<string>("");
-
   // Extract unique locations from hotels data
   const uniqueLocations = Array.from(
-    new Set(hotels?.map((hotel) => hotel.address.location))
+    new Set(hotels?.map((hotel: any) => hotel.address.location))
   );
 
   const filteredHotels = hotels?.filter(
-    (hotel) =>
+    (hotel: any) =>
       hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (locationFilter === "" || hotel.address.location === locationFilter)
   );
