@@ -8,9 +8,8 @@ const TermsAndConditions: React.FC = () => {
   return (
     <Main>
       <Container>
-        <div>
-          <h1>Terms and Conditions</h1>
-
+        <div className="my-10">
+          <h1 className="my-2">Terms and Conditions</h1>
           <p>
             Please read these Terms and Conditions carefully before using the
             Hotel Haven website. By accessing and using this website, you agree
@@ -18,7 +17,7 @@ const TermsAndConditions: React.FC = () => {
             these terms, please do not use this website.
           </p>
 
-          <h2>1. Use of the Website</h2>
+          <h2 className="my-2">1. Use of the Website</h2>
 
           <p>
             You must be at least 18 years of age or have the necessary legal
@@ -27,7 +26,7 @@ const TermsAndConditions: React.FC = () => {
             regulations.
           </p>
 
-          <h2>2. Privacy</h2>
+          <h2 className="my-2">2. Privacy</h2>
 
           <p>
             Your use of this website is also governed by our Privacy Policy.
@@ -35,7 +34,7 @@ const TermsAndConditions: React.FC = () => {
             use your personal information.
           </p>
 
-          <h2>3. Booking and Reservations</h2>
+          <h2 className="my-2">3. Booking and Reservations</h2>
 
           <p>
             When making reservations through our website, you agree to provide
@@ -43,14 +42,14 @@ const TermsAndConditions: React.FC = () => {
             website are subject to availability and confirmation.
           </p>
 
-          <h2>4. Payment</h2>
+          <h2 className="my-2">4. Payment</h2>
 
           <p>
             Payment for reservations made through our website is subject to the
             terms and conditions provided during the booking process.
           </p>
 
-          <h2>5. Cancellation and Refund</h2>
+          <h2 className="my-2">5. Cancellation and Refund</h2>
 
           <p>
             Cancellation and refund policies may vary depending on the specific
@@ -58,7 +57,7 @@ const TermsAndConditions: React.FC = () => {
             during the booking process.
           </p>
 
-          <h2>6. Intellectual Property</h2>
+          <h2 className="my-2">6. Intellectual Property</h2>
 
           <p>
             The content on this website, including text, images, logos, and
@@ -67,7 +66,7 @@ const TermsAndConditions: React.FC = () => {
             without our permission.
           </p>
 
-          <h2>7. Changes to the Terms</h2>
+          <h2 className="my-2">7. Changes to the Terms</h2>
 
           <p>
             We reserve the right to modify or revise these terms and conditions

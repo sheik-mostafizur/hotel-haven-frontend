@@ -22,25 +22,32 @@ const Hotel: React.FC<HotelType> = ({
   description,
   _id,
 }) => {
+  // bg-white className=" h-full border border-secondary-50 dark:bg-secondary-800 dark:border-secondary-800"
   return (
-    <div className="content-to-animate overflow-hidden shadow rounded-lg">
-      <div className=" bg-white h-full border border-secondary-50 dark:bg-secondary-800 dark:border-secondary-800">
-        <LazyLoad>
-          <img className="rounded-t-lg w-full h-80" src={photoURL} alt="" />
-        </LazyLoad>
-        <div className="p-5">
-          <h4 className="py-2 h-12">{name}</h4>
-          <p className="py-4 flex h-20 items-center gap-2">
-            <CiLocationOn /> {address?.location}
-          </p>
-          <p className="py-2 text-sm h-32">{description}</p>
-          <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400"></p>
-          <Link to={`/hotel/${_id}`}>
-            <Button size="sm">View Details</Button>
-          </Link>
+    <Link to={`/hotel/${_id}`}>
+      <figure className="relative transition-all cursor-pointer filter ">
+        <div style={{ position: "relative", display: "block" }}>
+          <img
+            className="rounded-lg h-96"
+            src={photoURL}
+            alt="image description"
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.3)", // Black overlay with 0.5 opacity
+            }}
+          ></div>
+          <figcaption className="absolute px-4 text-lg bottom-6">
+            <h2 className="text-white">{name}</h2>
+          </figcaption>
         </div>
-      </div>
-    </div>
+      </figure>
+    </Link>
   );
 };
 
