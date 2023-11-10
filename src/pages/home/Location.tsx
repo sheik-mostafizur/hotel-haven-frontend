@@ -8,12 +8,7 @@ interface Location {
   _id: string;
 }
 
-const Location: React.FC<Location> = ({
-  thumbnail,
-  location,
-  totalHotel,
-  _id,
-}) => {
+const Location: React.FC<Location> = ({ thumbnail, location, totalHotel }) => {
   // const hotelFilter = (location_name: any) => {
   //   console.log(location_name);
   // };

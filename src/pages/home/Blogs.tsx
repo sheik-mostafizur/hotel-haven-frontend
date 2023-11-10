@@ -14,7 +14,6 @@ interface Blogs {
 }
 
 const Blogs: React.FC<Blogs> = ({
-  _id,
   thumbnail,
   title,
   description,
