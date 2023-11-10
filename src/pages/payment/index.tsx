@@ -44,12 +44,11 @@ const Payment: React.FC = () => {
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
 
   const handelPayment = () => {
-    const order = {
-      ...user,
-      roomId: _id,
-    };
-    console.log(order);
+    window.location.replace(
+      "https://sandbox.sslcommerz.com/EasyCheckOut/testcdebc68a2e42f9d2924d7d992eb8a9ab3a9"
+    );
   };
+
   const amount = 1222;
 
   return (
@@ -142,7 +141,7 @@ const Payment: React.FC = () => {
               <p className="py-4 flex items-center gap-4 ">
                 <FaCheckCircle></FaCheckCircle> We never charge any card fees
               </p>
-              <Button onClick={() => handelPayment()}>Pay Now</Button>
+              <Button onClick={handelPayment}>Pay Now</Button>
             </div>
             {/* step 3 details */}
             <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
