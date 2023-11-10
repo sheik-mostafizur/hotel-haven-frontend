@@ -1,7 +1,7 @@
-import {Link} from "react-router-dom";
-import {AiOutlineLike, AiTwotoneLike} from "react-icons/ai";
-import {BsBookmarkStar, BsBookmarkStarFill} from "react-icons/bs";
-import {BlogType} from "../../../types";
+import { Link } from "react-router-dom";
+import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
+import { BsBookmarkStar, BsBookmarkStarFill } from "react-icons/bs";
+import { BlogType } from "../../../types";
 import formatPostDate from "../../../utils/format-post-date";
 
 interface BlogCardProps {
@@ -38,7 +38,8 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
           <div className="flex items-center justify-between gap-4">
             <Link
               to={`/blogs/${_id}`}
-              className="mb-2 text-2xl font-bold text-secondary-900 dark:text-white hover:underline">
+              className="mb-2 text-2xl font-bold text-secondary-900 dark:text-white hover:underline"
+            >
               {title}
             </Link>
             {isFavorite ? (
@@ -53,7 +54,8 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               {description.slice(0, 90)}{" "}
               <Link
                 to={`/blogs/${_id}`}
-                className="font-semibold text-secondary-500 dark:text-white hover:underline">
+                className="font-semibold text-secondary-500 dark:text-white hover:underline"
+              >
                 read more
               </Link>
             </p>
@@ -64,7 +66,8 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
           <div className="py-2 flex justify-between items-center">
             <Link
               to={`/profile/${userId}`}
-              className="group flex gap-2 justify-center items-center">
+              className="group flex gap-2 justify-center items-center"
+            >
               <img
                 className="rounded-full w-9 h-9 group-hover:outline outline-1 outline-primary-100"
                 src={userProfile}

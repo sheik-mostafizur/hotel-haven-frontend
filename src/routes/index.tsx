@@ -16,7 +16,7 @@ import SingleBlog from "../pages/blogs/SingleBlog";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import License from "../pages/License/License";
 import TermsAndConditions from "../pages/TermsAndCondition/TermsAndConditions";
-import LocationHotel from "../pages/home/locationHotel/locationHotel";
+import LocationHotel from "../pages/home/LocationHotel/LocationHotel";
 
 const router = createBrowserRouter([
   {

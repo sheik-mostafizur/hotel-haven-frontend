@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../redux/hooks";
 import { useGetHotelsQuery } from "../../../api/public-api";
 import AllHotelCard from "../../hotel/AllHotelCard";
+import { HashSpinner } from "../../../components/spinner";
 
 interface Hotel {
   _id: string;
@@ -22,16 +23,20 @@ const LocationHotel: React.FC = () => {
   const filteredHotels = hotels?.filter(
     (hotel: any) => hotel.address.location === location
   );
-  console.log(filteredHotels);
+  // console.log(filteredHotels);
   return (
     <div>
       <h2 className="text-center">{location}</h2>
-      <div className="grid grid-cols-1 my-4 justify-center items-center gap-4 md:gap-6 mx-auto">
-        {filteredHotels &&
-          filteredHotels.map((hotel: Hotel) => (
-            <AllHotelCard key={hotel._id} {...hotel} />
-          ))}
-      </div>
+      {isLoading ? (
+        <HashSpinner />
+      ) : (
+        <div className="grid grid-cols-1 my-4 justify-center items-center gap-4 md:gap-6 mx-auto">
+          {filteredHotels &&
+            filteredHotels.map((hotel: Hotel) => (
+              <AllHotelCard key={hotel._id} {...hotel} />
+            ))}
+        </div>
+      )}
     </div>
   );
 };
