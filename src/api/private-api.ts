@@ -38,6 +38,14 @@ const privateApi = createApi({
       query: (_id) => `/profile/${_id}`,
       providesTags: ["profile"],
     }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `/profile`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["profile"],
+    }),
 
     // Blogs for user
     getUserBlogById: builder.query({
@@ -85,6 +93,7 @@ export const {
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,
   useGetProfileQuery,
+  useUpdateProfileMutation,
   useGetUserBlogByIdQuery,
   useDeleteUserBlogByIdMutation,
   useGetUserBlogsQuery,

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter} from "react-router-dom";
 import Home from "../pages/home";
 import ErrorElement from "../pages/error-element";
 import SignUp from "../pages/signup";
@@ -16,7 +16,6 @@ import SingleBlog from "../pages/blogs/SingleBlog";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 import License from "../pages/License/License";
 import TermsAndConditions from "../pages/TermsAndCondition/TermsAndConditions";
-import LocationHotel from "../pages/home/LocationHotel/LocationHotel";
 
 const router = createBrowserRouter([
   {
@@ -55,10 +54,6 @@ const router = createBrowserRouter([
   {
     path: "/hotel/:_id",
     element: <HotelDetails />,
-  },
-  {
-    path: "location/:location",
-    element: <LocationHotel />,
   },
   {
     path: "/playground",

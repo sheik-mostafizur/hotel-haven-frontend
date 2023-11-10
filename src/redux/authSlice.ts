@@ -92,6 +92,7 @@ export const userSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      window.location.replace("/");
     },
     setUser: (state, action: PayloadAction<{user: User}>) => {
       state.user = action.payload.user;
