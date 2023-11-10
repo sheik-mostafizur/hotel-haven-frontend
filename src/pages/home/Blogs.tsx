@@ -1,36 +1,40 @@
 import React from "react";
 import "./Blog.css";
-import {FcLikePlaceholder} from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 interface Blogs {
+  _id: number;
   thumbnail: string;
   title: string;
+  description: string;
   authorName: string;
   authorProfile: string;
   publishDate: string;
-  description: string;
+  likes: number;
 }
 
 const Blogs: React.FC<Blogs> = ({
+  _id,
   thumbnail,
   title,
+  description,
   authorName,
   authorProfile,
   publishDate,
-  description,
+  likes,
 }) => {
   // console.log(title);
   return (
     <>
       <div
         id="fadeIn"
-        className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
+        className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
+      >
         <img
           className="h-80 w-full object-cover rounded-t-2xl"
           src={thumbnail}
           alt={title}
         />
-
         <div className="p-4">
           <h5 className="py-2">{title}</h5>
           <p className="py-2">{description.slice(0, 80)}...</p>

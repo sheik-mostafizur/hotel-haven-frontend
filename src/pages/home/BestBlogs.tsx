@@ -1,24 +1,24 @@
 import Container from "../../components/ui/container";
-import React, {useEffect, useState} from "react";
-import fetchData from "../../hooks/fetch-data";
-import {BlogCard} from "../../components/ui/card";
+import React from "react";
+import { BlogCard } from "../../components/ui/card";
+import { useGetPublicBlogsQuery } from "../../api/public-api";
+import { HashSpinner } from "../../components/spinner";
 
 interface BestBlogs {
+  _id: number;
   thumbnail: string;
   title: string;
   description: string;
   authorName: string;
   authorProfile: string;
   publishDate: string;
+  likes: number;
 }
 
 const BestBlogs: React.FC = () => {
-  const [bestBlogs, setBestBlog] = useState<BestBlogs[]>([]);
-  useEffect(() => {
-    fetchData("/db/best-blogs.json")
-      .then((data) => setBestBlog(data))
-      .catch((err) => console.log(err));
-  }, []);
+  const { data: blogs, isLoading } = useGetPublicBlogsQuery({
+    descending: true,
+  });
 
   return (
     <div className="dark:bg-secondary-700">
@@ -31,11 +31,15 @@ const BestBlogs: React.FC = () => {
           and adventure. Get inspired and stay informed with our diverse
           collection of stories.
         </p>
-        <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
-          {bestBlogs.splice(0, 4).map((blog) => (
-            <BlogCard key={blog._id} blog={blog} />
-          ))}
-        </div>
+        {isLoading ? (
+          <HashSpinner />
+        ) : (
+          <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
+            {blogs?.slice(0, 4).map((blog: BestBlogs) => (
+              <BlogCard key={blog._id} blog={blog} />
+            ))}
+          </div>
+        )}
       </Container>
     </div>
   );

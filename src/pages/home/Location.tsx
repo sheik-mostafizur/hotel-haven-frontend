@@ -1,15 +1,17 @@
 import React from "react";
 import "./Location.css";
 interface Location {
-  image: string;
-  location_name: string;
-  total_hotels: number;
+  thumbnail: string;
+  location: string;
+  totalHotel: number;
+  _id: string;
 }
 
 const Location: React.FC<Location> = ({
-  image,
-  location_name,
-  total_hotels,
+  thumbnail,
+  location,
+  totalHotel,
+  _id,
 }) => {
   const hotelFilter = (location_name: any) => {
     console.log(location_name);
@@ -17,22 +19,22 @@ const Location: React.FC<Location> = ({
 
   return (
     <div
-      onClick={() => hotelFilter(location_name)}
+      onClick={() => hotelFilter(_id)}
       id="card"
       className="bg-white mx-auto rounded-lg dark:bg-secondary-700"
     >
       <img
         id="className-img"
         className="w-full h-80 "
-        src={image}
+        src={thumbnail}
         alt="image"
       />
       <div className="" id="card-body">
         <h3 id="title" className=" text-white">
-          Location: {location_name}
+          Location: {location}
         </h3>
         <p id="info" className=" text-white">
-          Total Hotel: {total_hotels}
+          Total Hotel: {totalHotel}
         </p>
       </div>
     </div>
