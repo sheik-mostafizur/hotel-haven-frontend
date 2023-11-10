@@ -1,5 +1,6 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAppSelector } from "../../../redux/hooks";
+import { useUpdateProfileMutation } from "../../../api/private-api";
 // import { useState } from "react";
 // import Button from "../../../components/ui/button";
 interface IFormInputs {
@@ -7,12 +8,13 @@ interface IFormInputs {
   email: string;
   phone: string;
   photoURL: string;
-  // currentPassword: string;
-  // newPassword: string;
-  // confirmNewPassword: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
 }
 const ProfileDashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
+  const [updateProfile] = useUpdateProfileMutation();
   // const [confirm, setConfirm] = useState("");
 
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
@@ -24,7 +26,8 @@ const ProfileDashboard = () => {
     // } else {
     //   setConfirm("");
     // }
-    console.log(data);
+    updateProfile(data);
+    // console.log(data);
     // reset();
   };
 
@@ -80,7 +83,7 @@ const ProfileDashboard = () => {
               render={({ field }) => <input type="url" {...field} />}
             />
           </div>
-          {/* <div className="my-2">
+          <div className="my-2">
             <label htmlFor="currentPassword">Current password:</label>
             <Controller
               name="currentPassword"
@@ -97,19 +100,19 @@ const ProfileDashboard = () => {
               rules={{ required: true }}
               render={({ field }) => <input type="password" {...field} />}
             />
-          </div> */}
-          {/* <div className="my-2">
+          </div>
+          <div className="my-2">
             <label htmlFor="confirmNewPassword">Confirm new password</label>
-            <p className="text-red-500">
+            {/* <p className="text-red-500">
               <small>{confirm}</small>
-            </p>
+            </p> */}
             <Controller
               name="confirmNewPassword"
               control={control}
               rules={{ required: true }}
               render={({ field }) => <input type="password" {...field} />}
             />
-          </div> */}
+          </div>
           <input type="submit" className="bg-primary-400" value="Change" />
         </form>
       </div>
