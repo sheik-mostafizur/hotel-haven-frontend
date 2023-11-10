@@ -6,6 +6,7 @@ import {usePostUserBlogMutation} from "../../../api/private-api";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 import Modal from "../../../components/ui/modal";
+import {BeatSpinner} from "../../../components/spinner";
 
 interface IFormInputs {
   title: string;
@@ -16,7 +17,7 @@ interface IFormInputs {
 }
 
 const CreateBlog = () => {
-  const [postBlogs] = usePostUserBlogMutation();
+  const [postBlogs, {isLoading}] = usePostUserBlogMutation();
   const {handleSubmit, control, reset} = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
@@ -92,7 +93,7 @@ const CreateBlog = () => {
             )}
           />
           <Button type="submit" className="mt-4">
-            Create new blog
+            {isLoading ? <BeatSpinner /> : "Create new blog"}
           </Button>
         </form>
       </Modal>
