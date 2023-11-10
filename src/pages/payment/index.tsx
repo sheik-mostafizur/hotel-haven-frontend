@@ -42,11 +42,21 @@ const Payment: React.FC = () => {
   // console.log(data?.room?.roomInfo?.discountedPrice);
   const { handleSubmit, control, reset } = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
-
+const token = ''
   const handelPayment = () => {
-    window.location.replace(
-      "https://sandbox.sslcommerz.com/EasyCheckOut/testcdebc68a2e42f9d2924d7d992eb8a9ab3a9"
-    );
+    fetch('http://localhost:3000/payment/order',{
+      method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer 9a8d6d3d93a3a1f027afc63d65b6a4d32c2de963cba99db65b1bf506ec9acd8913de6097a449baa90debdd1d6c889774`
+  },
+  body: JSON.stringify(data)
+    })
+    .then(res=> res.json())
+    .then(url => 
+      window.location.replace(url.url)
+    )
+    
   };
 
   const amount = 1222;
