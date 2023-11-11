@@ -150,7 +150,7 @@ const Payment: React.FC = () => {
                   <p>
                     <FaBed></FaBed>
                   </p>
-                  <h5 className="">Step 2: Property details</h5>
+                  <h5 className="">Step 3: Property details</h5>
                 </div>
               </div>
               <hr className="mt-1 border" />
