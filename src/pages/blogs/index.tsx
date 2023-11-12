@@ -5,6 +5,8 @@ import {useGetPublicBlogsQuery} from "../../api/public-api";
 import SetTitle from "../../components/set-title";
 import {useState} from "react";
 import Pagination from "../../components/pagination";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setBlogFilter} from "../../redux/blog-filter-slice";
 
 interface BlogData {
   _id: number;
@@ -18,7 +20,9 @@ interface BlogData {
 }
 
 const Blogs: React.FC = () => {
-  const [query, setQuery] = useState({limit: 10, page: 1, descending: true});
+  const query = useAppSelector((state) => state.blogFilter);
+  const dispatch = useAppDispatch();
+
   const {data, isLoading} = useGetPublicBlogsQuery(query);
   const {data: blogs, totalPages, currentPage} = data || {};
 
@@ -38,7 +42,7 @@ const Blogs: React.FC = () => {
         </div>
         {totalPages != 1 && (
           <Pagination
-            handlePages={(page) => setQuery((prev) => ({...prev, page}))}
+            handlePages={(page) => dispatch(setBlogFilter({...query, page}))}
             currentPage={parseInt(currentPage)}
             totalPages={parseInt(totalPages)}
           />

@@ -12,7 +12,14 @@ const privateApi = createApi({
     },
   }),
   reducerPath: "privateApi",
-  tagTypes: ["roomDetails", "wishlist", "profile", "blogs", "blogBookmark"],
+  tagTypes: [
+    "roomDetails",
+    "wishlist",
+    "profile",
+    "blogs",
+    "blogBookmark",
+    "blogLike",
+  ],
 
   endpoints: (builder) => ({
     getRoomDetails: builder.query({
@@ -119,6 +126,26 @@ const privateApi = createApi({
       }),
       invalidatesTags: ["blogBookmark"],
     }),
+
+    // blogLike
+    getLiked: builder.query({
+      query: () => "/blog/liked",
+      providesTags: ["blogLike"],
+    }),
+    postLikeBlog: builder.mutation({
+      query: (_id) => ({
+        url: `/blog/${_id}/like`,
+        method: "POST",
+      }),
+      invalidatesTags: ["blogLike"],
+    }),
+    removeLikeBlog: builder.mutation({
+      query: (_id) => ({
+        url: `/blog/${_id}/unlike`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["blogLike"],
+    }),
   }),
 });
 
@@ -141,6 +168,10 @@ export const {
   useGetBlogBookmarkQuery,
   usePostBlogBookmarkMutation,
   useDeleteBlogBookmarkByIdMutation,
+
+  useGetLikedQuery,
+  usePostLikeBlogMutation,
+  useRemoveLikeBlogMutation,
 } = privateApi;
 
 export default privateApi;

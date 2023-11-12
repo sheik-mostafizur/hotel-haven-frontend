@@ -6,10 +6,15 @@ import formatPostDate from "../../../../utils/format-post-date";
 import {
   useDeleteBlogBookmarkByIdMutation,
   useGetBlogBookmarkQuery,
+  useGetLikedQuery,
   usePostBlogBookmarkMutation,
+  usePostLikeBlogMutation,
+  useRemoveLikeBlogMutation,
 } from "../../../../api/private-api";
 import toastSuccess from "../../../../utils/toast-success";
 import toastError from "../../../../utils/toast-error";
+import {useGetPublicBlogsQuery} from "../../../../api/public-api";
+import {useAppSelector} from "../../../../redux/hooks";
 
 interface BlogCardProps {
   blog: BlogType.Blog;
@@ -24,15 +29,20 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
     description,
     likeCount,
     publishDate,
-    isLiked = false,
     userId,
     userName,
     userProfile,
   } = props.blog;
+  const query = useAppSelector((state) => state.blogFilter);
+  const {refetch} = useGetPublicBlogsQuery(query);
 
   const {data: bookmark} = useGetBlogBookmarkQuery(undefined);
   const [postBlogBookmark] = usePostBlogBookmarkMutation();
   const [deleteBlogBookmarkById] = useDeleteBlogBookmarkByIdMutation();
+
+  const {data: liked} = useGetLikedQuery(undefined);
+  const [postLikeBlog] = usePostLikeBlogMutation();
+  const [removeLikeBlog] = useRemoveLikeBlogMutation();
 
   const handleAddBlogBookmark = () => {
     postBlogBookmark({blogId: _id})
@@ -45,11 +55,38 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
         toastError(error);
       });
   };
+
   const handleRemoveBlogBookmark = () => {
     deleteBlogBookmarkById(_id)
       .unwrap()
       .then((data) => {
         toastSuccess(data.message);
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
+  };
+
+  const handleLike = () => {
+    postLikeBlog(_id)
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+        refetch();
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
+  };
+
+  const handleRemoveLike = () => {
+    removeLikeBlog(_id)
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+        refetch();
       })
       .catch(({data}) => {
         const error = {message: data?.message};
@@ -119,12 +156,17 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               </div>
             </Link>
             <div className="flex items-center justify-center gap-1">
-              {isLiked ? (
-                <AiTwotoneLike className={iconStyle.active} />
+              {liked?.includes(_id) ? (
+                <AiTwotoneLike
+                  onClick={handleRemoveLike}
+                  className={iconStyle.active}
+                />
               ) : (
-                <AiOutlineLike className={iconStyle.inactive} />
+                <AiOutlineLike
+                  onClick={handleLike}
+                  className={iconStyle.inactive}
+                />
               )}
-
               <span className="text-secondary-500 text-lg dark:text-white">
                 {likeCount}
               </span>
