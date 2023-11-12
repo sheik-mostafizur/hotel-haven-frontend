@@ -1,5 +1,4 @@
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
-import {useAppSelector} from "../../../redux/hooks";
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
@@ -8,8 +7,8 @@ import {BeatSpinner, HashSpinner} from "../../../components/spinner";
 import Button from "../../../components/ui/button";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
-// import { useState } from "react";
-// import Button from "../../../components/ui/button";
+import SetTitle from "../../../components/set-title";
+
 interface IFormInputs {
   name: string;
   email: string;
@@ -54,6 +53,7 @@ const ProfileDashboard = () => {
 
   return (
     <div>
+      <SetTitle title="Update Your Profile" />
       <h2 className="text-center">User info</h2>
       <div>
         <div>
@@ -127,9 +127,6 @@ const ProfileDashboard = () => {
           </div>
           <div className="my-2">
             <label htmlFor="confirmPassword">Confirm password</label>
-            {/* <p className="text-red-500">
-              <small>{confirm}</small>
-            </p> */}
             <Controller
               name="confirmPassword"
               control={control}
@@ -139,9 +136,19 @@ const ProfileDashboard = () => {
               }}
               render={({field}) => <input type="password" {...field} />}
             />
+            {errors.confirmPassword && (
+              <p
+                className="text-sm text-red-500 dark:text-red-500"
+                role="alert">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </div>
 
-          <Button type="submit" className="block mx-auto min-w-[250px]">
+          <Button
+            type="submit"
+            isDisabled={updateIsLoading}
+            className="block mx-auto min-w-[250px]">
             {updateIsLoading ? <BeatSpinner /> : "Change Profile"}
           </Button>
         </form>

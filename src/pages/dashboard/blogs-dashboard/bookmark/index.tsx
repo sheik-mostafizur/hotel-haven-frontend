@@ -1,12 +1,14 @@
 import {Link} from "react-router-dom";
 import {useGetBlogBookmarkQuery} from "../../../../api/private-api";
 import Button from "../../../../components/ui/button";
+import SetTitle from "../../../../components/set-title";
 
 const Bookmark = () => {
   const {data} = useGetBlogBookmarkQuery(undefined);
 
   return (
     <div>
+      <SetTitle title={`Bookmark Blogs | Dashboard`} />
       <h1>Bookmark</h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

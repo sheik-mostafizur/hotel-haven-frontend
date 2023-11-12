@@ -10,6 +10,7 @@ import {
   useEditUserAdminMutation,
   useGetUsersAdminQuery,
 } from "../../../../api/admin-api";
+import SetTitle from "../../../../components/set-title";
 
 const Users = () => {
   const admin = useAppSelector((state) => state.auth.user);
@@ -46,6 +47,7 @@ const Users = () => {
 
   return (
     <>
+      <SetTitle title={`Users | Dashboard`} />
       <div className="pb-4">
         <h2 className="text-center">Our All Users</h2>
       </div>

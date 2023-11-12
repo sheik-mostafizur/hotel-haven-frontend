@@ -1,5 +1,6 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
+import SetTitle from "../../components/set-title";
 import Container from "../../components/ui/container";
 import {useAppDispatch} from "../../redux/hooks";
 import {changeTheme} from "../../redux/themeSlice";
@@ -10,6 +11,7 @@ const Settings = () => {
 
   return (
     <div className="dark:bg-secondary-700 h-screen">
+      <SetTitle title={`Settings`} />
       <Navbar />
       <Container>
         <h1>User Settings</h1>

@@ -10,6 +10,7 @@ import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
 import {useEffect, useState} from "react";
 import {setHotelFilter} from "../../../redux/hotel-filter-slice";
+import SetTitle from "../../../components/set-title";
 
 const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
 
@@ -78,6 +79,7 @@ const HotelDetails: React.FC = () => {
 
   return (
     <Main>
+      <SetTitle title={`${hotel?.name || "Hotel"}`} />
       <Container>
         {isLoading ? (
           <HashSpinner />

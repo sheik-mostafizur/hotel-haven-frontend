@@ -4,6 +4,7 @@ import Main from "../../layout/main";
 import {FcLikePlaceholder} from "react-icons/fc";
 import {useGetBlogByIdQuery} from "../../api/private-api";
 import {HashSpinner} from "../../components/spinner";
+import SetTitle from "../../components/set-title";
 
 interface SingleBlog {
   _id: number;
@@ -22,6 +23,7 @@ const SingleBlog: React.FC = () => {
 
   return (
     <Main>
+      <SetTitle title={blog?.title} />
       <Container>
         {isLoading ? (
           <HashSpinner />

@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
-import useSetTitle from "../../hooks/useSetTitle";
+import SetTitle from "../../components/set-title";
 
 const AboutUs: React.FC = () => {
-  useSetTitle("About Us");
   return (
     <Main>
-      <Container className="">
+      <SetTitle title="About Us" />
+      <Container>
         <div className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg:text-center">
@@ -101,8 +101,8 @@ const AboutUs: React.FC = () => {
 
         <section className="py-12 md:py-24">
           <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative">
-            <div className="shadow rounded-xl">
-              <div className="grid overflow-hidden text-white shadow-xl md:grid-cols-2 bg-primary-50 rounded-xl">
+            <div className="shadow shadow-primary-100 rounded-xl">
+              <div className="grid overflow-hidden text-white shadow-xl shadow-primary-100 md:grid-cols-2 bg-primary-50 rounded-xl">
                 <aside className="p-8 space-y-4 md:p-16">
                   <h2 className="text-2xl font-bold tracking-tight md:text-4xl font-headline">
                     Ready to enjoy your days. Let's start to booking our awesome
@@ -207,10 +207,10 @@ const AboutUs: React.FC = () => {
               </p>
             </div>
           </div>
-          <section className="flex flex-col max-w-4xl justify-center mx-auto overflow-hidden bg-primary-50 rounded-lg shadow dark:bg-secondary-800 md:flex-row md:h-48">
+          <section className="flex flex-col max-w-4xl justify-center mx-auto overflow-hidden bg-primary-50 rounded-lg shadow shadow-primary-100 dark:bg-secondary-800 md:flex-row md:h-48">
             <div className="md:flex md:items-center justify-center md:w-1/2">
               <div className="px-6 py-6 md:px-8 md:py-0">
-                <h2 className="text-lg text-black font-bold ">
+                <h2 className="text-lg font-bold ">
                   Sign Up for {""}
                   <span className="text-primary-400">hotels {""}</span>
                   updates

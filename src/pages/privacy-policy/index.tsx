@@ -1,10 +1,12 @@
 import React from "react";
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
+import SetTitle from "../../components/set-title";
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <Main>
+      <SetTitle title={`Privacy Policy`} />
       <Container>
         <div className="my-10">
           <h1 className="my-2">Privacy Policy</h1>

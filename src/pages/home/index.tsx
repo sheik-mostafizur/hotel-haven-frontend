@@ -10,7 +10,7 @@ import SetTitle from "../../components/set-title";
 const Home = () => {
   return (
     <Main>
-      <SetTitle title="Home" />
+      <SetTitle title="Welcome Our Home" />
       <Banner />
       <BestHotel />
       <HotelGallery />

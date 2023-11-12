@@ -24,7 +24,7 @@ const TopLocation: React.FC = () => {
       {isLoading ? (
         <HashSpinner />
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto">
+        <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto">
           {topLocation.slice(0, 6).map((l: any) => (
             <Location key={l._id} {...l} />
           ))}

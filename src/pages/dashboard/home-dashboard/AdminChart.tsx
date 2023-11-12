@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import {useEffect, useRef} from "react";
+import {useAppSelector} from "../../../redux/hooks";
 import Chart from "chart.js/auto";
 import {
   useGetHotelsAdminQuery,
@@ -11,11 +11,11 @@ const AdminChart: React.FC = () => {
   const isAdmin = user.role === "ADMIN";
   const usersData = useAppSelector((state: any): any => state.users); // Replace with actual user data from Redux
 
-  const { data } = useGetUsersAdminQuery({
+  const {data} = useGetUsersAdminQuery({
     length: true,
   });
 
-  const { data: hotelsData } = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
+  const {data: hotelsData} = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
 
   // Reference to the canvas elements where the charts will be rendered
   const pieChartRef = useRef(null);

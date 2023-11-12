@@ -8,14 +8,14 @@ import Blogs from "../pages/blogs";
 import AdminRoutes from "./AdminRoutes";
 import ManagerRoutes from "./ManagerRoutes";
 import PrivateRoutes from "./PrivateRoutes";
-import AboutUs from "../pages/AboutUs";
+import AboutUs from "../pages/about-us";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 import HotelDetails from "../pages/hotel/hotel-details";
 import SingleBlog from "../pages/blogs/SingleBlog";
-import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
-import License from "../pages/License/License";
-import TermsAndConditions from "../pages/TermsAndCondition/TermsAndConditions";
+import PrivacyPolicy from "../pages/privacy-policy";
+import License from "../pages/license";
+import TermsAndConditions from "../pages/terms-and-condition";
 
 const router = createBrowserRouter([
   {
