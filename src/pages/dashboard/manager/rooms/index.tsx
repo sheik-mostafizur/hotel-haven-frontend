@@ -41,12 +41,16 @@ const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rooms, setRoom] = useState([]);
 
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const { handleSubmit, control } = useForm<IFormInputs>({});
 
-  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
     setIsLoading(true);
-    data.facilities = data.facilities.filter((facilitie) => Boolean(facilitie));
-    data.thumbnails = data.thumbnails.filter((thumbnail) => Boolean(thumbnail));
+    data.facilities = data.facilities.filter((facilitie: any) =>
+      Boolean(facilitie)
+    );
+    data.thumbnails = data.thumbnails.filter((thumbnail: any) =>
+      Boolean(thumbnail)
+    );
 
     try {
       const {
@@ -242,7 +246,7 @@ const Rooms: React.FC = () => {
       <>
         {rooms ? (
           <>
-            {rooms.map((singleRoom) => (
+            {rooms.map((singleRoom: any) => (
               <HotelRoomCard key={singleRoom._id} {...singleRoom} />
             ))}{" "}
           </>

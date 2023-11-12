@@ -19,7 +19,6 @@ interface BlogData {
 
 const Blogs: React.FC = () => {
   const [query, setQuery] = useState({limit: 10, page: 1, descending: true});
-
   const {data, isLoading} = useGetPublicBlogsQuery(query);
   const {data: blogs, totalPages, currentPage} = data || {};
 

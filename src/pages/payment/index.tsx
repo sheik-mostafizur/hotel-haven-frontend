@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -15,7 +15,6 @@ import { MdPool } from "react-icons/md";
 import { CgGym } from "react-icons/cg";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
-// import { , FaCheck, FaEye } from "react-icons/fa";
 import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
 import { useGetRoomDetailsQuery } from "../../api/private-api";
@@ -27,10 +26,9 @@ interface IFormInputs {
 }
 
 const Payment: React.FC = () => {
-  const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const user = useAppSelector((state) => state.auth.user);
   const { _id } = useParams();
-  const { data, isLoading } = useGetRoomDetailsQuery(_id);
+  const { data } = useGetRoomDetailsQuery(_id);
   // console.log(data);
   // const { hotel, room } = data;
   // console.log(hotelFilter);
@@ -40,7 +38,7 @@ const Payment: React.FC = () => {
 
   // const { address } = data?.hotel;
   // console.log(data?.room?.roomInfo?.discountedPrice);
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const { handleSubmit, control } = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
 
   const handelPayment = () => {

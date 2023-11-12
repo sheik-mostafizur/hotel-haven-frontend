@@ -1,12 +1,12 @@
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Container from "../../../components/ui/container";
 import Button from "../../../components/ui/button";
 import BLOG_CATEGORIES from "../../../constants/BLOG_CATEGORIES";
-import {usePostUserBlogMutation} from "../../../api/private-api";
+import { usePostUserBlogMutation } from "../../../api/private-api";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 import Modal from "../../../components/ui/modal";
-import {BeatSpinner} from "../../../components/spinner";
+import { BeatSpinner } from "../../../components/spinner";
 
 interface IFormInputs {
   title: string;
@@ -17,17 +17,17 @@ interface IFormInputs {
 }
 
 const CreateBlog = () => {
-  const [postBlogs, {isLoading}] = usePostUserBlogMutation();
-  const {handleSubmit, control, reset} = useForm<IFormInputs>({});
+  const [postBlogs, { isLoading }] = usePostUserBlogMutation();
+  const { handleSubmit, control } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     postBlogs(data)
       .unwrap()
-      .then(({message}) => {
+      .then(({ message }) => {
         toastSuccess(message);
       })
-      .catch(({data: {message}}) => {
-        const error = {message};
+      .catch(({ data: { message } }) => {
+        const error = { message };
         toastError(error);
       });
   };
@@ -36,7 +36,8 @@ const CreateBlog = () => {
     <Container>
       <Modal
         title={"Create a new blog"}
-        button={{label: "Add Blog", className: "block ml-auto"}}>
+        button={{ label: "Add Blog", className: "block ml-auto" }}
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-2 gap-4 mx-auto items-center">
             <div>
@@ -44,8 +45,8 @@ const CreateBlog = () => {
               <Controller
                 name="title"
                 control={control}
-                rules={{required: true}}
-                render={({field}) => <input {...field} />}
+                rules={{ required: true }}
+                render={({ field }) => <input {...field} />}
               />
             </div>
             <div>
@@ -53,11 +54,12 @@ const CreateBlog = () => {
               <Controller
                 name="category"
                 control={control}
-                rules={{required: true}}
-                render={({field}) => (
+                rules={{ required: true }}
+                render={({ field }) => (
                   <select
                     className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    {...field}>
+                    {...field}
+                  >
                     <option defaultValue="">Select Category</option>
                     {BLOG_CATEGORIES?.map((option, index) => (
                       <option key={option.value + index} value={option.value}>
@@ -74,16 +76,16 @@ const CreateBlog = () => {
             <Controller
               name="thumbnail"
               control={control}
-              rules={{required: true}}
-              render={({field}) => <input type="url" {...field} />}
+              rules={{ required: true }}
+              render={({ field }) => <input type="url" {...field} />}
             />
           </div>
           <label htmlFor="description">Description min char 100</label>
           <Controller
             name="description"
             control={control}
-            rules={{required: true}}
-            render={({field}) => (
+            rules={{ required: true }}
+            render={({ field }) => (
               <textarea
                 {...field}
                 className="border-2 rounded-2xl w-full p-2"

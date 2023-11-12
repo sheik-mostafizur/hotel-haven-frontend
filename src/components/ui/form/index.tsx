@@ -1,7 +1,7 @@
-import {Controller, useForm} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Button from "../button";
 
-const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
+const Form: React.FC = ({ form = [], onSubmit, btnClass = "" }) => {
   const defaultValues = form.reduce((acc, val) => {
     if (val.name) {
       acc[val.name] = val.defaultValue;
@@ -12,7 +12,7 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
     handleSubmit,
     control,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     mode: "all",
     defaultValues: defaultValues,
@@ -23,8 +23,9 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
       onSubmit={handleSubmit((data) => {
         onSubmit(data);
         reset();
-      })}>
-      {form.map((item, index) => (
+      })}
+    >
+      {form.map((item: any, index: number) => (
         <div key={`${item.name} ${index}`} className="my-4">
           {item.tag !== "select" ? (
             <>
@@ -33,7 +34,7 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                 name={item.name}
                 control={control}
                 rules={item.rules}
-                render={({field}) => (
+                render={({ field }) => (
                   <>
                     {item.tag == "textarea" ? (
                       <textarea
@@ -45,7 +46,8 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                         }
                         placeholder={item?.placeholder}
                         rows={item?.rows || 4}
-                        {...field}></textarea>
+                        {...field}
+                      ></textarea>
                     ) : (
                       <input
                         className={
@@ -75,7 +77,7 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                 control={control}
                 name={item.name}
                 rules={item.rules}
-                render={({field}) => (
+                render={({ field }) => (
                   <select
                     id={item.name}
                     {...field}
@@ -83,8 +85,9 @@ const Form: React.FC = ({form = [], onSubmit, btnClass = ""}) => {
                       errors[item.name]
                         ? "border-red-500 dark:border-red-500 focus:border-red-500"
                         : "border-secondary-300 focus:border-primary-500"
-                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
-                    {item.option.map((opt, index) => (
+                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+                  >
+                    {item.option.map((opt: any, index: number) => (
                       <option key={`${opt.value} ${index}`} value={opt.value}>
                         {opt.label}
                       </option>

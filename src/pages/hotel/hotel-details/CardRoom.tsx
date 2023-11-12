@@ -108,7 +108,7 @@ const CardRoom: React.FC<Room> = ({room}) => {
           </SwiperSlide>
         </Swiper>
         <div className="p-4">
-          <h5 className="my-2 ">{room.title}</h5>
+          <h5 className="my-2 h-12">{room.title}</h5>
 
           <div className="py-1 ">
             <strong>Facilities:</strong>
@@ -127,7 +127,10 @@ const CardRoom: React.FC<Room> = ({room}) => {
                 <span className="line-through">
                   {room?.roomInfo.regularPrice} BDT
                 </span>
-                <span> {room?.roomInfo.discountedPrice} BDT</span>
+                <span className="text-red-500">
+                  {" "}
+                  {room?.roomInfo.discountedPrice} BDT
+                </span>
               </li>
               <li></li>
               <li className="flex gap-2 items-center">

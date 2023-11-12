@@ -10,7 +10,8 @@ import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
 import {useEffect, useState} from "react";
 
-const AnyReactComponent = ({text}) => <div>{text}</div>;
+const AnyReactComponent = ({ text }: { text: any }) => <div>{text}</div>;
+
 interface HotelDetails {
   hotel: {
     photoURL: string;
@@ -44,7 +45,7 @@ const HotelDetails: React.FC = () => {
 
   const {hotel, rooms} = viewHotels || [];
 
-  const defaultProps = {
+  const defaultProps: any = {
     center: {
       lat: hotel?.address?.map?.lat as number,
       lng: hotel?.address?.map?.lng as number,
@@ -62,7 +63,6 @@ const HotelDetails: React.FC = () => {
       });
   }, []);
 
-  console.log(comment);
   return (
     <Main>
       <Container>

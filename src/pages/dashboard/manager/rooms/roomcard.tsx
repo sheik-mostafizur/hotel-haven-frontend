@@ -24,8 +24,16 @@ interface HotelRoomCardProps {
   description: string;
   regularPrice: number;
   discountPrice: number;
-  capacity: {};
-  roomInfo: {};
+  capacity: {
+    adult: number;
+    children: number;
+  };
+  roomInfo: {
+    roomSize: string;
+    bedType: string;
+    regularPrice: number;
+    discountedPrice: number;
+  };
 }
 
 const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
@@ -61,17 +69,18 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
             Facilities:
           </h3>
           <ul className="mb-4 list-disc ms-10">
-            {facilities.map((facilitie) => (
+            {facilities.map((facilitie: any) => (
               <li className="text-[14px]" key={facilitie}>
                 {facilitie}
               </li>
             ))}
           </ul>
           <p>
-            <span className="font-semibold">Adults:</span> {capacity.adult}
+            <span className="font-semibold">Adults:</span> {capacity?.adult}
           </p>
           <p>
-            <span className="font-semibold">Children:</span> {capacity.children}
+            <span className="font-semibold">Children:</span>{" "}
+            {capacity?.children}
           </p>
           <p>
             <span className="font-semibold">Room Size:</span>{" "}
