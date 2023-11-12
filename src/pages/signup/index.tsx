@@ -49,7 +49,7 @@ const SignUp = () => {
         setIsLoading(false);
       });
   };
-  const isValidURL = (url) => {
+  const isValidURL = (url: string) => {
     // A simple function to validate the URL format
     try {
       new URL(url);
