@@ -1,3 +1,5 @@
+import generateEmptyArray from "../../utils/generateEmptyArray";
+
 interface PaginationProps {
   totalPages?: number;
   currentPage?: number;
@@ -11,20 +13,12 @@ const Pagination: React.FC<PaginationProps> = ({
   handlePages = () => {},
   className = "",
 }) => {
-  const generatePagesArray = (pages = 1) => {
-    const pagesArr = [];
-    for (let i = 1; i <= pages; i++) {
-      pagesArr.push(i);
-    }
-    return pagesArr;
-  };
-
   const pageStyle =
     "flex items-center justify-center px-3 lg:px-4 h-8 lg:h-10 leading-tight text-secondary-500 bg-white border border-secondary-300 hover:bg-secondary-100 hover:text-secondary-700 dark:bg-secondary-800 dark:border-secondary-700 dark:text-secondary-400 dark:hover:bg-secondary-700 dark:hover:text-white";
   const activePageStyle =
     "flex items-center justify-center px-3 lg:px-4 h-8 lg:h-10 text-primary-600 border border-secondary-300 bg-primary-50 hover:bg-primary-100 hover:text-primary-700 dark:border-secondary-700 dark:bg-secondary-600 dark:text-white";
 
-  const pages = generatePagesArray(totalPages);
+  const pages = generateEmptyArray(totalPages);
 
   return (
     <nav className={`mx-auto text-center ${className}`}>

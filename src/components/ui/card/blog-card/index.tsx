@@ -1,15 +1,15 @@
 import {Link} from "react-router-dom";
 import {AiOutlineLike, AiTwotoneLike} from "react-icons/ai";
 import {BsBookmarkStar, BsBookmarkStarFill} from "react-icons/bs";
-import {BlogType} from "../../../types";
-import formatPostDate from "../../../utils/format-post-date";
+import {BlogType} from "../../../../types";
+import formatPostDate from "../../../../utils/format-post-date";
 import {
   useDeleteBlogBookmarkByIdMutation,
   useGetBlogBookmarkQuery,
   usePostBlogBookmarkMutation,
-} from "../../../api/private-api";
-import toastSuccess from "../../../utils/toast-success";
-import toastError from "../../../utils/toast-error";
+} from "../../../../api/private-api";
+import toastSuccess from "../../../../utils/toast-success";
+import toastError from "../../../../utils/toast-error";
 
 interface BlogCardProps {
   blog: BlogType.Blog;

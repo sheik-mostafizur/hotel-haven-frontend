@@ -1,3 +1,3 @@
-import BlogCard from "./BlogCard";
+import BlogCard from "./blog-card";
 
 export {BlogCard};
