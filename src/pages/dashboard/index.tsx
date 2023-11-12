@@ -35,6 +35,13 @@ const Dashboard = () => {
     });
   };
 
+  const itemStyle = `flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group`;
+
+  const itemActiveStyle = `flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-primary-300 dark:hover-bg-secondary-700 group text-primary-500 bg-primary-200 dark:bg-primary-700`;
+
+  const iconStyle =
+    "flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white";
+
   return (
     <>
       <button
@@ -81,73 +88,71 @@ const Dashboard = () => {
             </span>
           </div>
           <ul className="space-y-2 font-medium">
-            <div>
-              <li>
-                <Link
-                  to="/dashboard"
-                  className={`flex items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
-                    location.pathname === "/dashboard"
-                      ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
-                      : ""
-                  }`}>
-                  <BiSolidDashboard className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
-                  <span className="ml-3">Dashboard</span>
-                </Link>
-              </li>
+            <li>
+              <Link
+                to="/dashboard"
+                className={
+                  location.pathname === "/dashboard"
+                    ? itemActiveStyle
+                    : itemStyle
+                }>
+                <BiSolidDashboard className={iconStyle} />
+                <span className="ml-3">Dashboard</span>
+              </Link>
+            </li>
 
-              {user.role === ROLE.CUSTOMER && <DashboardNavCustomer />}
-              {user.role === ROLE.MANAGER && <DashboardNavManager />}
-              {user.role === ROLE.ADMIN && <DashboardNavAdmin />}
-            </div>
+            {user.role === ROLE.CUSTOMER && <DashboardNavCustomer />}
+            {user.role === ROLE.MANAGER && <DashboardNavManager />}
+            {user.role === ROLE.ADMIN && <DashboardNavAdmin />}
+            <hr />
             <li>
               <Link
                 to={"/dashboard/profile"}
-                className={`flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
+                className={
                   location.pathname === "/dashboard/profile"
-                    ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
-                    : ""
-                }`}>
-                <CgProfile className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+                    ? itemActiveStyle
+                    : itemStyle
+                }>
+                <CgProfile className={iconStyle} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
               </Link>
             </li>
             <li>
               <Link
                 to={"/dashboard/blogs"}
-                className={`flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
+                className={
                   location.pathname === "/dashboard/blogs"
-                    ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
-                    : ""
-                }`}>
-                <BiLogoBlogger className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+                    ? itemActiveStyle
+                    : itemStyle
+                }>
+                <BiLogoBlogger className={iconStyle} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Blogs</span>
               </Link>
             </li>
             <li>
               <Link
                 to={"/dashboard/bookmark"}
-                className={`flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group ${
+                className={
                   location.pathname === "/dashboard/bookmark"
-                    ? "text-primary-500 bg-primary-400 dark:bg-primary-700"
-                    : ""
-                }`}>
-                <BiSolidBookBookmark className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+                    ? itemActiveStyle
+                    : itemStyle
+                }>
+                <BiSolidBookBookmark className={iconStyle} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Bookmark</span>
               </Link>
             </li>
+
+            <hr />
+
             <li>
-              <Link
-                to={"/"}
-                className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group">
-                <FaHome className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+              <Link to={"/"} className={itemStyle}>
+                <FaHome className={iconStyle} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Home</span>
               </Link>
             </li>
             <li>
-              <a
-                onClick={handleSignOut}
-                className="flex cursor-pointer items-center p-2 text-secondary-900 rounded-lg dark:text-white hover:bg-secondary-100 dark:hover-bg-secondary-700 group">
-                <FaSignOutAlt className="flex-shrink-0 w-5 h-5 text-secondary-500 transition duration-75 dark:text-secondary-400 group-hover:text-secondary-900 dark:group-hover:text-white" />
+              <a onClick={handleSignOut} className={itemStyle}>
+                <FaSignOutAlt className={iconStyle} />
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
               </a>
             </li>
