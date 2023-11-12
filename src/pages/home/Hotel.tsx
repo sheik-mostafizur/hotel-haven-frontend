@@ -43,7 +43,7 @@ const Hotel: React.FC<HotelType> = ({
             }}
           ></div>
           <figcaption className="absolute px-4 text-lg bottom-6">
-            <h2 className="text-white">{name}</h2>
+            <h3 className="text-white">{name}</h3>
           </figcaption>
         </div>
       </figure>

@@ -160,7 +160,7 @@ const token = ''
                   <p>
                     <FaBed></FaBed>
                   </p>
-                  <h5 className="">Step 2: Property details</h5>
+                  <h5 className="">Step 3: Property details</h5>
                 </div>
               </div>
               <hr className="mt-1 border" />
@@ -217,7 +217,7 @@ const token = ''
                 <small>{data?.hotel?.address?.location}</small>
               </p>
             </div>
-            <div className="p-5 mb-4 mx-2 bg-white rounded-lg border-2">
+            {/* <div className="p-5 mb-4 mx-2 bg-white rounded-lg border-2">
               <div className="flex justify-between items-center">
                 <p> CheckIn:</p>
                 <p>date</p>
@@ -226,8 +226,8 @@ const token = ''
                 <p>CheckOut:</p>
                 <p>date</p>
               </div>
-            </div>
-            <div className="p-5 bg-white">
+            </div> */}
+            {/* <div className="p-5 bg-white">
               <div className="flex justify-between items-center">
                 <p>date</p>
                 <p>{data?.room?.roomInfo?.discountedPrice} BDT</p>
@@ -240,7 +240,7 @@ const token = ''
                 <p>Total Price:</p>
                 <p>130 BDT</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Container>

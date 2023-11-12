@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Container from "../../components/ui/container";
-import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
-import { useGetHotelsQuery } from "../../api/public-api";
-import { HashSpinner } from "../../components/spinner";
-import { useAppSelector } from "../../redux/hooks";
-import useSetTitle from "../../hooks/useSetTitle";
+import {useGetHotelsQuery, useGetLocationsQuery} from "../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import Pagination from "../../components/pagination";
+import SetTitle from "../../components/set-title";
+import {setHotelFilter} from "../../redux/hotel-filter-slice";
+import {HotelCard, HotelCardSkeleton} from "../../components/ui/card";
 
 interface Hotel {
   _id: string;
@@ -18,68 +19,126 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
-  useSetTitle("All Hotels");
-  const query = useAppSelector((state) => state.hotelFilter);
-  const { data: hotels, isLoading } = useGetHotelsQuery(query);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [locationFilter, setLocationFilter] = useState<string>("");
-  // Extract unique locations from hotels data
-  const uniqueLocations = Array.from(
-    new Set(hotels?.map((hotel: any) => hotel.address.location))
-  );
+  const {data: locations} = useGetLocationsQuery(undefined);
+  const dispatch = useAppDispatch();
+  const filterQuery = useAppSelector((state) => state.hotelFilter);
 
-  const filteredHotels = hotels?.filter(
-    (hotel: any) =>
-      hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (locationFilter === "" || hotel.address.location === locationFilter)
-  );
+  const {data, isLoading} = useGetHotelsQuery(filterQuery);
+  const {data: hotels, totalPages, currentPage} = data || {};
+
+  // TODO: waiting for logic
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = new Date();
+  const minDate = formatDateToYYYYMMDD(today);
 
   return (
     <Main>
+      <SetTitle title="Our hotels" />
       <Container>
-        {isLoading ? (
-          <HashSpinner />
-        ) : (
-          <>
-            <h1 className="text-center">All Hotels</h1>
-            <div className="md:flex">
-              <div className="flex flex-col gap-y-4">
-                <div className="flex flex-col">
-                  <label htmlFor="search">Search by</label>
-                  <input
-                    type="text"
-                    id="search"
-                    placeholder="Search by name..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="p-2 border border-secondary-200 rounded-md"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label htmlFor="location">Filter by</label>
-                  <select
-                    id="location"
-                    value={locationFilter}
-                    onChange={(e) => setLocationFilter(e.target.value)}
-                    className="p-2 border border-secondary-200 rounded-md"
-                  >
-                    <option value="">All Locations</option>
-                    {uniqueLocations.map((location) => (
-                      <option key={location} value={location}>
-                        {location}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 my-4 justify-center items-center gap-4 md:gap-6 mx-auto">
-                {filteredHotels &&
-                  filteredHotels.map((hotel: Hotel) => (
-                    <AllHotelCard key={hotel._id} {...hotel} />
-                  ))}
-              </div>
+        <h1 className="text-center">All Hotels</h1>
+        <div className="md:flex md:gap-4">
+          <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col">
+              <label htmlFor="search">Search by</label>
+              <input
+                type="text"
+                id="search"
+                placeholder="Search by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="p-2 border border-secondary-200 rounded-md"
+              />
             </div>
-          </>
+            <div className="flex flex-col">
+              <label htmlFor="location">Filter by</label>
+              <select
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                id="location"
+                value={filterQuery.location}
+                onChange={(e) =>
+                  dispatch(
+                    setHotelFilter({
+                      ...filterQuery,
+                      location: e.target.value,
+                    })
+                  )
+                }>
+                <option value="">ALL</option>
+                {locations &&
+                  locations.map((location: any) => (
+                    <option key={location._id} value={location.location}>
+                      {location.address}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="checkIn">Check In Date</label>
+              <input
+                id="checkIn"
+                defaultValue={filterQuery.checkIn}
+                type="date"
+                min={minDate}
+                onChange={(e) => {
+                  dispatch(
+                    setHotelFilter({
+                      ...filterQuery,
+                      checkIn: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="checkOut">Check Out Date</label>
+              <input
+                id="checkOut"
+                defaultValue={filterQuery.checkOut}
+                type="date"
+                onChange={(e) => {
+                  dispatch(
+                    setHotelFilter({
+                      ...filterQuery,
+                      checkOut: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="md:flex-grow grid grid-cols-1 my-4 justify-center items-center gap-4 md:gap-6 mx-auto">
+            {isLoading ? (
+              <HotelCardSkeleton />
+            ) : (
+              hotels.map((hotel: Hotel) => (
+                <HotelCard key={hotel._id} {...hotel} />
+              ))
+            )}
+          </div>
+        </div>
+
+        {totalPages != 1 && (
+          <Pagination
+            handlePages={(page) => {
+              dispatch(
+                setHotelFilter({
+                  ...filterQuery,
+                  page,
+                })
+              );
+            }}
+            currentPage={parseInt(currentPage)}
+            totalPages={parseInt(totalPages)}
+          />
         )}
       </Container>
     </Main>

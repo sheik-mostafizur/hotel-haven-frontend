@@ -31,7 +31,7 @@ const CustomerReviews: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-primary-50 dark:bg-secondary-700">
+    <div className="bg-primary-50 dark:bg-secondary-900">
       <Container className="lg:py-16 overflow-hidden">
         <div className="mx-auto text-center py-4">
           <h2 className=""> Customer Reviews</h2>

@@ -9,7 +9,7 @@ const Settings = () => {
   const themes = ["base", "dark", "royal-blue", "matrix"];
 
   return (
-    <>
+    <div className="dark:bg-secondary-700 h-screen">
       <Navbar />
       <Container>
         <h1>User Settings</h1>
@@ -32,7 +32,7 @@ const Settings = () => {
         </div>
       </Container>
       <Footer />
-    </>
+    </div>
   );
 };
 
