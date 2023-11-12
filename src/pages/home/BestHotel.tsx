@@ -18,7 +18,7 @@ interface HotelType {
 const BestHotel: React.FC = () => {
   const {data, isLoading} = useGetHotelsQuery({limit: 4});
   const initialHotel: HotelType[] = [];
-  const hotels = data || initialHotel;
+  const hotels = data?.data || initialHotel;
 
   return (
     <Container className="lg:py-20">
