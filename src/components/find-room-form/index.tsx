@@ -42,7 +42,7 @@ const FindRoomForm = () => {
   }
 
   const today = new Date();
-  const date = formatDateToYYYYMMDD(today);
+  const minDate = formatDateToYYYYMMDD(today);
 
   return (
     <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-800 dark:border-secondary-800 dark:shadow-secondary-800">
@@ -86,7 +86,7 @@ const FindRoomForm = () => {
               control={control}
               rules={{required: true}}
               render={({field}) => (
-                <input id="checkIn" {...field} type="date" min={date} />
+                <input id="checkIn" {...field} type="date" min={minDate} />
               )}
               name="checkIn"
             />

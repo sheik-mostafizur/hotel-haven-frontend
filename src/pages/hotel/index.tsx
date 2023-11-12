@@ -20,17 +20,24 @@ interface Hotel {
 
 const Hotel: React.FC = () => {
   const {data: locations} = useGetLocationsQuery(undefined);
-  const filterQuery = useAppSelector((state) => state.hotelFilter);
-  const hotelFilterState = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
+  const filterQuery = useAppSelector((state) => state.hotelFilter);
 
-  const [query, setQuery] = useState({limit: 5, page: 1});
-
-  const {data, isLoading} = useGetHotelsQuery({...query, ...filterQuery});
+  const {data, isLoading} = useGetHotelsQuery(filterQuery);
   const {data: hotels, totalPages, currentPage} = data || {};
 
   // TODO: waiting for logic
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = new Date();
+  const minDate = formatDateToYYYYMMDD(today);
 
   return (
     <Main>
@@ -55,11 +62,11 @@ const Hotel: React.FC = () => {
               <select
                 className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 id="location"
-                value={hotelFilterState.location}
+                value={filterQuery.location}
                 onChange={(e) =>
                   dispatch(
                     setHotelFilter({
-                      ...hotelFilterState,
+                      ...filterQuery,
                       location: e.target.value,
                     })
                   )
@@ -72,6 +79,39 @@ const Hotel: React.FC = () => {
                     </option>
                   ))}
               </select>
+            </div>
+            <div>
+              <label htmlFor="checkIn">Check In Date</label>
+              <input
+                id="checkIn"
+                defaultValue={filterQuery.checkIn}
+                type="date"
+                min={minDate}
+                onChange={(e) => {
+                  dispatch(
+                    setHotelFilter({
+                      ...filterQuery,
+                      checkIn: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="checkOut">Check Out Date</label>
+              <input
+                id="checkOut"
+                defaultValue={filterQuery.checkOut}
+                type="date"
+                onChange={(e) => {
+                  dispatch(
+                    setHotelFilter({
+                      ...filterQuery,
+                      checkOut: e.target.value,
+                    })
+                  );
+                }}
+              />
             </div>
           </div>
 
@@ -89,7 +129,12 @@ const Hotel: React.FC = () => {
         {totalPages != 1 && (
           <Pagination
             handlePages={(page) => {
-              setQuery({...query, page});
+              dispatch(
+                setHotelFilter({
+                  ...filterQuery,
+                  page,
+                })
+              );
             }}
             currentPage={currentPage}
             totalPages={totalPages}
