@@ -21,7 +21,7 @@ interface TableProps {
   actions?: Actions | undefined;
 }
 
-const Table: React.FC<TableProps> = ({columns, data, actions}) => {
+const Table: React.FC<TableProps> = ({columns = [], data = [], actions}) => {
   const columnKeys = columns.map((item) => item.key);
 
   return (

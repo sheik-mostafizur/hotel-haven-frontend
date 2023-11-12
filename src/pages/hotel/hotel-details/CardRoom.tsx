@@ -1,7 +1,7 @@
 import {FaBed, FaCheck, FaEye} from "react-icons/fa";
 import {GiResize} from "react-icons/gi";
 import Button from "../../../components/ui/button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {BeatSpinner} from "../../../components/spinner";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {Tooltip} from "react-tooltip";
@@ -27,6 +27,7 @@ interface Room {
 }
 
 const CardRoom: React.FC<Room> = ({room}) => {
+  const navigate = useNavigate();
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
 
   const {data: wishlist} = useGetWishlistQuery(undefined);
@@ -61,9 +62,9 @@ const CardRoom: React.FC<Room> = ({room}) => {
 
   const handleReserve = () => {
     if (!hotelFilter.checkIn || !hotelFilter.checkOut) {
-      return alert("Please select checkIn and checkOut");
+      return toastError({message: "Please select checkIn and checkOut"});
     }
-    // <Link to={`/payment/${room._id}`}></Link>
+    navigate(`/payment/${room._id}`);
   };
 
   return (

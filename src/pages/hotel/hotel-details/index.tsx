@@ -5,12 +5,13 @@ import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
 import {useGetHotelByIdQuery} from "../../../api/public-api";
-import {useAppSelector} from "../../../redux/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
 import {useEffect, useState} from "react";
+import {setHotelFilter} from "../../../redux/hotel-filter-slice";
 
-const AnyReactComponent = ({ text }: { text: any }) => <div>{text}</div>;
+const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
 
 interface HotelDetails {
   hotel: {
@@ -37,6 +38,8 @@ interface HotelDetails {
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
+  const dispatch = useAppDispatch();
+
   const {_id} = useParams();
   const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
@@ -62,6 +65,16 @@ const HotelDetails: React.FC = () => {
         setComment(data);
       });
   }, []);
+
+  function formatDateToYYYYMMDD(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const today = new Date();
+  const minDate = formatDateToYYYYMMDD(today);
 
   return (
     <Main>
@@ -161,19 +174,33 @@ const HotelDetails: React.FC = () => {
                       <label htmlFor="checkIn">Check In Date</label>
                       <input
                         id="checkIn"
-                        // defaultValue={filterQuery.checkIn}
+                        defaultValue={hotelFilter.checkIn}
                         type="date"
-                        // min={minDate}
-                        onChange={(e) => {}}
+                        min={minDate}
+                        onChange={(e) =>
+                          dispatch(
+                            setHotelFilter({
+                              ...hotelFilter,
+                              checkIn: e.target.value,
+                            })
+                          )
+                        }
                       />
                     </div>
                     <div>
                       <label htmlFor="checkOut">Check Out Date</label>
                       <input
                         id="checkOut"
-                        // defaultValue={filterQuery.checkOut}
+                        defaultValue={hotelFilter.checkOut}
                         type="date"
-                        onChange={(e) => {}}
+                        onChange={(e) =>
+                          dispatch(
+                            setHotelFilter({
+                              ...hotelFilter,
+                              checkOut: e.target.value,
+                            })
+                          )
+                        }
                       />
                     </div>
                   </div>

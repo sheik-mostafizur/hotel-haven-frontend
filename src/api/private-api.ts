@@ -39,8 +39,16 @@ const privateApi = createApi({
       }),
       invalidatesTags: ["wishlist"],
     }),
-    getProfile: builder.query({
+
+    // users profile
+    getProfileById: builder.query({
       query: (_id) => `/profile/${_id}`,
+      providesTags: ["profile"],
+    }),
+
+    // logged in user profile
+    getProfile: builder.query({
+      query: () => `/profile`,
       providesTags: ["profile"],
     }),
     updateProfile: builder.mutation({
@@ -120,6 +128,7 @@ export const {
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,
 
+  useGetProfileByIdQuery,
   useGetProfileQuery,
   useUpdateProfileMutation,
 

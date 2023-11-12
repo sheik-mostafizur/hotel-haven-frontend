@@ -1,9 +1,10 @@
-import { useGetBlogBookmarkQuery } from "../../../../api/private-api";
+import {Link} from "react-router-dom";
+import {useGetBlogBookmarkQuery} from "../../../../api/private-api";
 import Button from "../../../../components/ui/button";
 
 const Bookmark = () => {
-  const { data } = useGetBlogBookmarkQuery(undefined);
-  console.log(data);
+  const {data} = useGetBlogBookmarkQuery(undefined);
+
   return (
     <div>
       <h1>Bookmark</h1>
@@ -32,7 +33,9 @@ const Bookmark = () => {
               </td>
               <td className="px-6 py-4">{item.blogTitle}</td>
               <td>
-                <Button>Read</Button>
+                <Link to={`/blogs/${item.blogId}`}>
+                  <Button>Read</Button>
+                </Link>
               </td>
             </tr>
           ))}

@@ -26,11 +26,11 @@ const SingleBlog: React.FC = () => {
         {isLoading ? (
           <HashSpinner />
         ) : (
-          <div className=" sm:mx-16 md:mx-64">
+          <div className="max-w-4xl mx-auto py-4 md:py-16">
             <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <a href="#">
                 <img
-                  className="rounded-t-lg w-full h-72"
+                  className="rounded-t-lg w-full"
                   src={blog?.thumbnail}
                   alt=""
                 />
@@ -47,12 +47,14 @@ const SingleBlog: React.FC = () => {
                       <img
                         className="rounded-full w-9 h-9"
                         src={blog?.userProfile}
-                        alt=""
+                        alt={blog?.userName}
                       />
                     </div>
                     <div className="flex-col items-center">
                       <div className="badge badge-outline font-semibold">
-                        <Link to="">{blog?.userName}</Link>
+                        <Link to={`/profile/${blog?.userId}`}>
+                          {blog?.userName}
+                        </Link>
                       </div>
                       <div className="badge badge-secondary text-sm">
                         {blog?.publishDate}

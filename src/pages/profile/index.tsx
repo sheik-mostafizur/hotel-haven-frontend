@@ -1,10 +1,10 @@
 import {useParams} from "react-router-dom";
 import Main from "../../layout/main";
-import {useGetProfileQuery} from "../../api/private-api";
+import {useGetProfileByIdQuery} from "../../api/private-api";
 
 const Profile = () => {
   const {_id} = useParams();
-  const {data, isLoading} = useGetProfileQuery(_id);
+  const {data, isLoading} = useGetProfileByIdQuery(_id);
 
   const date = new Date(data?.joined);
   const joined = date.toLocaleDateString();
