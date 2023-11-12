@@ -1,9 +1,8 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
-import {BlogCard} from "../../components/ui/card";
+import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
 import {useGetPublicBlogsQuery} from "../../api/public-api";
 import useSetTitle from "../../hooks/useSetTitle";
-import BlogCardSkeleton from "../../components/ui/card/blog-card/BlogCardSkeleton";
 
 interface BlogData {
   _id: number;

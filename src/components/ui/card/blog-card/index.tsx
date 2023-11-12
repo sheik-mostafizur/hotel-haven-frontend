@@ -88,7 +88,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
           </div>
 
           {description.length >= 90 ? (
-            <p className="mb-3 text-secondary-500">
+            <p className="mb-3 break-words text-secondary-500">
               {description.slice(0, 90)}{" "}
               <Link
                 to={`/blogs/${_id}`}
@@ -97,7 +97,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               </Link>
             </p>
           ) : (
-            <p className="mb-3">{description}</p>
+            <p className="mb-3 break-words">{description}</p>
           )}
 
           <div className="py-2 flex justify-between items-center">
@@ -107,7 +107,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
               <img
                 className="rounded-full w-9 h-9 group-hover:outline outline-1 outline-primary-100"
                 src={userProfile}
-                alt=""
+                alt={userName}
               />
               <div className="flex flex-col ">
                 <span className="font-semibold group-hover:underline dark:text-white">
