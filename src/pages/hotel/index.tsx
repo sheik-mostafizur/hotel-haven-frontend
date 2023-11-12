@@ -136,8 +136,8 @@ const Hotel: React.FC = () => {
                 })
               );
             }}
-            currentPage={currentPage}
-            totalPages={totalPages}
+            currentPage={parseInt(currentPage)}
+            totalPages={parseInt(totalPages)}
           />
         )}
       </Container>
