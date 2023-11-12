@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
-import {useGetHotelsQuery, useGetLocationsQuery} from "../../api/public-api";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import { useGetHotelsQuery, useGetLocationsQuery } from "../../api/public-api";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Pagination from "../../components/pagination";
 import SetTitle from "../../components/set-title";
-import {setHotelFilter} from "../../redux/hotel-filter-slice";
-import {HotelCard, HotelCardSkeleton} from "../../components/ui/card";
+import { setHotelFilter } from "../../redux/hotel-filter-slice";
+import { HotelCard, HotelCardSkeleton } from "../../components/ui/card";
 
 interface Hotel {
   _id: string;
@@ -19,17 +19,17 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
-  const {data: locations} = useGetLocationsQuery(undefined);
+  const { data: locations } = useGetLocationsQuery(undefined);
   const dispatch = useAppDispatch();
   const filterQuery = useAppSelector((state) => state.hotelFilter);
 
-  const {data, isLoading} = useGetHotelsQuery(filterQuery);
-  const {data: hotels, totalPages, currentPage} = data || {};
+  const { data, isLoading } = useGetHotelsQuery(filterQuery);
+  const { data: hotels, totalPages, currentPage } = data || {};
 
   // TODO: waiting for logic
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  function formatDateToYYYYMMDD(date) {
+  function formatDateToYYYYMMDD(date: Date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
@@ -70,7 +70,8 @@ const Hotel: React.FC = () => {
                       location: e.target.value,
                     })
                   )
-                }>
+                }
+              >
                 <option value="">ALL</option>
                 {locations &&
                   locations.map((location: any) => (
