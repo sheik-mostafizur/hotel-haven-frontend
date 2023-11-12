@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import Container from "../../components/ui/container";
-import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
 import {useGetHotelsQuery, useGetLocationsQuery} from "../../api/public-api";
-import {HashSpinner} from "../../components/spinner";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import Pagination from "../../components/pagination";
 import SetTitle from "../../components/set-title";
