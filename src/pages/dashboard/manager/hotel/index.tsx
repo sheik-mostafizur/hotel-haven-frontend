@@ -141,7 +141,7 @@ const Hotel: React.FC = () => {
                           <option value="" disabled>
                             Select a location
                           </option>
-                          {locations.map((location) => (
+                          {locations.map((location: any) => (
                             <option key={location.id} value={location?.name}>
                               {location?.name}
                             </option>

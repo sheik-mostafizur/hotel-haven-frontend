@@ -13,11 +13,11 @@ interface IFormInputs {
   confirmNewPassword: string;
 }
 const ProfileDashboard = () => {
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state: any) => state.auth.user);
   const [updateProfile] = useUpdateProfileMutation();
   // const [confirm, setConfirm] = useState("");
 
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const { handleSubmit, control } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     // if (data.NewPassword !== data.ConfirmNewPassword) {

@@ -2,7 +2,7 @@ import { useGetBlogBookmarkQuery } from "../../../../api/private-api";
 import Button from "../../../../components/ui/button";
 
 const Bookmark = () => {
-  const { data, isLoading } = useGetBlogBookmarkQuery(undefined);
+  const { data } = useGetBlogBookmarkQuery(undefined);
   console.log(data);
   return (
     <div>

@@ -1,7 +1,7 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
-import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
-import {useGetPublicBlogsQuery} from "../../api/public-api";
+import { BlogCard, BlogCardSkeleton } from "../../components/ui/card";
+import { useGetPublicBlogsQuery } from "../../api/public-api";
 import useSetTitle from "../../hooks/useSetTitle";
 
 interface BlogData {
@@ -17,7 +17,7 @@ interface BlogData {
 
 const Blogs: React.FC = () => {
   useSetTitle("Blogs");
-  const {data: blogs, isLoading} = useGetPublicBlogsQuery({
+  const { data: blogs, isLoading } = useGetPublicBlogsQuery({
     descending: true,
   });
 
