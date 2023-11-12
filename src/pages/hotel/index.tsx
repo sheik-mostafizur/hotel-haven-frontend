@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Container from "../../components/ui/container";
 import AllHotelCard from "./AllHotelCard";
 import Main from "../../layout/main";
-import { useGetHotelsQuery } from "../../api/public-api";
-import { HashSpinner } from "../../components/spinner";
-import { useAppSelector } from "../../redux/hooks";
-import useSetTitle from "../../hooks/useSetTitle";
+import {useGetHotelsQuery} from "../../api/public-api";
+import {HashSpinner} from "../../components/spinner";
+import {useAppSelector} from "../../redux/hooks";
+import Pagination from "../../components/pagination";
+import SetTitle from "../../components/set-title";
 
 interface Hotel {
   _id: string;
@@ -18,16 +19,21 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
-  useSetTitle("All Hotels");
+  const [q, serQ] = useState({limit: 10, page: 1});
+
   const query = useAppSelector((state) => state.hotelFilter);
-  const { data: hotels, isLoading } = useGetHotelsQuery(query);
+
+  const {data, isLoading} = useGetHotelsQuery(q);
+  const {data: hotels, totalPages, currentPage} = data || {};
+
   const [searchTerm, setSearchTerm] = useState<string>("");
+
   const [locationFilter, setLocationFilter] = useState<string>("");
+
   // Extract unique locations from hotels data
   const uniqueLocations = Array.from(
     new Set(hotels?.map((hotel: any) => hotel.address.location))
   );
-
   const filteredHotels = hotels?.filter(
     (hotel: any) =>
       hotel.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -36,6 +42,7 @@ const Hotel: React.FC = () => {
 
   return (
     <Main>
+      <SetTitle title="Our hotels" />
       <Container>
         {isLoading ? (
           <HashSpinner />
@@ -61,8 +68,7 @@ const Hotel: React.FC = () => {
                     id="location"
                     value={locationFilter}
                     onChange={(e) => setLocationFilter(e.target.value)}
-                    className="p-2 border border-secondary-200 rounded-md"
-                  >
+                    className="p-2 border border-secondary-200 rounded-md">
                     <option value="">All Locations</option>
                     {uniqueLocations.map((location) => (
                       <option key={location} value={location}>
@@ -80,6 +86,15 @@ const Hotel: React.FC = () => {
               </div>
             </div>
           </>
+        )}
+        {totalPages != 1 && (
+          <Pagination
+            handlePages={(page) => {
+              serQ({...q, page});
+            }}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
         )}
       </Container>
     </Main>
