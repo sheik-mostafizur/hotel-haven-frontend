@@ -1,8 +1,7 @@
 import Container from "../../components/ui/container";
 import React from "react";
-import {BlogCard} from "../../components/ui/card";
+import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
 import {useGetPublicBlogsQuery} from "../../api/public-api";
-import {HashSpinner} from "../../components/spinner";
 
 interface BestBlogs {
   _id: number;
@@ -16,9 +15,10 @@ interface BestBlogs {
 }
 
 const BestBlogs: React.FC = () => {
-  const {data: blogs, isLoading} = useGetPublicBlogsQuery({
+  const {data, isLoading} = useGetPublicBlogsQuery({
     descending: true,
   });
+  const {data: blogs} = data || {};
 
   return (
     <Container className="lg:py-20">
@@ -28,15 +28,16 @@ const BestBlogs: React.FC = () => {
         and adventure. Get inspired and stay informed with our diverse
         collection of stories.
       </p>
-      {isLoading ? (
-        <HashSpinner />
-      ) : (
-        <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
-          {blogs?.slice(0, 4).map((blog: BestBlogs) => (
-            <BlogCard key={blog._id} blog={blog} />
-          ))}
-        </div>
-      )}
+
+      <div className="grid gap-4 md:gap-6 py-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto">
+        {isLoading ? (
+          <BlogCardSkeleton items={4} />
+        ) : (
+          blogs
+            ?.slice(0, 4)
+            .map((blog: BestBlogs) => <BlogCard key={blog._id} blog={blog} />)
+        )}
+      </div>
     </Container>
   );
 };
