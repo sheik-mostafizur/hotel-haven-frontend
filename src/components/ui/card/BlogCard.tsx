@@ -65,7 +65,7 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
 
   return (
     <>
-      <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-700 dark:border-secondary-800">
+      <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
         <img className="rounded-t-lg w-full h-72" src={thumbnail} alt={title} />
         <div className="p-5">
           <div className="flex items-center justify-between gap-4">

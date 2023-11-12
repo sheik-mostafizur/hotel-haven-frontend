@@ -22,7 +22,7 @@ const Navbar = () => {
   const profileMenuStyle = `block px-4 py-2 text-sm text-secondary-700 hover:bg-secondary-100 dark:hover:bg-secondary-600 dark:text-secondary-200 dark:hover:text-white`;
 
   return (
-    <nav className="bg-white shadow-md border-secondary-200 dark:bg-secondary-900">
+    <nav className="bg-white shadow-md border-secondary-200 dark:bg-secondary-700">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link to="/" className="flex items-center">
           <img
@@ -122,7 +122,7 @@ const Navbar = () => {
             toggleMenu || "hidden"
           } items-center justify-between w-full md:flex md:w-auto md:order-1`}
           id="navbar-user">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-secondary-800 md:dark:bg-secondary-900 dark:border-secondary-800">
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-secondary-100 rounded-lg bg-secondary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-secondary-800 md:dark:bg-secondary-700 dark:border-secondary-800">
             <li>
               <Link
                 to="/"

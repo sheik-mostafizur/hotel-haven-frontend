@@ -4,11 +4,11 @@ import Navbar from "../../components/navbar";
 type MainProps = {
   children: React.ReactNode;
 };
-const Main = ({ children }: MainProps) => {
+const Main = ({children}: MainProps) => {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className="dark:bg-secondary-900">{children}</main>
       <Footer />
     </>
   );
