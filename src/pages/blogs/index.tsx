@@ -31,7 +31,7 @@ const Blogs: React.FC = () => {
       <SetTitle title="Blogs" />
       <Container className="py-4 lg:py-12">
         <h1 className="text-center my-4 font-bold">All Blogs</h1>
-        <div className="mb-4 lg:mb-8 grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+        <div className="mb-4 lg:mb-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
           {isLoading ? (
             <BlogCardSkeleton />
           ) : (
