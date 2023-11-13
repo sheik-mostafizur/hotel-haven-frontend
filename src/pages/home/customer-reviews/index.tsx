@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 // import CustomerReviewsSkeleton from "./CustomerReviewsSkeleton";
 
 interface CustomerReviews {
@@ -43,10 +44,15 @@ const CustomerReviews: React.FC = () => {
         </div>
         <div style={{ cursor: "grab" }}>
           <Swiper
+            spaceBetween={30}
+            keyboard={{
+              enabled: true,
+            }}
             pagination={{
               clickable: true,
             }}
-            modules={[Pagination]}
+            navigation={true}
+            modules={[Keyboard, Pagination, Navigation]}
             className="mySwiper"
             breakpoints={{
               640: {

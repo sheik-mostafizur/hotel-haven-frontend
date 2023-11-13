@@ -5,6 +5,8 @@ import STATUS from "../../../../constants/STATUS";
 import { HotelType } from "../../../../types";
 import { useEffect, useState } from "react";
 import toastError from "../../../../utils/toast-error";
+import { useUpdateManagerHotelMutation } from "../../../../api/manager-api";
+import toastSuccess from "../../../../utils/toast-success";
 
 type ViewHotelProps = {
   hotel: HotelType.Hotel;
@@ -15,17 +17,26 @@ interface IFormInputs {
   address: {
     thumbnailURL: string;
     location: string;
-    map: { lat: string; lng: string };
+    map: { lat: number; lng: number };
   };
   availableRoom: number;
   description: string;
 }
 const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
   const { name, photoURL, address, availableRoom, description, status } = hotel;
+  const [updateManagerHotel] = useUpdateManagerHotelMutation();
   const { handleSubmit, control } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
-    console.log(data);
+    updateManagerHotel(data)
+      .unwrap()
+      .then(({ message }) => {
+        toastSuccess(message);
+      })
+      .catch(({ data: { message } }) => {
+        const error = { message };
+        toastError(error);
+      });
   };
 
   const [locations, setLocations] = useState([]);
@@ -77,8 +88,8 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
             </p>
             <div className="lg:flex gap-2">
               <Modal
-                title="Edit your hotel"
-                button={{ label: "Edit hotel", className: "block ml-auto" }}
+                title="Update your hotel"
+                button={{ label: "Update hotel", className: "block ml-auto" }}
                 // className={`${
                 //   hotel.status === STATUS.PENDING
                 //     ? "bg-orange-400"
@@ -92,6 +103,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                   <Controller
                     name="name"
                     control={control}
+                    defaultValue={name}
                     rules={{ required: true }}
                     render={({ field }) => <input {...field} />}
                   />
@@ -101,6 +113,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="photoURL"
                         control={control}
+                        defaultValue={photoURL}
                         rules={{ required: true }}
                         render={({ field }) => <input {...field} />}
                       />
@@ -110,6 +123,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="availableRoom"
                         control={control}
+                        defaultValue={availableRoom}
                         rules={{ required: true }}
                         render={({ field }) => <input {...field} />}
                       />
@@ -121,14 +135,15 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="address.location"
                         control={control}
+                        defaultValue={address.location}
                         rules={{ required: true }}
                         render={({ field }) => (
                           <select
                             {...field}
                             className="bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                           >
-                            <option value="" disabled>
-                              Select a location
+                            <option defaultValue={address.location}>
+                              {address.location}
                             </option>
                             {locations.map((location: any) => (
                               <option key={location.id} value={location?.name}>
@@ -139,7 +154,6 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                         )}
                       />
                     </div>
-
                     <div>
                       <label htmlFor="locationThumbnailURL">
                         Location ThumbnailURL
@@ -147,6 +161,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="address.thumbnailURL"
                         control={control}
+                        defaultValue={address.thumbnailURL}
                         rules={{ required: true }}
                         render={({ field }) => <input {...field} />}
                       />
@@ -158,6 +173,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="address.map.lat"
                         control={control}
+                        defaultValue={address.map.lat}
                         rules={{ required: true }}
                         render={({ field }) => <input {...field} />}
                       />
@@ -167,6 +183,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                       <Controller
                         name="address.map.lng"
                         control={control}
+                        defaultValue={address.map.lng}
                         rules={{ required: true }}
                         render={({ field }) => <input {...field} />}
                       />
@@ -176,6 +193,7 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                   <Controller
                     name="description"
                     control={control}
+                    defaultValue={description}
                     rules={{ required: true }}
                     render={({ field }) => (
                       <textarea
@@ -191,9 +209,6 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
                   </Button>
                 </form>
               </Modal>
-              {/* <Link to={_id}>
-                <Button>Details</Button>
-              </Link> */}
             </div>
           </div>
         </div>
