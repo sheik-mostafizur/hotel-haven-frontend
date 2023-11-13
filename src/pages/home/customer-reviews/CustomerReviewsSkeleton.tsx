@@ -32,7 +32,7 @@ const CustomerReviewsSkeleton = () => {
         >
           <div>
             <SwiperSlide
-              className="bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
+              className="animate-pulse bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
@@ -49,7 +49,7 @@ const CustomerReviewsSkeleton = () => {
               </p>
             </SwiperSlide>
             <SwiperSlide
-              className="bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
+              className="animate-pulse bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
@@ -66,7 +66,7 @@ const CustomerReviewsSkeleton = () => {
               </p>
             </SwiperSlide>
             <SwiperSlide
-              className="bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
+              className="animate-pulse bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
@@ -83,7 +83,7 @@ const CustomerReviewsSkeleton = () => {
               </p>
             </SwiperSlide>
             <SwiperSlide
-              className="bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
+              className="animate-pulse bg-white p-4 border rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
               data-aos="fade-up"
             >
               <div className="flex items-center mb-4">
