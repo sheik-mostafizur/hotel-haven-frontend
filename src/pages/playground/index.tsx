@@ -1,6 +1,7 @@
-import Pagination from "../../components/pagination";
 import SetTitle from "../../components/set-title";
+import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
+import {useSignin, useSuccess} from "../../hooks";
 
 const Playground: React.FC = () => {
   return (
@@ -8,7 +9,12 @@ const Playground: React.FC = () => {
       <SetTitle title={`Playground`} />
       <h1 className="font-OpenSans">Playground</h1>
 
-      <Pagination />
+      <Button
+        onClick={async () => {
+          useSignin();
+        }}>
+        Click
+      </Button>
     </Container>
   );
 };

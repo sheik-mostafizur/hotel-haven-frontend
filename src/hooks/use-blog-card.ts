@@ -1,3 +1,5 @@
+import {useLocation, useNavigate} from "react-router-dom";
+import {useSignin} from ".";
 import {
   useDeleteBlogBookmarkByIdMutation,
   useGetBlogBookmarkQuery,
@@ -12,6 +14,9 @@ import toastError from "../utils/toast-error";
 import toastSuccess from "../utils/toast-success";
 
 const useBlogCard = (blogId: string) => {
+  const navigate = useNavigate();
+  const locations = useLocation();
+
   const query = useAppSelector((state) => state.blogFilter);
   const isAuthenticated = localStorage.getItem("token") ? true : false;
 
@@ -29,7 +34,14 @@ const useBlogCard = (blogId: string) => {
   const [postLikeBlog] = usePostLikeBlogMutation();
   const [removeLikeBlog] = useRemoveLikeBlogMutation();
 
-  const handleAddBookmark = () => {
+  const handleAddBookmark = async () => {
+    if (!isAuthenticated) {
+      if (await useSignin()) {
+        return navigate("/signin", {state: {from: {...locations}}});
+      }
+      return;
+    }
+
     postBlogBookmark({blogId})
       .unwrap()
       .then((data) => {
@@ -53,7 +65,14 @@ const useBlogCard = (blogId: string) => {
       });
   };
 
-  const handleLike = () => {
+  const handleLike = async () => {
+    if (!isAuthenticated) {
+      if (await useSignin()) {
+        return navigate("/signin", {state: {from: {...locations}}});
+      }
+      return;
+    }
+
     postLikeBlog(blogId)
       .unwrap()
       .then((data) => {
