@@ -96,7 +96,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
         >
           {thumbnails.map((img, index) => (
             <SwiperSlide key={index}>
-              <img className="max-h-96 w-full" src={img} alt="" />
+              <img className="h-72 w-full" src={img} alt="" />
             </SwiperSlide>
           ))}
         </Swiper>
