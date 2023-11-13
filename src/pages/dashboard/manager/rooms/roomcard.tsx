@@ -58,7 +58,7 @@ interface IFormInputs {
   };
   roomInfo: {
     bedType: string;
-    view: number;
+    view: string;
     roomSize: string;
     regularPrice: number;
     discountedPrice: number;
@@ -143,8 +143,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
         </div>
         <div className="flex gap-5 items-center justify-center">
           <Modal
-            title={"Edit Room"}
-            button={{ label: "Edit Room", className: "block ml-auto px-4" }}
+            title={"Update Room"}
+            button={{ label: "Update a room", className: "block ml-auto px-4" }}
           >
             <div>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -152,6 +152,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                 <Controller
                   name="title"
                   control={control}
+                  defaultValue={title}
                   rules={{ required: true }}
                   render={({ field }) => <input {...field} />}
                 />
@@ -160,6 +161,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <label htmlFor="thumbnails[0]">Thumbnails 1</label>
                     <Controller
                       name="thumbnails[0]"
+                      defaultValue={thumbnails[0]}
                       control={control}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} type="url" />}
@@ -169,6 +171,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <label htmlFor="thumbnails[1]">Thumbnails 2</label>
                     <Controller
                       name="thumbnails[1]"
+                      defaultValue={thumbnails[1]}
                       control={control}
                       render={({ field }) => <input {...field} type="url" />}
                     />
@@ -177,6 +180,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <label htmlFor="thumbnails[2]">Thumbnails 3</label>
                     <Controller
                       name="thumbnails[2]"
+                      defaultValue={thumbnails[2]}
                       control={control}
                       render={({ field }) => <input {...field} type="url" />}
                     />
@@ -188,6 +192,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="facilities[0]"
                       control={control}
+                      defaultValue={facilities[0]}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} />}
                     />
@@ -197,6 +202,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="facilities[1]"
                       control={control}
+                      defaultValue={facilities[1]}
                       render={({ field }) => <input {...field} />}
                     />
                   </div>
@@ -205,6 +211,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="facilities[2]"
                       control={control}
+                      defaultValue={facilities[2]}
                       render={({ field }) => <input {...field} />}
                     />
                   </div>
@@ -212,6 +219,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <label htmlFor="facilities[3]">Facilities 4</label>
                     <Controller
                       name="facilities[3]"
+                      defaultValue={facilities[3]}
                       control={control}
                       render={({ field }) => <input {...field} />}
                     />
@@ -222,6 +230,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <label htmlFor="adult">Adult</label>
                     <Controller
                       name="capacity.adult"
+                      defaultValue={capacity?.adult}
                       control={control}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} type="number" />}
@@ -232,6 +241,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="capacity.children"
                       control={control}
+                      defaultValue={capacity?.children}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} type="number" />}
                     />
@@ -243,6 +253,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.roomSize"
                       control={control}
+                      defaultValue={roomInfo.roomSize}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} />}
                     />
@@ -252,6 +263,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.regularPrice"
                       control={control}
+                      defaultValue={roomInfo?.regularPrice}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} />}
                     />
@@ -261,6 +273,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.discountedPrice"
                       control={control}
+                      defaultValue={roomInfo?.discountedPrice}
                       rules={{ required: true }}
                       render={({ field }) => <input {...field} />}
                     />
@@ -271,6 +284,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.view"
                       control={control}
                       rules={{ required: true }}
+                      defaultValue={roomInfo?.view}
                       render={({ field }) => <input {...field} type="text" />}
                     />
                   </div>
@@ -280,6 +294,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.bedType"
                       control={control}
                       rules={{ required: true }}
+                      defaultValue={roomInfo.bedType}
                       render={({ field }) => <input {...field} />}
                     />
                   </div>
@@ -289,6 +304,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.additionalInfo"
                       control={control}
                       rules={{ required: true }}
+                      defaultValue={roomInfo?.additionalInfo}
                       render={({ field }) => <input {...field} />}
                     />
                   </div>
