@@ -3,8 +3,8 @@ import Banner from "./Banner";
 import BestBlogs from "./BestBlogs";
 import BestHotel from "./BestHotel";
 import CustomerReviews from "./CustomerReviews";
-import HotelGallery from "./HotelGallery";
-import TopLocation from "./TopLocation";
+import HotelGallery from "./hotel-gallery";
+import TopLocation from "./top-location/TopLocation";
 import SetTitle from "../../components/set-title";
 
 const Home = () => {

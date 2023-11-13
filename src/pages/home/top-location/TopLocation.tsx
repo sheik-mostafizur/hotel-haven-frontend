@@ -1,8 +1,8 @@
-import Container from "../../components/ui/container";
+import Container from "../../../components/ui/container";
 import React from "react";
 import Location from "./Location";
-import { useGetTopLocationsQuery } from "../../api/public-api";
-import { HashSpinner } from "../../components/spinner";
+import { useGetTopLocationsQuery } from "../../../api/public-api";
+import { HashSpinner } from "../../../components/spinner";
 
 interface TopLocationTypes {
   thumbnail: string;

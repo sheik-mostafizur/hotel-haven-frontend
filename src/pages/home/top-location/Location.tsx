@@ -1,8 +1,8 @@
 import React from "react";
 import "./Location.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setHotelFilter } from "../../redux/hotel-filter-slice";
-import { useAppDispatch } from "../../redux/hooks";
+import { setHotelFilter } from "../../../redux/hotel-filter-slice";
+import { useAppDispatch } from "../../../redux/hooks";
 interface Location {
   thumbnail: string;
   location: string;

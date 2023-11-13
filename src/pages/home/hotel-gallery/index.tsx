@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
-import Container from "../../components/ui/container";
-import { HashSpinner } from "../../components/spinner";
-import { useGetHotelGalleryQuery } from "../../api/public-api";
+import Container from "../../../components/ui/container";
+import { useGetHotelGalleryQuery } from "../../../api/public-api";
+import HotelGallerySkeleton from "./HotelGallerySkeleton";
 
 interface GalleryImage {
   imageURL: string;
@@ -28,7 +28,7 @@ const HotelGallery = () => {
           </p>
         </div>
         {isLoading ? (
-          <HashSpinner />
+          <HotelGallerySkeleton />
         ) : (
           <div>
             <Marquee delay={1} direction="left">
