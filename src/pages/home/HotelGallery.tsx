@@ -16,11 +16,17 @@ const HotelGallery = () => {
 
   return (
     <div className="dark:bg-secondary-700">
-      <Container className="lg:py-20 ">
-        <h2 className="text-center">Capturing Elegance</h2>
-        <p className="px-4 lg:px-16 text-center py-2 font-normal">
-          Immerse yourself in refined sophistication and timeless charm.
-        </p>
+      <Container className="lg:my-20 ">
+        <div className="mb-6 mx-auto">
+          <h2 className="text-center uppercase">
+            {" "}
+            Explore Our Exquisite Hotel Collection
+          </h2>
+          <p className="text-center">
+            Immerse yourself in elegance with our curated selection of
+            world-class hotels.
+          </p>
+        </div>
         {isLoading ? (
           <HashSpinner />
         ) : (
