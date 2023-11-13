@@ -9,10 +9,10 @@ const Suceess = () => {
     <p className="mb-4">Thank you for your payment. Your transaction was successful.</p>
     <div className="text-left">
       <p className="font-semibold">Order Details:</p>
-   
+
     </div>
   </div>
-        </Main>
+</Main>
     );
 };
 

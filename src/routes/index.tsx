@@ -20,6 +20,7 @@ import Suceess from "../pages/payment/utitlies/Suceess";
 import Failed from "../pages/payment/utitlies/Failed";
 import Cancelpage from "../pages/payment/utitlies/Cancelpage";
 
+
 const router = createBrowserRouter([
   {
     path: "/",

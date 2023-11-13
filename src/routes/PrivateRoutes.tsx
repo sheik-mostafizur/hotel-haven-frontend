@@ -23,18 +23,7 @@ const routes = [
     path: "/payment/:_id",
     element: <Payment />,
   },
-  {
-    path: "/success",
-    element: <div>success </div>,
-  },
-  {
-    path: "/fail",
-    element: <Payment />,
-  },
-  {
-    path: "/cancel",
-    element: <Payment />,
-  },
+  
   {
     path: "/dashboard",
     element: <Dashboard />,
