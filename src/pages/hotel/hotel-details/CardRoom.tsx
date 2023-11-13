@@ -1,4 +1,4 @@
-import {FaBed, FaCheck, FaEye} from "react-icons/fa";
+import {FaBed, FaCheck, FaChild, FaEye, FaPeopleArrows} from "react-icons/fa";
 import {GiResize} from "react-icons/gi";
 import Button from "../../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
@@ -141,6 +141,13 @@ const CardRoom: React.FC<Room> = ({room}) => {
               <li className="flex gap-2 items-center">
                 <FaBed></FaBed>
                 {room?.roomInfo.bedType}
+              </li>
+              <li className="flex gap-2 items-center">
+                <FaPeopleArrows /> <span>Adult: {room.capacity.adult}</span>
+              </li>
+              <li className="flex gap-2 items-center">
+                <FaChild />
+                <span>Child: {room.capacity.children}</span>
               </li>
               <li className="flex gap-2 items-center">
                 <FaEye></FaEye>

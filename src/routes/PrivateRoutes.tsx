@@ -9,6 +9,7 @@ import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
 import HomeDashboard from "../pages/dashboard/home-dashboard";
 import BookingHistory from "../pages/dashboard/customer/booking-history/BookingHistory";
 import Bookmark from "../pages/dashboard/blogs-dashboard/bookmark";
+import SingleBlog from "../pages/blogs/SingleBlog";
 
 const routes = [
   {
@@ -22,6 +23,10 @@ const routes = [
   {
     path: "/payment/:_id",
     element: <Payment />,
+  },
+  {
+    path: "/blogs/:_id",
+    element: <SingleBlog />,
   },
   {
     path: "/dashboard",

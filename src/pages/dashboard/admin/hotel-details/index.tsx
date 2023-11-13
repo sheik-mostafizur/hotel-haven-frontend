@@ -76,8 +76,7 @@ const HotelDetails = () => {
                     </h5>
                     <p className="flex gap-3 mb-2">
                       <span className="flex gap-1 justify-center items-center">
-                        {" "}
-                        <FaPeopleArrows />{" "}
+                        <FaPeopleArrows />
                         <span>Adult: {room.capacity.adult}</span>
                       </span>
                       <span className="flex gap-1 items-center justify-center">

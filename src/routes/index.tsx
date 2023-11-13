@@ -12,7 +12,6 @@ import AboutUs from "../pages/about-us";
 import ContactUs from "../pages/contact-us";
 import Hotel from "../pages/hotel";
 import HotelDetails from "../pages/hotel/hotel-details";
-import SingleBlog from "../pages/blogs/SingleBlog";
 import PrivacyPolicy from "../pages/privacy-policy";
 import License from "../pages/license";
 import TermsAndConditions from "../pages/terms-and-condition";
@@ -26,10 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/blogs",
     element: <Blogs />,
-  },
-  {
-    path: "/blogs/:_id",
-    element: <SingleBlog />,
   },
   {
     path: "/about",

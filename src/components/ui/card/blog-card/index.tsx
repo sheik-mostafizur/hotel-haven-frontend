@@ -3,18 +3,7 @@ import {AiOutlineLike, AiTwotoneLike} from "react-icons/ai";
 import {BsBookmarkStar, BsBookmarkStarFill} from "react-icons/bs";
 import {BlogType} from "../../../../types";
 import formatPostDate from "../../../../utils/format-post-date";
-import {
-  useDeleteBlogBookmarkByIdMutation,
-  useGetBlogBookmarkQuery,
-  useGetLikedQuery,
-  usePostBlogBookmarkMutation,
-  usePostLikeBlogMutation,
-  useRemoveLikeBlogMutation,
-} from "../../../../api/private-api";
-import toastSuccess from "../../../../utils/toast-success";
-import toastError from "../../../../utils/toast-error";
-import {useGetPublicBlogsQuery} from "../../../../api/public-api";
-import {useAppSelector} from "../../../../redux/hooks";
+import {useBlogCard} from "../../../../hooks";
 
 interface BlogCardProps {
   blog: BlogType.Blog;
@@ -33,72 +22,15 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
     userName,
     userProfile,
   } = props.blog;
-  const isAuthenticated = localStorage.getItem("token") ? true : false;
-  const query = useAppSelector((state) => state.blogFilter);
 
-  const {refetch} = useGetPublicBlogsQuery(query);
-
-  const {data: bookmark} = isAuthenticated
-    ? useGetBlogBookmarkQuery(undefined)
-    : {data: null};
-  const [postBlogBookmark] = usePostBlogBookmarkMutation();
-  const [deleteBlogBookmarkById] = useDeleteBlogBookmarkByIdMutation();
-
-  const {data: liked} = isAuthenticated
-    ? useGetLikedQuery(undefined)
-    : {data: null};
-  const [postLikeBlog] = usePostLikeBlogMutation();
-  const [removeLikeBlog] = useRemoveLikeBlogMutation();
-
-  const handleAddBlogBookmark = () => {
-    postBlogBookmark({blogId: _id})
-      .unwrap()
-      .then((data) => {
-        toastSuccess(data.message);
-      })
-      .catch(({data}) => {
-        const error = {message: data?.message};
-        toastError(error);
-      });
-  };
-
-  const handleRemoveBlogBookmark = () => {
-    deleteBlogBookmarkById(_id)
-      .unwrap()
-      .then((data) => {
-        toastSuccess(data.message);
-      })
-      .catch(({data}) => {
-        const error = {message: data?.message};
-        toastError(error);
-      });
-  };
-
-  const handleLike = () => {
-    postLikeBlog(_id)
-      .unwrap()
-      .then((data) => {
-        toastSuccess(data.message);
-        refetch();
-      })
-      .catch(({data}) => {
-        const error = {message: data?.message};
-        toastError(error);
-      });
-  };
-
-  const handleRemoveLike = () => {
-    removeLikeBlog(_id)
-      .unwrap()
-      .then((data) => {
-        toastSuccess(data.message);
-        refetch();
-      })
-      .catch(({data}) => {
-        const error = {message: data?.message};
-        toastError(error);
-      });
-  };
+  const {
+    bookmark,
+    liked,
+    handleAddBookmark,
+    handleRemoveBookmark,
+    handleLike,
+    handleRemoveLike,
+  } = useBlogCard(_id);
 
   const iconStyle = {
     inactive:
@@ -123,12 +55,12 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
             </Link>
             {bookmark?.some((item: any) => item.blogId === _id) ? (
               <BsBookmarkStarFill
-                onClick={handleRemoveBlogBookmark}
+                onClick={handleRemoveBookmark}
                 className={iconStyle.active}
               />
             ) : (
               <BsBookmarkStar
-                onClick={handleAddBlogBookmark}
+                onClick={handleAddBookmark}
                 className={iconStyle.inactive}
               />
             )}
