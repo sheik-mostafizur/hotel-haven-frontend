@@ -103,6 +103,7 @@ export const userSlice = createSlice({
 
       if (localStorage.getItem("token")) {
         state.token = localStorage.getItem("token");
+        state.isAuthenticated = true;
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
