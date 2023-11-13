@@ -1,12 +1,13 @@
-import Container from "../../components/ui/container";
-import {Rating} from "@smastrom/react-rating";
+import Container from "../../../components/ui/container";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import {Pagination} from "swiper/modules";
+import { Pagination } from "swiper/modules";
+// import CustomerReviewsSkeleton from "./CustomerReviewsSkeleton";
 
 interface CustomerReviews {
   _id: number;
@@ -32,15 +33,15 @@ const CustomerReviews: React.FC = () => {
 
   return (
     <div className="bg-primary-50 dark:bg-secondary-900">
-      <Container className="lg:py-16 overflow-hidden">
+      <Container className="lg:my-20 overflow-hidden">
         <div className="mx-auto text-center py-4">
-          <h2 className=""> Customer Reviews</h2>
-          <p className="px-4 lg:px-16 text-center py-2">
+          <h2 className="uppercase"> Customer Reviews</h2>
+          <p className="text-center">
             Discover what our customers have to say about their experiences with
             our products.
           </p>
         </div>
-        <div style={{cursor: "grab"}}>
+        <div style={{ cursor: "grab" }}>
           <Swiper
             pagination={{
               clickable: true,
@@ -62,13 +63,15 @@ const CustomerReviews: React.FC = () => {
                 slidesPerView: 3,
                 spaceBetween: 30,
               },
-            }}>
+            }}
+          >
             <div>
               {reviews.map((review) => (
                 <SwiperSlide
                   key={review._id}
                   className="bg-white p-4 rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
-                  data-aos="fade-up">
+                  data-aos="fade-up"
+                >
                   <div className="flex items-center mb-4">
                     <img
                       src={review.profileURL}
@@ -82,13 +85,13 @@ const CustomerReviews: React.FC = () => {
                           <Rating
                             value={review.rating}
                             readOnly={true}
-                            style={{maxWidth: "100px"}}
+                            style={{ maxWidth: "100px" }}
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <p className="text-secondary-700 h-52">
+                  <p className="text-secondary-700 my-auto h-52">
                     <q className="italic font-mono">{review.review}</q>
                   </p>
                 </SwiperSlide>

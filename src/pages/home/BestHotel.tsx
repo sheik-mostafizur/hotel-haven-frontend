@@ -1,7 +1,7 @@
 import Container from "../../components/ui/container";
 import Hotel from "./Hotel";
 // import { HashSpinner } from "../../components/spinner";
-import {useGetHotelsQuery} from "../../api/public-api";
+import { useGetHotelsQuery } from "../../api/public-api";
 import React from "react";
 import HotelSkeleton from "../../components/skeleton/hotel-skeleton";
 
@@ -16,19 +16,18 @@ interface HotelType {
 }
 
 const BestHotel: React.FC = () => {
-  const {data, isLoading} = useGetHotelsQuery({limit: 4});
+  const { data, isLoading } = useGetHotelsQuery({ limit: 4 });
   const initialHotel: HotelType[] = [];
   const hotels = data?.data || initialHotel;
 
   return (
-    <Container className="lg:py-20">
-      <div className="mx-auto mb-4">
-        <h2 className="text-center">Discover our best hotel</h2>
-        {/* <p className="px-4 lg:px-16 text-center py-4 font-normal">
-            Indulge in the epitome of opulence at our carefully curated
-            selection of top-rated hotels, where unparalleled comfort meets
-            world-className hospitality.
-          </p> */}
+    <Container className="lg:my-20">
+      <div className="text-center mb-6">
+        <h2 className="text-center uppercase">Discover our best hotel</h2>
+        <p className="">
+          Discover a curated selection of the world's finest hotels, where
+          opulence meets comfort.
+        </p>
       </div>
       {isLoading ? (
         <HotelSkeleton />
