@@ -33,14 +33,20 @@ const BlogCard: React.FC<BlogCardProps> = (props) => {
     userName,
     userProfile,
   } = props.blog;
+  const isAuthenticated = localStorage.getItem("token") ? true : false;
   const query = useAppSelector((state) => state.blogFilter);
+
   const {refetch} = useGetPublicBlogsQuery(query);
 
-  const {data: bookmark} = useGetBlogBookmarkQuery(undefined);
+  const {data: bookmark} = isAuthenticated
+    ? useGetBlogBookmarkQuery(undefined)
+    : {data: null};
   const [postBlogBookmark] = usePostBlogBookmarkMutation();
   const [deleteBlogBookmarkById] = useDeleteBlogBookmarkByIdMutation();
 
-  const {data: liked} = useGetLikedQuery(undefined);
+  const {data: liked} = isAuthenticated
+    ? useGetLikedQuery(undefined)
+    : {data: null};
   const [postLikeBlog] = usePostLikeBlogMutation();
   const [removeLikeBlog] = useRemoveLikeBlogMutation();
 
