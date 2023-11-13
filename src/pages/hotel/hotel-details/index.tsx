@@ -299,7 +299,7 @@ const HotelDetails: React.FC = () => {
 
                 <div className="grid lg:grid-cols-2 gap-4">
                   <div>
-                    <RatingPopUp />
+                    <RatingPopUp hotelId={_id} />
                   </div>
                   <div className="mx-auto">
                     <h2 className="text-center">Customer reviews</h2>
