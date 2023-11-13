@@ -1,22 +1,22 @@
-import {useForm, Controller} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Button from "../ui/button";
-import {useGetLocationsQuery} from "../../api/public-api";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {setHotelFilter} from "../../redux/hotel-filter-slice";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useGetLocationsQuery } from "../../api/public-api";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setHotelFilter } from "../../redux/hotel-filter-slice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FindRoomForm = () => {
   const locationURL = useLocation();
   const navigate = useNavigate();
 
-  const {isLoading, data: locations} = useGetLocationsQuery(undefined);
+  const { isLoading, data: locations } = useGetLocationsQuery(undefined);
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
 
   const {
     control,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     defaultValues: {
       location: hotelFilter.location,
@@ -34,7 +34,7 @@ const FindRoomForm = () => {
     }
   };
 
-  function formatDateToYYYYMMDD(date) {
+  function formatDateToYYYYMMDD(date: Date) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
@@ -55,11 +55,12 @@ const FindRoomForm = () => {
             rules={{
               required: true,
             }}
-            render={({field}) => (
+            render={({ field }) => (
               <select
                 id="location"
                 {...field}
-                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
                 {isLoading ? (
                   <option value="">Choose a Location</option>
                 ) : (
@@ -84,8 +85,8 @@ const FindRoomForm = () => {
             <label htmlFor="checkIn">Check In Date</label>
             <Controller
               control={control}
-              rules={{required: true}}
-              render={({field}) => (
+              rules={{ required: true }}
+              render={({ field }) => (
                 <input id="checkIn" {...field} type="date" min={minDate} />
               )}
               name="checkIn"
@@ -95,8 +96,8 @@ const FindRoomForm = () => {
             <label htmlFor="checkOut">Check Out Date</label>
             <Controller
               control={control}
-              rules={{required: true}}
-              render={({field}) => (
+              rules={{ required: true }}
+              render={({ field }) => (
                 <input id="checkOut" {...field} type="date" />
               )}
               name="checkOut"

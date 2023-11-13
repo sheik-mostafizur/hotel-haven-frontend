@@ -2,6 +2,7 @@ import Container from "../../components/ui/container";
 import React from "react";
 import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
 import {useGetPublicBlogsQuery} from "../../api/public-api";
+import {useAppSelector} from "../../redux/hooks";
 
 interface BestBlogs {
   _id: number;
@@ -15,9 +16,8 @@ interface BestBlogs {
 }
 
 const BestBlogs: React.FC = () => {
-  const {data, isLoading} = useGetPublicBlogsQuery({
-    descending: true,
-  });
+  const query = useAppSelector((state) => state.blogFilter);
+  const {data, isLoading} = useGetPublicBlogsQuery(query);
   const {data: blogs} = data || {};
 
   return (

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import {useEffect, useRef} from "react";
 import {useAppSelector} from "../../../redux/hooks";
 import Chart from "chart.js/auto";
 import {
@@ -6,12 +6,12 @@ import {
   useGetUsersAdminQuery,
 } from "../../../api/admin-api";
 
-const AdminChart = () => {
+const AdminChart: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
   const isAdmin = user.role === "ADMIN";
-  const usersData = useAppSelector((state) => state.users); // Replace with actual user data from Redux
+  const usersData = useAppSelector((state: any): any => state.users); // Replace with actual user data from Redux
 
-  const {data, isLoading} = useGetUsersAdminQuery({
+  const {data} = useGetUsersAdminQuery({
     length: true,
   });
 
@@ -46,7 +46,7 @@ const AdminChart = () => {
 
       // Count the number of users in each category
       const userData = usersData || [];
-      userData.forEach((user) => {
+      userData.forEach((user: any) => {
         if (user.role === "CUSTOMER") {
           userDataCount.Customers += 1;
         } else if (user.role === "MANAGER") {
@@ -82,16 +82,19 @@ const AdminChart = () => {
       );
 
       // Extract hotel status data from the hotelsData
-      const hotelStatusData = hotelsData.map((hotel) => hotel.status);
+      const hotelStatusData = hotelsData.map((hotel: any) => hotel.status);
 
       // Count the number of hotels with different statuses
       const hotelDataCount = {
-        APPROVED: hotelStatusData.filter((status) => status === "APPROVED")
-          .length,
-        REJECTED: hotelStatusData.filter((status) => status === "REJECTED")
-          .length,
-        PENDING: hotelStatusData.filter((status) => status === "PENDING")
-          .length,
+        APPROVED: hotelStatusData.filter(
+          (status: string) => status === "APPROVED"
+        ).length,
+        REJECTED: hotelStatusData.filter(
+          (status: string) => status === "REJECTED"
+        ).length,
+        PENDING: hotelStatusData.filter(
+          (status: string) => status === "PENDING"
+        ).length,
       };
 
       const barChartData = {
@@ -122,7 +125,7 @@ const AdminChart = () => {
                 weight: "bold",
               },
               color: "black",
-              formatter: (value) => value, // Show the actual value on top of the bars
+              formatter: (value: any) => value, // Show the actual value on top of the bars
             },
           },
         },

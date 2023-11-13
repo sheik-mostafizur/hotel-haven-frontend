@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -10,15 +10,15 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import { AiFillCar } from "react-icons/ai";
-import { MdPool } from "react-icons/md";
-import { CgGym } from "react-icons/cg";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {AiFillCar} from "react-icons/ai";
+import {MdPool} from "react-icons/md";
+import {CgGym} from "react-icons/cg";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import React from "react";
-// import { , FaCheck, FaEye } from "react-icons/fa";
-import { useAppSelector } from "../../redux/hooks";
+import {useAppSelector} from "../../redux/hooks";
 import Button from "../../components/ui/button";
-import { useGetRoomDetailsQuery } from "../../api/private-api";
+import {useGetRoomDetailsQuery} from "../../api/private-api";
+import SetTitle from "../../components/set-title";
 
 interface IFormInputs {
   fullName: string;
@@ -27,10 +27,9 @@ interface IFormInputs {
 }
 
 const Payment: React.FC = () => {
-  const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const user = useAppSelector((state) => state.auth.user);
-  const { _id } = useParams();
-  const { data, isLoading } = useGetRoomDetailsQuery(_id);
+  const {_id} = useParams();
+  const {data} = useGetRoomDetailsQuery(_id);
   // console.log(data);
   // const { hotel, room } = data;
   // console.log(hotelFilter);
@@ -40,7 +39,7 @@ const Payment: React.FC = () => {
 
   // const { address } = data?.hotel;
   // console.log(data?.room?.roomInfo?.discountedPrice);
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const {handleSubmit, control} = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
 const token = ''
   const handelPayment = () => {
@@ -63,6 +62,7 @@ const token = ''
 
   return (
     <Main>
+      <SetTitle title={`Pay now`} />
       <Container className="px-8">
         <div className="w-full">
           <h3 className="">{data?.room?.title}</h3>
@@ -97,8 +97,8 @@ const token = ''
                 <Controller
                   name="fullName"
                   control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
+                  rules={{required: true}}
+                  render={({field}) => (
                     <input {...field} value={`${user.name}`} />
                   )}
                 />
@@ -108,8 +108,8 @@ const token = ''
                 <Controller
                   name="Email"
                   control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
+                  rules={{required: true}}
+                  render={({field}) => (
                     <input {...field} value={`${user.email}`} />
                   )}
                 />
@@ -121,8 +121,8 @@ const token = ''
                 <Controller
                   name="mobile"
                   control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
+                  rules={{required: true}}
+                  render={({field}) => (
                     <input {...field} value={`${user.phone}`} />
                   )}
                 />
@@ -131,8 +131,8 @@ const token = ''
                 <Controller
                   name="mobile"
                   control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
+                  rules={{required: true}}
+                  render={({field}) => (
                     <input {...field} value={amount} type="number" />
                   )}
                 />

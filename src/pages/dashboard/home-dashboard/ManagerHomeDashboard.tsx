@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import {useState, useEffect} from "react";
+import {Bar} from "react-chartjs-2";
 
 const ManagerHomeDashboard = () => {
   const [stats, setStats] = useState({

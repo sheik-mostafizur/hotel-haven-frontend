@@ -2,6 +2,7 @@ import {configureStore} from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import themeSlice from "./themeSlice";
 import hotelFilterSlice from "./hotel-filter-slice";
+import blogFilterSlice from "./blog-filter-slice";
 
 // import rtkQuery api
 import {publicApi, privateApi, managerApi, adminApi} from "../api";
@@ -11,6 +12,7 @@ const store = configureStore({
     auth: authSlice,
     theme: themeSlice,
     hotelFilter: hotelFilterSlice,
+    blogFilter: blogFilterSlice,
     // api path initialize
     [publicApi.reducerPath]: publicApi.reducer,
     [privateApi.reducerPath]: privateApi.reducer,

@@ -1,10 +1,12 @@
 import React from "react";
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
+import SetTitle from "../../components/set-title";
 
 const License: React.FC = () => {
   return (
     <Main>
+      <SetTitle title={`License`} />
       <Container>
         <div className="my-10">
           <h1 className="my-2">Licensing Information</h1>

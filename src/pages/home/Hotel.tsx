@@ -1,8 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "../../components/ui/button";
-import LazyLoad from "react-lazy-load";
 import React from "react";
-import { CiLocationOn } from "react-icons/ci";
 
 interface HotelType {
   _id: string;
@@ -16,10 +13,9 @@ interface HotelType {
 }
 
 const Hotel: React.FC<HotelType> = ({
-  address,
   name,
   photoURL,
-  description,
+
   _id,
 }) => {
   // bg-white className=" h-full border border-secondary-50 dark:bg-secondary-800 dark:border-secondary-800"

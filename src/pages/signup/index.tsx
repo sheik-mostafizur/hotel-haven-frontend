@@ -1,14 +1,15 @@
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Controller, useForm } from "react-hook-form";
+import {Link, useNavigate} from "react-router-dom";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import {Controller, useForm} from "react-hook-form";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
-import { useState } from "react";
-import { axios } from "../../api";
-import { BeatSpinner } from "../../components/spinner";
+import {useState} from "react";
+import {axios} from "../../api";
+import {BeatSpinner} from "../../components/spinner";
+import SetTitle from "../../components/set-title";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +21,7 @@ const SignUp = () => {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     mode: "all",
     defaultValues: {
@@ -39,7 +40,7 @@ const SignUp = () => {
     setIsLoading(true);
     axios
       .post("/auth/register", data)
-      .then(({ data }) => {
+      .then(({data}) => {
         toastSuccess(data.message);
         navigate("/signin");
         setIsLoading(false);
@@ -49,7 +50,7 @@ const SignUp = () => {
         setIsLoading(false);
       });
   };
-  const isValidURL = (url) => {
+  const isValidURL = (url: string) => {
     // A simple function to validate the URL format
     try {
       new URL(url);
@@ -60,6 +61,7 @@ const SignUp = () => {
   };
   return (
     <>
+      <SetTitle title={`Create a new account`} />
       <header>
         <Navbar />
       </header>
@@ -79,8 +81,8 @@ const SignUp = () => {
                 <Controller
                   name={"name"}
                   control={control}
-                  rules={{ required: "Name is required" }}
-                  render={({ field }) => (
+                  rules={{required: "Name is required"}}
+                  render={({field}) => (
                     <input
                       className={
                         errors.name ? "border-red-500 dark:border-red-500" : ""
@@ -95,8 +97,7 @@ const SignUp = () => {
                 {errors.name && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.name.message}
                   </p>
                 )}
@@ -113,7 +114,7 @@ const SignUp = () => {
                       message: "Invalid email address",
                     },
                   }}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <input
                       className={
                         errors.email ? "border-red-500 dark:border-red-500" : ""
@@ -128,8 +129,7 @@ const SignUp = () => {
                 {errors.email && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.email.message}
                   </p>
                 )}
@@ -148,7 +148,7 @@ const SignUp = () => {
                       isValidURL(value) || "Invalid URL format",
                   },
                 }}
-                render={({ field }) => (
+                render={({field}) => (
                   <input
                     className={
                       errors.photoURL
@@ -165,8 +165,7 @@ const SignUp = () => {
               {errors.photoURL && (
                 <p
                   className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
+                  role="alert">
                   {errors.photoURL.message}
                 </p>
               )}
@@ -177,8 +176,8 @@ const SignUp = () => {
                 <Controller
                   name="phone"
                   control={control}
-                  rules={{ required: "Phone Number is required" }}
-                  render={({ field }) => (
+                  rules={{required: "Phone Number is required"}}
+                  render={({field}) => (
                     <input
                       className={
                         errors.phone ? "border-red-500 dark:border-red-500" : ""
@@ -193,8 +192,7 @@ const SignUp = () => {
                 {errors.phone && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.phone.message}
                   </p>
                 )}
@@ -212,7 +210,7 @@ const SignUp = () => {
                         parseInt(value) >= 18 || "Age must be at least 18",
                     },
                   }}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <input
                       className={
                         errors.age ? "border-red-500 dark:border-red-500" : ""
@@ -227,8 +225,7 @@ const SignUp = () => {
                 {errors.age && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.age.message}
                   </p>
                 )}
@@ -238,15 +235,14 @@ const SignUp = () => {
             <div className="mb-6">
               <label
                 htmlFor="gender"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Gender
               </label>
               <Controller
                 name="gender"
                 control={control}
-                rules={{ required: "Gender is required" }}
-                render={({ field }) => (
+                rules={{required: "Gender is required"}}
+                render={({field}) => (
                   <select
                     id="gender"
                     {...field}
@@ -254,8 +250,7 @@ const SignUp = () => {
                       errors.gender
                         ? "border-red-500 dark:border-red-500 focus:border-red-500 dark:focus:border-red-500"
                         : "border-secondary-300 focus:border-primary-500"
-                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
-                  >
+                    } bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}>
                     <option value="">Choose Your Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -266,8 +261,7 @@ const SignUp = () => {
               {errors.gender && (
                 <p
                   className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
+                  role="alert">
                   {errors.gender.message}
                 </p>
               )}
@@ -291,7 +285,7 @@ const SignUp = () => {
                           "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
                       },
                     }}
-                    render={({ field }) => (
+                    render={({field}) => (
                       <div>
                         <input
                           type={showPassword ? "text" : "password"}
@@ -317,8 +311,7 @@ const SignUp = () => {
                 {errors.password && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.password.message}
                   </p>
                 )}
@@ -335,7 +328,7 @@ const SignUp = () => {
                       validate: (value) =>
                         value === watch("password") || "Passwords do not match",
                     }}
-                    render={({ field }) => (
+                    render={({field}) => (
                       <div>
                         <input
                           type={showConfPassword ? "text" : "password"}
@@ -365,8 +358,7 @@ const SignUp = () => {
                 {errors.confirm_password && (
                   <p
                     className="text-sm text-red-500 dark:text-red-500"
-                    role="alert"
-                  >
+                    role="alert">
                     {errors.confirm_password.message}
                   </p>
                 )}
@@ -380,8 +372,7 @@ const SignUp = () => {
               Already have an account?{" "}
               <Link
                 to="/signin"
-                className="font-bold text-primary-600 dark:text-white hover:underline"
-              >
+                className="font-bold text-primary-600 dark:text-white hover:underline">
                 Sign In
               </Link>
             </p>

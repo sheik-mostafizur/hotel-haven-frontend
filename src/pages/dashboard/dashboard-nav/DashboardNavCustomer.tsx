@@ -1,4 +1,4 @@
-import { BsFillBox2HeartFill, BsFillCreditCard2BackFill } from "react-icons/bs";
+import { BsFillBox2HeartFill } from "react-icons/bs";
 import { MdBookmarkAdded } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 

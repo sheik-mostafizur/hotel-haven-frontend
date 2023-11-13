@@ -1,17 +1,18 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Button from "../../components/ui/button";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { login } from "../../redux/authSlice";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {login} from "../../redux/authSlice";
 import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
-import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
-import { auth } from "../../api";
-import { AuthType } from "../../types";
-import { BeatSpinner } from "../../components/spinner";
+import {useState} from "react";
+import {useAppDispatch} from "../../redux/hooks";
+import {auth} from "../../api";
+import {AuthType} from "../../types";
+import {BeatSpinner} from "../../components/spinner";
+import SetTitle from "../../components/set-title";
 
 const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
@@ -24,7 +25,7 @@ const SignIn: React.FC = () => {
     control,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: {errors},
   } = useForm<AuthType.Login>({
     mode: "all",
     defaultValues: {
@@ -43,7 +44,7 @@ const SignIn: React.FC = () => {
         password: data.password,
       });
       toastSuccess(result.message);
-      dispatch(login({ token: result.token, user: result.user }));
+      dispatch(login({token: result.token, user: result.user}));
       reset();
       navigate(location?.state?.from?.pathname || "/");
     } catch (error: any) {
@@ -55,6 +56,7 @@ const SignIn: React.FC = () => {
 
   return (
     <>
+      <SetTitle title={`SignIn Your Account`} />
       <header>
         <Navbar />
       </header>
@@ -76,7 +78,7 @@ const SignIn: React.FC = () => {
                 rules={{
                   required: "Email is required",
                 }}
-                render={({ field }) => (
+                render={({field}) => (
                   <input
                     className={
                       errors.email ? "border-red-500 dark:border-red-500" : ""
@@ -91,8 +93,7 @@ const SignIn: React.FC = () => {
               {errors.email && (
                 <p
                   className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
+                  role="alert">
                   {errors.email.message}
                 </p>
               )}
@@ -106,7 +107,7 @@ const SignIn: React.FC = () => {
                   rules={{
                     required: "Password is required",
                   }}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <div>
                       <input
                         type={showPassword ? "text" : "password"}
@@ -137,8 +138,7 @@ const SignIn: React.FC = () => {
               {errors.password && (
                 <p
                   className="text-sm text-red-500 dark:text-red-500"
-                  role="alert"
-                >
+                  role="alert">
                   {errors.password.message}
                 </p>
               )}
@@ -151,8 +151,7 @@ const SignIn: React.FC = () => {
               Create an account?{" "}
               <Link
                 to="/signup"
-                className="font-bold text-primary-600 dark:text-white hover:underline"
-              >
+                className="font-bold text-primary-600 dark:text-white hover:underline">
                 Sign Up
               </Link>
             </p>

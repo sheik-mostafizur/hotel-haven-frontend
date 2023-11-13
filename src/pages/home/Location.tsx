@@ -1,8 +1,8 @@
 import React from "react";
 import "./Location.css";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {setHotelFilter} from "../../redux/hotel-filter-slice";
-import {useAppDispatch} from "../../redux/hooks";
+import { useLocation, useNavigate } from "react-router-dom";
+import { setHotelFilter } from "../../redux/hotel-filter-slice";
+import { useAppDispatch } from "../../redux/hooks";
 interface Location {
   thumbnail: string;
   location: string;
@@ -10,13 +10,13 @@ interface Location {
   _id: string;
 }
 
-const Location: React.FC<Location> = ({thumbnail, location, totalHotel}) => {
+const Location: React.FC<Location> = ({ thumbnail, location, totalHotel }) => {
   const locationURL = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const hotelFilter = () => {
-    dispatch(setHotelFilter({location}));
+    dispatch(setHotelFilter({ location }));
     if (locationURL.pathname == "/") {
       navigate("/hotel");
     }
@@ -26,7 +26,8 @@ const Location: React.FC<Location> = ({thumbnail, location, totalHotel}) => {
     <div
       onClick={hotelFilter}
       id="card"
-      className="bg-white mx-auto rounded-lg dark:bg-secondary-700">
+      className="bg-white mx-auto rounded-lg dark:bg-secondary-700"
+    >
       <img
         id="className-img"
         className="w-full h-80 "

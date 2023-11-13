@@ -1,10 +1,10 @@
-import { FaBed, FaCheck, FaEye } from "react-icons/fa";
-import { GiResize } from "react-icons/gi";
+import {FaBed, FaCheck, FaEye} from "react-icons/fa";
+import {GiResize} from "react-icons/gi";
 import Button from "../../../components/ui/button";
-import { Link } from "react-router-dom";
-import { BeatSpinner } from "../../../components/spinner";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { Tooltip } from "react-tooltip";
+import {Link, useNavigate} from "react-router-dom";
+import {BeatSpinner} from "../../../components/spinner";
+import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
+import {Tooltip} from "react-tooltip";
 import {
   useDeleteWishlistByIdMutation,
   useGetWishlistQuery,
@@ -12,34 +12,38 @@ import {
 } from "../../../api/private-api";
 import toastSuccess from "../../../utils/toast-success";
 import toastError from "../../../utils/toast-error";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {FaRegMoneyBillAlt} from "react-icons/fa";
 
 // Import Swiper styles
 // import 'swiper/css';
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import {Autoplay, Pagination, Navigation} from "swiper/modules";
+import {useAppSelector} from "../../../redux/hooks";
 
 interface Room {
   room: any;
 }
 
-const CardRoom: React.FC<Room> = ({ room }) => {
-  const { data: wishlist } = useGetWishlistQuery(undefined);
-  const [postWishlist, { isLoading: postWishLoading }] =
+const CardRoom: React.FC<Room> = ({room}) => {
+  const navigate = useNavigate();
+  const hotelFilter = useAppSelector((state) => state.hotelFilter);
+
+  const {data: wishlist} = useGetWishlistQuery(undefined);
+  const [postWishlist, {isLoading: postWishLoading}] =
     usePostWishlistMutation();
-  const [deleteWishlistById, { isLoading: delWishLoading }] =
+  const [deleteWishlistById, {isLoading: delWishLoading}] =
     useDeleteWishlistByIdMutation();
 
   const handleWishlist = (_id: any) => {
-    postWishlist({ roomId: _id })
+    postWishlist({roomId: _id})
       .unwrap()
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({ data }) => {
-        const error = { message: data?.message };
+      .catch(({data}) => {
+        const error = {message: data?.message};
         toastError(error);
       });
   };
@@ -50,10 +54,17 @@ const CardRoom: React.FC<Room> = ({ room }) => {
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({ data }) => {
-        const error = { message: data?.message };
+      .catch(({data}) => {
+        const error = {message: data?.message};
         toastError(error);
       });
+  };
+
+  const handleReserve = () => {
+    if (!hotelFilter.checkIn || !hotelFilter.checkOut) {
+      return toastError({message: "Please select checkIn and checkOut"});
+    }
+    navigate(`/payment/${room._id}`);
   };
 
   return (
@@ -71,8 +82,7 @@ const CardRoom: React.FC<Room> = ({ room }) => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           <SwiperSlide>
             <img
               // style={{ width: "100%" }}
@@ -99,7 +109,7 @@ const CardRoom: React.FC<Room> = ({ room }) => {
           </SwiperSlide>
         </Swiper>
         <div className="p-4">
-          <h5 className="my-2 ">{room.title}</h5>
+          <h5 className="my-2 h-12">{room.title}</h5>
 
           <div className="py-1 ">
             <strong>Facilities:</strong>
@@ -118,7 +128,10 @@ const CardRoom: React.FC<Room> = ({ room }) => {
                 <span className="line-through">
                   {room?.roomInfo.regularPrice} BDT
                 </span>
-                <span> {room?.roomInfo.discountedPrice} BDT</span>
+                <span className="text-red-500">
+                  {" "}
+                  {room?.roomInfo.discountedPrice} BDT
+                </span>
               </li>
               <li></li>
               <li className="flex gap-2 items-center">
@@ -140,9 +153,8 @@ const CardRoom: React.FC<Room> = ({ room }) => {
             </ul>
           </div>
           <div className="flex items-center justify-between">
-            <Link to={`/payment/${room._id}`}>
-              <Button>Reserve Now</Button>
-            </Link>
+            <Button onClick={handleReserve}>Reserve Now</Button>
+
             {wishlist?.some((item: any) => item.roomId === room._id) ? (
               <>
                 {delWishLoading ? (

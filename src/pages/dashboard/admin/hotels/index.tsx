@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
 import {useGetHotelsAdminQuery} from "../../../../api/admin-api";
+import SetTitle from "../../../../components/set-title";
 
 const Hotels: React.FC = () => {
   const {data: hotels, isLoading} = useGetHotelsAdminQuery(undefined);
@@ -22,6 +23,7 @@ const Hotels: React.FC = () => {
 
   return (
     <>
+      <SetTitle title={`Hotels | Dashboard`} />
       <div className="pb-4">
         <h2 className="text-center">Our Hotels</h2>
       </div>

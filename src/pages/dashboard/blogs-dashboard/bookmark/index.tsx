@@ -1,11 +1,14 @@
-import { useGetBlogBookmarkQuery } from "../../../../api/private-api";
+import {Link} from "react-router-dom";
+import {useGetBlogBookmarkQuery} from "../../../../api/private-api";
 import Button from "../../../../components/ui/button";
+import SetTitle from "../../../../components/set-title";
 
 const Bookmark = () => {
-  const { data, isLoading } = useGetBlogBookmarkQuery(undefined);
-  console.log(data);
+  const {data} = useGetBlogBookmarkQuery(undefined);
+
   return (
     <div>
+      <SetTitle title={`Bookmark Blogs | Dashboard`} />
       <h1>Bookmark</h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -32,7 +35,9 @@ const Bookmark = () => {
               </td>
               <td className="px-6 py-4">{item.blogTitle}</td>
               <td>
-                <Button>Read</Button>
+                <Link to={`/blogs/${item.blogId}`}>
+                  <Button>Read</Button>
+                </Link>
               </td>
             </tr>
           ))}

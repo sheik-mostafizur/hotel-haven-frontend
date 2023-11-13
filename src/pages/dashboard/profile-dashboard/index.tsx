@@ -1,38 +1,59 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useAppSelector } from "../../../redux/hooks";
-import { useUpdateProfileMutation } from "../../../api/private-api";
-// import { useState } from "react";
-// import Button from "../../../components/ui/button";
+import {Controller, SubmitHandler, useForm} from "react-hook-form";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../../api/private-api";
+import {BeatSpinner, HashSpinner} from "../../../components/spinner";
+import Button from "../../../components/ui/button";
+import toastError from "../../../utils/toast-error";
+import toastSuccess from "../../../utils/toast-success";
+import SetTitle from "../../../components/set-title";
+
 interface IFormInputs {
   name: string;
   email: string;
   phone: string;
   photoURL: string;
-  currentPassword: string;
+  oldPassword: string;
   newPassword: string;
-  confirmNewPassword: string;
+  confirmPassword: string;
 }
 const ProfileDashboard = () => {
-  const user = useAppSelector((state) => state.auth.user);
-  const [updateProfile] = useUpdateProfileMutation();
-  // const [confirm, setConfirm] = useState("");
+  const {data: user, isLoading} = useGetProfileQuery(undefined);
 
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({});
+  const [updateProfile, {isLoading: updateIsLoading}] =
+    useUpdateProfileMutation();
+
+  const {
+    handleSubmit,
+    control,
+    watch,
+    formState: {errors},
+  } = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
-    // if (data.NewPassword !== data.ConfirmNewPassword) {
-    //   setConfirm("password not match");
-    //   return;
-    // } else {
-    //   setConfirm("");
-    // }
-    updateProfile(data);
-    // console.log(data);
-    // reset();
+    const updatedData: any = {};
+    for (const [key, value] of Object.entries(data)) {
+      if (value !== undefined) {
+        updatedData[key] = value;
+      }
+    }
+    updateProfile(updatedData)
+      .unwrap()
+      .then((data) => {
+        toastSuccess(data.message);
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
   };
+
+  if (isLoading) return <HashSpinner />;
 
   return (
     <div>
+      <SetTitle title="Update Your Profile" />
       <h2 className="text-center">User info</h2>
       <div>
         <div>
@@ -49,28 +70,16 @@ const ProfileDashboard = () => {
               name="name"
               control={control}
               defaultValue={user?.name}
-              rules={{ required: true }}
-              render={({ field }) => <input {...field} />}
+              render={({field}) => <input {...field} />}
             />
           </div>
           <div className="my-2">
-            <label htmlFor="email">Email:</label>
-            <Controller
-              name="email"
-              control={control}
-              defaultValue={user?.email}
-              rules={{ required: true }}
-              render={({ field }) => <input type="email" {...field} />}
-            />
-          </div>
-          <div className="my-2">
-            <label htmlFor="phone">Mobile:</label>
+            <label htmlFor="phone">Phone:</label>
             <Controller
               name="phone"
               control={control}
               defaultValue={user?.phone}
-              rules={{ required: true }}
-              render={({ field }) => <input type="number" {...field} />}
+              render={({field}) => <input type="number" {...field} />}
             />
           </div>
           <div className="my-2">
@@ -79,17 +88,15 @@ const ProfileDashboard = () => {
               name="photoURL"
               control={control}
               defaultValue={user?.photoURL}
-              rules={{ required: true }}
-              render={({ field }) => <input type="url" {...field} />}
+              render={({field}) => <input type="url" {...field} />}
             />
           </div>
           <div className="my-2">
-            <label htmlFor="currentPassword">Current password:</label>
+            <label htmlFor="oldPassword">Current password:</label>
             <Controller
-              name="currentPassword"
+              name="oldPassword"
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => <input type="password" {...field} />}
+              render={({field}) => <input type="password" {...field} />}
             />
           </div>
           <div className="my-2">
@@ -97,23 +104,53 @@ const ProfileDashboard = () => {
             <Controller
               name="newPassword"
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => <input type="password" {...field} />}
+              rules={{
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).+$/,
+                  message:
+                    "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.",
+                },
+              }}
+              render={({field}) => <input type="password" {...field} />}
             />
+            {errors.newPassword && (
+              <p
+                className="text-sm text-red-500 dark:text-red-500"
+                role="alert">
+                {errors.newPassword.message}
+              </p>
+            )}
           </div>
           <div className="my-2">
-            <label htmlFor="confirmNewPassword">Confirm new password</label>
-            {/* <p className="text-red-500">
-              <small>{confirm}</small>
-            </p> */}
+            <label htmlFor="confirmPassword">Confirm password</label>
             <Controller
-              name="confirmNewPassword"
+              name="confirmPassword"
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => <input type="password" {...field} />}
+              rules={{
+                validate: (value: string) =>
+                  value === watch("newPassword") || "Passwords do not match",
+              }}
+              render={({field}) => <input type="password" {...field} />}
             />
+            {errors.confirmPassword && (
+              <p
+                className="text-sm text-red-500 dark:text-red-500"
+                role="alert">
+                {errors.confirmPassword.message}
+              </p>
+            )}
           </div>
-          <input type="submit" className="bg-primary-400" value="Change" />
+
+          <Button
+            type="submit"
+            isDisabled={updateIsLoading}
+            className="block mx-auto min-w-[250px]">
+            {updateIsLoading ? <BeatSpinner /> : "Change Profile"}
+          </Button>
         </form>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {BiSolidOffer} from "react-icons/bi";
 import {HiInformationCircle} from "react-icons/hi2";
 import Button from "../../../../components/ui/button";
 import {useGetHotelsByIdAdminQuery} from "../../../../api/admin-api";
+import SetTitle from "../../../../components/set-title";
 
 const HotelDetails = () => {
   const {_id} = useParams();
@@ -17,6 +18,9 @@ const HotelDetails = () => {
 
   return (
     <>
+      <SetTitle
+        title={`${hotelDetails?.hotel.name || "Hotel Details"} | Dashboard`}
+      />
       {isLoading ? (
         <HashSpinner />
       ) : hotelDetails ? (

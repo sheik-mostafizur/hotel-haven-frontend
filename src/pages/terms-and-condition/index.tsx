@@ -3,10 +3,12 @@
 import React from "react";
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
+import SetTitle from "../../components/set-title";
 
 const TermsAndConditions: React.FC = () => {
   return (
     <Main>
+      <SetTitle title={`Terms And Conditions`} />
       <Container>
         <div className="my-10">
           <h1 className="my-2">Terms and Conditions</h1>

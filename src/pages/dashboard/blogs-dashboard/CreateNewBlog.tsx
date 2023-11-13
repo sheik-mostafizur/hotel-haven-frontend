@@ -18,7 +18,7 @@ interface IFormInputs {
 
 const CreateBlog = () => {
   const [postBlogs, {isLoading}] = usePostUserBlogMutation();
-  const {handleSubmit, control, reset} = useForm<IFormInputs>({});
+  const {handleSubmit, control} = useForm<IFormInputs>({});
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => {
     postBlogs(data)
