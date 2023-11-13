@@ -4,6 +4,8 @@ import { Autoplay } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import Modal from "../../../../components/ui/modal";
 import Button from "../../../../components/ui/button";
 interface HotelRoomCardProps {
   title: string;
@@ -36,6 +38,34 @@ interface HotelRoomCardProps {
   };
 }
 
+interface IFormInputs {
+  _id: string;
+  title: string;
+  thumbnails: {
+    [0]: string;
+    [1]: string;
+    [2]: string;
+  };
+  facilities: {
+    [0]: string;
+    [1]: string;
+    [2]: string;
+    [3]: string;
+  };
+  capacity: {
+    children: number;
+    adult: number;
+  };
+  roomInfo: {
+    bedType: string;
+    view: number;
+    roomSize: string;
+    regularPrice: number;
+    discountedPrice: number;
+    additionalInfo: string;
+  };
+}
+
 const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
   title,
   thumbnails,
@@ -43,6 +73,15 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
   capacity,
   roomInfo,
 }) => {
+  const { handleSubmit, control } = useForm<IFormInputs>({});
+  const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
+    data.facilities = data.facilities.filter((facilitie: any) =>
+      Boolean(facilitie)
+    );
+    data.thumbnails = data.thumbnails.filter((thumbnail: any) =>
+      Boolean(thumbnail)
+    );
+  };
   return (
     <div className="bg-white rounded-lg grid grid-cols-1 lg:grid-cols-2 gap-5 lg:p-4  shadow-md border mt-5 p-2">
       <div className="relative  w-full ">
@@ -62,7 +101,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
           ))}
         </Swiper>
       </div>
-      <div className="p-4   grid grid-cols-1 lg:grid-cols-2 gap-5   w-full">
+      <div className="p-4   grid grid-cols-1 gap-5   w-full">
         <div className="w-full">
           <h2 className="text-2xl font-bold mb-2">{title}</h2>
           <h3 className="text-lg font-semibold w-[25%] mb-2 border-b border-primary-500">
@@ -103,8 +142,164 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
           </div>
         </div>
         <div className="flex gap-5 items-center justify-center">
-          <Button className="h-12 w-32">Edit</Button>
-          <Button className="h-12 w-32">Delete</Button>
+          <Modal
+            title={"Edit Room"}
+            button={{ label: "Edit Room", className: "block ml-auto px-4" }}
+          >
+            <div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="title">Title</label>
+                <Controller
+                  name="title"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => <input {...field} />}
+                />
+                <div className="grid md:grid-cols-1 lg:grid-cols-3 py-2 gap-4">
+                  <div>
+                    <label htmlFor="thumbnails[0]">Thumbnails 1</label>
+                    <Controller
+                      name="thumbnails[0]"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} type="url" />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="thumbnails[1]">Thumbnails 2</label>
+                    <Controller
+                      name="thumbnails[1]"
+                      control={control}
+                      render={({ field }) => <input {...field} type="url" />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="thumbnails[2]">Thumbnails 3</label>
+                    <Controller
+                      name="thumbnails[2]"
+                      control={control}
+                      render={({ field }) => <input {...field} type="url" />}
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-1 lg:grid-cols-4 py-2 gap-4">
+                  <div>
+                    <label htmlFor="facilities[0]">Facilities 1</label>
+                    <Controller
+                      name="facilities[0]"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="facilities[1]">Facilities 2</label>
+                    <Controller
+                      name="facilities[1]"
+                      control={control}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="facilities[2]">Facilities 3</label>
+                    <Controller
+                      name="facilities[2]"
+                      control={control}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="facilities[3]">Facilities 4</label>
+                    <Controller
+                      name="facilities[3]"
+                      control={control}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+                  <div>
+                    <label htmlFor="adult">Adult</label>
+                    <Controller
+                      name="capacity.adult"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} type="number" />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="child">Children</label>
+                    <Controller
+                      name="capacity.children"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} type="number" />}
+                    />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+                  <div>
+                    <label htmlFor="roomSize">Room Size</label>
+                    <Controller
+                      name="roomInfo.roomSize"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="regularPrice">Regular Price</label>
+                    <Controller
+                      name="roomInfo.regularPrice"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="discountPrice">Discount price</label>
+                    <Controller
+                      name="roomInfo.discountedPrice"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="view">View</label>
+                    <Controller
+                      name="roomInfo.view"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} type="text" />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="bedType">Bed type</label>
+                    <Controller
+                      name="roomInfo.bedType"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="additionalInfo">additional info</label>
+                    <Controller
+                      name="roomInfo.additionalInfo"
+                      control={control}
+                      rules={{ required: true }}
+                      render={({ field }) => <input {...field} />}
+                    />
+                  </div>
+                </div>
+                <Button type="submit" className="w-full mt-3">
+                  Save
+                </Button>
+              </form>
+              <br />
+            </div>
+          </Modal>
         </div>
       </div>
     </div>
