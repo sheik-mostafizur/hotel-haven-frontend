@@ -37,7 +37,6 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
         const error = { message };
         toastError(error);
       });
-    console.log(data);
   };
 
   const [locations, setLocations] = useState([]);

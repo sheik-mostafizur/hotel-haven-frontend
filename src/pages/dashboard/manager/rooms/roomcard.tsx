@@ -7,6 +7,9 @@ import "swiper/css/pagination";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import Modal from "../../../../components/ui/modal";
 import Button from "../../../../components/ui/button";
+import { useUpdateManagerRoomMutation } from "../../../../api/manager-api";
+import toastSuccess from "../../../../utils/toast-success";
+import toastError from "../../../../utils/toast-error";
 interface HotelRoomCardProps {
   title: string;
   thumbnails: [];
@@ -68,19 +71,25 @@ interface IFormInputs {
 
 const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
   title,
+  _id,
   thumbnails,
   facilities,
   capacity,
   roomInfo,
 }) => {
+  const [updateManagerRoom] = useUpdateManagerRoomMutation();
   const { handleSubmit, control } = useForm<IFormInputs>({});
+  console.log(_id);
   const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
-    data.facilities = data.facilities.filter((facilitie: any) =>
-      Boolean(facilitie)
-    );
-    data.thumbnails = data.thumbnails.filter((thumbnail: any) =>
-      Boolean(thumbnail)
-    );
+    updateManagerRoom({ data, _id })
+      .unwrap()
+      .then(({ message }) => {
+        toastSuccess(message);
+      })
+      .catch(({ data: { message } }) => {
+        const error = { message };
+        toastError(error);
+      });
   };
   return (
     <div className="bg-white rounded-lg grid grid-cols-1 lg:grid-cols-2 gap-5 lg:p-4  shadow-md border mt-5 p-2">
