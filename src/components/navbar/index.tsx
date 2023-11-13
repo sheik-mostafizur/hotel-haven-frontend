@@ -27,10 +27,10 @@ const Navbar = () => {
         <Link to="/" className="flex items-center">
           <img
             src="/images/logo-transparent.png"
-            className="h-16 bg-cover"
+            className="h-12 md:h-16 bg-cover"
             alt="Hotel Haven Logo"
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white">
             HotelHaven
           </span>
         </Link>
