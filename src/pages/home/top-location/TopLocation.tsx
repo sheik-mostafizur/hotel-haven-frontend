@@ -2,8 +2,7 @@ import Container from "../../../components/ui/container";
 import React from "react";
 import Location from "./Location";
 import { useGetTopLocationsQuery } from "../../../api/public-api";
-import { HashSpinner } from "../../../components/spinner";
-import LocationSkeleton from "./locationSkeleton";
+import LocationSkeleton from "./LocationSkeleton";
 
 interface TopLocationTypes {
   thumbnail: string;
