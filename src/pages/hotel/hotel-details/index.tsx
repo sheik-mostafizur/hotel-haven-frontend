@@ -171,14 +171,13 @@ const HotelDetails: React.FC = () => {
 
                 <div className="my-8 mx-auto">
                   <h3 className="text-center">Choose your room</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-lg">
                     <div>
                       <label htmlFor="checkIn">Check In Date</label>
                       <input
                         id="checkIn"
                         defaultValue={hotelFilter.checkIn}
                         type="date"
-                        className="w-full"
                         min={minDate}
                         onChange={(e) =>
                           dispatch(
