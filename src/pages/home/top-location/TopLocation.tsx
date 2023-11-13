@@ -3,6 +3,7 @@ import React from "react";
 import Location from "./Location";
 import { useGetTopLocationsQuery } from "../../../api/public-api";
 import { HashSpinner } from "../../../components/spinner";
+import LocationSkeleton from "./locationSkeleton";
 
 interface TopLocationTypes {
   thumbnail: string;
@@ -27,7 +28,7 @@ const TopLocation: React.FC = () => {
         </p>
       </div>
       {isLoading ? (
-        <HashSpinner />
+        <LocationSkeleton />
       ) : (
         <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3 mx-auto">
           {topLocation.slice(0, 6).map((l: any) => (
