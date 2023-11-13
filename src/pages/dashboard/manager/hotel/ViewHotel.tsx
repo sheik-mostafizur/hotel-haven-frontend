@@ -1,13 +1,47 @@
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Button from "../../../../components/ui/button";
+import Modal from "../../../../components/ui/modal";
 import STATUS from "../../../../constants/STATUS";
 import { HotelType } from "../../../../types";
+import { useEffect, useState } from "react";
+import toastError from "../../../../utils/toast-error";
 
 type ViewHotelProps = {
   hotel: HotelType.Hotel;
 };
-
+interface IFormInputs {
+  name: string;
+  photoURL: string;
+  address: {
+    thumbnailURL: string;
+    location: string;
+    map: { lat: string; lng: string };
+  };
+  availableRoom: number;
+  description: string;
+}
 const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
   const { name, photoURL, address, availableRoom, description, status } = hotel;
+  const { handleSubmit, control } = useForm<IFormInputs>({});
+
+  const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
+    console.log(data);
+  };
+
+  const [locations, setLocations] = useState([]);
+
+  useEffect(() => {
+    fetch("/db/all-district.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setLocations(data);
+        // console.log(data);
+      })
+      .catch((error) => {
+        toastError(error);
+      });
+  }, []);
+
   return (
     <div>
       <h2 className="text-center">Hotel</h2>
@@ -42,17 +76,121 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
               Description: {description}
             </p>
             <div className="lg:flex gap-2">
-              <Button
-                className={`${
-                  hotel.status === STATUS.PENDING
-                    ? "bg-orange-400"
-                    : hotel.status === STATUS.REJECTED
-                    ? "bg-red-500"
-                    : ""
-                }`}
+              <Modal
+                title="Edit your hotel"
+                button={{ label: "Edit hotel", className: "block ml-auto" }}
+                // className={`${
+                //   hotel.status === STATUS.PENDING
+                //     ? "bg-orange-400"
+                //     : hotel.status === STATUS.REJECTED
+                //     ? "bg-red-500"
+                //     : ""
+                // }`}
               >
-                Edit hotel
-              </Button>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <label htmlFor="name">Hotel Name</label>
+                  <Controller
+                    name="name"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => <input {...field} />}
+                  />
+                  <div className="grid w-full md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+                    <div>
+                      <label htmlFor="photoURL">Photo URL</label>
+                      <Controller
+                        name="photoURL"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <input {...field} />}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="availableRoom">Available room</label>
+                      <Controller
+                        name="availableRoom"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <input {...field} />}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+                    <div>
+                      <label htmlFor="locationName">Location Name</label>
+                      <Controller
+                        name="address.location"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                          <select
+                            {...field}
+                            className="bg-secondary-50 border text-secondary-900 text-sm rounded-lg focus:ring-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                          >
+                            <option value="" disabled>
+                              Select a location
+                            </option>
+                            {locations.map((location: any) => (
+                              <option key={location.id} value={location?.name}>
+                                {location?.name}
+                              </option>
+                            ))}
+                          </select>
+                        )}
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="locationThumbnailURL">
+                        Location ThumbnailURL
+                      </label>
+                      <Controller
+                        name="address.thumbnailURL"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <input {...field} />}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-1 lg:grid-cols-2 py-2 gap-4">
+                    <div>
+                      <label htmlFor="Latitude">Latitude</label>
+                      <Controller
+                        name="address.map.lat"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <input {...field} />}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="Longitude">Longitude</label>
+                      <Controller
+                        name="address.map.lng"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field }) => <input {...field} />}
+                      />
+                    </div>
+                  </div>
+                  <label htmlFor="description">Description</label>
+                  <Controller
+                    name="description"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <textarea
+                        {...field}
+                        className="border-2 rounded-2xl w-full p-2"
+                        rows={5}
+                        cols={120}
+                      />
+                    )}
+                  />
+                  <Button type="submit" className="w-full mt-3">
+                    Save
+                  </Button>
+                </form>
+              </Modal>
               {/* <Link to={_id}>
                 <Button>Details</Button>
               </Link> */}
