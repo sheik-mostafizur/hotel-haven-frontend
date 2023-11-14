@@ -40,27 +40,29 @@ const Payment: React.FC = () => {
   // const { address } = data?.hotel;
   // console.log(data?.room?.roomInfo?.discountedPrice);
 
-  // const token = ''
-  const handelPayment = () => {
-    fetch("http://localhost:3000/payment/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQGdtYWlsLmNvbSIsImdlbmRlciI6Ik1BTEUiLCJhZ2UiOjIxLCJpYXQiOjE2OTk4MzY1NDJ9.luGYQo6haAbRIbrvf8L7spcCGDXCSpMsLcmah6QRBXY`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((results) => {
-        window.location.replace(results.url);
-        console.log(results);
-      });
-  };
-
   const amount = 1222;
 
   const handlePayment = async () => {
-    const data = {};
+    const data = [
+      {
+        email: "example1@example.com",
+        phoneNumber: "123456781010",
+        roomId: "617df0e86cbe590015d6d91d",
+        checkIn: new Date("2023-11-15"),
+        checkOut: new Date("2023-11-20"),
+        adult: 2,
+        children: 1,
+      },
+      {
+        email: "example2@example.com",
+        phoneNumber: "123456781010",
+        roomId: "617df0e86cbe590015d6d91e",
+        checkIn: new Date("2023-12-01"),
+        checkOut: new Date("2023-12-05"),
+        adult: 3,
+        children: 2,
+      },
+    ];
 
     const res = await fetch("http://localhost:3000/payment/order", {
       method: "POST",
@@ -70,7 +72,6 @@ const Payment: React.FC = () => {
       },
       body: JSON.stringify(data),
     });
-
     const url = await res.json();
     window.location.href = url;
   };
