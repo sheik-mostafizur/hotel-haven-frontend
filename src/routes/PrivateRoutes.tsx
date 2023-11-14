@@ -24,6 +24,7 @@ const routes = [
     path: "/payment/:_id",
     element: <Payment />,
   },
+  
   {
     path: "/blogs/:_id",
     element: <SingleBlog />,
