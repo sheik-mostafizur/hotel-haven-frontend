@@ -15,10 +15,6 @@ import HotelDetails from "../pages/hotel/hotel-details";
 import PrivacyPolicy from "../pages/privacy-policy";
 import License from "../pages/license";
 import TermsAndConditions from "../pages/terms-and-condition";
-import Suceess from "../pages/payment/utitlies/Suceess";
-import Failed from "../pages/payment/utitlies/Failed";
-import Cancelpage from "../pages/payment/utitlies/Cancelpage";
-
 
 const router = createBrowserRouter([
   {
@@ -69,18 +65,6 @@ const router = createBrowserRouter([
   {
     path: "/termsAndConditions",
     element: <TermsAndConditions />,
-  },
-  {
-    path: "/success",
-    element: <Suceess />,
-  },
-  {
-    path: "/fail",
-    element: <Failed />,
-  },
-  {
-    path: "/cancel",
-    element: <Cancelpage />,
   },
   ...AdminRoutes,
   ...ManagerRoutes,

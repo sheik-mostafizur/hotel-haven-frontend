@@ -39,37 +39,46 @@ const Payment: React.FC = () => {
 
   // const { address } = data?.hotel;
   // console.log(data?.room?.roomInfo?.discountedPrice);
-  const {handleSubmit, control} = useForm<IFormInputs>({});
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
-// const token = ''
+
+  // const token = ''
   const handelPayment = () => {
-    fetch('http://localhost:3000/payment/order',{
-      method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQGdtYWlsLmNvbSIsImdlbmRlciI6Ik1BTEUiLCJhZ2UiOjIxLCJpYXQiOjE2OTk4MzY1NDJ9.luGYQo6haAbRIbrvf8L7spcCGDXCSpMsLcmah6QRBXY`
-  },
-  body: JSON.stringify(data)
+    fetch("http://localhost:3000/payment/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQGdtYWlsLmNvbSIsImdlbmRlciI6Ik1BTEUiLCJhZ2UiOjIxLCJpYXQiOjE2OTk4MzY1NDJ9.luGYQo6haAbRIbrvf8L7spcCGDXCSpMsLcmah6QRBXY`,
+      },
+      body: JSON.stringify(data),
     })
-    .then(res=>res.json())
-    .then(results=> 
-     {
-      window.location.replace(results.url)
-      console.log(results)
-     }
-      )
-    
+      .then((res) => res.json())
+      .then((results) => {
+        window.location.replace(results.url);
+        console.log(results);
+      });
   };
 
   const amount = 1222;
+
+  const handlePayment = async () => {
+    const data = {};
+
+    const res = await fetch("http://localhost:3000/payment/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    const url = await res.json();
+    window.location.href = url;
+  };
 
   return (
     <Main>
       <SetTitle title={`Pay now`} />
       <Container className="px-8">
-        <div className="w-full">
-          <h3 className="">{data?.room?.title}</h3>
-        </div>
         <div className="flex flex-col-reverse lg:flex-row justify-center py-2 items-start gap-4 mx-auto">
           <div className="w-full">
             {/* <div className=" p-6 flex items-center gap-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 ">
@@ -95,75 +104,44 @@ const Payment: React.FC = () => {
                   guest has more than one last name, please enter them all.
                 </small>
               </p>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="fullName">Name</label>
-                <Controller
-                  name="fullName"
-                  control={control}
-                  rules={{required: true}}
-                  render={({field}) => (
-                    <input {...field} value={`${user.name}`} />
-                  )}
-                />
-                <br />
-                <label htmlFor="Email">Email</label>
-                <small>Your confirmation email goes here</small>
-                <Controller
-                  name="Email"
-                  control={control}
-                  rules={{required: true}}
-                  render={({field}) => (
-                    <input {...field} value={`${user.email}`} />
-                  )}
-                />
-                <br />
-                <label htmlFor="mobile">Mobile</label>
-                <small className="">
-                  We’ll only contact you in an emergency
-                </small>
-                <Controller
-                  name="mobile"
-                  control={control}
-                  rules={{required: true}}
-                  render={({field}) => (
-                    <input {...field} value={`${user.phone}`} />
-                  )}
-                />
-                <label htmlFor="amount">Mobile</label>
-
-                <Controller
-                  name="mobile"
-                  control={control}
-                  rules={{required: true}}
-                  render={({field}) => (
-                    <input {...field} value={amount} type="number" />
-                  )}
-                />
-              </form>
-            </div>
-            {/* step 2 Payment Details*/}
-            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                  <FaLock></FaLock>
-                  <h5 className="">Step 2: Payment details</h5>
+              <div>
+                <div>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    defaultValue={user.name}
+                    disabled
+                  />
                 </div>
-                <p>Your booking is safe and secure</p>
+                <div>
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    id="email"
+                    defaultValue={user.email}
+                    disabled
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone">Phone</label>
+                  <input
+                    type="text"
+                    id="phone"
+                    defaultValue={user.phone}
+                    disabled
+                  />
+                </div>
               </div>
-              <hr className="mt-1 border" />
-              <p className="py-4 flex items-center gap-4 ">
-                <FaCheckCircle></FaCheckCircle> We never charge any card fees
-              </p>
-              <Button onClick={handelPayment}>Pay Now</Button>
             </div>
-            {/* step 3 details */}
+            {/* step 2 details */}
             <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4">
                   <p>
                     <FaBed></FaBed>
                   </p>
-                  <h5 className="">Step 3: Property details</h5>
+                  <h5 className="">Step 2: Property details</h5>
                 </div>
               </div>
               <hr className="mt-1 border" />
@@ -204,7 +182,25 @@ const Payment: React.FC = () => {
                   ))}
               </ul>
             </div>
+            {/* step 3 Payment Details*/}
+            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-2">
+                  <FaLock></FaLock>
+                  <h5 className="">Step 3: Payment details</h5>
+                </div>
+                <p>Your booking is safe and secure</p>
+              </div>
+              <hr className="mt-1 border" />
+              <p className="py-4 flex items-center gap-4 ">
+                <FaCheckCircle></FaCheckCircle> We never charge any card fees
+              </p>
+              <Button size="xl" className="w-52" onClick={handlePayment}>
+                Pay Now
+              </Button>
+            </div>
           </div>
+
           {/* Room Details */}
           <div className="max-w-sm h-full mb-4 lg:sticky lg:top-0 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div>

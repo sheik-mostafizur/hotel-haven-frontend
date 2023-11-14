@@ -1,7 +1,7 @@
 import SetTitle from "../../components/set-title";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
-import {useSignin, useSuccess} from "../../hooks";
+import {useSignin, useSuccess, useWarning} from "../../hooks";
 
 const Playground: React.FC = () => {
   return (
@@ -13,7 +13,19 @@ const Playground: React.FC = () => {
         onClick={async () => {
           useSignin();
         }}>
-        Click
+        useSignin
+      </Button>
+      <Button
+        onClick={async () => {
+          useSuccess();
+        }}>
+        useSuccess
+      </Button>
+      <Button
+        onClick={async () => {
+          useWarning();
+        }}>
+        useWarning
       </Button>
     </Container>
   );

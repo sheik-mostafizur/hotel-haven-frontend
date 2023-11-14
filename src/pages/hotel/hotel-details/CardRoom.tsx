@@ -21,6 +21,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {Autoplay, Pagination, Navigation} from "swiper/modules";
 import {useAppSelector} from "../../../redux/hooks";
+import {useWarning} from "../../../hooks";
 
 interface Room {
   room: any;
@@ -62,7 +63,7 @@ const CardRoom: React.FC<Room> = ({room}) => {
 
   const handleReserve = () => {
     if (!hotelFilter.checkIn || !hotelFilter.checkOut) {
-      return toastError({message: "Please select checkIn and checkOut"});
+      return useWarning({title: "Please select checkIn and checkOut!"});
     }
     navigate(`/payment/${room._id}`);
   };
