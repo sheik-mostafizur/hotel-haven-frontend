@@ -1,10 +1,10 @@
-import {FaBed, FaCheck, FaChild, FaEye, FaPeopleArrows} from "react-icons/fa";
-import {GiResize} from "react-icons/gi";
+import { FaBed, FaCheck, FaChild, FaEye, FaPeopleArrows } from "react-icons/fa";
+import { GiResize } from "react-icons/gi";
 import Button from "../../../components/ui/button";
-import {Link, useNavigate} from "react-router-dom";
-import {BeatSpinner} from "../../../components/spinner";
-import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
-import {Tooltip} from "react-tooltip";
+import { Link, useNavigate } from "react-router-dom";
+import { BeatSpinner } from "../../../components/spinner";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { Tooltip } from "react-tooltip";
 import {
   useDeleteWishlistByIdMutation,
   useGetWishlistQuery,
@@ -12,39 +12,39 @@ import {
 } from "../../../api/private-api";
 import toastSuccess from "../../../utils/toast-success";
 import toastError from "../../../utils/toast-error";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {FaRegMoneyBillAlt} from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 
 // Import Swiper styles
 // import 'swiper/css';
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import {Autoplay, Pagination, Navigation} from "swiper/modules";
-import {useAppSelector} from "../../../redux/hooks";
-import {useWarning} from "../../../hooks";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { useAppSelector } from "../../../redux/hooks";
+import { useWarning } from "../../../hooks";
 
 interface Room {
   room: any;
 }
 
-const CardRoom: React.FC<Room> = ({room}) => {
+const CardRoom: React.FC<Room> = ({ room }) => {
   const navigate = useNavigate();
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
 
-  const {data: wishlist} = useGetWishlistQuery(undefined);
-  const [postWishlist, {isLoading: postWishLoading}] =
+  const { data: wishlist } = useGetWishlistQuery(undefined);
+  const [postWishlist, { isLoading: postWishLoading }] =
     usePostWishlistMutation();
-  const [deleteWishlistById, {isLoading: delWishLoading}] =
+  const [deleteWishlistById, { isLoading: delWishLoading }] =
     useDeleteWishlistByIdMutation();
 
   const handleWishlist = (_id: any) => {
-    postWishlist({roomId: _id})
+    postWishlist({ roomId: _id })
       .unwrap()
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
@@ -55,17 +55,17 @@ const CardRoom: React.FC<Room> = ({room}) => {
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
 
   const handleReserve = () => {
     if (!hotelFilter.checkIn || !hotelFilter.checkOut) {
-      return useWarning({title: "Please select checkIn and checkOut!"});
+      return useWarning({ title: "Please select checkIn and checkOut!" });
     }
-    navigate(`/payment/${room._id}`);
+    navigate(`/payment`);
   };
 
   return (
@@ -83,7 +83,8 @@ const CardRoom: React.FC<Room> = ({room}) => {
           }}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper">
+          className="mySwiper"
+        >
           <SwiperSlide>
             <img
               // style={{ width: "100%" }}

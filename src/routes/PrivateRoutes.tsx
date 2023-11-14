@@ -3,7 +3,7 @@ import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
-import {Wishlist} from "../pages/dashboard/customer";
+import { Wishlist } from "../pages/dashboard/customer";
 import Profile from "../pages/profile";
 import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
 import HomeDashboard from "../pages/dashboard/home-dashboard";
@@ -24,7 +24,7 @@ const routes = [
     element: <Profile />,
   },
   {
-    path: "/payment/:_id",
+    path: "/payment",
     element: <Payment />,
   },
   {

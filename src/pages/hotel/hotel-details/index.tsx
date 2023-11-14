@@ -171,7 +171,7 @@ const HotelDetails: React.FC = () => {
 
                 <div className="my-8 mx-auto">
                   <h3 className="text-center">Choose your room</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-lg">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-6 max-w-screen-lg">
                     <div>
                       <label htmlFor="checkIn">Check In Date</label>
                       <input
@@ -204,6 +204,14 @@ const HotelDetails: React.FC = () => {
                           )
                         }
                       />
+                    </div>
+                    <div className="">
+                      <label htmlFor="adult">Adult</label>
+                      <input id="adult" type="number" min="1" max="6" />
+                    </div>
+                    <div className="">
+                      <label htmlFor="child">Child</label>
+                      <input id="child" type="number" min="0" max="6" />
                     </div>
                   </div>
                 </div>

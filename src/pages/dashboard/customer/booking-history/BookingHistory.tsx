@@ -1,4 +1,5 @@
 import SetTitle from "../../../../components/set-title";
+import Button from "../../../../components/ui/button";
 import Container from "../../../../components/ui/container";
 
 const BookingHistory = () => {
@@ -20,6 +21,9 @@ const BookingHistory = () => {
                 Room
               </th>
               <th scope="col" className="px-6 py-3">
+                Transaction
+              </th>
+              <th scope="col" className="px-6 py-3">
                 Payment History
               </th>
             </tr>
@@ -28,12 +32,17 @@ const BookingHistory = () => {
             <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></th>
-              <td className="px-6 py-4"></td>
-              <td className="px-6 py-4"></td>
-              <td className="px-6 py-4">
-                {/* <Button size="sm">View</Button> */}
-              </td>
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                Image
+              </th>
+              <td className="px-6 py-4">Demo Hotel</td>
+              <td className="px-6 py-4">Demo Room</td>
+              <td className="px-6 py-4">Demo Room</td>
+              <td className="px-6 py-4">Demo Room</td>
+              {/* <td className="px-6 py-4">
+                <Button size="sm">View Payment Details</Button>
+              </td> */}
             </tr>
           </tbody>
         </table>
