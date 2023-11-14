@@ -7,6 +7,7 @@ import Pagination from "../../components/pagination";
 import SetTitle from "../../components/set-title";
 import {setHotelFilter} from "../../redux/hotel-filter-slice";
 import {HotelCard, HotelCardSkeleton} from "../../components/ui/card";
+import formatDateToYYYYMMDD from "../../utils/format-date-to-YYYYMMDD";
 
 interface Hotel {
   _id: string;
@@ -29,15 +30,12 @@ const Hotel: React.FC = () => {
   // TODO: waiting for logic
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+  const checkInMinDate = formatDateToYYYYMMDD();
 
-  const today = new Date();
-  const minDate = formatDateToYYYYMMDD(today);
+  let currentCheckIn = new Date(filterQuery.checkIn);
+  const day = currentCheckIn.getDate();
+  currentCheckIn.setDate(day + 1);
+  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
     <Main>
@@ -86,7 +84,7 @@ const Hotel: React.FC = () => {
                 id="checkIn"
                 defaultValue={filterQuery.checkIn}
                 type="date"
-                min={minDate}
+                min={checkInMinDate}
                 onChange={(e) => {
                   dispatch(
                     setHotelFilter({
@@ -103,6 +101,7 @@ const Hotel: React.FC = () => {
                 id="checkOut"
                 defaultValue={filterQuery.checkOut}
                 type="date"
+                min={checkOutMinDate}
                 onChange={(e) => {
                   dispatch(
                     setHotelFilter({

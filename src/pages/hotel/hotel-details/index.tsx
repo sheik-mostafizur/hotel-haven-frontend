@@ -11,6 +11,7 @@ import RatingPopUp from "../../../components/RatingPopUp";
 import {useEffect, useState} from "react";
 import {setHotelFilter} from "../../../redux/hotel-filter-slice";
 import SetTitle from "../../../components/set-title";
+import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
 
 const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
 
@@ -67,15 +68,12 @@ const HotelDetails: React.FC = () => {
       });
   }, []);
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+  const checkInMinDate = formatDateToYYYYMMDD();
 
-  const today = new Date();
-  const minDate = formatDateToYYYYMMDD(today);
+  let currentCheckIn = new Date(hotelFilter.checkIn);
+  const day = currentCheckIn.getDate();
+  currentCheckIn.setDate(day + 1);
+  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
     <Main>
@@ -178,7 +176,7 @@ const HotelDetails: React.FC = () => {
                         id="checkIn"
                         defaultValue={hotelFilter.checkIn}
                         type="date"
-                        min={minDate}
+                        min={checkInMinDate}
                         onChange={(e) =>
                           dispatch(
                             setHotelFilter({
@@ -195,6 +193,7 @@ const HotelDetails: React.FC = () => {
                         id="checkOut"
                         defaultValue={hotelFilter.checkOut}
                         type="date"
+                        min={checkOutMinDate}
                         onChange={(e) =>
                           dispatch(
                             setHotelFilter({
