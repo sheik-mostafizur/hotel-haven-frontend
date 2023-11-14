@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -10,14 +10,14 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import {AiFillCar} from "react-icons/ai";
-import {MdPool} from "react-icons/md";
-import {CgGym} from "react-icons/cg";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { AiFillCar } from "react-icons/ai";
+import { MdPool } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
-import {useAppSelector} from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
-import {useGetRoomDetailsQuery} from "../../api/private-api";
+import { useGetRoomDetailsQuery } from "../../api/private-api";
 import SetTitle from "../../components/set-title";
 
 interface IFormInputs {
@@ -28,8 +28,8 @@ interface IFormInputs {
 
 const Payment: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const {_id} = useParams();
-  const {data} = useGetRoomDetailsQuery(_id);
+  const { _id } = useParams();
+  const { data } = useGetRoomDetailsQuery(_id);
 
   // const { hotel, room } = data;
   // console.log(hotelFilter);
@@ -202,44 +202,80 @@ const Payment: React.FC = () => {
           </div>
 
           {/* Room Details */}
-          <div className="max-w-sm h-full mb-4 lg:sticky lg:top-0 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div>
-              <img
-                className="rounded-lg border-2 p-2 border-white"
-                src={data?.room?.thumbnails[0]}
-                alt="Room image"
-              />
+          <div>
+            {/* Accordion */}
+
+            {/* Accordion */}
+            <div className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div>
+                <img
+                  className="rounded-lg border-2 p-2 border-white"
+                  src="https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699833600&semt=ais"
+                  alt="Room image"
+                />
+              </div>
+              <div className="p-3 mb-2">
+                <h6 className="font-bold">Demo Room</h6>
+                <p>
+                  <small>Location</small>
+                </p>
+                <p className="text-lg font-semibold">Price</p>
+              </div>
+
+              <div className="p-5 bg-white">
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Check In</p>
+                  <p className="text-base">Date</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Check out</p>
+                  <p className="text-base">Date</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Adult</p>
+                  <p className="text-base">00</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Child</p>
+                  <p className="text-base">00</p>
+                </div>
+              </div>
             </div>
-            <div className="p-5 mb-4">
-              <h6>{data?.room?.title}</h6>
-              <p>
-                <small>{data?.hotel?.address?.location}</small>
-              </p>
+            <div className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div>
+                <img
+                  className="rounded-lg border-2 p-2 border-white"
+                  src="https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699833600&semt=ais"
+                  alt="Room image"
+                />
+              </div>
+              <div className="p-3 mb-2">
+                <h6 className="font-bold">Demo Room</h6>
+                <p>
+                  <small>Location</small>
+                </p>
+                <p className="text-lg font-semibold">Price</p>
+              </div>
+
+              <div className="p-5 bg-white">
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Check In</p>
+                  <p className="text-base">Date</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Check out</p>
+                  <p className="text-base">Date</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Adult</p>
+                  <p className="text-base">00</p>
+                </div>
+                <div className="flex justify-between items-center">
+                  <p className="text-base">Child</p>
+                  <p className="text-base">00</p>
+                </div>
+              </div>
             </div>
-            {/* <div className="p-5 mb-4 mx-2 bg-white rounded-lg border-2">
-              <div className="flex justify-between items-center">
-                <p> CheckIn:</p>
-                <p>date</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>CheckOut:</p>
-                <p>date</p>
-              </div>
-            </div> */}
-            {/* <div className="p-5 bg-white">
-              <div className="flex justify-between items-center">
-                <p>date</p>
-                <p>{data?.room?.roomInfo?.discountedPrice} BDT</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>tax:</p>
-                <p>5%</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>Total Price:</p>
-                <p>130 BDT</p>
-              </div>
-            </div> */}
           </div>
         </div>
       </Container>
