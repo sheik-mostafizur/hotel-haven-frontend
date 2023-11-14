@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -7,25 +7,26 @@ import {
   FaBath,
   FaCheckCircle,
   FaBed,
+  FaCross,
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import {AiFillCar} from "react-icons/ai";
-import {MdPool} from "react-icons/md";
-import {CgGym} from "react-icons/cg";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { AiFillCar } from "react-icons/ai";
+import { MdPool } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
-import {useAppSelector} from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
 import {
   useGetRoomDetailsQuery,
   useGetRoomsByIdsQuery,
 } from "../../api/private-api";
 import SetTitle from "../../components/set-title";
-import {usePostPaymentOrderMutation} from "../../api/public-api";
-import {useSuccess} from "../../hooks";
+import { usePostPaymentOrderMutation } from "../../api/public-api";
+import { useSuccess } from "../../hooks";
 import toastError from "../../utils/toast-error";
-import {BeatSpinner} from "../../components/spinner";
+import { BeatSpinner } from "../../components/spinner";
 
 interface IFormInputs {
   fullName: string;
@@ -38,7 +39,7 @@ const Payment: React.FC = () => {
   const reserveData = useAppSelector((state) => state.reserve);
   const roomIds = reserveData.map((room) => room.roomId);
 
-  let {data: rooms, isLoading} = useGetRoomsByIdsQuery(roomIds);
+  let { data: rooms, isLoading } = useGetRoomsByIdsQuery(roomIds);
   rooms = rooms?.map((room) => {
     const reserve = reserveData.find((r) => r.roomId === room._id);
 
@@ -46,7 +47,7 @@ const Payment: React.FC = () => {
       const {
         _id,
         title,
-        roomInfo: {regularPrice, discountedPrice},
+        roomInfo: { regularPrice, discountedPrice },
       } = room;
 
       return {
@@ -67,8 +68,14 @@ const Payment: React.FC = () => {
     if (room.discountedPrice) total += room.discountedPrice;
     return total;
   }, 0);
+  const originalPrice = rooms?.reduce((total: any, room: any) => {
+    if (room.price) total += room.price;
+    return total;
+  }, 0);
 
-  const [postPaymentOrder, {isLoading: payIsLoading}] =
+  const savings: number = originalPrice - totalPrice;
+
+  const [postPaymentOrder, { isLoading: payIsLoading }] =
     usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
@@ -77,12 +84,11 @@ const Payment: React.FC = () => {
       .then((url: string) => {
         window.location.href = url;
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
-
   return (
     <Main>
       <SetTitle title={`Pay now`} />
@@ -143,7 +149,7 @@ const Payment: React.FC = () => {
               </div>
             </div>
             {/* step 2 details */}
-            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
+            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4">
                   <p>
@@ -189,7 +195,7 @@ const Payment: React.FC = () => {
               </ul>
             </div>
             {/* step 3 Payment Details*/}
-            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
+            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <FaLock></FaLock>
@@ -201,13 +207,45 @@ const Payment: React.FC = () => {
               <p className="py-4 flex items-center gap-4 ">
                 <FaCheckCircle></FaCheckCircle> We never charge any card fees
               </p>
-              <Button
-                isDisabled={payIsLoading}
-                size="xl"
-                className="w-52"
-                onClick={handlePayment}>
-                {payIsLoading ? <BeatSpinner /> : " Pay Now"}
-              </Button>
+              <div className="">
+                <div className="">
+                  <h4 className="py-2">Your Price Summary</h4>
+                  <div className="flex justify-between items-center">
+                    <p>Original Price:</p>
+                    <p>BDT {originalPrice}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p>Bonus Savings:</p>
+                    <p>BDT -{savings.toFixed(2)}</p>
+                  </div>
+                  <p>
+                    <small>
+                      You are getting reduce rate because this property is
+                      offering a discount
+                    </small>
+                    <hr />
+                  </p>
+                  <div className="flex justify-between items-center  pt-4">
+                    <Button
+                      isDisabled={payIsLoading}
+                      size="xl"
+                      className="w-52"
+                      onClick={handlePayment}
+                    >
+                      {payIsLoading ? <BeatSpinner /> : " Pay Now"}
+                    </Button>
+                    <div>
+                      <p className="font-medium text-red-600 line-through">
+                        BDT {originalPrice}
+                      </p>
+                      <p className="text-3xl font-semibold">
+                        {" "}
+                        BDT {totalPrice}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -219,14 +257,18 @@ const Payment: React.FC = () => {
               rooms?.map((room) => (
                 <div
                   key={room._id}
-                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                  <div>
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <div className="relative">
                     {/* here you can see many images using slide */}
                     <img
                       className="rounded-lg border-2 p-2 border-white"
                       src={room.thumbnails[0]}
                       alt={room.title}
                     />
+                    <button className="rounded-full absolute top-0 right-0 bg-secondary-200 block ml-auto px-2">
+                      X
+                    </button>
                   </div>
                   <div className="p-3">
                     <h6 className="font-bold">{room.title}</h6>
@@ -237,7 +279,6 @@ const Payment: React.FC = () => {
                       </p>
                     </div>
                   </div>
-
                   <div className="p-5 bg-white">
                     <div className="flex justify-between items-center">
                       <p className="text-base">Check In</p>
