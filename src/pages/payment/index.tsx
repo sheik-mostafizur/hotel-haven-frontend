@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -10,15 +10,22 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import { AiFillCar } from "react-icons/ai";
-import { MdPool } from "react-icons/md";
-import { CgGym } from "react-icons/cg";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {AiFillCar} from "react-icons/ai";
+import {MdPool} from "react-icons/md";
+import {CgGym} from "react-icons/cg";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
+import {useAppSelector} from "../../redux/hooks";
 import Button from "../../components/ui/button";
-import { useGetRoomDetailsQuery } from "../../api/private-api";
+import {
+  useGetRoomDetailsQuery,
+  useGetRoomsByIdsQuery,
+} from "../../api/private-api";
 import SetTitle from "../../components/set-title";
+import {usePostPaymentOrderMutation} from "../../api/public-api";
+import {useSuccess} from "../../hooks";
+import toastError from "../../utils/toast-error";
+import {BeatSpinner} from "../../components/spinner";
 
 interface IFormInputs {
   fullName: string;
@@ -28,52 +35,52 @@ interface IFormInputs {
 
 const Payment: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const { _id } = useParams();
-  const { data } = useGetRoomDetailsQuery(_id);
+  const reserveData = useAppSelector((state) => state.reserve);
+  const roomIds = reserveData.map((room) => room.roomId);
 
-  // const { hotel, room } = data;
-  // console.log(hotelFilter);
+  let {data: rooms, isLoading} = useGetRoomsByIdsQuery(roomIds);
+  rooms = rooms?.map((room) => {
+    const reserve = reserveData.find((r) => r.roomId === room._id);
 
-  // const { title, roomInfo, facilities, capacity, availability, thumbnails } =
-  //   data?.room;
+    if (reserve) {
+      const {
+        _id,
+        title,
+        roomInfo: {regularPrice, discountedPrice},
+      } = room;
 
-  // const { address } = data?.hotel;
-  // console.log(data?.room?.roomInfo?.discountedPrice);
+      return {
+        _id,
+        title,
+        thumbnails: room.thumbnails,
+        price: regularPrice,
+        discountedPrice,
+        checkIn: reserve.checkIn,
+        checkOut: reserve.checkOut,
+        adult: reserve.adult,
+        children: reserve.children,
+      };
+    }
+  });
 
-  const amount = 1222;
+  const totalPrice = rooms?.reduce((total, room) => {
+    if (room.discountedPrice) total += room.discountedPrice;
+    return total;
+  }, 0);
+
+  const [postPaymentOrder, {isLoading: payIsLoading}] =
+    usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
-    const data = [
-      {
-        email: "example1@example.com",
-        phoneNumber: "123456781010",
-        roomId: "617df0e86cbe590015d6d91d",
-        checkIn: new Date("2023-11-15"),
-        checkOut: new Date("2023-11-20"),
-        adult: 2,
-        children: 1,
-      },
-      {
-        email: "example2@example.com",
-        phoneNumber: "123456781010",
-        roomId: "617df0e86cbe590015d6d91e",
-        checkIn: new Date("2023-12-01"),
-        checkOut: new Date("2023-12-05"),
-        adult: 3,
-        children: 2,
-      },
-    ];
-
-    const res = await fetch("http://localhost:3000/payment/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
-    const url = await res.json();
-    window.location.href = url;
+    postPaymentOrder(reserveData)
+      .unwrap()
+      .then((url: string) => {
+        window.location.href = url;
+      })
+      .catch(({data}) => {
+        const error = {message: data?.message};
+        toastError(error);
+      });
   };
 
   return (
@@ -174,13 +181,11 @@ const Payment: React.FC = () => {
               <hr />
               <p className="font-medium py-2">Facilities</p>
               <ul>
-                {data?.room?.facilities &&
-                  data?.room?.facilities.map((f: string) => (
-                    <li key={f} className="flex gap-2 items-center">
-                      <FaCheck />
-                      {f}
-                    </li>
-                  ))}
+                <li className="flex gap-2 items-center">facility one</li>
+                <li className="flex gap-2 items-center">
+                  <FaCheck />
+                  facility two
+                </li>
               </ul>
             </div>
             {/* step 3 Payment Details*/}
@@ -196,87 +201,64 @@ const Payment: React.FC = () => {
               <p className="py-4 flex items-center gap-4 ">
                 <FaCheckCircle></FaCheckCircle> We never charge any card fees
               </p>
-              <Button size="xl" className="w-52" onClick={handlePayment}>
-                Pay Now
+              <Button
+                isDisabled={payIsLoading}
+                size="xl"
+                className="w-52"
+                onClick={handlePayment}>
+                {payIsLoading ? <BeatSpinner /> : " Pay Now"}
               </Button>
             </div>
           </div>
 
           {/* Room Details */}
           <div>
-            {/* Accordion */}
+            {isLoading ? (
+              <h1>Loading...</h1>
+            ) : (
+              rooms?.map((room) => (
+                <div
+                  key={room._id}
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div>
+                    {/* here you can see many images using slide */}
+                    <img
+                      className="rounded-lg border-2 p-2 border-white"
+                      src={room.thumbnails[0]}
+                      alt={room.title}
+                    />
+                  </div>
+                  <div className="p-3">
+                    <h6 className="font-bold">{room.title}</h6>
+                    <div className="flex justify-between items-center">
+                      <p className="text-lg font-semibold">Price</p>
+                      <p className="text-base">
+                        <del>{room.price}</del> <b>{room.discountedPrice}</b>
+                      </p>
+                    </div>
+                  </div>
 
-            {/* Accordion */}
-            <div className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <div>
-                <img
-                  className="rounded-lg border-2 p-2 border-white"
-                  src="https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699833600&semt=ais"
-                  alt="Room image"
-                />
-              </div>
-              <div className="p-3 mb-2">
-                <h6 className="font-bold">Demo Room</h6>
-                <p>
-                  <small>Location</small>
-                </p>
-                <p className="text-lg font-semibold">Price</p>
-              </div>
-
-              <div className="p-5 bg-white">
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Check In</p>
-                  <p className="text-base">Date</p>
+                  <div className="p-5 bg-white">
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Check In</p>
+                      <b className="text-base">{room.checkIn}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Check out</p>
+                      <b className="text-base">{room.checkOut}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Adult</p>
+                      <b className="text-base">{room.adult}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Child</p>
+                      <b className="text-base">{room.children}</b>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Check out</p>
-                  <p className="text-base">Date</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Adult</p>
-                  <p className="text-base">00</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Child</p>
-                  <p className="text-base">00</p>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-              <div>
-                <img
-                  className="rounded-lg border-2 p-2 border-white"
-                  src="https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699833600&semt=ais"
-                  alt="Room image"
-                />
-              </div>
-              <div className="p-3 mb-2">
-                <h6 className="font-bold">Demo Room</h6>
-                <p>
-                  <small>Location</small>
-                </p>
-                <p className="text-lg font-semibold">Price</p>
-              </div>
-
-              <div className="p-5 bg-white">
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Check In</p>
-                  <p className="text-base">Date</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Check out</p>
-                  <p className="text-base">Date</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Adult</p>
-                  <p className="text-base">00</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="text-base">Child</p>
-                  <p className="text-base">00</p>
-                </div>
-              </div>
-            </div>
+              ))
+            )}
           </div>
         </div>
       </Container>
