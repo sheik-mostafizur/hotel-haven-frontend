@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import React from "react";
 
 interface HotelType {
@@ -22,9 +22,9 @@ const Hotel: React.FC<HotelType> = ({
   return (
     <Link to={`/hotel/${_id}`}>
       <figure className="relative transition-all cursor-pointer filter ">
-        <div style={{ position: "relative", display: "block" }}>
+        <div style={{position: "relative", display: "block"}}>
           <img
-            className="rounded-lg h-96"
+            className="rounded-lg h-96 object-cover"
             src={photoURL}
             alt="image description"
           />
@@ -36,8 +36,7 @@ const Hotel: React.FC<HotelType> = ({
               width: "100%",
               height: "100%",
               backgroundColor: "rgba(0, 0, 0, 0.3)", // Black overlay with 0.5 opacity
-            }}
-          ></div>
+            }}></div>
           <figcaption className="absolute px-4 text-lg bottom-6">
             <h3 className="text-white">{name}</h3>
           </figcaption>
