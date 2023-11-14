@@ -1,34 +1,62 @@
-import {useState, ChangeEvent} from "react";
+import {useState, ChangeEvent, useEffect} from "react";
 import Greeting from "./Greeting";
+import { useAppSelector } from "../../redux/hooks";
 
-const RatingPopUp: React.FC = ({hotelId}) => {
+interface RatingPopUpProps {
+  hotelId: number;
+}
+
+const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
+
+  const user = useAppSelector(state=> state.auth.user);
   const [rating, setRating] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleRatingSubmit = () => {
-    if (!hotelId || !message) return alert("hoteId or feedback messing");
+    if (!hotelId ) return alert("hoteId needed");
 
     const data = {rating, feedback: message, hotelId: hotelId};
-    console.log(data);
+    console.log(data,user);
+
+    fetch("")
+  
+
     setRating(0);
     setMessage("");
     setIsSubmitDisabled(true);
     setFeedbackSubmitted(true);
   };
 
+
+
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
-    setIsSubmitDisabled(newRating === 0);
   };
 
   const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newMessage: string = e.target.value;
     setMessage(newMessage);
-    setIsSubmitDisabled(rating === 0);
   };
 
+  useEffect(() => {
+    if (rating === 0) {
+      setIsSubmitDisabled(true);
+      setErrorMessage("Please rate us");
+      return;
+    } else if (message.trim() === '') {
+      setIsSubmitDisabled(true);
+      setErrorMessage("Please comment us ");
+      return;
+    } else {
+      setIsSubmitDisabled(false);
+    }
+    setErrorMessage(null);
+  }, [rating, message]);
+
+  
   return (
     <div>
       {feedbackSubmitted ? (
@@ -74,6 +102,9 @@ const RatingPopUp: React.FC = ({hotelId}) => {
                     placeholder="Leave a message, if you want"
                     value={message}
                     onChange={handleMessageChange}></textarea>
+                    {errorMessage && (
+                  <p className="text-red-400 text-lg pt-3">{errorMessage}</p>
+                )}
                   <button
                     onClick={handleRatingSubmit}
                     className={`py-3 my-8 text-lg bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl text-white ${

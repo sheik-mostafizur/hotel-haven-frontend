@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../../redux/hooks";
 
 const Greeting = () => {
   const [greeting, setGreeting] = useState("");
+  const user = useAppSelector(state => state.auth.user)
 
   useEffect(() => {
     const time = new Date().getHours();
@@ -21,7 +23,7 @@ const Greeting = () => {
   return (
     <div className="px-4 py-7 md:px-8 lg:py-12 bg-gray-100 mx-auto shadow-2xl max-w-xl">
       <h1 className="text-sm mb-4">
-        Hey Amit
+        Hey {user.name}
         <span className="mx-2" id="demo">
           {greeting}
         </span>

@@ -42,6 +42,8 @@ const HotelDetails: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const { _id } = useParams();
+
+  console.log(_id);
   const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
