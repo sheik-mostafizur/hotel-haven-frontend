@@ -41,7 +41,7 @@ interface HotelDetails {
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
-
+  
   const {_id} = useParams();
   const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
