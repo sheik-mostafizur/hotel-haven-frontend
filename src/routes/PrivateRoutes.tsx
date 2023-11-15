@@ -3,7 +3,7 @@ import Dashboard from "../pages/dashboard";
 import ProfileDashboard from "../pages/dashboard/profile-dashboard";
 import Settings from "../pages/settings";
 import PrivateProtector from "./PrivateProtector";
-import { Wishlist } from "../pages/dashboard/customer";
+import {Wishlist} from "../pages/dashboard/customer";
 import Profile from "../pages/profile";
 import BlogsDashboard from "../pages/dashboard/blogs-dashboard";
 import HomeDashboard from "../pages/dashboard/home-dashboard";
@@ -12,7 +12,7 @@ import Bookmark from "../pages/dashboard/blogs-dashboard/bookmark";
 import SingleBlog from "../pages/blogs/SingleBlog";
 import Failed from "../pages/payment/utitlies/Failed";
 import Cancelpage from "../pages/payment/utitlies/Cancelpage";
-import Suceess from "../pages/payment/utitlies/Suceess";
+import Success from "../pages/payment/utitlies/Success";
 
 const routes = [
   {
@@ -28,8 +28,8 @@ const routes = [
     element: <Payment />,
   },
   {
-    path: "/payment/success",
-    element: <Suceess />,
+    path: "/payment/success/:transactionId",
+    element: <Success />,
   },
   {
     path: "/payment/fail",

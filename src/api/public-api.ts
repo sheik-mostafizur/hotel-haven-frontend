@@ -65,6 +65,10 @@ const publicApi: any = createApi({
       }),
       invalidatesTags: ["payment"],
     }),
+    getPaymentSuccessOrder: builder.query({
+      query: (transactionId) => `/payment/success/${transactionId}`,
+      providesTags: ["payment"],
+    }),
   }),
 });
 
@@ -76,5 +80,6 @@ export const {
   useGetHotelByIdQuery,
   useGetPublicBlogsQuery,
   usePostPaymentOrderMutation,
+  useGetPaymentSuccessOrderQuery,
 } = publicApi;
 export default publicApi;

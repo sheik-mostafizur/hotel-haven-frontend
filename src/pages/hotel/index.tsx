@@ -118,7 +118,7 @@ const Hotel: React.FC = () => {
             {isLoading ? (
               <HotelCardSkeleton />
             ) : (
-              hotels.map((hotel: Hotel) => (
+              hotels?.map((hotel: Hotel) => (
                 <HotelCard key={hotel._id} {...hotel} />
               ))
             )}
