@@ -1,9 +1,25 @@
+import { useGetBookingHistoryQuery } from "../../../../api/private-api";
+import {
+  useGetHotelByIdQuery,
+  useGetHotelsQuery,
+} from "../../../../api/public-api";
 import SetTitle from "../../../../components/set-title";
-import Button from "../../../../components/ui/button";
 import Container from "../../../../components/ui/container";
 import Modal from "../../../../components/ui/modal";
 
 const BookingHistory = () => {
+  const { data } = useGetBookingHistoryQuery(undefined);
+  console.log(data);
+  const { data: hotelData } = useGetHotelsQuery(undefined);
+  console.log(hotelData?.data);
+
+  const getLocationName = (hotelId: any) => {
+    console.log(hotelId);
+    const hotel = hotelData?.data.find((h: any) => h._id === hotelId);
+    console.log(hotel);
+    return hotel ? hotel?.address.location : "Unknown Location";
+  };
+
   return (
     <Container>
       <SetTitle title={`Booking History | Dashboard`} />
@@ -12,9 +28,6 @@ const BookingHistory = () => {
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                Booking ID
-              </th>
               <th scope="col" className="px-6 py-3">
                 Hotel name
               </th>
@@ -36,37 +49,123 @@ const BookingHistory = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            {data?.map((bookingHistory: any, index: number) => (
+              <tr
+                key={index}
+                className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
               >
-                vfdsf12JHGH
-              </th>
-              <td className="px-6 py-4">Test Hotel</td>
-              <td className="px-6 py-4">Cox Bazar</td>
-              <td className="px-6 py-4">`Demo Rooms`</td>
-              <td className="px-6 py-4">2 Adults 1 Child</td>
-              <td className="px-6 py-4">
-                12-Oct-2023 to 14-Oct-2023 (3 Nights)
-              </td>
-              <td className="px-6 py-4">
-                <Modal
-                  title={"See Payment Details"}
-                  button={{
-                    label: "Payment Details",
-                    className: "block ml-auto",
-                  }}
+                <td
+                  scope="row"
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <p>Transaction id: ewrewtewtwet3535</p>
-                  <p>Payment Method: BKash</p>
-                  <p>Amount: 3000 BDt</p>
-                </Modal>
-              </td>
-              {/* <td className="px-6 py-4">
-                <Button size="sm">View Payment Details</Button>
-              </td> */}
-            </tr>
+                  {bookingHistory?.hotelName}
+                </td>
+                <td className="px-6 py-4">
+                  {bookingHistory?.hotelId && (
+                    <span>{getLocationName(bookingHistory?.hotelId)}</span>
+                  )}
+                </td>
+                <td className="px-6 py-4">
+                  {bookingHistory?.rooms?.map((room: any, index: number) => (
+                    <span key={index}>{room?.roomId}</span>
+                  ))}
+                </td>
+                <td className="px-6 py-4">
+                  {bookingHistory?.rooms?.map((room: any, index: number) => (
+                    <span key={index}>
+                      {room?.adult} Adults, {room?.children} Children
+                    </span>
+                  ))}
+                </td>
+                {/* <td className="px-6 py-4">
+                  {bookingHistory?.rooms?.map((room: any, index: number) => {
+                    const checkInDate = new Date(room?.checkIn);
+                    const checkOutDate = new Date(room?.checkOut);
+
+                    // Format date and time
+                    const formattedCheckIn = `${checkInDate.toLocaleDateString()} ${checkInDate.toLocaleTimeString()}`;
+                    const formattedCheckOut = `${checkOutDate.toLocaleDateString()} ${checkOutDate.toLocaleTimeString()}`;
+
+                    // Calculate the difference in days
+                    const timeDifference =
+                      checkOutDate.getTime() - checkInDate.getTime();
+                    const daysDifference = Math.ceil(
+                      timeDifference / (1000 * 3600 * 24)
+                    );
+
+                    return (
+                      <span key={index}>
+                        {formattedCheckIn} to {formattedCheckOut} (
+                        {daysDifference} days)
+                      </span>
+                    );
+                  })}
+                </td> */}
+                <td className="px-6 py-4">
+                  {bookingHistory?.rooms?.map((room: any, index: number) => {
+                    const checkInDate = new Date(room?.checkIn);
+                    const checkOutDate = new Date(room?.checkOut);
+
+                    // Format date
+                    const formattedCheckIn = `${checkInDate.getFullYear()}-${(
+                      checkInDate.getMonth() + 1
+                    )
+                      .toString()
+                      .padStart(2, "0")}-${checkInDate
+                      .getDate()
+                      .toString()
+                      .padStart(2, "0")}`;
+                    const formattedCheckOut = `${checkOutDate.getFullYear()}-${(
+                      checkOutDate.getMonth() + 1
+                    )
+                      .toString()
+                      .padStart(2, "0")}-${checkOutDate
+                      .getDate()
+                      .toString()
+                      .padStart(2, "0")}`;
+
+                    // Calculate the difference in days
+                    const timeDifference =
+                      checkOutDate.getTime() - checkInDate.getTime();
+                    const daysDifference = Math.ceil(
+                      timeDifference / (1000 * 3600 * 24)
+                    );
+
+                    return (
+                      <span key={index}>
+                        {formattedCheckIn} to {formattedCheckOut} (
+                        {daysDifference} days)
+                      </span>
+                    );
+                  })}
+                </td>
+
+                <td className="px-6 py-4">
+                  <Modal
+                    title={"See Payment Details"}
+                    button={{
+                      label: "Payment Details",
+                      className: "block ml-auto",
+                    }}
+                  >
+                    <div>
+                      <p className="font-medium text-primary-700">
+                        Transaction ID: {bookingHistory?.transactionId}
+                      </p>
+                      <p className="font-medium text-primary-700">
+                        Payment Method: {bookingHistory?.cardType}
+                      </p>
+                      <p className="font-medium text-primary-700">
+                        Payment Status: {bookingHistory?.status}
+                      </p>
+                      <p className="font-medium text-primary-700">
+                        Amount: {bookingHistory?.totalAmount} BDt
+                      </p>
+                    </div>
+                  </Modal>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

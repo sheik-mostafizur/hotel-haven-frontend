@@ -1,5 +1,5 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {axios} from ".";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axios } from ".";
 
 const privateApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -15,6 +15,7 @@ const privateApi = createApi({
   tagTypes: [
     "roomDetails",
     "rooms",
+    "bookingHistory",
     "wishlist",
     "profile",
     "blogs",
@@ -33,6 +34,11 @@ const privateApi = createApi({
         params: roomIds.map((id) => `roomIds=${id}`).join("&"),
       }),
       providesTags: ["rooms"],
+    }),
+
+    getBookingHistory: builder.query({
+      query: () => `/booking`,
+      providesTags: ["bookingHistory"],
     }),
 
     getWishlist: builder.query({
@@ -81,7 +87,7 @@ const privateApi = createApi({
       providesTags: ["blogs"],
     }),
     updateUserBlogById: builder.mutation({
-      query: ({_id, data}) => ({
+      query: ({ _id, data }) => ({
         url: `/blog/user-blog/${_id}`,
         method: "PUT",
         body: data,
@@ -161,6 +167,8 @@ export const {
   useGetRoomDetailsQuery,
 
   useGetRoomsByIdsQuery,
+
+  useGetBookingHistoryQuery,
 
   useGetWishlistQuery,
   usePostWishlistMutation,

@@ -1,5 +1,6 @@
-import {useState, useEffect} from "react";
-import {Bar} from "react-chartjs-2";
+import { useState, useEffect } from "react";
+import { Bar } from "react-chartjs-2";
+import { useGetManagerInfoQuery } from "../../../api/manager-api";
 
 const ManagerHomeDashboard = () => {
   const [stats, setStats] = useState({
@@ -39,6 +40,9 @@ const ManagerHomeDashboard = () => {
     fetchDashboardStats();
   }, []);
 
+  const { data: managerStat } = useGetManagerInfoQuery(undefined);
+  console.log(managerStat);
+
   const data = {
     labels: ["Hotels", "Rooms", "Bookings", "Customers"],
     datasets: [
@@ -69,7 +73,12 @@ const ManagerHomeDashboard = () => {
           "rgba(255,206,86,1)",
           "rgba(75,192,192,1)",
         ],
-        data: [stats.hotels, stats.rooms, stats.bookings, stats.customers],
+        data: [
+          stats.hotels,
+          managerStat?.rooms || 0,
+          managerStat?.totalBooking || 0,
+          managerStat?.totalCustomer || 0,
+        ],
       },
     ],
   };
@@ -98,17 +107,23 @@ const ManagerHomeDashboard = () => {
           <div>
             <h4 className="text-lg font-semibold">Total Rooms</h4>
             {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">5</p>
+            <p className="text-2xl font-bold text-primary-500">
+              {managerStat?.rooms}
+            </p>
           </div>
           <div>
             <h4 className="text-lg font-semibold">Total Booking</h4>
             {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">15</p>
+            <p className="text-2xl font-bold text-primary-500">
+              {managerStat?.totalBooking}
+            </p>
           </div>
           <div>
             <h4 className="text-lg font-semibold">Total Customers</h4>
             {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">8</p>
+            <p className="text-2xl font-bold text-primary-500">
+              {managerStat?.totalCustomer}
+            </p>
           </div>
         </div>
       </div>
