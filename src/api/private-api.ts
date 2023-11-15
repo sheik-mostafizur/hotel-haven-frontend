@@ -14,6 +14,7 @@ const privateApi = createApi({
   reducerPath: "privateApi",
   tagTypes: [
     "roomDetails",
+    "rooms",
     "wishlist",
     "profile",
     "blogs",
@@ -25,6 +26,13 @@ const privateApi = createApi({
     getRoomDetails: builder.query({
       query: (_id) => `/room/${_id}`,
       providesTags: ["roomDetails"],
+    }),
+    getRoomsByIds: builder.query({
+      query: (roomIds) => ({
+        url: `/room/roomIds`,
+        params: roomIds.map((id) => `roomIds=${id}`).join("&"),
+      }),
+      providesTags: ["rooms"],
     }),
 
     getWishlist: builder.query({
@@ -151,6 +159,9 @@ const privateApi = createApi({
 
 export const {
   useGetRoomDetailsQuery,
+
+  useGetRoomsByIdsQuery,
+
   useGetWishlistQuery,
   usePostWishlistMutation,
   useDeleteWishlistByIdMutation,

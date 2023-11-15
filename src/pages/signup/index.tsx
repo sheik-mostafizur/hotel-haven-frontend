@@ -4,12 +4,12 @@ import Button from "../../components/ui/button";
 import {Link, useNavigate} from "react-router-dom";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {Controller, useForm} from "react-hook-form";
-import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {axios} from "../../api";
 import {BeatSpinner} from "../../components/spinner";
 import SetTitle from "../../components/set-title";
+import {useSuccess} from "../../hooks";
 
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ const SignUp = () => {
     axios
       .post("/auth/register", data)
       .then(({data}) => {
-        toastSuccess(data.message);
+        useSuccess({title: data.message});
         navigate("/signin");
         setIsLoading(false);
       })

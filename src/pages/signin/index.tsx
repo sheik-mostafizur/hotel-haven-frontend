@@ -5,7 +5,6 @@ import Button from "../../components/ui/button";
 import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {login} from "../../redux/authSlice";
-import toastSuccess from "../../utils/toast-success";
 import toastError from "../../utils/toast-error";
 import {useState} from "react";
 import {useAppDispatch} from "../../redux/hooks";
@@ -13,6 +12,7 @@ import {auth} from "../../api";
 import {AuthType} from "../../types";
 import {BeatSpinner} from "../../components/spinner";
 import SetTitle from "../../components/set-title";
+import {useSuccess} from "../../hooks";
 
 const SignIn: React.FC = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
         email: data.email,
         password: data.password,
       });
-      toastSuccess(result.message);
+      useSuccess({title: result.message});
       dispatch(login({token: result.token, user: result.user}));
       reset();
       navigate(location?.state?.from?.pathname || "/");

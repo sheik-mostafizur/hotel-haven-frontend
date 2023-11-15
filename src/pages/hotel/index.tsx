@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
-import { useGetHotelsQuery, useGetLocationsQuery } from "../../api/public-api";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {useGetHotelsQuery, useGetLocationsQuery} from "../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import Pagination from "../../components/pagination";
 import SetTitle from "../../components/set-title";
-import { setHotelFilter } from "../../redux/hotel-filter-slice";
-import { HotelCard, HotelCardSkeleton } from "../../components/ui/card";
+import {setHotelFilter} from "../../redux/hotel-filter-slice";
+import {HotelCard, HotelCardSkeleton} from "../../components/ui/card";
+import formatDateToYYYYMMDD from "../../utils/format-date-to-YYYYMMDD";
 
 interface Hotel {
   _id: string;
@@ -19,25 +20,22 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
-  const { data: locations } = useGetLocationsQuery(undefined);
+  const {data: locations} = useGetLocationsQuery(undefined);
   const dispatch = useAppDispatch();
   const filterQuery = useAppSelector((state) => state.hotelFilter);
 
-  const { data, isLoading } = useGetHotelsQuery(filterQuery);
-  const { data: hotels, totalPages, currentPage } = data || {};
+  const {data, isLoading} = useGetHotelsQuery(filterQuery);
+  const {data: hotels, totalPages, currentPage} = data || {};
 
   // TODO: waiting for logic
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+  const checkInMinDate = formatDateToYYYYMMDD();
 
-  const today = new Date();
-  const minDate = formatDateToYYYYMMDD(today);
+  let currentCheckIn = new Date(filterQuery.checkIn);
+  const day = currentCheckIn.getDate();
+  currentCheckIn.setDate(day + 1);
+  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
     <Main>
@@ -70,8 +68,7 @@ const Hotel: React.FC = () => {
                       location: e.target.value,
                     })
                   )
-                }
-              >
+                }>
                 <option value="">ALL</option>
                 {locations &&
                   locations.map((location: any) => (
@@ -87,7 +84,7 @@ const Hotel: React.FC = () => {
                 id="checkIn"
                 defaultValue={filterQuery.checkIn}
                 type="date"
-                min={minDate}
+                min={checkInMinDate}
                 onChange={(e) => {
                   dispatch(
                     setHotelFilter({
@@ -104,6 +101,7 @@ const Hotel: React.FC = () => {
                 id="checkOut"
                 defaultValue={filterQuery.checkOut}
                 type="date"
+                min={checkOutMinDate}
                 onChange={(e) => {
                   dispatch(
                     setHotelFilter({
@@ -120,7 +118,7 @@ const Hotel: React.FC = () => {
             {isLoading ? (
               <HotelCardSkeleton />
             ) : (
-              hotels.map((hotel: Hotel) => (
+              hotels?.map((hotel: Hotel) => (
                 <HotelCard key={hotel._id} {...hotel} />
               ))
             )}

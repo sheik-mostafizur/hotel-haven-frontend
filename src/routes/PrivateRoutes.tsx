@@ -10,6 +10,9 @@ import HomeDashboard from "../pages/dashboard/home-dashboard";
 import BookingHistory from "../pages/dashboard/customer/booking-history/BookingHistory";
 import Bookmark from "../pages/dashboard/blogs-dashboard/bookmark";
 import SingleBlog from "../pages/blogs/SingleBlog";
+import Failed from "../pages/payment/utitlies/Failed";
+import Cancelpage from "../pages/payment/utitlies/Cancelpage";
+import Success from "../pages/payment/utitlies/Success";
 
 const routes = [
   {
@@ -21,10 +24,21 @@ const routes = [
     element: <Profile />,
   },
   {
-    path: "/payment/:_id",
+    path: "/payment",
     element: <Payment />,
   },
-  
+  {
+    path: "/payment/success/:transactionId",
+    element: <Success />,
+  },
+  {
+    path: "/payment/fail",
+    element: <Failed />,
+  },
+  {
+    path: "/payment/cancel",
+    element: <Cancelpage />,
+  },
   {
     path: "/blogs/:_id",
     element: <SingleBlog />,

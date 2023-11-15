@@ -1,29 +1,32 @@
-import { useForm, Controller } from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 import Button from "../ui/button";
-import { useGetLocationsQuery } from "../../api/public-api";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setHotelFilter } from "../../redux/hotel-filter-slice";
-import { useLocation, useNavigate } from "react-router-dom";
+import {useGetLocationsQuery} from "../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {setHotelFilter} from "../../redux/hotel-filter-slice";
+import {useLocation, useNavigate} from "react-router-dom";
+import formatDateToYYYYMMDD from "../../utils/format-date-to-YYYYMMDD";
 
 const FindRoomForm = () => {
   const locationURL = useLocation();
   const navigate = useNavigate();
 
-  const { isLoading, data: locations } = useGetLocationsQuery(undefined);
+  const {isLoading, data: locations} = useGetLocationsQuery(undefined);
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
 
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    watch,
+    // formState: {errors},
   } = useForm({
+    mode: "all",
     defaultValues: {
       location: hotelFilter.location,
       checkIn: hotelFilter.checkIn,
       checkOut: hotelFilter.checkOut,
       adult: hotelFilter.adult,
-      child: hotelFilter.child,
+      children: hotelFilter.children,
     },
   });
 
@@ -34,15 +37,12 @@ const FindRoomForm = () => {
     }
   };
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+  const checkInMinDate = formatDateToYYYYMMDD();
 
-  const today = new Date();
-  const minDate = formatDateToYYYYMMDD(today);
+  let currentCheckIn = new Date(watch("checkIn"));
+  const day = currentCheckIn.getDate();
+  currentCheckIn.setDate(day + 1);
+  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
     <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-800 dark:border-secondary-800 dark:shadow-secondary-800">
@@ -55,12 +55,11 @@ const FindRoomForm = () => {
             rules={{
               required: true,
             }}
-            render={({ field }) => (
+            render={({field}) => (
               <select
                 id="location"
                 {...field}
-                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
+                className="bg-secondary-50 border border-secondary-300 text-secondary-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-secondary-700 dark:border-secondary-800 dark:placeholder-secondary-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 {isLoading ? (
                   <option value="">Choose a Location</option>
                 ) : (
@@ -85,9 +84,14 @@ const FindRoomForm = () => {
             <label htmlFor="checkIn">Check In Date</label>
             <Controller
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <input id="checkIn" {...field} type="date" min={minDate} />
+              rules={{required: true}}
+              render={({field}) => (
+                <input
+                  id="checkIn"
+                  {...field}
+                  type="date"
+                  min={checkInMinDate}
+                />
               )}
               name="checkIn"
             />
@@ -96,9 +100,15 @@ const FindRoomForm = () => {
             <label htmlFor="checkOut">Check Out Date</label>
             <Controller
               control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <input id="checkOut" {...field} type="date" />
+              rules={{required: true}}
+              render={({field}) => (
+                <input
+                  id="checkOut"
+                  {...field}
+                  type="date"
+                  min={checkOutMinDate}
+                  disabled={!watch("checkIn")}
+                />
               )}
               name="checkOut"
             />

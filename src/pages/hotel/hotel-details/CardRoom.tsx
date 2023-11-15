@@ -20,8 +20,9 @@ import {FaRegMoneyBillAlt} from "react-icons/fa";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {Autoplay, Pagination, Navigation} from "swiper/modules";
-import {useAppSelector} from "../../../redux/hooks";
-import {useWarning} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
+import {useConfirm, useWarning} from "../../../hooks";
+import {setReserve} from "../../../redux/reserve-slice";
 
 interface Room {
   room: any;
@@ -30,6 +31,9 @@ interface Room {
 const CardRoom: React.FC<Room> = ({room}) => {
   const navigate = useNavigate();
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
+  const user = useAppSelector((state) => state.auth.user);
+  const reserve = useAppSelector((state) => state.reserve);
+  const dispatch = useAppDispatch();
 
   const {data: wishlist} = useGetWishlistQuery(undefined);
   const [postWishlist, {isLoading: postWishLoading}] =
@@ -61,11 +65,32 @@ const CardRoom: React.FC<Room> = ({room}) => {
       });
   };
 
-  const handleReserve = () => {
+  const handleReserve = async () => {
     if (!hotelFilter.checkIn || !hotelFilter.checkOut) {
-      return useWarning({title: "Please select checkIn and checkOut!"});
+      return useWarning({
+        title: "Please select checkIn and checkOut!",
+      });
     }
-    navigate(`/payment/${room._id}`);
+
+    dispatch(
+      setReserve({
+        email: user.email,
+        phoneNumber: user.phone,
+        roomId: room._id,
+        checkIn: hotelFilter.checkIn,
+        checkOut: hotelFilter.checkOut,
+        adult: hotelFilter.adult,
+        children: hotelFilter.children,
+      })
+    );
+    const isConfirm = await useConfirm({
+      config: {icon: "success", buttons: ["Add more", "Pay now"]},
+      title: "To proceed with your reservation please pay now.",
+    });
+
+    if (isConfirm) {
+      navigate(`/payment`);
+    }
   };
 
   return (
@@ -161,7 +186,11 @@ const CardRoom: React.FC<Room> = ({room}) => {
             </ul>
           </div>
           <div className="flex items-center justify-between">
-            <Button onClick={handleReserve}>Reserve Now</Button>
+            {reserve.some((r) => r.roomId == room._id) ? (
+              <Button onClick={() => navigate(`/payment`)}>Pay</Button>
+            ) : (
+              <Button onClick={handleReserve}>Reserve</Button>
+            )}
 
             {wishlist?.some((item: any) => item.roomId === room._id) ? (
               <>

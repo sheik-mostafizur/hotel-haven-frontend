@@ -1,18 +1,19 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Main from "../../../layout/main";
-import { Rating } from "@smastrom/react-rating";
-import { HashSpinner } from "../../../components/spinner";
+import {Rating} from "@smastrom/react-rating";
+import {HashSpinner} from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
-import { useGetHotelByIdQuery } from "../../../api/public-api";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {useGetHotelByIdQuery} from "../../../api/public-api";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
-import { useEffect, useState } from "react";
-import { setHotelFilter } from "../../../redux/hotel-filter-slice";
+import {useEffect, useState} from "react";
+import {setHotelFilter} from "../../../redux/hotel-filter-slice";
 import SetTitle from "../../../components/set-title";
+import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
 
-const AnyReactComponent = ({ text }: { text: any }) => <div>{text}</div>;
+const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
 
 interface HotelDetails {
   hotel: {
@@ -33,23 +34,21 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: { [key: string]: string };
+    roomInfo: {[key: string]: string};
   }[];
 }
 
 const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
-
-  const { _id } = useParams();
-
-  console.log(_id);
-  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
+  
+  const {_id} = useParams();
+  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
 
-  const { hotel, rooms } = viewHotels || [];
+  const {hotel, rooms} = viewHotels || [];
 
   const defaultProps: any = {
     center: {
@@ -69,15 +68,12 @@ const HotelDetails: React.FC = () => {
       });
   }, []);
 
-  function formatDateToYYYYMMDD(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+  const checkInMinDate = formatDateToYYYYMMDD();
 
-  const today = new Date();
-  const minDate = formatDateToYYYYMMDD(today);
+  let currentCheckIn = new Date(hotelFilter.checkIn);
+  const day = currentCheckIn.getDate();
+  currentCheckIn.setDate(day + 1);
+  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
     <Main>
@@ -173,14 +169,14 @@ const HotelDetails: React.FC = () => {
 
                 <div className="my-8 mx-auto">
                   <h3 className="text-center">Choose your room</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-lg">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-6 max-w-screen-lg">
                     <div>
                       <label htmlFor="checkIn">Check In Date</label>
                       <input
                         id="checkIn"
                         defaultValue={hotelFilter.checkIn}
                         type="date"
-                        min={minDate}
+                        min={checkInMinDate}
                         onChange={(e) =>
                           dispatch(
                             setHotelFilter({
@@ -197,11 +193,48 @@ const HotelDetails: React.FC = () => {
                         id="checkOut"
                         defaultValue={hotelFilter.checkOut}
                         type="date"
+                        min={checkOutMinDate}
                         onChange={(e) =>
                           dispatch(
                             setHotelFilter({
                               ...hotelFilter,
                               checkOut: e.target.value,
+                            })
+                          )
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      <label htmlFor="adult">Adult</label>
+                      <input
+                        id="adult"
+                        type="number"
+                        min="1"
+                        max="6"
+                        defaultValue={hotelFilter.adult}
+                        onChange={(e) =>
+                          dispatch(
+                            setHotelFilter({
+                              ...hotelFilter,
+                              adult: e.target.value,
+                            })
+                          )
+                        }
+                      />
+                    </div>
+                    <div className="">
+                      <label htmlFor="child">Children</label>
+                      <input
+                        id="child"
+                        type="number"
+                        min="0"
+                        max="6"
+                        defaultValue={hotelFilter.children}
+                        onChange={(e) =>
+                          dispatch(
+                            setHotelFilter({
+                              ...hotelFilter,
+                              children: e.target.value,
                             })
                           )
                         }
@@ -309,15 +342,14 @@ const HotelDetails: React.FC = () => {
                       <Rating
                         value={4.5}
                         readOnly={true}
-                        style={{ maxWidth: "100px" }}
+                        style={{maxWidth: "100px"}}
                       />
                       <p>4.5 out of 5</p>
                     </div>
                     {comment.slice(0, 3).map((c: any) => (
                       <div
                         key={c.id}
-                        className=" p-4 bg-white  rounded-lg dark:bg-gray-800 "
-                      >
+                        className=" p-4 bg-white  rounded-lg dark:bg-gray-800 ">
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-2">
                             <img
@@ -330,7 +362,7 @@ const HotelDetails: React.FC = () => {
                               <Rating
                                 value={c?.rating}
                                 readOnly={true}
-                                style={{ maxWidth: "100px" }}
+                                style={{maxWidth: "100px"}}
                               />
                             </div>
                           </div>
@@ -348,13 +380,11 @@ const HotelDetails: React.FC = () => {
 
                 <div
                   className="my-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
-                  style={{ height: "500px", width: "100%" }}
-                >
+                  style={{height: "500px", width: "100%"}}>
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "" }}
+                    bootstrapURLKeys={{key: ""}}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}
-                  >
+                    defaultZoom={defaultProps.zoom}>
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}

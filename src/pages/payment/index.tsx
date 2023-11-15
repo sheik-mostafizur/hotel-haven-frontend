@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -7,18 +7,26 @@ import {
   FaBath,
   FaCheckCircle,
   FaBed,
+  FaCross,
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import {AiFillCar} from "react-icons/ai";
-import {MdPool} from "react-icons/md";
-import {CgGym} from "react-icons/cg";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { AiFillCar } from "react-icons/ai";
+import { MdPool } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
-import {useAppSelector} from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
-import {useGetRoomDetailsQuery} from "../../api/private-api";
+import {
+  useGetRoomDetailsQuery,
+  useGetRoomsByIdsQuery,
+} from "../../api/private-api";
 import SetTitle from "../../components/set-title";
+import { usePostPaymentOrderMutation } from "../../api/public-api";
+import { useSuccess } from "../../hooks";
+import toastError from "../../utils/toast-error";
+import { BeatSpinner } from "../../components/spinner";
 
 interface IFormInputs {
   fullName: string;
@@ -28,53 +36,59 @@ interface IFormInputs {
 
 const Payment: React.FC = () => {
   const user = useAppSelector((state) => state.auth.user);
-  const {_id} = useParams();
-  const {data} = useGetRoomDetailsQuery(_id);
+  const reserveData = useAppSelector((state) => state.reserve);
+  const roomIds = reserveData.map((room) => room.roomId);
 
-  // const { hotel, room } = data;
-  // console.log(hotelFilter);
+  let { data: rooms, isLoading } = useGetRoomsByIdsQuery(roomIds);
+  rooms = rooms?.map((room) => {
+    const reserve = reserveData.find((r) => r.roomId === room._id);
 
-  // const { title, roomInfo, facilities, capacity, availability, thumbnails } =
-  //   data?.room;
+    if (reserve) {
+      const {
+        _id,
+        title,
+        roomInfo: { regularPrice, discountedPrice },
+      } = room;
 
-  // const { address } = data?.hotel;
-  // console.log(data?.room?.roomInfo?.discountedPrice);
+      return {
+        _id,
+        title,
+        thumbnails: room.thumbnails,
+        price: regularPrice,
+        discountedPrice,
+        checkIn: reserve.checkIn,
+        checkOut: reserve.checkOut,
+        adult: reserve.adult,
+        children: reserve.children,
+      };
+    }
+  });
 
-  // const token = ''
-  const handelPayment = () => {
-    fetch("http://localhost:3000/payment/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQGdtYWlsLmNvbSIsImdlbmRlciI6Ik1BTEUiLCJhZ2UiOjIxLCJpYXQiOjE2OTk4MzY1NDJ9.luGYQo6haAbRIbrvf8L7spcCGDXCSpMsLcmah6QRBXY`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((results) => {
-        window.location.replace(results.url);
-        console.log(results);
-      });
-  };
+  const totalPrice = rooms?.reduce((total, room) => {
+    if (room.discountedPrice) total += room.discountedPrice;
+    return total;
+  }, 0);
+  const originalPrice = rooms?.reduce((total: any, room: any) => {
+    if (room.price) total += room.price;
+    return total;
+  }, 0);
 
-  const amount = 1222;
+  const savings: number = originalPrice - totalPrice;
+
+  const [postPaymentOrder, { isLoading: payIsLoading }] =
+    usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
-    const data = {};
-
-    const res = await fetch("http://localhost:3000/payment/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(data),
-    });
-
-    const url = await res.json();
-    window.location.href = url;
+    postPaymentOrder(reserveData)
+      .unwrap()
+      .then((url: string) => {
+        window.location.href = url;
+      })
+      .catch(({ data }) => {
+        const error = { message: data?.message };
+        toastError(error);
+      });
   };
-
   return (
     <Main>
       <SetTitle title={`Pay now`} />
@@ -135,7 +149,7 @@ const Payment: React.FC = () => {
               </div>
             </div>
             {/* step 2 details */}
-            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
+            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4">
                   <p>
@@ -173,17 +187,15 @@ const Payment: React.FC = () => {
               <hr />
               <p className="font-medium py-2">Facilities</p>
               <ul>
-                {data?.room?.facilities &&
-                  data?.room?.facilities.map((f: string) => (
-                    <li key={f} className="flex gap-2 items-center">
-                      <FaCheck />
-                      {f}
-                    </li>
-                  ))}
+                <li className="flex gap-2 items-center">facility one</li>
+                <li className="flex gap-2 items-center">
+                  <FaCheck />
+                  facility two
+                </li>
               </ul>
             </div>
             {/* step 3 Payment Details*/}
-            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow hover:bg-secondary-100 dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
+            <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <FaLock></FaLock>
@@ -195,51 +207,99 @@ const Payment: React.FC = () => {
               <p className="py-4 flex items-center gap-4 ">
                 <FaCheckCircle></FaCheckCircle> We never charge any card fees
               </p>
-              <Button size="xl" className="w-52" onClick={handlePayment}>
-                Pay Now
-              </Button>
+              <div className="">
+                <div className="">
+                  <h4 className="py-2">Your Price Summary</h4>
+                  <div className="flex justify-between items-center">
+                    <p>Original Price:</p>
+                    <p>BDT {originalPrice}</p>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p>Bonus Savings:</p>
+                    <p>BDT -{savings.toFixed(2)}</p>
+                  </div>
+                  <p>
+                    <small>
+                      You are getting reduce rate because this property is
+                      offering a discount
+                    </small>
+                    <hr />
+                  </p>
+                  <div className="flex justify-between items-center  pt-4">
+                    <Button
+                      isDisabled={payIsLoading}
+                      size="xl"
+                      className="w-52"
+                      onClick={handlePayment}
+                    >
+                      {payIsLoading ? <BeatSpinner /> : " Pay Now"}
+                    </Button>
+                    <div>
+                      <p className="font-medium text-red-600 line-through">
+                        BDT {originalPrice}
+                      </p>
+                      <p className="text-3xl font-semibold">
+                        {" "}
+                        BDT {totalPrice}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Room Details */}
-          <div className="max-w-sm h-full mb-4 lg:sticky lg:top-0 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div>
-              <img
-                className="rounded-lg border-2 p-2 border-white"
-                src={data?.room?.thumbnails[0]}
-                alt="Room image"
-              />
-            </div>
-            <div className="p-5 mb-4">
-              <h6>{data?.room?.title}</h6>
-              <p>
-                <small>{data?.hotel?.address?.location}</small>
-              </p>
-            </div>
-            {/* <div className="p-5 mb-4 mx-2 bg-white rounded-lg border-2">
-              <div className="flex justify-between items-center">
-                <p> CheckIn:</p>
-                <p>date</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>CheckOut:</p>
-                <p>date</p>
-              </div>
-            </div> */}
-            {/* <div className="p-5 bg-white">
-              <div className="flex justify-between items-center">
-                <p>date</p>
-                <p>{data?.room?.roomInfo?.discountedPrice} BDT</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>tax:</p>
-                <p>5%</p>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>Total Price:</p>
-                <p>130 BDT</p>
-              </div>
-            </div> */}
+          <div>
+            {isLoading ? (
+              <h1>Loading...</h1>
+            ) : (
+              rooms?.map((room) => (
+                <div
+                  key={room._id}
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <div className="relative">
+                    {/* here you can see many images using slide */}
+                    <img
+                      className="rounded-lg border-2 p-2 border-white"
+                      src={room.thumbnails[0]}
+                      alt={room.title}
+                    />
+                    <button className="rounded-full absolute top-0 right-0 bg-secondary-200 block ml-auto px-2">
+                      X
+                    </button>
+                  </div>
+                  <div className="p-3">
+                    <h6 className="font-bold">{room.title}</h6>
+                    <div className="flex justify-between items-center">
+                      <p className="text-lg font-semibold">Price</p>
+                      <p className="text-base">
+                        <del>{room.price}</del> <b>{room.discountedPrice}</b>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="p-5 bg-white">
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Check In</p>
+                      <b className="text-base">{room.checkIn}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Check out</p>
+                      <b className="text-base">{room.checkOut}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Adult</p>
+                      <b className="text-base">{room.adult}</b>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <p className="text-base">Child</p>
+                      <b className="text-base">{room.children}</b>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </Container>
