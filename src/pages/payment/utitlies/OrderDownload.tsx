@@ -7,7 +7,7 @@ import {
   PDFDownloadLink,
 } from "@react-pdf/renderer";
 import Button from "../../../components/ui/button";
-import {BeatSpinner} from "../../../components/spinner";
+import { BeatSpinner } from "../../../components/spinner";
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
@@ -18,8 +18,14 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 1,
   },
+  div: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 10,
+  },
 });
-const OrderDownload = () => {
+const OrderDownload = ({ data }: { data: any }) => {
   return (
     <PDFDownloadLink
       document={
@@ -30,11 +36,38 @@ const OrderDownload = () => {
               <Text>
                 Thank you for your payment. Your transaction was successful.
               </Text>
+
+              <Text style={styles.div}>
+                <Text>Payment Type:</Text>
+                <Text>{data?.cardType}</Text>
+              </Text>
+              <Text style={styles.div}>
+                <Text>Status</Text>
+                <Text>{data?.status}</Text>
+              </Text>
+              <Text style={styles.div}>
+                <Text>Email</Text>
+                <Text>{data?.email}</Text>
+              </Text>
+              <Text style={styles.div}>
+                <Text>Mobile</Text>
+                <Text>{data?.phoneNumber}</Text>
+              </Text>
+              <hr />
+              <Text style={styles.div}>
+                <Text>Transaction Id</Text>
+                <Text>{data?.transactionId}</Text>
+              </Text>
+              <Text style={styles.div}>
+                <Text>Amount paid</Text>
+                <Text>{data?.totalAmount}.00</Text>
+              </Text>
             </View>
           </Page>
         </Document>
-      }>
-      {({loading}) =>
+      }
+    >
+      {({ loading }) =>
         loading ? (
           <Button>
             <BeatSpinner />

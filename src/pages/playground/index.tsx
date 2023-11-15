@@ -1,7 +1,8 @@
 import SetTitle from "../../components/set-title";
+import SuccesSkeleton from "../../components/skeleton/success-skeleton";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
-import {useSignin, useSuccess, useWarning} from "../../hooks";
+import { useSignin, useSuccess, useWarning } from "../../hooks";
 
 const Playground: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Playground: React.FC = () => {
       <SetTitle title={`Playground`} />
       <h1 className="font-OpenSans">Playground</h1>
 
-      <Button
+      {/* <Button
         onClick={async () => {
           useSignin();
         }}>
@@ -26,7 +27,8 @@ const Playground: React.FC = () => {
           useWarning();
         }}>
         useWarning
-      </Button>
+      </Button> */}
+      <SuccesSkeleton />
     </Container>
   );
 };
