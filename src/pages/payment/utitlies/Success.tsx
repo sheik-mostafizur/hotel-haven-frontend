@@ -1,13 +1,13 @@
-import { useParams } from "react-router-dom";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { useGetPaymentSuccessOrderQuery } from "../../../api/public-api";
+import {Link, useParams} from "react-router-dom";
+import {IoMdCheckmarkCircleOutline} from "react-icons/io";
+import {useGetPaymentSuccessOrderQuery} from "../../../api/public-api";
 import Container from "../../../components/ui/container";
 import OrderDownload from "./OrderDownload";
 import SuccessSkeleton from "../../../components/skeleton/success-skeleton";
 
 const Success = () => {
-  const { transactionId } = useParams();
-  const { data, isLoading } = useGetPaymentSuccessOrderQuery(transactionId);
+  const {transactionId} = useParams();
+  const {data, isLoading} = useGetPaymentSuccessOrderQuery(transactionId);
 
   return (
     <Container>
@@ -48,12 +48,13 @@ const Success = () => {
             </div>
             <div className="flex items-center justify-center gap-4">
               <OrderDownload data={data} />
-              <button
-                type="button"
-                className="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-500 dark:hover:bg-gray-600 focus:outline-none dark:focus:ring-gray-700"
-              >
-                Close
-              </button>
+              <Link to={"/dashboard/bookingHistory"}>
+                <button
+                  type="button"
+                  className="text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-500 dark:hover:bg-gray-600 focus:outline-none dark:focus:ring-gray-700">
+                  Close
+                </button>
+              </Link>
             </div>
           </div>
         </div>

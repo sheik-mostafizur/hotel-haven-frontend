@@ -189,7 +189,11 @@ const CardRoom: React.FC<Room> = ({room}) => {
             {reserve.some((r) => r.roomId == room._id) ? (
               <Button onClick={() => navigate(`/payment`)}>Pay</Button>
             ) : (
-              <Button onClick={handleReserve}>Reserve</Button>
+              <Button
+                onClick={handleReserve}
+                isDisabled={room.availability.isBlocked}>
+                {room.availability.isBlocked ? "Already Booked" : "Reserve"}
+              </Button>
             )}
 
             {wishlist?.some((item: any) => item.roomId === room._id) ? (
