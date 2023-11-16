@@ -11,11 +11,10 @@ import {
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
-import {useEffect, useState} from "react";
-import {setHotelFilter} from "../../../redux/hotel-filter-slice";
 import SetTitle from "../../../components/set-title";
-import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
 import formatPostDate from "../../../utils/format-post-date";
+import Header from "./Header";
+import Filter from "./Filter";
 
 const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
 
@@ -56,6 +55,19 @@ const HotelDetails: React.FC = () => {
 
   const {hotel, rooms} = viewHotels || [];
 
+  let roomsURL = rooms?.map((room) => room.thumbnails) || [];
+  roomsURL = [].concat(...roomsURL);
+
+  const headerData = {
+    isLoading,
+    hotelPhotoURL: hotel?.photoURL,
+    name: hotel?.name,
+    location: hotel?.address?.location,
+    rating: hotel?.rating || 0,
+    description: hotel?.description,
+    roomsURL: roomsURL.slice(0, 4),
+  };
+
   const defaultProps: any = {
     center: {
       lat: hotel?.address?.map?.lat as number,
@@ -64,26 +76,11 @@ const HotelDetails: React.FC = () => {
     zoom: 11,
   };
 
-  const [comment, setComment] = useState([]);
-
-  useEffect(() => {
-    fetch("/db/comment.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setComment(data);
-      });
-  }, []);
-
-  const checkInMinDate = formatDateToYYYYMMDD();
-
-  let currentCheckIn = new Date(hotelFilter.checkIn);
-  const day = currentCheckIn.getDate();
-  currentCheckIn.setDate(day + 1);
-  const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
-
   return (
     <Main>
       <SetTitle title={`${hotel?.name || "Hotel"}`} />
+      <Header {...headerData} />
+      <Filter isLoading={isLoading} />
       <Container>
         {isLoading ? (
           <HashSpinner />
@@ -91,164 +88,6 @@ const HotelDetails: React.FC = () => {
           <>
             {viewHotels ? (
               <>
-                <div className="bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
-                  <div className="grid grid-cols-2 items-center gap-1">
-                    <div>
-                      <img
-                        className="rounded-t-lg h-96 w-full"
-                        src={hotel?.photoURL}
-                        alt="hotel image"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-1">
-                      {rooms[0]?.thumbnails[1] ? (
-                        <img
-                          className="rounded-t-lg h-48 w-full"
-                          src={rooms[0]?.thumbnails[1]}
-                          alt="Room image"
-                        />
-                      ) : (
-                        <img
-                          className="rounded-t-lg h-48 w-full"
-                          src="https://media.istockphoto.com/id/1213695547/photo/3d-rendering-of-an-elegant-bedroom.jpg?s=612x612&w=0&k=20&c=yxOoaz2IAd9zvtlXeS-Th-AiXhaCtMIxOONfGbtGeG8="
-                          alt="Room image"
-                        />
-                      )}
-                      {rooms[1]?.thumbnails[1] ? (
-                        <img
-                          className="rounded-t-lg h-48 w-full"
-                          src={rooms[1]?.thumbnails[1]}
-                          alt="room image"
-                        />
-                      ) : (
-                        <img
-                          className="rounded-t-lg h-48 w-full"
-                          src="https://images.adsttc.com/media/images/622a/1b96/620b/c901/65c4/d5ff/newsletter/cama-arquitetura-06b.jpg?1646926752"
-                          alt="room image"
-                        />
-                      )}
-                      {rooms[0]?.thumbnails[2] ? (
-                        <img
-                          className="rounded-b-lg h-48 w-full"
-                          src={rooms[0].thumbnails[2]}
-                          alt="room image"
-                        />
-                      ) : (
-                        <img
-                          className="rounded-b-lg h-48 w-full"
-                          src="https://media.designcafe.com/wp-content/uploads/2022/07/29185240/industrial-rustic-living-room-in-earthy-tones.jpg"
-                          alt="room image"
-                        />
-                      )}
-                      {rooms[1]?.thumbnails[2] ? (
-                        <img
-                          className="rounded-b-lg h-48 w-full"
-                          src={rooms[1]?.thumbnails[2]}
-                          alt="room image"
-                        />
-                      ) : (
-                        <img
-                          className="rounded-b-lg h-48 w-full"
-                          src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlNF9waG90b19vZl9hX2ZyYW1lX2luX3RoZV9saXZpbmdfcm9vbV9pbl90aGVfc3R5bF85YWM1MjY1ZS02OTdjLTQ4OWMtYTFmYS03NzgzMjJlMTEwODNfMi5qcGc.jpg"
-                          alt="Room image"
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div>
-                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-secondary-900 dark:text-white">
-                        {hotel?.name}
-                      </h5>
-                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-                        Location: {hotel?.address?.location}
-                      </p>
-                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-                        Rating: {hotel?.rating}
-                      </p>
-                      <p className="mb-3 font-normal text-secondary-700 dark:text-secondary-400">
-                        {hotel?.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="my-8 mx-auto">
-                  <h3 className="text-center">Choose your room</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-6 max-w-screen-lg">
-                    <div>
-                      <label htmlFor="checkIn">Check In Date</label>
-                      <input
-                        id="checkIn"
-                        defaultValue={hotelFilter.checkIn}
-                        type="date"
-                        min={checkInMinDate}
-                        onChange={(e) =>
-                          dispatch(
-                            setHotelFilter({
-                              ...hotelFilter,
-                              checkIn: e.target.value,
-                            })
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="">
-                      <label htmlFor="checkOut">Check Out Date</label>
-                      <input
-                        id="checkOut"
-                        defaultValue={hotelFilter.checkOut}
-                        type="date"
-                        min={checkOutMinDate}
-                        onChange={(e) =>
-                          dispatch(
-                            setHotelFilter({
-                              ...hotelFilter,
-                              checkOut: e.target.value,
-                            })
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="">
-                      <label htmlFor="adult">Adult</label>
-                      <input
-                        id="adult"
-                        type="number"
-                        min="1"
-                        max="6"
-                        defaultValue={hotelFilter.adult}
-                        onChange={(e) =>
-                          dispatch(
-                            setHotelFilter({
-                              ...hotelFilter,
-                              adult: e.target.value,
-                            })
-                          )
-                        }
-                      />
-                    </div>
-                    <div className="">
-                      <label htmlFor="child">Children</label>
-                      <input
-                        id="child"
-                        type="number"
-                        min="0"
-                        max="6"
-                        defaultValue={hotelFilter.children}
-                        onChange={(e) =>
-                          dispatch(
-                            setHotelFilter({
-                              ...hotelFilter,
-                              children: e.target.value,
-                            })
-                          )
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-
                 <div className="grid md:grid-cols-2 gap-4 justify-center items-center lg:grid-cols-3 2xl:grid-cols-4">
                   {viewHotels.rooms && viewHotels.rooms.length > 0 ? (
                     viewHotels?.rooms.map((room: any) => (
