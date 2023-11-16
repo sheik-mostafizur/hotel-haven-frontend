@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import { useGetHotelReviewByIdQuery } from "../../../api/public-api";
 // import CustomerReviewsSkeleton from "./CustomerReviewsSkeleton";
 
 interface CustomerReviews {
@@ -19,19 +20,9 @@ interface CustomerReviews {
 }
 
 const CustomerReviews: React.FC = () => {
-  const [reviews, setReviews] = useState<CustomerReviews[]>([]);
-
-  useEffect(() => {
-    axios
-      .get("/db/customer-reviews.json")
-      .then((res) => {
-        setReviews(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+  const { data: reviews, isLoading: reviewLoading } =
+    useGetHotelReviewByIdQuery("65404fb8a56e13bc02c8c037");
+  console.log(reviews);
   return (
     <div className="bg-primary-50 dark:bg-secondary-900">
       <Container className="lg:my-20 overflow-hidden">
@@ -72,7 +63,7 @@ const CustomerReviews: React.FC = () => {
             }}
           >
             <div>
-              {reviews.map((review) => (
+              {reviews?.slice(0, 15).map((review: any) => (
                 <SwiperSlide
                   key={review._id}
                   className="bg-white p-4 rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
@@ -80,12 +71,14 @@ const CustomerReviews: React.FC = () => {
                 >
                   <div className="flex items-center mb-4">
                     <img
-                      src={review.profileURL}
-                      alt={review.name}
+                      src={review.userProfile}
+                      alt={review.userName}
                       className="w-12 h-12 rounded-full"
                     />
                     <div className="ml-3">
-                      <h3 className="text-xl font-semibold">{review.name}</h3>
+                      <h3 className="text-xl font-semibold">
+                        {review.userName}
+                      </h3>
                       <div className="flex items-center">
                         <div className="font-semibold font-mono text-lg">
                           <Rating
@@ -98,7 +91,7 @@ const CustomerReviews: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-secondary-700 my-auto h-52">
-                    <q className="italic font-mono">{review.review}</q>
+                    <q className="italic font-mono">{review.feedback}</q>
                   </p>
                 </SwiperSlide>
               ))}

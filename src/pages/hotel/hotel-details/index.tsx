@@ -11,7 +11,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
-import { useEffect, useState } from "react";
 import { setHotelFilter } from "../../../redux/hotel-filter-slice";
 import SetTitle from "../../../components/set-title";
 import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
@@ -54,6 +53,13 @@ const HotelDetails: React.FC = () => {
   const { data: review, isLoading: reviewLoading } =
     useGetHotelReviewByIdQuery(_id);
 
+  const totalRating = review?.reduce((total: any, reviews: any) => {
+    if (reviews.rating) total += reviews.rating;
+    return total;
+  }, 0);
+
+  const avgRating = totalRating / review?.length;
+
   const { hotel, rooms } = viewHotels || [];
 
   const defaultProps: any = {
@@ -63,16 +69,6 @@ const HotelDetails: React.FC = () => {
     },
     zoom: 11,
   };
-
-  const [comment, setComment] = useState([]);
-
-  useEffect(() => {
-    fetch("/db/comment.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setComment(data);
-      });
-  }, []);
 
   const checkInMinDate = formatDateToYYYYMMDD();
 
@@ -337,24 +333,27 @@ const HotelDetails: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="grid lg:grid-cols-2 gap-4">
                   <div>
-                    <RatingPopUp hotelId={_id} />
+                    <RatingPopUp hotelId={hotel?._id} />
                   </div>
                   <div className="mx-auto">
                     <h2 className="text-center">Customer reviews</h2>
+                    <p className="text-center">
+                      Total reviews: {""}
+                      {review?.length}
+                    </p>
                     <div className="flex gap-2 justify-center">
                       <Rating
-                        value={4.5}
+                        value={avgRating}
                         readOnly={true}
                         style={{ maxWidth: "100px" }}
                       />
-                      <p>4.5 out of 5</p>
+                      <p>{avgRating} out of 5</p>
                     </div>
                     {review?.map((rev: any) => (
                       <div
-                        key={c.id}
+                        key={rev.id}
                         className=" p-4 bg-white  rounded-lg dark:bg-gray-800 "
                       >
                         <div className="flex justify-between items-center">
@@ -405,7 +404,7 @@ const HotelDetails: React.FC = () => {
               </>
             ) : (
               <>
-                <p>No details</p>
+                <p className="text-center">Check Your Interne Connection</p>
               </>
             )}
           </>
