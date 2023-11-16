@@ -6,6 +6,7 @@ import {createSlice} from "@reduxjs/toolkit";
     email: "",
     phoneNumber: "",
     roomId: "",
+    hotelId:"",
     checkIn: "",
     checkOut: "",
     adult: 1,

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -11,22 +11,22 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import { AiFillCar } from "react-icons/ai";
-import { MdPool } from "react-icons/md";
-import { CgGym } from "react-icons/cg";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {AiFillCar} from "react-icons/ai";
+import {MdPool} from "react-icons/md";
+import {CgGym} from "react-icons/cg";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
+import {useAppSelector} from "../../redux/hooks";
 import Button from "../../components/ui/button";
 import {
   useGetRoomDetailsQuery,
   useGetRoomsByIdsQuery,
 } from "../../api/private-api";
 import SetTitle from "../../components/set-title";
-import { usePostPaymentOrderMutation } from "../../api/public-api";
-import { useSuccess } from "../../hooks";
+import {usePostPaymentOrderMutation} from "../../api/public-api";
+import {useSuccess} from "../../hooks";
 import toastError from "../../utils/toast-error";
-import { BeatSpinner } from "../../components/spinner";
+import {BeatSpinner} from "../../components/spinner";
 
 interface IFormInputs {
   fullName: string;
@@ -39,7 +39,7 @@ const Payment: React.FC = () => {
   const reserveData = useAppSelector((state) => state.reserve);
   const roomIds = reserveData.map((room) => room.roomId);
 
-  let { data: rooms, isLoading } = useGetRoomsByIdsQuery(roomIds);
+  let {data: rooms, isLoading} = useGetRoomsByIdsQuery(roomIds);
   rooms = rooms?.map((room) => {
     const reserve = reserveData.find((r) => r.roomId === room._id);
 
@@ -47,7 +47,7 @@ const Payment: React.FC = () => {
       const {
         _id,
         title,
-        roomInfo: { regularPrice, discountedPrice },
+        roomInfo: {regularPrice, discountedPrice},
       } = room;
 
       return {
@@ -75,7 +75,7 @@ const Payment: React.FC = () => {
 
   const savings: number = originalPrice - totalPrice;
 
-  const [postPaymentOrder, { isLoading: payIsLoading }] =
+  const [postPaymentOrder, {isLoading: payIsLoading}] =
     usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
@@ -84,8 +84,8 @@ const Payment: React.FC = () => {
       .then((url: string) => {
         window.location.href = url;
       })
-      .catch(({ data }) => {
-        const error = { message: data?.message };
+      .catch(({data}) => {
+        const error = {message: data?.message};
         toastError(error);
       });
   };
@@ -230,8 +230,7 @@ const Payment: React.FC = () => {
                       isDisabled={payIsLoading}
                       size="xl"
                       className="w-52"
-                      onClick={handlePayment}
-                    >
+                      onClick={handlePayment}>
                       {payIsLoading ? <BeatSpinner /> : " Pay Now"}
                     </Button>
                     <div>
@@ -257,8 +256,7 @@ const Payment: React.FC = () => {
               rooms?.map((room) => (
                 <div
                   key={room._id}
-                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
-                >
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <div className="relative">
                     {/* here you can see many images using slide */}
                     <img

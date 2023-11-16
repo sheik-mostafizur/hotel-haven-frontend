@@ -72,11 +72,16 @@ const CardRoom: React.FC<Room> = ({room}) => {
       });
     }
 
+    const isSameHotel = reserve.some((resv) => resv.hotelId !== room.hotelId);
+
+    if (isSameHotel) return alert("must room will be a hotel");
+
     dispatch(
       setReserve({
         email: user.email,
         phoneNumber: user.phone,
         roomId: room._id,
+        hotelId: room.hotelId,
         checkIn: hotelFilter.checkIn,
         checkOut: hotelFilter.checkOut,
         adult: hotelFilter.adult,
