@@ -45,7 +45,7 @@ const FindRoomForm = () => {
   const checkOutMinDate = formatDateToYYYYMMDD(currentCheckIn);
 
   return (
-    <div className="bg-primary-50 p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-800 dark:border-secondary-800 dark:shadow-secondary-800">
+    <div className="bg-primary-100/70 backdrop-blur p-4 md:px-8 md:py-12 rounded-lg shadow shadow-primary-100 max-w-2xl dark:bg-secondary-800 dark:border-secondary-800 dark:shadow-secondary-800">
       <h2>Find Your Room</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <div>
