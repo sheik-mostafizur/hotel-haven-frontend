@@ -1,12 +1,11 @@
 import Main from "../../layout/main";
 import Container from "../../components/ui/container";
-import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
-import {useGetPublicBlogsQuery} from "../../api/public-api";
+import { BlogCard, BlogCardSkeleton } from "../../components/ui/card";
+import { useGetPublicBlogsQuery } from "../../api/public-api";
 import SetTitle from "../../components/set-title";
-import {useState} from "react";
 import Pagination from "../../components/pagination";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {setBlogFilter} from "../../redux/blog-filter-slice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setBlogFilter } from "../../redux/blog-filter-slice";
 
 interface BlogData {
   _id: number;
@@ -23,8 +22,8 @@ const Blogs: React.FC = () => {
   const query = useAppSelector((state) => state.blogFilter);
   const dispatch = useAppDispatch();
 
-  const {data, isLoading} = useGetPublicBlogsQuery(query);
-  const {data: blogs, totalPages, currentPage} = data || {};
+  const { data, isLoading } = useGetPublicBlogsQuery(query);
+  const { data: blogs, totalPages, currentPage } = data || {};
 
   return (
     <Main>
@@ -42,7 +41,7 @@ const Blogs: React.FC = () => {
         </div>
         {totalPages != 1 && (
           <Pagination
-            handlePages={(page) => dispatch(setBlogFilter({...query, page}))}
+            handlePages={(page) => dispatch(setBlogFilter({ ...query, page }))}
             currentPage={parseInt(currentPage)}
             totalPages={parseInt(totalPages)}
           />

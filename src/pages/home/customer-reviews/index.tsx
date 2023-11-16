@@ -22,9 +22,8 @@ interface CustomerReviews {
 const CustomerReviews: React.FC = () => {
   const { data: reviews, isLoading: reviewLoading } =
     useGetHotelReviewByIdQuery("65404fb8a56e13bc02c8c037");
-  console.log(reviews);
   return (
-    <div className="bg-primary-50 dark:bg-secondary-900">
+    <div className="bg-primary-50 md:py-4 dark:bg-secondary-900">
       <Container className="lg:my-20 overflow-hidden">
         <div className="mx-auto text-center py-4">
           <h2 className="uppercase"> Customer Reviews</h2>
@@ -53,11 +52,6 @@ const CustomerReviews: React.FC = () => {
 
               768: {
                 slidesPerView: 2,
-                spaceBetween: 30,
-              },
-
-              1024: {
-                slidesPerView: 3,
                 spaceBetween: 30,
               },
             }}

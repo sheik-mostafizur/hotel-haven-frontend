@@ -11,6 +11,7 @@ import { useUpdateManagerRoomMutation } from "../../../../api/manager-api";
 import toastSuccess from "../../../../utils/toast-success";
 import toastError from "../../../../utils/toast-error";
 interface HotelRoomCardProps {
+  _id: string;
   title: string;
   thumbnails: [];
   thumbnail1: string;
@@ -79,7 +80,6 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
 }) => {
   const [updateManagerRoom] = useUpdateManagerRoomMutation();
   const { handleSubmit, control } = useForm<IFormInputs>({});
-  console.log(_id);
   const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
     updateManagerRoom({ data, _id })
       .unwrap()

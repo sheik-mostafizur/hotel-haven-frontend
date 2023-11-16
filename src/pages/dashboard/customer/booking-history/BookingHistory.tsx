@@ -1,17 +1,15 @@
-import {useGetBookingHistoryQuery} from "../../../../api/private-api";
-import {useGetHotelsQuery} from "../../../../api/public-api";
+import { useGetBookingHistoryQuery } from "../../../../api/private-api";
+import { useGetHotelsQuery } from "../../../../api/public-api";
 import SetTitle from "../../../../components/set-title";
 import Container from "../../../../components/ui/container";
 import Modal from "../../../../components/ui/modal";
 
 const BookingHistory = () => {
-  const {data} = useGetBookingHistoryQuery(undefined);
-  const {data: hotelData} = useGetHotelsQuery(undefined);
+  const { data } = useGetBookingHistoryQuery(undefined);
+  const { data: hotelData } = useGetHotelsQuery(undefined);
 
   const getLocationName = (hotelId: any) => {
-    console.log(hotelId);
     const hotel = hotelData?.data.find((h: any) => h._id === hotelId);
-    console.log(hotel);
     return hotel ? hotel?.address.location : "Unknown Location";
   };
 
@@ -47,10 +45,12 @@ const BookingHistory = () => {
             {data?.map((bookingHistory: any, index: number) => (
               <tr
                 key={index}
-                className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+              >
                 <td
                   scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
                   {bookingHistory?.hotelName}
                 </td>
                 <td className="px-6 py-4">
@@ -139,7 +139,8 @@ const BookingHistory = () => {
                     button={{
                       label: "Payment Details",
                       className: "block ml-auto",
-                    }}>
+                    }}
+                  >
                     <div>
                       <p className="font-medium text-primary-700">
                         Transaction ID: {bookingHistory?.transactionId}
