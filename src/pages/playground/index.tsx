@@ -3,6 +3,7 @@ import SuccesSkeleton from "../../components/skeleton/success-skeleton";
 import Button from "../../components/ui/button";
 import Container from "../../components/ui/container";
 import { useSignin, useSuccess, useWarning } from "../../hooks";
+import { BookingHistoryManager } from "../dashboard/manager";
 
 const Playground: React.FC = () => {
   return (
@@ -28,7 +29,8 @@ const Playground: React.FC = () => {
         }}>
         useWarning
       </Button> */}
-      <SuccesSkeleton />
+      {/* <SuccesSkeleton /> */}
+      <BookingHistoryManager />
     </Container>
   );
 };
