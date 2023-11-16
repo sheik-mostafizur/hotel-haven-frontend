@@ -143,7 +143,7 @@ const CardRoom: React.FC<Room> = ({ room }) => {
         <div className="p-4">
           <h5 className="my-2 h-12">{room.title}</h5>
 
-          <div className="py-1 ">
+          <div className="py-1 h-44">
             <strong>Facilities:</strong>
             <>
               {room.facilities.map((facility: any, index: number) => (
@@ -153,7 +153,7 @@ const CardRoom: React.FC<Room> = ({ room }) => {
               ))}
             </>
           </div>
-          <div className="mb-3">
+          <div className="mb-3 h-64">
             <ul>
               <li className="flex gap-4 items-center h-8">
                 <span>
@@ -198,7 +198,8 @@ const CardRoom: React.FC<Room> = ({ room }) => {
             ) : (
               <Button
                 onClick={handleReserve}
-                isDisabled={room.availability.isBlocked}>
+                isDisabled={room.availability.isBlocked}
+              >
                 {room.availability.isBlocked ? "Already Booked" : "Reserve"}
               </Button>
             )}

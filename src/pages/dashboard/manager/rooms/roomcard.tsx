@@ -117,9 +117,9 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
             Facilities:
           </h3>
           <ul className="mb-4 list-disc ms-10">
-            {facilities.map((facilitie: any) => (
-              <li className="text-[14px]" key={facilitie}>
-                {facilitie}
+            {facilities.map((facilities: string) => (
+              <li className="text-[14px]" key={facilities}>
+                {facilities}
               </li>
             ))}
           </ul>
