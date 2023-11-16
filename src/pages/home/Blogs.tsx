@@ -22,7 +22,6 @@ const Blogs: React.FC<Blogs> = ({
   publishDate,
   likes,
 }) => {
-  // console.log(title);
   return (
     <>
       <div

@@ -3,14 +3,14 @@ import {
   useGetWishlistQuery,
 } from "../../../api/private-api";
 import SetTitle from "../../../components/set-title";
-import {HashSpinner} from "../../../components/spinner";
+import { HashSpinner } from "../../../components/spinner";
 import Button from "../../../components/ui/button";
 import Container from "../../../components/ui/container";
 import toastError from "../../../utils/toast-error";
 import toastSuccess from "../../../utils/toast-success";
 
 const Wishlist = () => {
-  const {data: wishlist, isLoading} = useGetWishlistQuery(undefined);
+  const { data: wishlist, isLoading } = useGetWishlistQuery(undefined);
   const [deleteWishlistById] = useDeleteWishlistByIdMutation();
 
   const handleDeleteWishlist = (_id: any) => {
@@ -19,12 +19,11 @@ const Wishlist = () => {
       .then((data) => {
         toastSuccess(data.message);
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
-  console.log(wishlist);
 
   return (
     <Container>
@@ -53,13 +52,15 @@ const Wishlist = () => {
                 {wishlist?.map((item: any) => (
                   <tr
                     key={item._id}
-                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                    className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  >
                     <td className="px-6 py-4">{item.hotelName}</td>
                     <td className="px-6 py-4">{item.roomTitle}</td>
                     <td className="px-6 py-4">
                       <Button
                         size="sm"
-                        onClick={() => handleDeleteWishlist(item._id)}>
+                        onClick={() => handleDeleteWishlist(item._id)}
+                      >
                         remove
                       </Button>
                     </td>

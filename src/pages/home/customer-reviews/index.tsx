@@ -22,7 +22,6 @@ interface CustomerReviews {
 const CustomerReviews: React.FC = () => {
   const { data: reviews, isLoading: reviewLoading } =
     useGetHotelReviewByIdQuery("65404fb8a56e13bc02c8c037");
-  console.log(reviews);
   return (
     <div className="bg-primary-50 dark:bg-secondary-900">
       <Container className="lg:my-20 overflow-hidden">

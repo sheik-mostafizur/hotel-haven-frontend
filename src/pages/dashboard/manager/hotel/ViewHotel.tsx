@@ -46,7 +46,6 @@ const ViewHotel: React.FC<ViewHotelProps> = ({ hotel }) => {
       .then((res) => res.json())
       .then((data) => {
         setLocations(data);
-        // console.log(data);
       })
       .catch((error) => {
         toastError(error);
