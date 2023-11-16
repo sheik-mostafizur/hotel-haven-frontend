@@ -7,13 +7,13 @@ const PrivacyPolicy: React.FC = () => {
   return (
     <Main>
       <SetTitle title={`Privacy Policy`} />
-      <Container className="bg-gray-100 p-8 rounded-lg shadow-lg">
+      <Container className="my-4 md:my-8">
         <div className="flex flex-col items-center my-10">
-          <h1 className="text-4xl font-extrabold text-primary-400 mb-4">
+          <h1 className="text-4xl font-extrabold text-primary-500 mb-4">
             Privacy Policy
           </h1>
 
-          <p className="text-gray-700 text-center mb-8">
+          <p className="text-secondary-700 text-center mb-8 max-w-4xl">
             This Privacy Policy describes how Hotel Haven ("we," "us," or "our")
             collects, uses, and shares your personal information when you use
             our hotel booking website.
@@ -22,10 +22,10 @@ const PrivacyPolicy: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-primary-400 mb-4">
+            <h2 className="text-2xl font-bold text-primary-500 mb-4">
               Information We Collect
             </h2>
-            <ul className="list-disc list-inside text-gray-700">
+            <ul className="list-disc list-inside text-secondary-700">
               <li>
                 Your name, email address, and contact information when you make
                 a reservation.
@@ -48,10 +48,10 @@ const PrivacyPolicy: React.FC = () => {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-primary-400 mb-4">
+            <h2 className="text-2xl font-bold text-primary-500 mb-4">
               How We Use Your Information
             </h2>
-            <ul className="list-disc list-inside text-gray-700">
+            <ul className="list-disc list-inside text-secondary-700">
               <li>Processing and confirming your reservations.</li>
               <li>
                 Providing customer support and responding to your inquiries.
@@ -68,10 +68,10 @@ const PrivacyPolicy: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-primary-400 mb-4">
+            <h2 className="text-2xl font-bold text-primary-500 mb-4">
               Sharing Your Information
             </h2>
-            <ul className="list-disc list-inside text-gray-700">
+            <ul className="list-disc list-inside text-secondary-700">
               <li>
                 With service providers and partners who help us operate our
                 website and provide services to you.
@@ -89,10 +89,10 @@ const PrivacyPolicy: React.FC = () => {
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-primary-400 mb-4">
+            <h2 className="text-2xl font-bold text-primary-500 mb-4">
               Your Choices
             </h2>
-            <p className="text-gray-700">
+            <p className="text-secondary-700">
               You have certain rights regarding your personal information,
               including the right to access, correct, or delete your data. You
               can contact us using the information provided in the "Contact Us"
