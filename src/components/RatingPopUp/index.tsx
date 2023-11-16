@@ -1,14 +1,17 @@
 import {useState, ChangeEvent, useEffect} from "react";
 import Greeting from "./Greeting";
-import { useAppSelector } from "../../redux/hooks";
+import {usePostHotelReviewMutation} from "../../api/private-api";
+import toastSuccess from "../../utils/toast-success";
+import toastError from "../../utils/toast-error";
+import {BeatSpinner} from "../spinner";
 
 interface RatingPopUpProps {
   hotelId: number;
 }
 
-const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
-
-  const user = useAppSelector(state=> state.auth.user);
+const RatingPopUp: React.FC<RatingPopUpProps> = ({hotelId}) => {
+  const [postHotelReview, {isLoading: reviewPostLoading}] =
+    usePostHotelReviewMutation();
   const [rating, setRating] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
@@ -16,21 +19,24 @@ const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleRatingSubmit = () => {
-    if (!hotelId ) return alert("hoteId needed");
+    if (!hotelId) return alert("hoteId needed");
 
-    const data = {rating, feedback: message, hotelId: hotelId};
-    console.log(data,user);
+    const data = {rating, feedback: message, hotelId};
 
-    fetch("")
-  
-
-    setRating(0);
-    setMessage("");
-    setIsSubmitDisabled(true);
-    setFeedbackSubmitted(true);
+    postHotelReview(data)
+      .unwrap()
+      .then(({message}) => {
+        setRating(0);
+        setMessage("");
+        setIsSubmitDisabled(true);
+        setFeedbackSubmitted(true);
+        toastSuccess(message);
+      })
+      .catch(({data: {message}}) => {
+        const error = {message};
+        toastError(error);
+      });
   };
-
-
 
   const handleRatingChange = (newRating: number) => {
     setRating(newRating);
@@ -46,7 +52,7 @@ const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
       setIsSubmitDisabled(true);
       setErrorMessage("Please rate us");
       return;
-    } else if (message.trim() === '') {
+    } else if (message.trim() === "") {
       setIsSubmitDisabled(true);
       setErrorMessage("Please comment us ");
       return;
@@ -56,7 +62,6 @@ const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
     setErrorMessage(null);
   }, [rating, message]);
 
-  
   return (
     <div>
       {feedbackSubmitted ? (
@@ -102,16 +107,16 @@ const RatingPopUp: React.FC<RatingPopUpProps>  = ({hotelId}) => {
                     placeholder="Leave a message, if you want"
                     value={message}
                     onChange={handleMessageChange}></textarea>
-                    {errorMessage && (
-                  <p className="text-red-400 text-lg pt-3">{errorMessage}</p>
-                )}
+                  {errorMessage && (
+                    <p className="text-red-400 text-lg pt-3">{errorMessage}</p>
+                  )}
                   <button
                     onClick={handleRatingSubmit}
                     className={`py-3 my-8 text-lg bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl text-white ${
                       isSubmitDisabled ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                     disabled={isSubmitDisabled}>
-                    Rate now
+                    {reviewPostLoading ? <BeatSpinner /> : "Rate now"}
                   </button>
                 </div>
               </div>
