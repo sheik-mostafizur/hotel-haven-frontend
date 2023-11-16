@@ -4,7 +4,10 @@ import { Rating } from "@smastrom/react-rating";
 import { HashSpinner } from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
-import { useGetHotelByIdQuery } from "../../../api/public-api";
+import {
+  useGetHotelByIdQuery,
+  useGetHotelReviewByIdQuery,
+} from "../../../api/public-api";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
@@ -12,6 +15,7 @@ import { useEffect, useState } from "react";
 import { setHotelFilter } from "../../../redux/hotel-filter-slice";
 import SetTitle from "../../../components/set-title";
 import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
+import formatPostDate from "../../../utils/format-post-date";
 
 const AnyReactComponent = ({ text }: { text: any }) => <div>{text}</div>;
 
@@ -47,6 +51,8 @@ const HotelDetails: React.FC = () => {
     _id,
     params: hotelFilter,
   });
+  const { data: review, isLoading: reviewLoading } =
+    useGetHotelReviewByIdQuery(_id);
 
   const { hotel, rooms } = viewHotels || [];
 
@@ -346,7 +352,7 @@ const HotelDetails: React.FC = () => {
                       />
                       <p>4.5 out of 5</p>
                     </div>
-                    {comment.slice(0, 3).map((c: any) => (
+                    {review?.map((rev: any) => (
                       <div
                         key={c.id}
                         className=" p-4 bg-white  rounded-lg dark:bg-gray-800 "
@@ -355,24 +361,24 @@ const HotelDetails: React.FC = () => {
                           <div className="flex items-center gap-2">
                             <img
                               className="rounded-full w-12 h-12"
-                              src={c?.image}
+                              src={rev?.userProfile}
                               alt=""
                             />
                             <div>
-                              <h5>{c?.name}</h5>
+                              <h5>{rev?.userName}</h5>
                               <Rating
-                                value={c?.rating}
+                                value={rev?.rating}
                                 readOnly={true}
                                 style={{ maxWidth: "100px" }}
                               />
                             </div>
                           </div>
                           <div>
-                            <p>{c?.date}</p>
+                            <p>{formatPostDate(rev?.createdAt)}</p>
                           </div>
                         </div>
                         <p className="my-3 font-normal text-gray-500 dark:text-gray-400">
-                          {c?.feedback}
+                          {rev?.feedback}
                         </p>
                       </div>
                     ))}

@@ -12,6 +12,7 @@ const publicApi: any = createApi({
     "gallery",
     "hotels",
     "hotelById",
+    "hotelReview",
     "publicBlog",
     "payment",
   ],
@@ -24,10 +25,12 @@ const publicApi: any = createApi({
       query: () => "/public/top-locations",
       providesTags: ["topLocations"],
     }),
+
     getHotelGallery: builder.query({
       query: () => "/public/gallery",
       providesTags: ["gallery"],
     }),
+
     getHotels: builder.query({
       query: (params = {}) => {
         const queryParams = Object.keys(params)
@@ -46,6 +49,12 @@ const publicApi: any = createApi({
       },
       providesTags: ["hotelById"],
     }),
+
+    getHotelReviewById: builder.query({
+      query: (_id) => `/public/review/${_id}`,
+      providesTags: ["hotelReview"],
+    }),
+
     getPublicBlogs: builder.query({
       query: (params = {}) => {
         const queryParams = Object.keys(params)
@@ -78,6 +87,8 @@ export const {
   useGetHotelGalleryQuery,
   useGetHotelsQuery,
   useGetHotelByIdQuery,
+  useGetHotelReviewByIdQuery,
+
   useGetPublicBlogsQuery,
   usePostPaymentOrderMutation,
   useGetPaymentSuccessOrderQuery,

@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../redux/hooks";
+import {useEffect, useState} from "react";
+import {useAppSelector} from "../../../redux/hooks";
+import {Link} from "react-router-dom";
+import Button from "../../ui/button";
 
 const Greeting = () => {
   const [greeting, setGreeting] = useState("");
-  const user = useAppSelector(state => state.auth.user)
+  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     const time = new Date().getHours();
@@ -39,12 +41,9 @@ const Greeting = () => {
       </h1>
 
       <div className="flex flex-col justify-center w-full text-center mt-4  sm:flex-row text-lg font-semibold">
-        <button
-          type="button"
-          className="text-primary-400 hover:text-white border border-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-primary-500 dark:text-primary-500 dark:hover:text-white dark:hover:bg-primary-500 dark:focus:ring-primary-800"
-        >
-          Back Home
-        </button>
+        <Link to={"/"}>
+          <Button>Back Home</Button>
+        </Link>
       </div>
     </div>
   );
