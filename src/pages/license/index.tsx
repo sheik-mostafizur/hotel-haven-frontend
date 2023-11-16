@@ -7,46 +7,47 @@ const License: React.FC = () => {
   return (
     <Main>
       <SetTitle title={`License`} />
-      <Container className="bg-white p-8 rounded-lg shadow-lg">
-        <div className="my-10">
-          <h1 className="text-4xl font-extrabold text-primary-400 mb-6">
-            Licensing Information
-          </h1>
+      <Container className="my-4 md:my-16">
+        <div className="flex flex-col gap-4 max-w-4xl mx-auto">
+          <div>
+            <h1 className="text-4xl font-extrabold text-primary-500 mb-6">
+              Licensing Information
+            </h1>
 
-          <p className="text-gray-700 mb-6">
-            Welcome to Hotel Haven, an elegant hotel booking service located in
-            Dhaka, Bangladesh. Here, we provide detailed information about the
-            licensing and registration of our business.
-          </p>
-
-          <h2 className="text-2xl font-bold text-primary-400 mb-4">
-            Business Information
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p className="text-gray-700">
-                <strong>Business Name:</strong> Hotel Haven
-              </p>
-              <p className="text-gray-700">
-                <strong>Email:</strong> hotelhaven@gmail.com
-              </p>
-              <p className="text-gray-700">
-                <strong>Location:</strong> Dhaka, Bangladesh
-              </p>
-            </div>
+            <p className="text-secondary-700 mb-6">
+              Welcome to Hotel Haven, an elegant hotel booking service located
+              in Dhaka, Bangladesh. Here, we provide detailed information about
+              the licensing and registration of our business.
+            </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-primary-400 my-4">
-            Licensing and Registration
-          </h2>
+          <div>
+            <h2 className="text-2xl font-bold text-primary-500 mb-4">
+              Business Information
+            </h2>
+            <p className="text-secondary-700">
+              <strong>Business Name:</strong> Hotel Haven
+            </p>
+            <p className="text-secondary-700">
+              <strong>Email:</strong> hotelhaven@gmail.com
+            </p>
+            <p className="text-secondary-700">
+              <strong>Location:</strong> Dhaka, Bangladesh
+            </p>
+          </div>
 
-          <p className="text-gray-700">
-            Hotel Haven is a legally registered and licensed business in Dhaka,
-            Bangladesh. We meticulously adhere to all relevant regulations and
-            requirements as set forth by the local authorities, ensuring a
-            sophisticated and secure experience.
-          </p>
+          <div>
+            <h2 className="text-2xl font-bold text-primary-500 my-4">
+              Licensing and Registration
+            </h2>
+
+            <p className="text-secondary-700">
+              Hotel Haven is a legally registered and licensed business in
+              Dhaka, Bangladesh. We meticulously adhere to all relevant
+              regulations and requirements as set forth by the local
+              authorities, ensuring a sophisticated and secure experience.
+            </p>
+          </div>
         </div>
       </Container>
     </Main>
