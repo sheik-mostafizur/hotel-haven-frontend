@@ -6,7 +6,13 @@ const ManagerHomeDashboard = () => {
   const {data} = useGetManagerInfoQuery(undefined);
 
   const chartData = {
-    labels: ["rooms", "currentBooking", "totalBooking", "totalCustomer"],
+    labels: [
+      "rooms",
+      "currentBooking",
+      "pendingBooking",
+      "totalBooking",
+      "totalCustomer",
+    ],
     datasets: [
       {
         label: "Dashboard Stats",
@@ -38,6 +44,7 @@ const ManagerHomeDashboard = () => {
         data: [
           data?.rooms || 0,
           data?.currentBooking || 0,
+          data?.pendingBooking || 0,
           data?.totalBooking || 0,
           data?.totalCustomer || 0,
         ],
@@ -57,7 +64,7 @@ const ManagerHomeDashboard = () => {
     <Container>
       <h1 className="text-center mb-4 md:mb-8">Manager Dashboard</h1>
       <div className="my-4 border p-4 rounded-lg">
-        <div className="md:grid grid-cols-4 gap-4">
+        <div className="md:grid grid-cols-5 gap-2">
           <div>
             <h5>Total Rooms</h5>
             <h6 className="text-primary-500">{data?.rooms}</h6>
@@ -65,6 +72,10 @@ const ManagerHomeDashboard = () => {
           <div>
             <h5>Current Booking</h5>
             <h6 className="text-primary-500">{data?.currentBooking}</h6>
+          </div>
+          <div>
+            <h5>Pending Booking</h5>
+            <h6 className="text-primary-500">{data?.pendingBooking}</h6>
           </div>
           <div>
             <h5>Total Booking</h5>
