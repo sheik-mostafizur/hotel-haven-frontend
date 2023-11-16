@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Container from "../../components/ui/container";
 import Main from "../../layout/main";
 import {
@@ -11,22 +11,22 @@ import {
   FaCheck,
   FaBus,
 } from "react-icons/fa";
-import {AiFillCar} from "react-icons/ai";
-import {MdPool} from "react-icons/md";
-import {CgGym} from "react-icons/cg";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
+import { AiFillCar } from "react-icons/ai";
+import { MdPool } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
+// import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import React from "react";
-import {useAppSelector} from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import Button from "../../components/ui/button";
 import {
-  useGetRoomDetailsQuery,
+  // useGetRoomDetailsQuery,
   useGetRoomsByIdsQuery,
 } from "../../api/private-api";
 import SetTitle from "../../components/set-title";
-import {usePostPaymentOrderMutation} from "../../api/public-api";
-import {useSuccess} from "../../hooks";
+import { usePostPaymentOrderMutation } from "../../api/public-api";
+// import { useSuccess } from "../../hooks";
 import toastError from "../../utils/toast-error";
-import {BeatSpinner} from "../../components/spinner";
+import { BeatSpinner } from "../../components/spinner";
 
 interface IFormInputs {
   fullName: string;
@@ -39,7 +39,7 @@ const Payment: React.FC = () => {
   const reserveData = useAppSelector((state) => state.reserve);
   const roomIds = reserveData.map((room) => room.roomId);
 
-  let {data: rooms, isLoading} = useGetRoomsByIdsQuery(roomIds);
+  let { data: rooms, isLoading } = useGetRoomsByIdsQuery(roomIds);
   rooms = rooms?.map((room) => {
     const reserve = reserveData.find((r) => r.roomId === room._id);
 
@@ -47,7 +47,7 @@ const Payment: React.FC = () => {
       const {
         _id,
         title,
-        roomInfo: {regularPrice, discountedPrice},
+        roomInfo: { regularPrice, discountedPrice },
       } = room;
 
       return {
@@ -64,7 +64,7 @@ const Payment: React.FC = () => {
     }
   });
 
-  const totalPrice = rooms?.reduce((total, room) => {
+  const totalPrice = rooms?.reduce((total: any, room: any) => {
     if (room.discountedPrice) total += room.discountedPrice;
     return total;
   }, 0);
@@ -75,7 +75,7 @@ const Payment: React.FC = () => {
 
   const savings: number = originalPrice - totalPrice;
 
-  const [postPaymentOrder, {isLoading: payIsLoading}] =
+  const [postPaymentOrder, { isLoading: payIsLoading }] =
     usePostPaymentOrderMutation();
 
   const handlePayment = async () => {
@@ -84,8 +84,8 @@ const Payment: React.FC = () => {
       .then((url: string) => {
         window.location.href = url;
       })
-      .catch(({data}) => {
-        const error = {message: data?.message};
+      .catch(({ data }: { data: any }) => {
+        const error = { message: data?.message };
         toastError(error);
       });
   };
@@ -95,16 +95,6 @@ const Payment: React.FC = () => {
       <Container className="px-8">
         <div className="flex flex-col-reverse lg:flex-row justify-center py-2 items-start gap-4 mx-auto">
           <div className="w-full">
-            {/* <div className=" p-6 flex items-center gap-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 ">
-              <span className="bg-primary-500 p-5 rounded-2xl">
-                <FaMoon></FaMoon>
-              </span>
-              <div>
-                <h6 className="">Collect 4 stamps with this stay</h6>
-                <p>10 stamps get you 1 reward night.</p>
-              </div>
-            </div> */}
-            {/* step 1 */}
             <div className="block p-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex items-center gap-4">
                 <FaUserAlt></FaUserAlt>
@@ -148,7 +138,7 @@ const Payment: React.FC = () => {
                 </div>
               </div>
             </div>
-            {/* step 2 details */}
+
             <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4">
@@ -194,7 +184,7 @@ const Payment: React.FC = () => {
                 </li>
               </ul>
             </div>
-            {/* step 3 Payment Details*/}
+
             <div className="block p-6 my-4 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800 dark:hover:bg-secondary-700">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
@@ -230,7 +220,8 @@ const Payment: React.FC = () => {
                       isDisabled={payIsLoading}
                       size="xl"
                       className="w-52"
-                      onClick={handlePayment}>
+                      onClick={handlePayment}
+                    >
                       {payIsLoading ? <BeatSpinner /> : " Pay Now"}
                     </Button>
                     <div>
@@ -247,18 +238,16 @@ const Payment: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Room Details */}
           <div>
             {isLoading ? (
               <h1>Loading...</h1>
             ) : (
-              rooms?.map((room) => (
+              rooms?.map((room: any) => (
                 <div
                   key={room._id}
-                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  className="max-w-sm h-full mb-4 bg-secondary-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+                >
                   <div className="relative">
-                    {/* here you can see many images using slide */}
                     <img
                       className="rounded-lg border-2 p-2 border-white"
                       src={room.thumbnails[0]}

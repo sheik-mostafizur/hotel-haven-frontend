@@ -1,14 +1,14 @@
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Main from "../../../layout/main";
-import {Rating} from "@smastrom/react-rating";
-import {HashSpinner} from "../../../components/spinner";
+import { Rating } from "@smastrom/react-rating";
+import { HashSpinner } from "../../../components/spinner";
 import Container from "../../../components/ui/container";
 import GoogleMapReact from "google-map-react";
 import {
   useGetHotelByIdQuery,
   useGetHotelReviewByIdQuery,
 } from "../../../api/public-api";
-import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import CardRoom from "./CardRoom";
 import RatingPopUp from "../../../components/RatingPopUp";
 import SetTitle from "../../../components/set-title";
@@ -16,7 +16,7 @@ import formatPostDate from "../../../utils/format-post-date";
 import Header from "./Header";
 import Filter from "./Filter";
 
-const AnyReactComponent = ({text}: {text: any}) => <div>{text}</div>;
+const AnyReactComponent = ({ text }: { text: any }) => <div>{text}</div>;
 
 interface HotelDetails {
   hotel: {
@@ -37,7 +37,7 @@ interface HotelDetails {
     thumbnails: string[];
     title: string;
     facilities: string[];
-    roomInfo: {[key: string]: string};
+    roomInfo: { [key: string]: string };
   }[];
 }
 
@@ -45,15 +45,22 @@ const HotelDetails: React.FC = () => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
 
-  const {_id} = useParams();
-  const {data: viewHotels, isLoading} = useGetHotelByIdQuery({
+  const { _id } = useParams();
+  const { data: viewHotels, isLoading } = useGetHotelByIdQuery({
     _id,
     params: hotelFilter,
   });
-  const {data: review, isLoading: reviewLoading} =
+  const { data: review, isLoading: reviewLoading } =
     useGetHotelReviewByIdQuery(_id);
 
-  const {hotel, rooms} = viewHotels || [];
+  const totalRating = review?.reduce((total: any, reviews: any) => {
+    if (reviews.rating) total += reviews.rating;
+    return total;
+  }, 0);
+
+  const avgRating = totalRating / review?.length;
+
+  const { hotel, rooms } = viewHotels || [];
 
   let roomsURL = rooms?.map((room) => room.thumbnails) || [];
   roomsURL = [].concat(...roomsURL);
@@ -176,25 +183,29 @@ const HotelDetails: React.FC = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="grid lg:grid-cols-2 gap-4">
                   <div>
-                    <RatingPopUp hotelId={_id} />
+                    <RatingPopUp hotelId={hotel?._id} />
                   </div>
                   <div className="mx-auto">
                     <h2 className="text-center">Customer reviews</h2>
+                    <p className="text-center">
+                      Total reviews: {""}
+                      {review?.length}
+                    </p>
                     <div className="flex gap-2 justify-center">
                       <Rating
-                        value={4.5}
+                        value={avgRating}
                         readOnly={true}
-                        style={{maxWidth: "100px"}}
+                        style={{ maxWidth: "100px" }}
                       />
-                      <p>4.5 out of 5</p>
+                      <p>{avgRating} out of 5</p>
                     </div>
                     {review?.map((rev: any) => (
                       <div
-                        key={rev._id}
-                        className=" p-4 bg-white  rounded-lg dark:bg-gray-800 ">
+                        key={rev.id}
+                        className=" p-4 bg-white  rounded-lg dark:bg-gray-800 "
+                      >
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-2">
                             <img
@@ -207,7 +218,7 @@ const HotelDetails: React.FC = () => {
                               <Rating
                                 value={rev?.rating}
                                 readOnly={true}
-                                style={{maxWidth: "100px"}}
+                                style={{ maxWidth: "100px" }}
                               />
                             </div>
                           </div>
@@ -225,11 +236,13 @@ const HotelDetails: React.FC = () => {
 
                 <div
                   className="my-6 bg-white border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
-                  style={{height: "500px", width: "100%"}}>
+                  style={{ height: "500px", width: "100%" }}
+                >
                   <GoogleMapReact
-                    bootstrapURLKeys={{key: ""}}
+                    bootstrapURLKeys={{ key: "" }}
                     defaultCenter={defaultProps.center}
-                    defaultZoom={defaultProps.zoom}>
+                    defaultZoom={defaultProps.zoom}
+                  >
                     <AnyReactComponent
                       lat={hotel?.address?.map?.lat}
                       lng={hotel?.address?.map?.lng}
@@ -241,7 +254,7 @@ const HotelDetails: React.FC = () => {
               </>
             ) : (
               <>
-                <p>No details</p>
+                <p className="text-center">Check Your Interne Connection</p>
               </>
             )}
           </>
