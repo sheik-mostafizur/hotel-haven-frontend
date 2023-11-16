@@ -1,5 +1,9 @@
 import Dashboard from "../pages/dashboard";
-import {HotelManager, RoomsManager} from "../pages/dashboard/manager";
+import {
+  BookingHistoryManager,
+  HotelManager,
+  RoomsManager,
+} from "../pages/dashboard/manager";
 import ManagerProtector from "./ManagerProtector";
 
 const routes = [
@@ -18,6 +22,10 @@ const routes = [
       {
         path: "rooms",
         element: <RoomsManager />,
+      },
+      {
+        path: "booking-history",
+        element: <BookingHistoryManager />,
       },
     ],
   },

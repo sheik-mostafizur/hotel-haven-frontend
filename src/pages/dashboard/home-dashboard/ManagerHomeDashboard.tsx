@@ -1,50 +1,12 @@
-import { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
-import { useGetManagerInfoQuery } from "../../../api/manager-api";
+import {Bar} from "react-chartjs-2";
+import {useGetManagerInfoQuery} from "../../../api/manager-api";
+import Container from "../../../components/ui/container";
 
 const ManagerHomeDashboard = () => {
-  const [stats, setStats] = useState({
-    hotels: 1,
-    rooms: 5,
-    bookings: 15,
-    customers: 8,
-  });
+  const {data} = useGetManagerInfoQuery(undefined);
 
-  useEffect(() => {
-    // Fetch data from your API endpoints
-    // Replace the following with actual API calls
-
-    const fetchDashboardStats = async () => {
-      try {
-        const hotelsResponse = await fetch("/api/manager/hotels");
-        const roomsResponse = await fetch("/api/manager/rooms");
-        const bookingsResponse = await fetch("/api/manager/bookings");
-        const customersResponse = await fetch("/api/manager/customers");
-
-        const hotels = await hotelsResponse.json();
-        const rooms = await roomsResponse.json();
-        const bookings = await bookingsResponse.json();
-        const customers = await customersResponse.json();
-
-        setStats({
-          hotels: hotels.count,
-          rooms: rooms.count,
-          bookings: bookings.count,
-          customers: customers.count,
-        });
-      } catch (error) {
-        console.error("Error fetching dashboard stats", error);
-      }
-    };
-
-    fetchDashboardStats();
-  }, []);
-
-  const { data: managerStat } = useGetManagerInfoQuery(undefined);
-  console.log(managerStat);
-
-  const data = {
-    labels: ["Hotels", "Rooms", "Bookings", "Customers"],
+  const chartData = {
+    labels: ["rooms", "currentBooking", "totalBooking", "totalCustomer"],
     datasets: [
       {
         label: "Dashboard Stats",
@@ -74,10 +36,10 @@ const ManagerHomeDashboard = () => {
           "rgba(75,192,192,1)",
         ],
         data: [
-          stats.hotels,
-          managerStat?.rooms || 0,
-          managerStat?.totalBooking || 0,
-          managerStat?.totalCustomer || 0,
+          data?.rooms || 0,
+          data?.currentBooking || 0,
+          data?.totalBooking || 0,
+          data?.totalCustomer || 0,
         ],
       },
     ],
@@ -92,51 +54,37 @@ const ManagerHomeDashboard = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-center mb-4">Manager Dashboard</h1>
-      <div className="mt-4 border p-4 rounded-lg shadow-lg">
-        {/* <h3 className="text-xl text-center my-4 font-semibold">
-            Admin Dashboard
-          </h3> */}
+    <Container>
+      <h1 className="text-center mb-4 md:mb-8">Manager Dashboard</h1>
+      <div className="my-4 border p-4 rounded-lg">
         <div className="md:grid grid-cols-4 gap-4">
           <div>
-            <h4 className="text-lg font-semibold">Total Hotels</h4>
-            {/* Assume you have access to totalRooms for the admin */}
-            <p className="text-2xl font-bold text-primary-500">1</p>
+            <h5>Total Rooms</h5>
+            <h6 className="text-primary-500">{data?.rooms}</h6>
           </div>
           <div>
-            <h4 className="text-lg font-semibold">Total Rooms</h4>
-            {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">
-              {managerStat?.rooms}
-            </p>
+            <h5>Current Booking</h5>
+            <h6 className="text-primary-500">{data?.currentBooking}</h6>
           </div>
           <div>
-            <h4 className="text-lg font-semibold">Total Booking</h4>
-            {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">
-              {managerStat?.totalBooking}
-            </p>
+            <h5>Total Booking</h5>
+            <h6 className="text-primary-500">{data?.totalBooking}</h6>
           </div>
           <div>
-            <h4 className="text-lg font-semibold">Total Customers</h4>
-            {/* Assume you have access to totalUsers for the admin */}
-            <p className="text-2xl font-bold text-primary-500">
-              {managerStat?.totalCustomer}
-            </p>
+            <h5>Total Customer</h5>
+            <h6 className="text-primary-500">{data?.totalCustomer}</h6>
           </div>
         </div>
       </div>
-      <div>
-        {/* <h2>Dashboard Stats</h2> */}
-        <Bar data={data} options={options} />
-        <div>
+      <div className="max-w-5xl">
+        <Bar data={chartData} options={options} />
+        <div className="mt-4">
           <p className="text-center text-primary-500 text-base underline font-semibold">
             Manager's Needed Stats in Bar Chart
           </p>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

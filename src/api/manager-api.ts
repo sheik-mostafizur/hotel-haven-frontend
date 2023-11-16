@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { axios } from ".";
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {axios} from ".";
 
 const managerApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -12,7 +12,7 @@ const managerApi = createApi({
     },
   }),
   reducerPath: "managerApi",
-  tagTypes: ["managerInfo", "managerHotel", "managerRoom"],
+  tagTypes: ["managerInfo", "managerHotel", "managerRoom", "bookingHistory"],
   endpoints: (builder) => ({
     getManagerInfo: builder.query({
       query: () => "/manager",
@@ -39,12 +39,16 @@ const managerApi = createApi({
       invalidatesTags: ["managerHotel"],
     }),
     updateManagerRoom: builder.mutation({
-      query: ({ data, _id }) => ({
+      query: ({data, _id}) => ({
         url: `/manager/room/${_id}`,
         method: "PUT",
         body: data,
       }),
       invalidatesTags: ["managerRoom"],
+    }),
+    getManagerBookingHistory: builder.query({
+      query: () => "/manager/booking-history",
+      providesTags: ["bookingHistory"],
     }),
   }),
 });
@@ -55,5 +59,6 @@ export const {
   usePostManagerHotelMutation,
   useUpdateManagerHotelMutation,
   useUpdateManagerRoomMutation,
+  useGetManagerBookingHistoryQuery,
 } = managerApi;
 export default managerApi;
