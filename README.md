@@ -1,6 +1,6 @@
 # Hotel Haven (Team Project)
 
-## [Hotel Haven Requirement](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
+## [Hotel Haven Requirement and Documentation](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
 
 ## [Hotel Haven Requirement Distributions](https://shanjeed-saif.atlassian.net/jira/software/projects/HOT/boards/2/timeline?shared=&atlOrigin=eyJpIjoiZDZkNTkzYzZhMWQ5NDA3NDg1ZWQ3N2JjNWU3M2M0ZGUiLCJwIjoiaiJ9)
 
@@ -24,30 +24,52 @@
 
 - Using UPPERCASE_SNAKE_CASE for constant values is a common practice. It makes constants stand out and is widely recognized as a convention for constants in many programming languages.
 
-# React + TypeScript + Vite
+# Contributors
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<!-- Contributors List -->
+<table>
+  <tr>
+    <!-- Contributor 1 -->
+    <td align="center">
+      <a href="https://github.com/sheik-mostafizur">
+        <img src="https://avatars.githubusercontent.com/u/106415501?v=4" width="100px;" alt="Sheik Mostafizur"/>
+        <br />
+        <sub><b>Sheik Mostafizur</b></sub>
+      </a>
+    </td>
+    <!-- Contributor 2 -->
+    <td align="center">
+      <a href="https://github.com/AbuBokorprog">
+        <img src="https://avatars.githubusercontent.com/u/116732361?v=4" width="100px;" alt="Abu Bokor"/>
+        <br />
+        <sub><b>Abu Bokor</b></sub>
+      </a>
+    </td>
+    <!-- Contributor 3 -->
+    <td align="center">
+      <a href="https://github.com/eshansaif">
+        <img src="https://avatars.githubusercontent.com/u/35582062?v=4" width="100px;" alt="Md. Shanjeed Saif"/>
+        <br />
+        <sub><b>Md. Shanjeed Saif</b></sub>
+      </a>
+    </td>
+    <!-- Contributor 4 -->
+    <td align="center">
+      <a href="https://github.com/titumiranan123">
+        <img src="https://avatars.githubusercontent.com/u/116849275?v=4" width="100px;" alt="Md Titumir Anan"/>
+        <br />
+        <sub><b>Md Titumir Anan</b></sub>
+      </a>
+    </td>
+    <!-- Contributor 5 -->
+    <td align="center">
+      <a href="https://github.com/Si-Faisal">
+        <img src="https://avatars.githubusercontent.com/u/90281405?v=4" width="100px;" alt="Shahidul Islam Faisal"/>
+        <br />
+        <sub><b>Shahidul Islam Faisal</b></sub>
+      </a>
+    </td>
+    <!-- Add more contributors as needed -->
+  </tr>
+</table>
+<!-- End of Contributors List -->
