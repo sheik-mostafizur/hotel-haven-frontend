@@ -4,6 +4,7 @@ This repository contains the frontend codebase for Hotel Haven, a modern hotel m
 
 ## Project Links
 
+- [Hotel Haven Live Link](https://hotel-haven-37e44.web.app/)
 - [Hotel Haven Requirement and Documentation](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
 - [Hotel Haven Requirement Distributions](https://shanjeed-saif.atlassian.net/jira/software/projects/HOT/boards/2/timeline?shared=&atlOrigin=eyJpIjoiZDZkNTkzYzZhMWQ5NDA3NDg1ZWQ3N2JjNWU3M2M0ZGUiLCJwIjoiaiJ9)
 - [Hotel Haven Backend](https://github.com/sheik-mostafizur/hotel-haven-backend)
