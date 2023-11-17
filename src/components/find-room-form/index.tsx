@@ -10,9 +10,23 @@ const FindRoomForm = () => {
   const locationURL = useLocation();
   const navigate = useNavigate();
 
-  const {isLoading, data: locations} = useGetLocationsQuery(undefined);
+  const {isLoading, data: locations = {}} = useGetLocationsQuery(undefined);
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
+
+  const filterLocations = Object.entries(locations)
+    .map(([address, count]) => ({
+      address,
+      count: `${address} (${count})`,
+    }))
+    .sort((a, b) => {
+      const addressA = a.address.toLowerCase();
+      const addressB = b.address.toLowerCase();
+
+      if (addressA < addressB) return -1;
+      if (addressA > addressB) return 1;
+      return 0;
+    });
 
   const {
     control,
@@ -65,10 +79,10 @@ const FindRoomForm = () => {
                 ) : (
                   <>
                     <option value="">Choose a Location</option>
-                    {locations &&
-                      locations.map((location: any) => (
-                        <option key={location._id} value={location.location}>
-                          {location.address}
+                    {filterLocations &&
+                      filterLocations?.map((location) => (
+                        <option key={location.address} value={location.address}>
+                          {location.count}
                         </option>
                       ))}
                   </>

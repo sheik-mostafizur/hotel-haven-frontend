@@ -20,7 +20,21 @@ interface Hotel {
 }
 
 const Hotel: React.FC = () => {
-  const {data: locations} = useGetLocationsQuery(undefined);
+  const {data: locations = {}} = useGetLocationsQuery(undefined);
+  const filterLocations = Object.entries(locations)
+    .map(([address, count]) => ({
+      address,
+      count: `${address} (${count})`,
+    }))
+    .sort((a, b) => {
+      const addressA = a.address.toLowerCase();
+      const addressB = b.address.toLowerCase();
+
+      if (addressA < addressB) return -1;
+      if (addressA > addressB) return 1;
+      return 0;
+    });
+
   const dispatch = useAppDispatch();
   const filterQuery = useAppSelector((state) => state.hotelFilter);
 
@@ -70,10 +84,10 @@ const Hotel: React.FC = () => {
                   )
                 }>
                 <option value="">ALL</option>
-                {locations &&
-                  locations.map((location: any) => (
-                    <option key={location._id} value={location.location}>
-                      {location.address}
+                {filterLocations &&
+                  filterLocations?.map((location: any) => (
+                    <option key={location.address} value={location.address}>
+                      {location.count}
                     </option>
                   ))}
               </select>
