@@ -2,13 +2,33 @@ import {useGetManagerBookingHistoryQuery} from "../../../../api/manager-api";
 import Container from "../../../../components/ui/container";
 import Modal from "../../../../components/ui/modal";
 
+interface BookingType {
+  readonly _id: string;
+  readonly transactionId: string;
+  email: string;
+  phoneNumber: string;
+  hotelId: string;
+  rooms: {
+    roomId: string;
+    checkIn: string;
+    checkOut: string;
+    adult: number;
+    children: number;
+    _id: string;
+  }[];
+  cardType: string;
+  status: string;
+  totalAmount: number;
+  __v: number;
+}
+
 const BookingHistory = () => {
   const {data} = useGetManagerBookingHistoryQuery(undefined);
-
+  console.log(data);
   return (
     <Container className="">
       <h1 className="text-center mb-8">Booking and Payment History</h1>
-      {data?.map((booking) => (
+      {data?.map((booking: BookingType) => (
         <div className="my-4" key={booking._id}>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-secondary-500 dark:text-secondary-400">

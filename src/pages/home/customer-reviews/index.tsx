@@ -1,15 +1,12 @@
 import Container from "../../../components/ui/container";
-import { Rating } from "@smastrom/react-rating";
+import {Rating} from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
-import { useGetHotelReviewByIdQuery } from "../../../api/public-api";
-// import CustomerReviewsSkeleton from "./CustomerReviewsSkeleton";
+import {Navigation, Pagination, Keyboard} from "swiper/modules";
+import {useGetHotelReviewByIdQuery} from "../../../api/public-api";
 
 interface CustomerReviews {
   _id: number;
@@ -20,8 +17,9 @@ interface CustomerReviews {
 }
 
 const CustomerReviews: React.FC = () => {
-  const { data: reviews, isLoading: reviewLoading } =
-    useGetHotelReviewByIdQuery("65404fb8a56e13bc02c8c037");
+  const {data: reviews} = useGetHotelReviewByIdQuery(
+    "65404fb8a56e13bc02c8c037"
+  );
   return (
     <div className="bg-primary-50 md:py-4 dark:bg-secondary-900">
       <Container className="lg:my-20 overflow-hidden">
@@ -32,7 +30,7 @@ const CustomerReviews: React.FC = () => {
             our products.
           </p>
         </div>
-        <div style={{ cursor: "grab" }}>
+        <div style={{cursor: "grab"}}>
           <Swiper
             spaceBetween={30}
             keyboard={{
@@ -54,15 +52,13 @@ const CustomerReviews: React.FC = () => {
                 slidesPerView: 2,
                 spaceBetween: 30,
               },
-            }}
-          >
+            }}>
             <div>
               {reviews?.slice(0, 15).map((review: any) => (
                 <SwiperSlide
                   key={review._id}
                   className="bg-white p-4 rounded-lg h-80 shadow-md  dark:bg-secondary-800 dark:border-secondary-800"
-                  data-aos="fade-up"
-                >
+                  data-aos="fade-up">
                   <div className="flex items-center mb-4">
                     <img
                       src={review.userProfile}
@@ -78,7 +74,7 @@ const CustomerReviews: React.FC = () => {
                           <Rating
                             value={review.rating}
                             readOnly={true}
-                            style={{ maxWidth: "100px" }}
+                            style={{maxWidth: "100px"}}
                           />
                         </div>
                       </div>

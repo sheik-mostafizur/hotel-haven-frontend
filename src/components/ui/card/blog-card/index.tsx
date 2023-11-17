@@ -7,7 +7,6 @@ import {useBlogCard} from "../../../../hooks";
 
 interface BlogCardProps {
   blog: BlogType.Blog;
-  isLoading: boolean;
 }
 
 const BlogCard: React.FC<BlogCardProps> = (props) => {

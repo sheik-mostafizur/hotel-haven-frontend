@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {setHotelFilter} from "../../../redux/hotel-filter-slice";
 import formatDateToYYYYMMDD from "../../../utils/format-date-to-YYYYMMDD";
 
-const Filter = ({isLoading}) => {
+const Filter = ({isLoading}: {isLoading: boolean}) => {
   const hotelFilter = useAppSelector((state) => state.hotelFilter);
   const dispatch = useAppDispatch();
 
@@ -88,7 +88,7 @@ const Filter = ({isLoading}) => {
                   dispatch(
                     setHotelFilter({
                       ...hotelFilter,
-                      adult: e.target.value,
+                      adult: parseInt(e.target.value),
                     })
                   )
                 }
@@ -106,7 +106,7 @@ const Filter = ({isLoading}) => {
                   dispatch(
                     setHotelFilter({
                       ...hotelFilter,
-                      children: e.target.value,
+                      children: parseInt(e.target.value),
                     })
                   )
                 }

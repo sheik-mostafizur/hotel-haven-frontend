@@ -1,4 +1,4 @@
-interface Location {
+interface Address {
   map: {
     lat: number;
     lng: number;
@@ -8,18 +8,20 @@ interface Location {
 }
 
 interface Hotel {
-  address: Location;
-  _id: string;
-  managerId: string;
+  readonly _id: string;
+  address: Address;
+  readonly managerId: string;
+  email?: string;
   name: string;
   photoURL: string;
   description: string;
   availableRoom: number;
+  addedRoom: number;
   status: string;
   createdAt: string;
   updatedAt: string;
-  __v: number;
   feedback?: string;
+  readonly __v: number;
 }
 
-export {Hotel, Location};
+export {Hotel, Address};

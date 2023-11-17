@@ -1,6 +1,16 @@
 import Container from "../../../components/ui/container";
 
-const Header = (props) => {
+interface HeaderProps {
+  isLoading: boolean;
+  hotelPhotoURL?: string;
+  roomsURL: string[];
+  name: string;
+  location: string;
+  rating: number;
+  description: string;
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
   const {
     isLoading,
     hotelPhotoURL = "",
@@ -42,7 +52,11 @@ const Header = (props) => {
             </div>
             <div className="grid grid-cols-2 items-start gap-1">
               {roomsURL.map((url) => (
-                <img src={url} className="h-full w-full object-cover rounded" />
+                <img
+                  key={url}
+                  src={url}
+                  className="h-full w-full object-cover rounded"
+                />
               ))}
             </div>
           </div>

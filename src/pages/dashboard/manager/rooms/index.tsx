@@ -10,23 +10,13 @@ import HotelRoomCard from "./roomcard";
 import Modal from "../../../../components/ui/modal";
 import SetTitle from "../../../../components/set-title";
 
-interface IFormInputs {
-  _id: string;
+interface RoomFormData {
   title: string;
-  thumbnails: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-  };
-  facilities: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-    [3]: string;
-  };
+  thumbnails: string[];
+  facilities: string[];
   capacity: {
-    children: number;
     adult: number;
+    children: number;
   };
   roomInfo: {
     bedType: string;
@@ -42,16 +32,30 @@ const Rooms: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rooms, setRoom] = useState([]);
 
-  const {handleSubmit, control} = useForm<IFormInputs>({});
+  const {handleSubmit, control} = useForm<RoomFormData>({
+    defaultValues: {
+      title: "",
+      thumbnails: [],
+      facilities: [],
+      capacity: {
+        adult: 0,
+        children: 0,
+      },
+      roomInfo: {
+        bedType: "",
+        view: 0,
+        roomSize: "",
+        regularPrice: 0,
+        discountedPrice: 0,
+        additionalInfo: "",
+      },
+    },
+  });
 
-  const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
+  const onSubmit: SubmitHandler<RoomFormData> = async (data) => {
     setIsLoading(true);
-    data.facilities = data.facilities.filter((facilitie: any) =>
-      Boolean(facilitie)
-    );
-    data.thumbnails = data.thumbnails.filter((thumbnail: any) =>
-      Boolean(thumbnail)
-    );
+    data.facilities = data.facilities.filter((facilitie) => Boolean(facilitie));
+    data.thumbnails = data.thumbnails.filter((thumbnail) => Boolean(thumbnail));
 
     try {
       const {
@@ -96,30 +100,30 @@ const Rooms: React.FC = () => {
                 name="title"
                 control={control}
                 rules={{required: true}}
-                render={({field}) => <input {...field} />}
+                render={({field}) => <input {...field} type="text" />}
               />
               <div className="grid md:grid-cols-1 lg:grid-cols-3 py-2 gap-4">
                 <div>
-                  <label htmlFor="thumbnails[0]">Thumbnails 1</label>
+                  <label htmlFor="thumbnails.0">Thumbnails 1</label>
                   <Controller
-                    name="thumbnails[0]"
+                    name="thumbnails.0"
                     control={control}
                     rules={{required: true}}
                     render={({field}) => <input {...field} type="url" />}
                   />
                 </div>
                 <div>
-                  <label htmlFor="thumbnails[1]">Thumbnails 2</label>
+                  <label htmlFor="thumbnails.1">Thumbnails 2</label>
                   <Controller
-                    name="thumbnails[1]"
+                    name="thumbnails.1"
                     control={control}
                     render={({field}) => <input {...field} type="url" />}
                   />
                 </div>
                 <div>
-                  <label htmlFor="thumbnails[2]">Thumbnails 3</label>
+                  <label htmlFor="thumbnails.2">Thumbnails 3</label>
                   <Controller
-                    name="thumbnails[2]"
+                    name="thumbnails.2"
                     control={control}
                     render={({field}) => <input {...field} type="url" />}
                   />
@@ -127,36 +131,36 @@ const Rooms: React.FC = () => {
               </div>
               <div className="grid md:grid-cols-1 lg:grid-cols-4 py-2 gap-4">
                 <div>
-                  <label htmlFor="facilities[0]">Facilities 1</label>
+                  <label htmlFor="facilities.0">Facilities 1</label>
                   <Controller
-                    name="facilities[0]"
+                    name="facilities.0"
                     control={control}
                     rules={{required: true}}
-                    render={({field}) => <input {...field} />}
+                    render={({field}) => <input {...field} type="text" />}
                   />
                 </div>
                 <div>
-                  <label htmlFor="facilities[1]">Facilities 2</label>
+                  <label htmlFor="facilities.1">Facilities 2</label>
                   <Controller
-                    name="facilities[1]"
+                    name="facilities.1"
                     control={control}
-                    render={({field}) => <input {...field} />}
+                    render={({field}) => <input {...field} type="text" />}
                   />
                 </div>
                 <div>
-                  <label htmlFor="facilities[2]">Facilities 3</label>
+                  <label htmlFor="facilities.2">Facilities 3</label>
                   <Controller
-                    name="facilities[2]"
+                    name="facilities.2"
                     control={control}
-                    render={({field}) => <input {...field} />}
+                    render={({field}) => <input {...field} type="text" />}
                   />
                 </div>
                 <div>
-                  <label htmlFor="facilities[3]">Facilities 4</label>
+                  <label htmlFor="facilities.3">Facilities 4</label>
                   <Controller
-                    name="facilities[3]"
+                    name="facilities.3"
                     control={control}
-                    render={({field}) => <input {...field} />}
+                    render={({field}) => <input {...field} type="text" />}
                   />
                 </div>
               </div>

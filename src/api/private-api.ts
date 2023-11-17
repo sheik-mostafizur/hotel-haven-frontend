@@ -32,7 +32,7 @@ const privateApi = createApi({
     getRoomsByIds: builder.query({
       query: (roomIds) => ({
         url: `/room/roomIds`,
-        params: roomIds.map((id) => `roomIds=${id}`).join("&"),
+        params: roomIds.map((id: string) => `roomIds=${id}`).join("&"),
       }),
       providesTags: ["rooms"],
     }),

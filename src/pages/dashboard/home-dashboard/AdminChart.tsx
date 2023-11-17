@@ -18,8 +18,8 @@ const AdminChart: React.FC = () => {
   const {data: hotelsData} = useGetHotelsAdminQuery(undefined); // Updated to get hotel data
 
   // Reference to the canvas elements where the charts will be rendered
-  const pieChartRef = useRef(null);
-  const barChartRef = useRef(null);
+  const pieChartRef = useRef<HTMLCanvasElement | null>(null);
+  const barChartRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     if (
@@ -30,11 +30,11 @@ const AdminChart: React.FC = () => {
       hotelsData
     ) {
       // Destroy the existing chart instances on the canvas
-      if (pieChartRef.current?.__chart) {
-        pieChartRef.current.__chart.destroy();
+      if (pieChartRef.current && (pieChartRef.current as any).__chart) {
+        (pieChartRef.current as any).__chart.destroy();
       }
-      if (barChartRef.current?.__chart) {
-        barChartRef.current.__chart.destroy();
+      if (barChartRef.current && (barChartRef.current as any)?.__chart) {
+        (barChartRef.current as any).__chart.destroy();
       }
 
       // Create the data for the pie chart
@@ -70,13 +70,13 @@ const AdminChart: React.FC = () => {
         ],
       };
 
-      const pieChartConfig = {
+      const pieChartConfig: any = {
         type: "pie",
         data: pieChartData,
       };
 
       // Create the pie chart
-      pieChartRef.current.__chart = new Chart(
+      (pieChartRef.current as any).__chart = new Chart(
         pieChartRef.current,
         pieChartConfig
       );
@@ -112,7 +112,7 @@ const AdminChart: React.FC = () => {
         ],
       };
 
-      const barChartConfig = {
+      const barChartConfig: any = {
         type: "bar",
         data: barChartData,
         options: {
@@ -132,7 +132,7 @@ const AdminChart: React.FC = () => {
       };
 
       // Create the bar chart
-      barChartRef.current.__chart = new Chart(
+      (barChartRef.current as any).__chart = new Chart(
         barChartRef.current,
         barChartConfig
       );

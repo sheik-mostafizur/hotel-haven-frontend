@@ -20,7 +20,7 @@ const ContactUs: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {handleSubmit} = useForm<FormData>();
   const formRef = useRef<HTMLFormElement | null>(null);
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data: any) => {
     setIsLoading(true);
     try {
       const response = await emailjs.send(

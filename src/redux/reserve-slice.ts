@@ -1,25 +1,23 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {PayloadAction, createSlice} from "@reduxjs/toolkit";
 
-/*
-[
-  {
-    email: "",
-    phoneNumber: "",
-    roomId: "",
-    hotelId:"",
-    checkIn: "",
-    checkOut: "",
-    adult: 1,
-    children: 0,
-  },
-]
-*/
+interface InitialStateType {
+  email: string;
+  phoneNumber: string;
+  roomId: string;
+  hotelId: string;
+  checkIn: string;
+  checkOut: string;
+  adult: number;
+  children: number;
+}
+
+const initialState: InitialStateType[] = [];
 
 const reserveSlice = createSlice({
   name: "reserve",
-  initialState: [],
+  initialState,
   reducers: {
-    setReserve: (state, action) => {
+    setReserve: (state, action: PayloadAction<InitialStateType>) => {
       state.push(action.payload);
     },
   },

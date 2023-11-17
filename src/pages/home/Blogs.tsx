@@ -1,6 +1,7 @@
 import React from "react";
 import "./Blog.css";
-import { FcLikePlaceholder } from "react-icons/fc";
+import {FcLikePlaceholder} from "react-icons/fc";
+import {BlogType} from "../../types";
 
 interface Blogs {
   _id: number;
@@ -13,21 +14,19 @@ interface Blogs {
   likes: number;
 }
 
-const Blogs: React.FC<Blogs> = ({
+const Blogs: React.FC<BlogType.Blog> = ({
   thumbnail,
   title,
   description,
-  authorName,
-  authorProfile,
+  userName,
+  userProfile,
   publishDate,
-  likes,
 }) => {
   return (
     <>
       <div
         id="fadeIn"
-        className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800"
-      >
+        className="bg-white mx-auto border border-secondary-200 rounded-lg shadow dark:bg-secondary-800 dark:border-secondary-800">
         <img
           className="h-80 w-full object-cover rounded-t-2xl"
           src={thumbnail}
@@ -41,12 +40,12 @@ const Blogs: React.FC<Blogs> = ({
               <div>
                 <img
                   className="rounded-full w-10 h-10"
-                  src={authorProfile}
+                  src={userProfile}
                   alt=""
                 />
               </div>
               <div className="flex-col items-center">
-                <h5>{authorName}</h5>
+                <h5>{userName}</h5>
                 <p>{publishDate}</p>
               </div>
             </div>

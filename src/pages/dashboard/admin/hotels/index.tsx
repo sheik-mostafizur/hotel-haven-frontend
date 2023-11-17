@@ -3,9 +3,10 @@ import {HashSpinner} from "../../../../components/spinner";
 import HotelCard from "./HotelCard";
 import {useGetHotelsAdminQuery} from "../../../../api/admin-api";
 import SetTitle from "../../../../components/set-title";
+import {HotelType} from "../../../../types";
 
 const Hotels: React.FC = () => {
-  const {data: hotels, isLoading} = useGetHotelsAdminQuery(undefined);
+  const {data: hotels, isLoading} = useGetHotelsAdminQuery({});
   const [searchText, setSearchText] = useState("");
   const [filterStatus, setFilterStatus] = useState("all"); // 'all' is the default option
 
@@ -55,7 +56,7 @@ const Hotels: React.FC = () => {
         <HashSpinner />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
-          {filteredHotels.map((hotel: any) => (
+          {filteredHotels.map((hotel: HotelType.Hotel) => (
             <HotelCard key={hotel._id} hotel={hotel} />
           ))}
         </div>

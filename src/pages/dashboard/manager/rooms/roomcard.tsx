@@ -1,13 +1,13 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import { Pagination } from "swiper/modules";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Autoplay} from "swiper/modules";
+import {Pagination} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import Modal from "../../../../components/ui/modal";
 import Button from "../../../../components/ui/button";
-import { useUpdateManagerRoomMutation } from "../../../../api/manager-api";
+import {useUpdateManagerRoomMutation} from "../../../../api/manager-api";
 import toastSuccess from "../../../../utils/toast-success";
 import toastError from "../../../../utils/toast-error";
 interface HotelRoomCardProps {
@@ -25,7 +25,6 @@ interface HotelRoomCardProps {
   adult: number;
   children: number;
   roomSize: string;
-  view: string;
   bedType: string;
   description: string;
   regularPrice: number;
@@ -39,23 +38,16 @@ interface HotelRoomCardProps {
     bedType: string;
     regularPrice: number;
     discountedPrice: number;
+    view: string;
+    additionalInfo: string;
   };
 }
 
 interface IFormInputs {
   _id: string;
   title: string;
-  thumbnails: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-  };
-  facilities: {
-    [0]: string;
-    [1]: string;
-    [2]: string;
-    [3]: string;
-  };
+  thumbnails: string[];
+  facilities: string[];
   capacity: {
     children: number;
     adult: number;
@@ -79,15 +71,15 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
   roomInfo,
 }) => {
   const [updateManagerRoom] = useUpdateManagerRoomMutation();
-  const { handleSubmit, control } = useForm<IFormInputs>({});
+  const {handleSubmit, control} = useForm<IFormInputs>({});
   const onSubmit: SubmitHandler<IFormInputs> = async (data: any) => {
-    updateManagerRoom({ data, _id })
+    updateManagerRoom({data, _id})
       .unwrap()
-      .then(({ message }) => {
+      .then(({message}) => {
         toastSuccess(message);
       })
-      .catch(({ data: { message } }) => {
-        const error = { message };
+      .catch(({data: {message}}) => {
+        const error = {message};
         toastError(error);
       });
   };
@@ -97,12 +89,11 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
         <Swiper
           slidesPerView={1}
           spaceBetween={5}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
+          autoplay={{delay: 2500, disableOnInteraction: false}}
+          pagination={{clickable: true}}
           navigation={true}
           modules={[Pagination, Autoplay]}
-          className="mySwiper"
-        >
+          className="mySwiper">
           {thumbnails.map((img, index) => (
             <SwiperSlide key={index}>
               <img className="h-72 w-full" src={img} alt="" />
@@ -153,8 +144,7 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
         <div className="flex gap-5 items-center justify-center">
           <Modal
             title={"Update Room"}
-            button={{ label: "Update a room", className: "block ml-auto px-4" }}
-          >
+            button={{label: "Update a room", className: "block ml-auto px-4"}}>
             <div>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="title">Title</label>
@@ -162,75 +152,75 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                   name="title"
                   control={control}
                   defaultValue={title}
-                  rules={{ required: true }}
-                  render={({ field }) => <input {...field} />}
+                  rules={{required: true}}
+                  render={({field}) => <input {...field} />}
                 />
                 <div className="grid md:grid-cols-1 lg:grid-cols-3 py-2 gap-4">
                   <div>
-                    <label htmlFor="thumbnails[0]">Thumbnails 1</label>
+                    <label htmlFor="thumbnails.0">Thumbnails 1</label>
                     <Controller
-                      name="thumbnails[0]"
-                      defaultValue={thumbnails[0]}
+                      name="thumbnails.0"
+                      defaultValue={"thumbnails.0"}
                       control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} type="url" />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} type="url" />}
                     />
                   </div>
                   <div>
-                    <label htmlFor="thumbnails[1]">Thumbnails 2</label>
+                    <label htmlFor="thumbnails.1">Thumbnails 2</label>
                     <Controller
-                      name="thumbnails[1]"
-                      defaultValue={thumbnails[1]}
+                      name="thumbnails.1"
+                      defaultValue={"thumbnails.1"}
                       control={control}
-                      render={({ field }) => <input {...field} type="url" />}
+                      render={({field}) => <input {...field} type="url" />}
                     />
                   </div>
                   <div>
-                    <label htmlFor="thumbnails[2]">Thumbnails 3</label>
+                    <label htmlFor="thumbnails.2">Thumbnails 3</label>
                     <Controller
-                      name="thumbnails[2]"
-                      defaultValue={thumbnails[2]}
+                      name="thumbnails.2"
+                      defaultValue={"thumbnails.2"}
                       control={control}
-                      render={({ field }) => <input {...field} type="url" />}
+                      render={({field}) => <input {...field} type="url" />}
                     />
                   </div>
                 </div>
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 py-2 gap-4">
                   <div>
-                    <label htmlFor="facilities[0]">Facilities 1</label>
+                    <label htmlFor="facilities.0">Facilities 1</label>
                     <Controller
-                      name="facilities[0]"
+                      name="facilities.0"
                       control={control}
-                      defaultValue={facilities[0]}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} />}
+                      defaultValue={"facilities.0"}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
-                    <label htmlFor="facilities[1]">Facilities 2</label>
+                    <label htmlFor="facilities.1">Facilities 2</label>
                     <Controller
-                      name="facilities[1]"
+                      name="facilities.1"
                       control={control}
-                      defaultValue={facilities[1]}
-                      render={({ field }) => <input {...field} />}
+                      defaultValue={"facilities.1"}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
-                    <label htmlFor="facilities[2]">Facilities 3</label>
+                    <label htmlFor="facilities.2">Facilities 3</label>
                     <Controller
-                      name="facilities[2]"
+                      name="facilities.2"
                       control={control}
-                      defaultValue={facilities[2]}
-                      render={({ field }) => <input {...field} />}
+                      defaultValue={"facilities.2"}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
-                    <label htmlFor="facilities[3]">Facilities 4</label>
+                    <label htmlFor="facilities.3">Facilities 4</label>
                     <Controller
-                      name="facilities[3]"
-                      defaultValue={facilities[3]}
+                      name="facilities.3"
+                      defaultValue={"facilities.3"}
                       control={control}
-                      render={({ field }) => <input {...field} />}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                 </div>
@@ -241,8 +231,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="capacity.adult"
                       defaultValue={capacity?.adult}
                       control={control}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} type="number" />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} type="number" />}
                     />
                   </div>
                   <div>
@@ -251,8 +241,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="capacity.children"
                       control={control}
                       defaultValue={capacity?.children}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} type="number" />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} type="number" />}
                     />
                   </div>
                 </div>
@@ -263,8 +253,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.roomSize"
                       control={control}
                       defaultValue={roomInfo.roomSize}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
@@ -273,8 +263,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.regularPrice"
                       control={control}
                       defaultValue={roomInfo?.regularPrice}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
@@ -283,8 +273,8 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                       name="roomInfo.discountedPrice"
                       control={control}
                       defaultValue={roomInfo?.discountedPrice}
-                      rules={{ required: true }}
-                      render={({ field }) => <input {...field} />}
+                      rules={{required: true}}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
@@ -292,9 +282,9 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.view"
                       control={control}
-                      rules={{ required: true }}
+                      rules={{required: true}}
                       defaultValue={roomInfo?.view}
-                      render={({ field }) => <input {...field} type="text" />}
+                      render={({field}) => <input {...field} type="text" />}
                     />
                   </div>
                   <div>
@@ -302,9 +292,9 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.bedType"
                       control={control}
-                      rules={{ required: true }}
+                      rules={{required: true}}
                       defaultValue={roomInfo.bedType}
-                      render={({ field }) => <input {...field} />}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                   <div>
@@ -312,9 +302,9 @@ const HotelRoomCard: React.FC<HotelRoomCardProps> = ({
                     <Controller
                       name="roomInfo.additionalInfo"
                       control={control}
-                      rules={{ required: true }}
+                      rules={{required: true}}
                       defaultValue={roomInfo?.additionalInfo}
-                      render={({ field }) => <input {...field} />}
+                      render={({field}) => <input {...field} />}
                     />
                   </div>
                 </div>

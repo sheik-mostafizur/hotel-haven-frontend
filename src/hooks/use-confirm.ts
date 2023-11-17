@@ -1,6 +1,14 @@
 import swal from "sweetalert";
 
-const useConfirm = async ({title = "Are you sure?", config} = {}) => {
+type UseConfirm = {
+  title?: string;
+  config?: object;
+};
+
+const useConfirm = async ({
+  title = "Are you sure?",
+  config,
+}: UseConfirm = {}) => {
   const confirm = await swal(title, {
     buttons: ["Cancel", "Yes"],
     ...config,

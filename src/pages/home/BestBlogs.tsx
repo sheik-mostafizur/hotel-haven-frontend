@@ -3,17 +3,7 @@ import React from "react";
 import {BlogCard, BlogCardSkeleton} from "../../components/ui/card";
 import {useGetPublicBlogsQuery} from "../../api/public-api";
 import {useAppSelector} from "../../redux/hooks";
-
-interface BestBlogs {
-  _id: number;
-  thumbnail: string;
-  title: string;
-  description: string;
-  authorName: string;
-  authorProfile: string;
-  publishDate: string;
-  likes: number;
-}
+import {BlogType} from "../../types";
 
 const BestBlogs: React.FC = () => {
   const query = useAppSelector((state) => state.blogFilter);
@@ -37,7 +27,9 @@ const BestBlogs: React.FC = () => {
         ) : (
           blogs
             ?.slice(0, 4)
-            .map((blog: BestBlogs) => <BlogCard key={blog._id} blog={blog} />)
+            .map((blog: BlogType.Blog) => (
+              <BlogCard key={blog._id} blog={blog} />
+            ))
         )}
       </div>
     </Container>
