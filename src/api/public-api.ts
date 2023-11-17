@@ -13,6 +13,7 @@ const publicApi: any = createApi({
     "hotels",
     "hotelById",
     "hotelReview",
+    "hotelReviewTop",
     "publicBlog",
     "payment",
   ],
@@ -55,6 +56,11 @@ const publicApi: any = createApi({
       providesTags: ["hotelReview"],
     }),
 
+    getHotelReviewTop: builder.query({
+      query: (_id) => `/public/review-top`,
+      providesTags: ["hotelReviewTop"],
+    }),
+
     getPublicBlogs: builder.query({
       query: (params = {}) => {
         const queryParams = Object.keys(params)
@@ -88,6 +94,7 @@ export const {
   useGetHotelsQuery,
   useGetHotelByIdQuery,
   useGetHotelReviewByIdQuery,
+  useGetHotelReviewTopQuery,
 
   useGetPublicBlogsQuery,
   usePostPaymentOrderMutation,

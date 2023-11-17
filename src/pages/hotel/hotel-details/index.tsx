@@ -84,7 +84,7 @@ const HotelDetails: React.FC = () => {
     hotelPhotoURL: hotel?.photoURL,
     name: hotel?.name,
     location: hotel?.address?.location,
-    rating: hotel?.rating || 0,
+    rating: avgRating || 0,
     description: hotel?.description,
     roomsURL: roomsURL.slice(0, 4),
   };
@@ -197,10 +197,8 @@ const HotelDetails: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <div className="grid lg:grid-cols-2 gap-4">
-                  <div>
-                    <RatingPopUp hotelId={hotel?._id} />
-                  </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 my-8 lg:my-16">
+                  <RatingPopUp hotelId={hotel?._id} />
                   <div className="mx-auto">
                     <h2 className="text-center">Customer reviews</h2>
                     <p className="text-center">
@@ -213,7 +211,7 @@ const HotelDetails: React.FC = () => {
                         readOnly={true}
                         style={{maxWidth: "100px"}}
                       />
-                      <p>{avgRating} out of 5</p>
+                      <p>{avgRating || 0} out of 5</p>
                     </div>
                     {review?.map((rev: any) => (
                       <div
