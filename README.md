@@ -1,30 +1,76 @@
 # Hotel Haven (Team Project)
 
-## [Hotel Haven Requirement and Documentation](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
+This repository contains the frontend codebase for Hotel Haven, a modern hotel management application. The frontend is built using various libraries, frameworks, and tools to provide an intuitive and efficient user experience.
 
-## [Hotel Haven Requirement Distributions](https://shanjeed-saif.atlassian.net/jira/software/projects/HOT/boards/2/timeline?shared=&atlOrigin=eyJpIjoiZDZkNTkzYzZhMWQ5NDA3NDg1ZWQ3N2JjNWU3M2M0ZGUiLCJwIjoiaiJ9)
+## Project Links
 
-## [Hotel Haven Backend](https://github.com/sheik-mostafizur/hotel-haven-backend)
+- [Hotel Haven Requirement and Documentation](https://chiseled-numeric-49f.notion.site/Booking-Heaven-d115045250f84e92b5bbece1439a0987?pvs=4)
+- [Hotel Haven Requirement Distributions](https://shanjeed-saif.atlassian.net/jira/software/projects/HOT/boards/2/timeline?shared=&atlOrigin=eyJpIjoiZDZkNTkzYzZhMWQ5NDA3NDg1ZWQ3N2JjNWU3M2M0ZGUiLCJwIjoiaiJ9)
+- [Hotel Haven Backend](https://github.com/sheik-mostafizur/hotel-haven-backend)
+- [Hotel Haven Frontend](https://github.com/sheik-mostafizur/hotel-haven-frontend)
 
-## [Hotel Haven Frontend](https://github.com/sheik-mostafizur/hotel-haven-frontend)
-
-## We are follow Folder and File
+## Folder and File Naming Conventions
 
 **kebab-case** for File and Folder Names:
 
-- **make sure all folder names are kebab-case**
-
-- Using kebab-case for file and folder names is a reasonable choice, especially for non-component files. It's a more web-friendly convention and can be more easily used in URLs.
+- Ensure all folder names are in kebab-case. This convention is more web-friendly and suitable for URLs.
 
 **PascalCase** for Component Files:
 
-- Using PascalCase for component files is a common convention in React. It helps differentiate components from other files and makes it clear that these are meant to be used as React components. Make sure to keep the root file, like "index.js" or "index.ts", in PascalCase, which is also a common practice.
+- Use PascalCase for component files to distinguish them from other files, especially in React. Root files like "index.js" or "index.ts" should also follow PascalCase.
 
 **UPPERCASE_SNAKE_CASE** for Constants file names:
 
-- Using UPPERCASE_SNAKE_CASE for constant values is a common practice. It makes constants stand out and is widely recognized as a convention for constants in many programming languages.
+- Use UPPERCASE_SNAKE_CASE for constant values to make them stand out and maintain convention consistency.
 
-# Contributors
+## Used Packages In This Project
+
+### Frontend Libraries/Frameworks:
+
+- **React**: Frontend library for building user interfaces.
+- **Redux Toolkit**: State management toolset for predictable state containers.
+- **React Router DOM**: Declarative routing for React-based applications.
+- **Framer Motion**: Animation library for React components.
+- **TailwindCSS Theme Swapper**: TailwindCSS utility for easy theme swapping.
+
+### UI/Visualization:
+
+- **Chart.js**: Data visualization library for creating charts.
+- **React Chartjs 2**: React wrapper for Chart.js.
+- **React Calendar**: Calendar component for React applications.
+- **React Responsive Carousel**: Carousel/slider component for React.
+- **React Icons**: Icon library with a vast collection of icons for React applications.
+- **React Tooltip**: Tooltip component for React.
+
+### Data Handling/Backend Integration:
+
+- **Axios**: Promise-based HTTP client for making HTTP requests.
+- **Firebase**: Backend services for hosting and backend integration.
+- **LocalForage**: Library for offline storage using asynchronous storage in the browser.
+- **EmailJS Com**: Service for sending emails using JavaScript.
+
+### Miscellaneous:
+
+- **@React-PDF/Renderer**: Library for generating PDFs in React.
+- **@Smastrom/React-Rating**: React component for ratings.
+- **@Types/Google-Map-React**: TypeScript definitions for Google Map React library.
+- **Sort-By**: Sorting utility for arrays.
+
+## Scripts
+
+- **dev**: Start development server using Vite.
+- **build**: Build the project using TypeScript and Vite, then deploy to Firebase.
+- **lint**: Run ESLint to lint TypeScript and TypeScript React files.
+- **preview**: Preview the project using Vite.
+
+## Development Dependencies
+
+- **TypeScript**: Typed superset of JavaScript for enhancing developer productivity.
+- **ESLint**: JavaScript and TypeScript linter for maintaining code quality.
+- **TailwindCSS**: Utility-first CSS framework for rapid UI development.
+- **Vite**: Build tool that focuses on frontend development serving.
+
+## Contributors
 
 <!-- Contributors List -->
 <table>
